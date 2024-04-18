@@ -1,0 +1,104 @@
+.side_ankerpane{
+    -fx-background-color: #353A56;
+    -fx-border-width: 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+
+}
+.inner_pane{
+    -fx-background-color: #748CF1;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #784CF1;
+}
+.most_inner_pane {
+    -fx-background-color: #6780E2;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #784CF1;
+}
+.btn_workbench{
+    -fx-background-color: #141313;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #141313;
+}
+.pane_1{
+    -fx-background-color: #748CF1;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-border-style: solid;
+    -fx-border-color: #748CF1;
+}
+.pane_11{
+    -fx-background-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-border-style: solid;
+    -fx-border-color: #ffffff;
+}
+.pane_111{
+    -fx-background-color: #FD9999;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-border-style: solid;
+    -fx-border-color: #FD9999;
+}
+.table-view .column-header-background .filler{
+    -fx-cell-size: 20;
+    -fx-background-color: #FFFFFF;
+}
+.table-view .column-header-background .label{
+    -fx-text-fill: #52438F;
+}
+.table-view .cell{
+    -fx-cell-size: 30;
+    -fx-text-fill: #000000;
+}
+.table-row-cell:selected{
+    -fx-background-color: rgb(EBE9F6);
+}
+.table-row-cell:selected .text{
+    -fx-fill : #52438F;
+}
+/*tab pane*/
+.tab-pane .tab-header-area .tab-header-background{
+    -fx-opacity: 0;
+}
+.tab-pane{
+    -fx-tab-min-width:90px;
+}
+.tab{
+    -fx-background-insets: 0 0 0 0,0,0;
+}
+.tab-pane .tab{
+    -fx-background-color: white;
+}
+.tab-pane .tab:selected
+{
+    -fx-background-color: white;
+    -fx-text-fill: #6F5CC2;
+    -fx-border-color: #6F5CC2;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+.tab .tab-label{
+    -fx-alignment: CENTER;
+    -fx-text-fill: #A5A9B4;
+
+}
+.tab:selected .tab-label{
+    -fx-alignment: CENTER;
+    -fx-text-fill: #6F5CC2;
+}
+
+
