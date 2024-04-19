@@ -10,19 +10,35 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
+    private static Stage primaryStage;  // Static ²reference to the primary stage
+
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage; // Assign the incoming stage to your static reference
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/signUp.fxml"));
-        Parent root = fxmlLoader.load(); // Load the FXML file once
+        Parent root = fxmlLoader.load();
 
-        registrationController controller = fxmlLoader.getController();
-        Scene scene = new Scene(root, 700, 450); // Use the loaded root node
-        stage.setTitle("Welcome to TourJoy!");
-        stage.setScene(scene);
-        stage.show();
+        Scene scene = new Scene(root, 700, 450);
+        primaryStage.setTitle("Welcome to TourJoy!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
+
+    public static void loadFXML(String fxmlFileName) throws IOException {
+        if (primaryStage == null) {
+            throw new IllegalStateException("Primary stage is not initialized.");
+        }
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource(fxmlFileName));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 
     public static void main(String[] args) {
         launch();
     }
 }
+

@@ -31,11 +31,34 @@ public class User {
 
     private boolean isVerified;
 
+    public User(String email, String[] roles, String password, Integer phoneNumber, LocalDateTime createdAt) {
+        this.email = email;
+        this.roles = roles;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.createdAt = createdAt;
+    }
+
+    public User(String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, LocalDateTime createdAt) {
+        this.email = email;
+        this.roles = roles;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.createdAt = createdAt;
+    }
+
     private boolean isBanned;
 
     private String googleId;
 
-
+    public User(String email, String[] roles, String password, LocalDateTime createdAt) {
+        this.email = email;
+        this.roles = roles;
+        this.password = password;
+        this.createdAt = createdAt;
+    }
 
     public int getId() {
         return id;

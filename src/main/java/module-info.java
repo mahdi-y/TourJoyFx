@@ -8,6 +8,7 @@ module com.example.tourjoy {
     requires mysql.connector.j;
     requires jbcrypt;
     requires com.google.gson;
+    requires java.desktop;
 
     opens com.example.tourjoy to javafx.fxml;
     exports com.example.tourjoy;

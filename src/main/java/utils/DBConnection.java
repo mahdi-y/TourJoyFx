@@ -15,9 +15,9 @@ public class DBConnection {
     private DBConnection() {
         try {
             cnx = DriverManager.getConnection(URL, USER, PWD);
-            System.out.println("Connexion établie !");
+            System.out.println("Connection established !");
         } catch (SQLException e) {
-            System.out.println("Erreur lors de l'établissement de la connexion : " + e.getMessage());
+            System.out.println("Error while trying to establish connection : " + e.getMessage());
         }
     }
 
