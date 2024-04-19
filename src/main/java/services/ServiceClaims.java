@@ -19,6 +19,8 @@ public class ServiceClaims implements IServices<claims> {
         con = DBConnection.getInstance().getCnx();
     }
 
+
+
     @Override
     public void add(claims claims) throws SQLException {
         String query = "INSERT INTO claims ( title, description, createDate, state, reply) VALUES (?, ?, ?, ?, ?)";
@@ -30,6 +32,7 @@ public class ServiceClaims implements IServices<claims> {
         pre.setString(4, claims.getState());
         pre.setString(5, claims.getReply());
         pre.executeUpdate();
+
     }
     public List<claims> Read() throws SQLException {
         List<claims> claimsList = new ArrayList<>();
@@ -66,28 +69,31 @@ public class ServiceClaims implements IServices<claims> {
     }
 
     @Override
-    public void delete(claims claims)
-    throws SQLException {
-
+    public void delete(claims claims) throws SQLException {
         String deleteClaimsQuery = "DELETE FROM claims WHERE id=?";
-
-        try (Connection connection = DBConnection.getInstance().getCnx();
-
-             PreparedStatement deleteClaimsPst = connection.prepareStatement(deleteClaimsQuery)) {
-
-
-            // Delete the claim
+        PreparedStatement deleteClaimsPst = null;
+        try {
+            deleteClaimsPst = con.prepareStatement(deleteClaimsQuery);
             deleteClaimsPst.setInt(1, claims.getId());
-            deleteClaimsPst.executeUpdate();
+            int affectedRows = deleteClaimsPst.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting claim failed, no rows affected.");
+            }
         } catch (SQLException e) {
-            // Handle exceptions
             e.printStackTrace();
+            throw new SQLException("Error deleting claim from the database", e);
+        } finally {
+            if (deleteClaimsPst != null) {
+                deleteClaimsPst.close(); // Close only the PreparedStatement
+            }
+            // Do not close the connection here if it's being reused
         }
     }
 
 
 
 
-    }
+
+}
 
 

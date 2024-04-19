@@ -87,6 +87,8 @@ public class RecController {
             // Create claim object
             claims claims = new claims(title, description, createDate,state,reply);
 
+
+
             // Add claim to database
             ServiceClaims.add(claims);
 
