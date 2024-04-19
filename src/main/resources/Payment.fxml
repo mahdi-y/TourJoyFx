@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.PaymentController" prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <VBox spacing="10" layoutX="50" layoutY="50">
+            <children>
+                <Label text="Credit Card Number:"/>
+                <TextField fx:id="cardNumberField" promptText="1234 5678 9012 3456"/>
+                <Label text="Expiry Date (MM/YY):"/>
+                <TextField fx:id="expiryDateField" promptText="MM/YY"/>
+                <Label text="CVC:"/>
+                <TextField fx:id="cvcField" promptText="123"/>
+                <Button text="Submit Payment" onAction="#handlePaymentProcess"/>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

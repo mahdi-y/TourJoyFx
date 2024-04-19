@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="678.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddGuide">
+    <children>
+         <ImageView fitHeight="985.0" fitWidth="1737.0" layoutX="-296.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+             <image>
+                 <Image url="@/image/travel_2.jpg" />
+             </image>
+         </ImageView>
+        <!-- Title -->
+        <Text layoutX="328.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guides Management">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+
+        <!-- Add Button -->
+        <Button fx:id="Add" layoutX="397.0" layoutY="367.0" mnemonicParsing="false" onAction="#AddGuide" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;" text="Add" />
+
+        <!-- TextFields, DatePicker, and TableView -->
+        <TextField fx:id="genderField" layoutX="462.0" layoutY="211.0" promptText="Gender" styleClass="styled-text-field" />
+        <TextField fx:id="phoneNumberField" layoutX="462.0" layoutY="159.0" promptText="Phone Number" styleClass="styled-text-field" />
+        <TextField fx:id="emailField" layoutX="206.0" layoutY="304.0" promptText="Email" styleClass="styled-text-field" />
+        <TextField fx:id="lastNameField" layoutX="206.0" layoutY="259.0" promptText="Last Name" styleClass="styled-text-field" />
+        <TextField fx:id="firstNameField" layoutX="206.0" layoutY="211.0" promptText="First Name" styleClass="styled-text-field" />
+        <TextField fx:id="languageField" layoutX="462.0" layoutY="259.0" promptText="Language" styleClass="styled-text-field" />
+        <TextField fx:id="cinField" layoutX="206.0" layoutY="159.0" promptText="CIN" styleClass="styled-text-field" />
+        <DatePicker fx:id="dobPicker" layoutX="455.0" layoutY="299.0" promptText="Date Of Birth" styleClass="styled-date-picker" />
+        <TextField fx:id="priceField" layoutX="205.0" layoutY="340.0" prefHeight="26.0" prefWidth="150.0" promptText="Price" />
+        <TableView fx:id="ListGuides" layoutX="115.0" layoutY="420.0" prefHeight="294.0" prefWidth="694.0">
+            <columns>
+                <TableColumn fx:id="cinColumn" prefWidth="75.0" text="CIN" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
+                <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+                <TableColumn fx:id="phoneNumberColumn" prefWidth="75.0" text="Phone Number" />
+                <TableColumn fx:id="genderColumn" prefWidth="75.0" text="Gender" />
+                <TableColumn fx:id="languageColumn" prefWidth="75.0" text="Language" />
+                <TableColumn fx:id="dobColumn" prefWidth="75.0" text="DOB" />
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+            </columns>
+        </TableView>
+
+        <!-- Update Button -->
+        <Button fx:id="updateButton" layoutX="664.0" layoutY="734.0" mnemonicParsing="false" onAction="#updateGuide" style="-fx-background-color: #739a8b; -fx-text-fill: white; -fx-font-size: 14px;" text="Update" />
+
+        <!-- Delete Button -->
+        <Button fx:id="deleteButton" layoutX="742.0" layoutY="734.0" mnemonicParsing="false" onAction="#deleteGuide" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 14px;" text="Delete" />
+        <Button fx:id="clearButton" layoutX="600.0" layoutY="734.0" mnemonicParsing="false" onAction="#clearGuide" style="-fx-background-color: #fd9f00; -fx-text-fill: white; -fx-font-size: 14px;" text="Clear" />
+      <Button fx:id="selectImageButton" layoutX="699.0" layoutY="286.0" mnemonicParsing="false" onAction="#selectImage" text="selectImage" />
+        <ImageView fx:id="imageViewGuide" fitHeight="150.0" fitWidth="200.0" layoutX="664.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@/image/image.png" />
+            </image>
+        </ImageView>
+    </children>
+    <!-- Include CSS file -->
+       <stylesheets>
+           <URL value="@/style/styles.css" />
+       </stylesheets>
+   </AnchorPane>
