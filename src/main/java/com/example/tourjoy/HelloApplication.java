@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/signUp.fxml"));
         Parent root = fxmlLoader.load();
 
-        Scene scene = new Scene(root, 700, 450);
+        Scene scene = new Scene(root, 700, 700);
         primaryStage.setTitle("Welcome to TourJoy!");
         primaryStage.setScene(scene);
         primaryStage.show();
