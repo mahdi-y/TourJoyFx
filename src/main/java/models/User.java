@@ -60,6 +60,22 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public User(int id, String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, String country, String profilePicture, String googleAuthenticatorSecret, boolean isVerified, boolean isBanned, String googleId) {
+        this.id = id;
+        this.email = email;
+        this.roles = roles;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.profilePicture = profilePicture;
+        this.googleAuthenticatorSecret = googleAuthenticatorSecret;
+        this.isVerified = isVerified;
+        this.isBanned = isBanned;
+        this.googleId = googleId;
+    }
+
     public int getId() {
         return id;
     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.LoginController"
+            prefHeight="800.0" prefWidth="800.0"
+            stylesheets="@styles.css">
+
+    <!-- AnchorPane allows for absolute positioning of elements -->
+    <VBox layoutX="150" layoutY="50" prefWidth="300" spacing="20" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+        <Text text="Sign In" styleClass="title-text"/>
+        <TextField fx:id="emailField" promptText="Email" styleClass="text-field"/>
+        <PasswordField fx:id="passwordField" promptText="Password" styleClass="text-field"/>
+        <Button fx:id="signInButton" text="Sign In" onAction="#handleSignIn" styleClass="primary-button"/>
+        <HBox spacing="10" alignment="CENTER">
+            <Text text="Don't have an account?" />
+            <Hyperlink text="Sign Up" onAction="#handleSignUp"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

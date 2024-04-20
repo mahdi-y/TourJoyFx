@@ -23,3 +23,40 @@
 .btn-register:hover {
     -fx-background-color: linear-gradient(to bottom, #75dfff, #4b8cff);
 }
+
+.root {
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.title-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+
+.primary-button {
+    -fx-background-color: #09c;
+    -fx-text-fill: white;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 300px;
+    -fx-font-weight: bold;
+}
+
+.primary-button:hover {
+    -fx-background-color: #08a;
+}
+
+/* Adjust the HBox spacing if necessary */
+.hbox {
+    -fx-spacing: 10px;
+}
+
+
+.hyperlink {
+    -fx-text-fill: black;
+    -fx-underline: true;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #ACB6E5;
+}

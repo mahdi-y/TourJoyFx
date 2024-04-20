@@ -7,12 +7,14 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import utils.userUtils;
+
 
 import org.mindrot.jbcrypt.BCrypt;
 
 public class userService implements IServices<User> {
 
-    private Connection con;
+    private final Connection con;
     private PreparedStatement pre;
     private ResultSet res;
 
@@ -30,8 +32,8 @@ public class userService implements IServices<User> {
         pre.setString(1, user.getEmail());
         String[] roles = {"ROLE_USER"}; // Normally, this should be taken from `user.getRoles()`
         pre.setString(2, Arrays.toString(roles));
-        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-        pre.setString(3, hashedPassword);
+        String encryptedPassword = encrypt(user.getPassword());
+        pre.setString(3, encryptedPassword);
 
         // Handle potentially null phoneNumber
         if (user.getPhoneNumber() != null) {
@@ -96,4 +98,52 @@ public class userService implements IServices<User> {
     public List<User> selectAll() throws SQLException {
         return null;
     }
+
+    public static User loginUser(String email, String password){
+        // Query to fetch the user by email
+        String query = "SELECT * FROM user WHERE email = ?";
+
+        try (PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String storedPassword = resultSet.getString("password");
+
+                    // Check if the password matches the hashed password in the database
+                    if (BCrypt.checkpw(password, storedPassword)) {
+                        // If passwords match, extract user information
+                        int id = resultSet.getInt("id");
+                        String email1 = resultSet.getString("email");
+                        String[] roles = userUtils.extractRoles(resultSet);
+                        String first_name = resultSet.getString("first_name");
+                        String last_name = resultSet.getString("last_name");
+                        Integer phone_number = resultSet.getInt("phone_number");
+                        if (resultSet.wasNull()) {
+                            phone_number = null; // Handle nullability of phone_number
+                        }
+                        String country = resultSet.getString("country");
+                        String profile_picture = resultSet.getString("profile_picture");
+                        String google_authenticator_secret = resultSet.getString("google_authenticator_secret");
+                        boolean is_verified = resultSet.getBoolean("is_verified");
+                        boolean is_banned = resultSet.getBoolean("is_banned");
+                        String google_id = resultSet.getString("google_id");
+
+                        return new User(id, email1, roles, storedPassword, first_name, last_name, phone_number, country, profile_picture, google_authenticator_secret, is_verified, is_banned, google_id);
+                    }
+                }
+                return null; // Return null if no user found or passwords do not match
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e); // Consider handling this more gracefully
+        }
+    }
+
+
+
+    public static String encrypt(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+
 }

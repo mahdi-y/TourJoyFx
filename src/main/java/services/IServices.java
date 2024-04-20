@@ -1,5 +1,7 @@
 package services;
 
+import models.User;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,4 +15,5 @@ public interface IServices<T>{
     List<T> ReadUser() throws SQLException;
 
     List<T> selectAll() throws SQLException;
+
 }

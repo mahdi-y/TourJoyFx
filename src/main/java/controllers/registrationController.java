@@ -1,6 +1,7 @@
 package controllers;
 
 import com.example.tourjoy.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -159,5 +160,13 @@ public class registrationController {
 
         // If all checks pass
         return true;
+    }
+
+    @FXML
+    void loginInstead() throws IOException {
+        HelloApplication.loadFXML("/login.fxml");
+    }
+    public void handleSignIn(ActionEvent actionEvent) throws IOException {
+        loginInstead();
     }
 }

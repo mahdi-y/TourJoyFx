@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserDashboardController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <children>
+        <Label fx:id="emailLabel" text="Email:"/>
+        <Label fx:id="nameLabel" text="Name:"/>
+        <Label fx:id="phoneLabel" text="Phone:"/>
+        <Label fx:id="countryLabel" text="Country:"/>
+        <Label fx:id="roleLabel" text="Role:"/>
+    </children>
+</VBox>

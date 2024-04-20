@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.ComboBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.profileController">
+<VBox prefHeight="700.0" prefWidth="700.0" alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.profileController">
     <Label fx:id="welcomeLabel" text="Welcome!"/> <!-- This label will show the welcome message -->
     <Label text="Complete Your Profile!"/>
     <TextField fx:id="firstNameField" promptText="First Name"/>
