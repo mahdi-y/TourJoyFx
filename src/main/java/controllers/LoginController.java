@@ -14,6 +14,7 @@ import utils.UserSession;
 
 import models.User;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -37,14 +38,11 @@ public class LoginController {
         }
 
         try {
-            // Attempt to login user
             User user = userService.loginUser(email, password);
             if (user != null) {
-                // Set up session for the logged-in user
                 UserSession.getInstance(user.getId(),user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCountry(),user.getProfilePicture(), String.valueOf(user.getPhoneNumber().intValue()), Arrays.toString(user.getRoles())).setUser(user);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getEmail() + "!");
 
-                // Check user roles and redirect appropriately
                 if (Arrays.asList(user.getRoles()).contains("ROLE_ADMIN")) {
                     HelloApplication.loadFXML("/adminDashboard.fxml");
                 } else {
@@ -59,8 +57,13 @@ public class LoginController {
         }
     }
 
+    @FXML
+    void registerInstead() throws IOException {
+        HelloApplication.loadFXML("/signup.fxml");
+    }
 
-    public void handleSignUp(ActionEvent actionEvent) {
+    public void handleSignUp(ActionEvent actionEvent) throws IOException {
+        registerInstead();
     }
 
 

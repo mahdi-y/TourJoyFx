@@ -1,62 +1,121 @@
-.text-field {
-    -fx-background-color: #ffffff, #ffffff;
-    -fx-background-insets: 0, 2;
-    -fx-background-radius: 5px;
-    -fx-padding: 15px;
-    -fx-prompt-text-fill: derive(-fx-control-inner-background, -30%);
-    -fx-border-color: #ced4da;
-    -fx-border-radius: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0.0, 0.0);
+/* Main container */
+.mainContainer {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
 }
 
+/* Header text */
+.header-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+    -fx-alignment: center;
+}
+
+/* Form container */
+.formContainer {
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+/* Text fields */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-padding: 10 15;
+    -fx-prompt-text-fill: #999;
+    -fx-background-radius: 5;
+    -fx-background-color: #f9f9f9;
+}
+
+/* Register button */
 .btn-register {
-    -fx-background-color: linear-gradient(to bottom, #89f7fe, #66a6ff);
+    -fx-background-color: #5cb85c;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-padding: 15px 30px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.5, 0.0, 0.0);
+    -fx-background-radius: 5;
+    -fx-padding: 15 30;
 }
 
 .btn-register:hover {
-    -fx-background-color: linear-gradient(to bottom, #75dfff, #4b8cff);
+    -fx-background-color: #4cae4c;
 }
 
-.root {
+/* Normal text */
+.normal-text {
+    -fx-fill: #666;
+}
+
+/* Hyperlink */
+.hyperlink-text {
+    -fx-text-fill: #337ab7;
+    -fx-font-weight: bold;
+}
+
+.hyperlink-text:hover {
+    -fx-text-fill: #23527c;
+}
+
+/* Applying global styles to all buttons and text fields */
+.button, .text-field {
     -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
-.title-text {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-}
-
-
-.primary-button {
-    -fx-background-color: #09c;
+.title-bar {
+    -fx-background-color: white;
     -fx-text-fill: white;
-    -fx-pref-height: 40px;
-    -fx-pref-width: 300px;
-    -fx-font-weight: bold;
+    -fx-spacing: 10; /* Space between buttons */
+    -fx-background-radius: 8;
+
 }
 
-.primary-button:hover {
-    -fx-background-color: #08a;
+/* Style for close button */
+.close-button {
+    -fx-background-radius: 10em; /* Circular shape */
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #ff5f57; /* Red color */
 }
 
-/* Adjust the HBox spacing if necessary */
-.hbox {
-    -fx-spacing: 10px;
+.close-button:hover {
+    -fx-background-color: #ff3b30; /* Darker red on hover */
 }
 
-
-.hyperlink {
-    -fx-text-fill: black;
-    -fx-underline: true;
+/* Style for minimize button */
+.minimize-button {
+    -fx-background-radius: 10em; /* Circular shape */
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #28c840; /* Green color */
 }
 
-.hyperlink:hover {
-    -fx-text-fill: #ACB6E5;
+.minimize-button:hover {
+    -fx-background-color: #14ae32; /* Darker green on hover */
+}
+
+.expand-button{
+    -fx-background-radius: 10em;
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #c7a807;
+}
+
+.expand-button:hover {
+    -fx-background-color: #e79519;
+}
+
+/* General button styling to remove borders */
+.button {
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 5px; /* Adjust padding as needed */
 }
