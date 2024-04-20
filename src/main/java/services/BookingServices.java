@@ -139,6 +139,28 @@ public class BookingServices {
         }
         return lastBooking;
     }
+    public List<Booking> getBookingsByGuide(int guideId) throws SQLException {
+        List<Booking> bookings = new ArrayList<>();
+        String query = "SELECT * FROM Booking WHERE guide_id = ?";
+
+        try (Connection conn = MyDB.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, guideId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                // Assuming you have a constructor in your Booking entity that matches the fetched data
+                int id = rs.getInt("id");
+                LocalDate date = rs.getDate("date").toLocalDate(); // Ensure correct conversion from SQL Date to LocalDate
+                int userId = rs.getInt("user_id");  // Assuming there's a user_id field if needed
+
+                Booking booking = new Booking(id, guideId, date);
+                bookings.add(booking);
+            }
+        }
+        return bookings;
+    }
 
 }
 

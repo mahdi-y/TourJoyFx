@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookingsBack">
+    <children>
+        <Label text="Bookings for Selected Guide"/>
+        <TableView fx:id="bookingsTable">
+            <columns>
+                <TableColumn text="Date"/>
+                <TableColumn text="Customer"/>
+                <TableColumn text="Details"/>
+            </columns>
+        </TableView>
+    </children>
+</VBox>

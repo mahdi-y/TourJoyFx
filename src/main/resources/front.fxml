@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.ComboBox?>
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1550.0" style="-fx-background-color: white;" styleClass="btn_workbench" stylesheets="@style/styling.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddGuide">
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1550.0" style="-fx-background-color: white;" styleClass="btn_workbench" stylesheets="@style/styling.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.front">
     <children>
         <VBox prefHeight="448.0" prefWidth="172.0" style="-fx-background-color: #F0F0F2;">
             <children>
@@ -102,61 +97,35 @@
                     </children></AnchorPane>
             </children>
         </VBox>
-        <AnchorPane prefHeight="521.0" prefWidth="1550.0" style="-fx-background-color: #F0F0F2;">
+        <AnchorPane prefHeight="521.0" prefWidth="1264.0" style="-fx-background-color: #F0F0F2;">
             <children>
-                <Text layoutX="490.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-fill: #34495E;" text="Guides Management">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                    <effect>
-                        <DropShadow color="rgba(0,0,0,0.5)" radius="5.0" />
-                    </effect>
-                </Text>
-
-
-                <!-- Add Button -->
-                <Button fx:id="Add" layoutX="129.0" layoutY="484.0" mnemonicParsing="false" onAction="#AddGuide" prefHeight="41.0" prefWidth="65.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;" text="Add" />
-
-                <!-- TextFields, DatePicker, and TableView -->
-                <RadioButton fx:id="maleRadioButton" layoutX="323.0" layoutY="357.0" text="Male">
-               <toggleGroup>
-                  <ToggleGroup fx:id="genderToggleGroup" />
-               </toggleGroup></RadioButton>
-                <RadioButton fx:id="femaleRadioButton" layoutX="402.0" layoutY="357.0" text="Female" toggleGroup="$genderToggleGroup" />
-                <TextField fx:id="phoneNumberField" layoutX="314.0" layoutY="159.0" promptText="Phone Number" styleClass="styled-text-field" />
-                <TextField fx:id="emailField" layoutX="74.0" layoutY="348.0" promptText="Email" styleClass="styled-text-field" />
-                <TextField fx:id="lastNameField" layoutX="74.0" layoutY="285.0" promptText="Last Name" styleClass="styled-text-field" />
-                <TextField fx:id="firstNameField" layoutX="74.0" layoutY="221.0" promptText="First Name" styleClass="styled-text-field" />
-                <ComboBox fx:id="languageField" layoutX="314.0" layoutY="221.0" prefWidth="200.0" prefHeight="30.0" promptText="Select Language" />
-                <TextField fx:id="cinField" layoutX="74.0" layoutY="159.0" promptText="CIN" styleClass="styled-text-field" />
-                <DatePicker fx:id="dobPicker" layoutX="314.0" layoutY="284.0" prefHeight="39.0" prefWidth="175.0" promptText="Date Of Birth" styleClass="styled-date-picker" />
-                <TextField fx:id="priceField" layoutX="74.0" layoutY="408.0" prefHeight="38.0" prefWidth="175.0" promptText="Price" />
-                <TableView fx:id="ListGuides" layoutX="651.0" layoutY="169.0" prefHeight="530.0" prefWidth="602.0" stylesheets="@style/styling.css">
-                    <columns>
-                        <TableColumn fx:id="cinColumn" prefWidth="75.0" text="CIN" />
-                        <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First Name" />
-                        <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last Name" />
-                        <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
-                        <TableColumn fx:id="phoneNumberColumn" prefWidth="75.0" text="Phone Number" />
-                        <TableColumn fx:id="genderColumn" prefWidth="75.0" text="Gender" />
-                        <TableColumn fx:id="languageColumn" prefWidth="75.0" text="Language" />
-                        <TableColumn fx:id="dobColumn" prefWidth="75.0" text="Date Of Birth" />
-                        <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
-                    </columns>
-                </TableView>
-
-                <!-- Update Button -->
-                <Button fx:id="updateButton" layoutX="850.0" layoutY="711.0" mnemonicParsing="false" onAction="#updateGuide" prefHeight="38.0" prefWidth="79.0" style="-fx-background-color: #739a8b; -fx-text-fill: white; -fx-font-size: 14px;" text="Update" />
-
-                <!-- Delete Button -->
-                <Button fx:id="deleteButton" layoutX="952.0" layoutY="711.0" mnemonicParsing="false" onAction="#deleteGuide" prefHeight="38.0" prefWidth="66.0" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 14px;" text="Delete" />
-                <Button fx:id="clearButton" layoutX="128.0" layoutY="538.0" mnemonicParsing="false" onAction="#clearGuide" prefHeight="42.0" prefWidth="66.0" style="-fx-background-color: #fd9f00; -fx-text-fill: white; -fx-font-size: 14px;" text="Clear" />
-                <Button fx:id="selectImageButton" layoutX="365.0" layoutY="525.0" mnemonicParsing="false" onAction="#selectImage" text="selectImage" />
-                <ImageView fx:id="imageViewGuide" fitHeight="113.0" fitWidth="161.0" layoutX="324.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@/image/image.png" />
-                    </image>
-                </ImageView>
+                <HBox alignment="CENTER" spacing="20" layoutX="50" layoutY="50" prefHeight="400" prefWidth="750">
+                    <children>
+                        <Button fx:id="leftButton" onAction="#handlePrevious" style="-fx-background-radius: 15; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitWidth="30" fitHeight="30">
+                                    <image>
+                                        <Image url="@/image/left.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <ImageView fx:id="imageView" fitHeight="350" fitWidth="650" preserveRatio="true">
+                            <image>
+                                <Image url="@/image/nature1.jpg"/>
+                            </image>
+                        </ImageView>
+                        <Button fx:id="rightButton" onAction="#handleNext" style="-fx-background-radius: 15; -fx-background-color: transparent;">
+                            <graphic>
+                                <ImageView fitWidth="30" fitHeight="30">
+                                    <image>
+                                        <Image url="@/image/right.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </HBox>
             </children>
         </AnchorPane>
     </children>

@@ -6,11 +6,15 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import services.BookingServices;
 
 import java.awt.event.ActionEvent;
@@ -27,7 +31,8 @@ public class BookingsBack {
     @FXML
     private TableView<Booking> ListBookings;
     List<Guide> listBookings = new ArrayList<>();
-
+    @FXML
+    private Button seebookingsButton;
 
     @FXML
     private TableColumn<Booking, Integer> guideColumn;
@@ -39,6 +44,9 @@ public class BookingsBack {
     private Button deletebookingButton;
 
     private BookingServices bookingServices;
+
+    private TableView<Guide> ListGuides;
+
 
     public void initialize() {
         bookingServices = new BookingServices();
@@ -108,6 +116,15 @@ public class BookingsBack {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    public void setBookingsData(Guide guide) {
+        try {
+            List<Booking> bookings = bookingServices.getBookingsByGuide(guide.getCIN());
+            ObservableList<Booking> observableBookings = FXCollections.observableArrayList(bookings);
+            ListBookings.setItems(observableBookings);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle error (e.g., show an error message)
+        }
+    }
 
 }

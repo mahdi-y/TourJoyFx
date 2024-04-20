@@ -12,15 +12,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+import javafx.scene.Scene;
 
+import entities.Booking;
 import entities.Guide;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import services.BookingServices;
 import services.GuideServices;
 import utils.MyDB;
 import javafx.beans.property.SimpleStringProperty;
@@ -33,6 +38,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class AddGuide {
+    private BookingServices bookingServices;
+
+    private TableView<Booking> ListBookings;
+
 
     @FXML
     private TableView<Guide> ListGuides;
@@ -108,6 +117,7 @@ public class AddGuide {
     @FXML
     private RadioButton femaleRadioButton;
 
+    @FXML
     private ToggleGroup genderToggleGroup;
 
 
@@ -121,6 +131,7 @@ public class AddGuide {
                 "Portuguese", "Indonesian"
         );
         languageField.getItems().addAll(languages);
+      //  languageField.getSelectionModel().selectFirst(); // Optionally set the first language as the default
         genderToggleGroup = new ToggleGroup();
         maleRadioButton.setToggleGroup(genderToggleGroup);
         femaleRadioButton.setToggleGroup(genderToggleGroup);
@@ -158,14 +169,19 @@ public class AddGuide {
                 languageField.setValue(newSelection.getLanguage()); // Set the language in the ComboBox
                 dobPicker.setValue(LocalDate.parse(newSelection.getDob()));
                 priceField.setText(String.valueOf(newSelection.getPrice()));
+                if ("Male".equals(newSelection.getGender_g())) {
+                    maleRadioButton.setSelected(true);
+                } else {
+                    femaleRadioButton.setSelected(true);
+                }
 
+            }
             }
 
 
-            languageField.getSelectionModel().selectFirst(); // Optionally set the first language as the default
 
 
-        });
+        );
     }
 
 
@@ -351,4 +367,28 @@ public class AddGuide {
             imageViewGuide.setImage(image);  // Set the image in ImageViewGuide
         }
     }
+
+
+    @FXML
+    private void guideBookings(ActionEvent event) throws Exception {
+        Guide selectedGuide = ListGuides.getSelectionModel().getSelectedItem();
+        if (selectedGuide != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/BookingsPerGuide.fxml"));
+            Parent root = loader.load();
+
+            // Assuming the controller class for the BookingsPerGuide.fxml is BookingsPerGuideController
+            BookingsBack bookingsController = loader.getController();
+            bookingsController.setBookingsData(selectedGuide);  // Correctly call the method to set the guide
+
+            Stage stage = new Stage();
+            stage.setTitle("Bookings for " + selectedGuide.getFirstname_g() + " " + selectedGuide.getLastname_g());  // Assuming you also want to show the last name
+            stage.setScene(new Scene(root));
+
+            stage.show();
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a guide to view bookings.");
+        }
+    }
+
+
 }
