@@ -11,12 +11,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import models.categories;
 import models.claims;
 import services.ServiceClaims;
+import utils.DBConnection;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BackController {
@@ -25,6 +31,8 @@ public class BackController {
     private Button catB;
     @FXML
     private TableColumn<claims, Integer> idR;
+    @FXML
+    private TableColumn<claims, String> catView;
     @FXML
     private TableColumn<claims, String> titleR;
     @FXML
@@ -38,6 +46,8 @@ public class BackController {
 
     @FXML
     private Label descriptionMod;
+    @FXML
+    private Label catLabel;
 
     @FXML
     private TextField descriptionM;
@@ -52,10 +62,11 @@ public class BackController {
     private Label stateMod;
 
     @FXML
-    private TextField stateM;
+    ComboBox<String> stateBox;
     @FXML
     private Button deleteButton;
-
+    @FXML
+    ComboBox<categories> catBo;
 
     @FXML
     private Label titleMod;
@@ -77,10 +88,17 @@ public class BackController {
 
         ServiceClaims=new ServiceClaims();
 
-
+        stateBox.getItems().addAll("Not treated", "Treated"); // Optionally, populate ComboBox items if not set in FXML
 
         updateButton.setOnAction(event -> updateClaims());
         deleteButton.setOnAction(event -> deleteClaims());
+        try {
+            List<categories> categories = loadCategories(); // This should return a list of Category objects
+            catBo.setItems(FXCollections.observableArrayList(categories));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load categories.");
+        }
         loadClaimsData();
         setupTableColumns();
         // Add listener to handle row selection
@@ -90,18 +108,71 @@ public class BackController {
 
                 titleM.setText(newSelection.getTitle());
                 descriptionM.setText(newSelection.getDescription());
-                stateM.setText(newSelection.getState());
+                stateBox.setValue(newSelection.getState());
+                // Now set the selected category in the catBo ComboBox
+                catBo.setValue(findCategoryById(newSelection.getFkC())); // Assuming your categories constructor can handle this
+
                 replyM.setText(newSelection.getReply());
+                titleM.setEditable(false);
+                descriptionM.setEditable(false);
+                catBo.setDisable(true);
             }
         });
     }
-
+    private List<categories> loadCategories() throws SQLException {
+        List<categories> categories = new ArrayList<>();
+        Connection con = DBConnection.getInstance().getCnx();
+        String query = "SELECT id, name FROM categories"; // Adjusted for a hypothetical table structure
+        try (PreparedStatement pst = con.prepareStatement(query);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                categories.add(new categories(rs.getInt("id"), rs.getString("name")));
+            }
+        }
+        return categories;
+    }
+    private categories findCategoryById(int categoryId) {
+        for (categories cat : catBo.getItems()) {
+            if (cat.getId() == categoryId) {
+                return cat;
+            }
+        }
+        return null;
+    }
+    private String getCategoryNameById(Integer id) {
+        // Logic to fetch the category name from the database or a cache
+        // For demonstration purposes, let's assume we have a map with category names
+        String categoryName = ""; // Default to an empty string if category is not found
+        try {
+            // Here you would have the actual code to query your database
+            Connection connection = DBConnection.getInstance().getCnx();
+            String query = "SELECT name FROM categories WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        categoryName = resultSet.getString("name");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categoryName;
+    }
     private void setupTableColumns() {
         idR.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         titleR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         descriptionR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
         createDateR.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreateDate()));
         stateR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getState()));
+        // Assuming you have a method getCategoryNameById that returns the category name
+        catView.setCellValueFactory(cellData -> {
+            Integer categoryId = cellData.getValue().getFkC(); // This is the foreign key ID
+            String categoryName = getCategoryNameById(categoryId); // You need to implement this method
+            return new SimpleStringProperty(categoryName);
+        });
+
         replyR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReply()));
     }
     private void loadClaimsData() {
@@ -113,6 +184,15 @@ public class BackController {
             e.printStackTrace();  // Handle exceptions, log them, and maybe show an error message to the user
         }
     }
+    private void clearForm() {
+        titleM.setText("");
+        descriptionM.setText("");
+        stateBox.setValue(null);  // or set to default value if preferred
+        catBo.setValue(null);
+        replyM.setText("");
+    }
+
+    // Use it in the deleteClaims method
     @FXML
     void deleteClaims() {
         claims selectedClaim = claimsTableView.getSelectionModel().getSelectedItem();
@@ -120,6 +200,8 @@ public class BackController {
             try {
                 ServiceClaims.delete(selectedClaim);
                 claimsTableView.getItems().remove(selectedClaim);
+                claimsTableView.getSelectionModel().clearSelection();
+                clearForm();  // Clear the form fields after deletion
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Claim deleted successfully!");
             } catch (SQLException e) {
                 showAlert(Alert.AlertType.ERROR, "Database Error", "Error deleting claim from the database.");
@@ -129,29 +211,33 @@ public class BackController {
         }
     }
 
+
     @FXML
     void updateClaims() {
         claims selectedClaims = claimsTableView.getSelectionModel().getSelectedItem();
         if (selectedClaims != null) {
             try {
-                String title = titleM.getText();
-                String description = descriptionM.getText();
-                LocalDateTime createDate =LocalDateTime.now();
-                String state = stateM.getText();
+
+                String state = stateBox.getValue();
+                categories selectedCategory = catBo.getValue();  // Get the selected category from ComboBox
+
                 String reply = replyM.getText();
 
 
 
 
                 // Update selected country object
-                selectedClaims.setTitle(title);
-                selectedClaims.setDescription(description);
+
                 selectedClaims.setState(state);
+                if (selectedCategory != null) {
+                    selectedClaims.setFkC(selectedCategory.getId());  // Assuming there is a setter for fkC in your claims model
+                }
                 selectedClaims.setReply(reply);
+
 
                 // Update country in the database
                 ServiceClaims.update(selectedClaims);
-
+                clearForm();
                 // Refresh TableView
                 claimsTableView.refresh();
 

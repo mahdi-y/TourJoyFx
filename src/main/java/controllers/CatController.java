@@ -80,7 +80,7 @@ public class CatController {
             // Add the newly added category to the ObservableList to update the TableView
             ObservableList<categories> currentItems = View.getItems();
             currentItems.add(newCategory);
-
+            clearForm();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Category added successfully!");
         } catch (SQLException e) {
             e.printStackTrace();  // Print stack trace for detailed error information
@@ -102,6 +102,11 @@ public class CatController {
             e.printStackTrace();  // Handle exceptions, log them, and maybe show an error message to the user
         }
     }
+
+    private void clearForm() {
+        nameField.setText("");
+
+    }
     @FXML
     void deleteCategories() {
         categories selectedCategory = View.getSelectionModel().getSelectedItem();
@@ -109,6 +114,7 @@ public class CatController {
             try {
                 ServiceCategories.delete(selectedCategory);
                 View.getItems().remove(selectedCategory);
+                clearForm();
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Category deleted successfully!");
             } catch (SQLException e) {
                 showAlert(Alert.AlertType.ERROR, "Database Error", "Error deleting category from the database.");
@@ -138,7 +144,7 @@ public class CatController {
 
                 // Refresh TableView
                 View.refresh();
-
+                clearForm();
                 // Show success message
                 showAlert(Alert.AlertType.INFORMATION, "Success", "category updated successfully!");
             } catch (NumberFormatException e) {

@@ -23,14 +23,15 @@ public class ServiceClaims implements IServices<claims> {
 
     @Override
     public void add(claims claims) throws SQLException {
-        String query = "INSERT INTO claims ( title, description, createDate, state, reply) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO claims ( title, description, createDate, state, fkC, reply) VALUES (?, ?, ?, ?, ?, ?)";
         pre = con.prepareStatement(query);
 
         pre.setString(1, claims.getTitle());
         pre.setString(2, claims.getDescription());
         pre.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
         pre.setString(4, claims.getState());
-        pre.setString(5, claims.getReply());
+        pre.setInt(5, claims.getFkC());
+        pre.setString(6, claims.getReply());
         pre.executeUpdate();
 
     }
@@ -45,8 +46,9 @@ public class ServiceClaims implements IServices<claims> {
                 String description = res.getString("description");
                 LocalDateTime createDate = res.getTimestamp("createDate").toLocalDateTime();
                 String state = res.getString("state");
+                int fkC = res.getInt("fkC");
                 String reply = res.getString("reply");
-                claims claim = new claims(id, title, description, createDate, state, reply);
+                claims claim = new claims(id, title, description, createDate, state,fkC, reply);
                 claimsList.add(claim);
             }
         } catch (SQLException e) {
@@ -57,14 +59,15 @@ public class ServiceClaims implements IServices<claims> {
     @Override
     public void update(claims claims)
             throws SQLException {
-        String query = "UPDATE claims SET title=?, description=?, state=?, reply=? WHERE id=?";
+        String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=? WHERE id=?";
         pre = con.prepareStatement(query);
         pre.setString(1, claims.getTitle());
         pre.setString(2, claims.getDescription());
 
         pre.setString(3, claims.getState());
-        pre.setString(4, claims.getReply());
-        pre.setInt(5, claims.getId()); // Ensure this is the last parameter according to the query
+        pre.setInt(4, claims.getFkC());
+        pre.setString(5, claims.getReply());
+        pre.setInt(6, claims.getId()); // Ensure this is the last parameter according to the query
         pre.executeUpdate();
     }
 

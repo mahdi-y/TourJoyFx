@@ -1,12 +1,20 @@
 package controllers;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import models.categories;
 import models.claims;
 import services.ServiceClaims;
+import utils.DBConnection;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecController {
 
@@ -21,80 +29,63 @@ public class RecController {
     @FXML
     private TableColumn<claims, LocalDateTime> createDateR;
     @FXML
-    private TableColumn<claims, String> stateR;
-    @FXML
-    private TableColumn<claims, String> replyR;
+    private TableColumn<claims, String> catView;
 
     @FXML
     private Label description;
-
     @FXML
     private TextField descriptionT;
-
     @FXML
-    private Label reply;
-
-    @FXML
-    private TextField replyT;
-
-    @FXML
-    private Label state;
-
-    @FXML
-    private TextField stateT;
-    @FXML
-    private Button deleteButton;
-
-
+    ComboBox<categories> catBox;
     @FXML
     private Label title;
-
-    @FXML
-    private Button updateButton;
-    @FXML
-    private TableView<claims> claimsTableView;
-
-
     @FXML
     private TextField titleT;
     private ServiceClaims ServiceClaims;
 
-
-
     @FXML
     void initialize() {
-
-        ServiceClaims=new ServiceClaims();
-        button.setOnAction(event -> {
-            addClaims();
-
-        });
-
-
+        ServiceClaims = new ServiceClaims();
+        button.setOnAction(event -> addClaims());
+        try {
+            List<categories> categories = loadCategories(); // This should return a list of Category objects
+            catBox.setItems(FXCollections.observableArrayList(categories));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load categories.");
+        }
     }
+
+    private List<categories> loadCategories() throws SQLException {
+        List<categories> categories = new ArrayList<>();
+        Connection con = DBConnection.getInstance().getCnx();
+        String query = "SELECT id, name FROM categories"; // Adjusted for a hypothetical table structure
+        try (PreparedStatement pst = con.prepareStatement(query);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                categories.add(new categories(rs.getInt("id"), rs.getString("name")));
+            }
+        }
+        return categories;
+    }
+
     @FXML
     void addClaims() {
         try {
-
             String title = titleT.getText();
             String description = descriptionT.getText();
-            LocalDateTime createDate =LocalDateTime.now();
-            String state = stateT.getText();
-            String reply = replyT.getText();
-
-
+            LocalDateTime createDate = LocalDateTime.now();
+            String state = "Not treated";  // Default state
+            Integer fkC = (catBox.getSelectionModel().getSelectedItem() != null) ? catBox.getSelectionModel().getSelectedItem().getId() : null;
+            String reply = "-";  // Default reply
 
             // Create claim object
-            claims claims = new claims(title, description, createDate,state,reply);
-
-
+            claims claims = new claims(title, description, createDate, state, fkC, reply);
 
             // Add claim to database
             ServiceClaims.add(claims);
-
-
-
-            showAlert(Alert.AlertType.INFORMATION, "Success", "claim added successfully!");
+            clearForm();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Claim added successfully!");
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid ID.");
         } catch (SQLException e) {
@@ -102,13 +93,17 @@ public class RecController {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Error adding claim to the database.");
         }
     }
+    private void clearForm() {
+        titleT.setText("");
+        descriptionT.setText("");
 
-        private void showAlert(Alert.AlertType type, String title, String message) {
-            Alert alert = new Alert(type);
-            alert.setTitle(title);
-            alert.setContentText(message);
-            alert.showAndWait();
-        }
+        catBox.setValue(null);
 
-
+    }
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

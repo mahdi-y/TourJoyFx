@@ -33,12 +33,16 @@ public class categories {
         this.name = name;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Categories{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }*/
+    @Override
+    public String toString() {
+        return name;
     }
 }
 

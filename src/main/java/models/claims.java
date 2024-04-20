@@ -8,27 +8,30 @@ public class claims {
     private String description;
     private LocalDateTime createDate;
     private String state;
+    private Integer fkC;
 
     private String reply;
     // Default constructor
     public claims() {
     }
 
-    public claims(String title, String description, LocalDateTime createDate, String state, String reply) {
+    public claims(String title, String description, LocalDateTime createDate, String state, Integer fkC, String reply) {
         this.title = title;
         this.description = description;
         this.createDate = createDate;
         this.state = state;
+        this.fkC = fkC;
         this.reply = reply;
     }
 
     // Parameterized constructor
-    public claims(Integer id, String title, String description, LocalDateTime createDate, String state, String reply) {
+    public claims(Integer id, String title, String description, LocalDateTime createDate, String state,Integer fkC, String reply) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.createDate = createDate;
         this.state = state;
+        this.fkC = fkC;
         this.reply = reply;
     }
 
@@ -71,7 +74,13 @@ public class claims {
     public void setState(String state) {
         this.state = state;
     }
+    public Integer getFkC() {
+        return fkC;
+    }
 
+    public void setFkC(Integer fkC) {
+        this.fkC = fkC;
+    }
 
 
     public String getReply() {
@@ -89,6 +98,7 @@ public class claims {
                 ", description='" + description + '\'' +
                 ", createDate=" + createDate +
                 ", state='" + state + '\'' +
+                ", fkC=" + fkC +
                 ", reply='" + reply + '\'' +
                 '}';
     }
