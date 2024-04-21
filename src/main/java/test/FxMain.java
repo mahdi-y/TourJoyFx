@@ -15,7 +15,7 @@ public class FxMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Create an instance of FXMLLoader
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/frontoffice.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddGuide.fxml"));
 
         // Load the FXML file
         Parent root = loader.load();

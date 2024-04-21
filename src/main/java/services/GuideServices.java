@@ -5,6 +5,7 @@ import entities.Guide;
 import utils.MyDB;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -235,7 +236,6 @@ public class GuideServices implements IServices<Guide> {
         }
         return price;
     }
-
 
 
 

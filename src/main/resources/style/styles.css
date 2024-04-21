@@ -139,3 +139,33 @@
 }
 
 
+/* styles.css located in src/main/resources/styles */
+.tile-pane {
+    -fx-background-color: #f0f0f2;
+}
+
+.vbox {
+    -fx-padding: 10 10 10 10;  // Correct padding
+-fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+.label {
+    -fx-padding: 5;
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+}
+.orange-button {
+    -fx-background-color: orange;
+}
+.white-box {
+    -fx-background-color: white;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+}
+

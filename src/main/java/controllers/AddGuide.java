@@ -7,10 +7,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Pattern;
 import javafx.scene.Scene;
 
@@ -121,10 +118,21 @@ public class AddGuide {
     private ToggleGroup genderToggleGroup;
 
 
-
+    public AddGuide() {
+        this.bookingServices = new BookingServices(); // Instantiate BookingServices here
+    }
 
     @FXML
     void initialize() {
+
+        try {
+            String defaultImagePath = "@image/image.png";  // Corrected path assuming your images folder is directly under resources
+            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(defaultImagePath)));
+            imageViewGuide.setImage(defaultImage);
+        } catch (NullPointerException e) {
+            System.out.println("Default image not found");
+        }
+
         List<String> languages = Arrays.asList(
                 "English", "Mandarin Chinese", "Hindi", "Spanish",
                 "French", "Standard Arabic", "Bengali", "Russian",
@@ -173,6 +181,12 @@ public class AddGuide {
                     maleRadioButton.setSelected(true);
                 } else {
                     femaleRadioButton.setSelected(true);
+                }
+                try {
+                    Image image = new Image(newSelection.getImage());
+                    imageViewGuide.setImage(image);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
 
             }
@@ -232,6 +246,7 @@ public class AddGuide {
 
     @FXML
     public void clearGuide() {
+        // Clear all text fields
         cinField.clear();
         firstNameField.clear();
         lastNameField.clear();
@@ -240,8 +255,16 @@ public class AddGuide {
         languageField.getSelectionModel().selectFirst(); // Optionally set the first language as the default
         dobPicker.setValue(null);
         priceField.clear();
-        imageViewGuide.setImage(null); // Clear the ImageView
-    }
+
+        // Reset the image to a default image
+        try {
+            String defaultImagePath = "image/image.png";  // Correct path inside your resources directory
+            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(defaultImagePath)));
+            imageViewGuide.setImage(defaultImage);
+        } catch (NullPointerException e) {
+            System.err.println("Default image not found");
+            imageViewGuide.setImage(null); // Set to null if default image is not found
+        }}
 
     @FXML
     void AddGuide() {
@@ -274,6 +297,7 @@ public class AddGuide {
         guideServices.add(guide);
         ListGuides.getItems().add(guide);
         showAlert(AlertType.INFORMATION, "Success", "Guide added successfully!");
+   clearGuide();
     }
 
 
@@ -370,20 +394,21 @@ public class AddGuide {
 
 
     @FXML
-    private void guideBookings(ActionEvent event) throws Exception {
+    private void guideBookings() throws Exception {
         Guide selectedGuide = ListGuides.getSelectionModel().getSelectedItem();
         if (selectedGuide != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/BookingsPerGuide.fxml"));
             Parent root = loader.load();
 
-            // Assuming the controller class for the BookingsPerGuide.fxml is BookingsPerGuideController
-            BookingsBack bookingsController = loader.getController();
-            bookingsController.setBookingsData(selectedGuide);  // Correctly call the method to set the guide
+            BookingsPerGuideController bookingsController = loader.getController();
+
+            // Fetch bookings for the selected guide
+            List<Booking> bookings = bookingServices.getBookingsByGuide(selectedGuide.getCIN());  // Implement this method in your BookingServices
+            bookingsController.setBookingsData(bookings);
 
             Stage stage = new Stage();
-            stage.setTitle("Bookings for " + selectedGuide.getFirstname_g() + " " + selectedGuide.getLastname_g());  // Assuming you also want to show the last name
+            stage.setTitle("Bookings for " + selectedGuide.getFirstname_g() + " " + selectedGuide.getLastname_g());
             stage.setScene(new Scene(root));
-
             stage.show();
         } else {
             showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a guide to view bookings.");

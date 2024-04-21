@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddFeedback">
-   <children>
-      <ComboBox fx:id="guideCombo" layoutX="199.0" layoutY="90.0" prefWidth="150.0" promptText="Select Guide" />
-      <TextField fx:id="CommentField" layoutX="199.0" layoutY="156.0" onAction="#addFeedback" />
-      <Button fx:id="adddF" layoutX="237.0" layoutY="211.0" mnemonicParsing="false" text="Submit" />
-   </children>
+<!-- ComboBox -->
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="main-container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddFeedback">
+
+
+   <ImageView fitHeight="500" fitWidth="500">
+      <image>
+         <Image url="@image/bg1.jpg" />
+      </image>
+   </ImageView>
+   <!-- Main Content Area -->
+   <AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="content-pane">
+      <children>
+
+         <Text fill="#031231" layoutX="129.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book A Guide">
+            <font>
+               <Font size="40.0" />
+            </font>
+         </Text>
+      <ComboBox fx:id="guideCombo" layoutX="174.0" layoutY="181.0" prefWidth="150.0" promptText="Select Guide" />
+         <TextField fx:id="CommentField" layoutX="124.0" layoutY="224.0" onAction="#addFeedback" prefHeight="100.0" prefWidth="249.0" />
+      <Button fx:id="adddF" layoutX="223.0" layoutY="343.0" mnemonicParsing="false" text="Submit" />
+      </children>
+   </AnchorPane>
+   <stylesheets>
+      <URL value="@/style/styles.css" />
+   </stylesheets>
+
 </AnchorPane>

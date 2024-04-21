@@ -116,15 +116,6 @@ public class BookingsBack {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    public void setBookingsData(Guide guide) {
-        try {
-            List<Booking> bookings = bookingServices.getBookingsByGuide(guide.getCIN());
-            ObservableList<Booking> observableBookings = FXCollections.observableArrayList(bookings);
-            ListBookings.setItems(observableBookings);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle error (e.g., show an error message)
-        }
-    }
+
 
 }

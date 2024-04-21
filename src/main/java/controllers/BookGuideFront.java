@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BookGuideFront {
+    private String selectedGuideName;
 
     @FXML
     private ComboBox<String> guideComboBox;
@@ -37,8 +38,12 @@ public class BookGuideFront {
     @FXML
     void initialize() {
         populateGuideComboBox();
+        if (selectedGuideName != null && !selectedGuideName.isEmpty()) {
+            selectGuideByName(selectedGuideName);  // Use the new method for selecting the guide
+        }
         bookButton.setOnAction(event -> addBooking());
     }
+
 
     private void populateGuideComboBox() {
         try {
@@ -106,4 +111,16 @@ public class BookGuideFront {
     public void finalize() {
         bookingService.closeConnection();
     }
+
+
+    public void selectGuideByName(String guideName) {
+        for (int i = 0; i < guideComboBox.getItems().size(); i++) {
+            if (guideComboBox.getItems().get(i).equalsIgnoreCase(guideName)) {
+                guideComboBox.getSelectionModel().select(i);
+                break;
+            }
+        }
+    }
+
+
 }

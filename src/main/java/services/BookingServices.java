@@ -139,28 +139,51 @@ public class BookingServices {
         }
         return lastBooking;
     }
-    public List<Booking> getBookingsByGuide(int guideId) throws SQLException {
+
+    public List<Booking> getBookingsByGuide(int guideId) {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT * FROM Booking WHERE guide_id = ?";
+        String query = "SELECT id, guide_id, date FROM Booking WHERE guide_id = ?"; // Corrected to 'Booking' if that's your table name
 
-        try (Connection conn = MyDB.getInstance().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
+        try {
+            conn = MyDB.getInstance().getConnection();
+            if (conn == null) {
+                System.out.println("Failed to establish a database connection.");
+                return bookings; // Early return with empty list
+            }
+
+            pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, guideId);
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                // Assuming you have a constructor in your Booking entity that matches the fetched data
                 int id = rs.getInt("id");
-                LocalDate date = rs.getDate("date").toLocalDate(); // Ensure correct conversion from SQL Date to LocalDate
-                int userId = rs.getInt("user_id");  // Assuming there's a user_id field if needed
+                int guide = rs.getInt("guide_id");
+                LocalDate date = rs.getDate("date").toLocalDate(); // Ensure 'date' is of type DATE in the database
 
-                Booking booking = new Booking(id, guideId, date);
+                Booking booking = new Booking(id, guide, date);
                 bookings.add(booking);
             }
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                System.err.println("Error closing resources: " + ex.getMessage());
+                ex.printStackTrace();
+            }
         }
+
         return bookings;
     }
+
 
 }
 

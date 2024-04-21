@@ -29,8 +29,8 @@ public class PaymentController {
     @FXML
     private void handlePaymentProcess() {
         try {
-            Booking lastBooking = bookingServices.getLastBooking();
-            double guidePrice = guideServices.getGuidePrice(lastBooking.getGuide());
+          //  Booking lastBooking = bookingServices.getLastBooking();
+        //    double guidePrice = guideServices.getGuidePrice(lastBooking.getGuide());
 
             String cardNumber = cardNumberField.getText();
             String expiryDate = expiryDateField.getText();
@@ -38,13 +38,11 @@ public class PaymentController {
 
             String token = "tok_visa"; // Placeholder for token received from payment API
 
-            if (paymentService.processPayment(token, guidePrice)) {
+            if (paymentService.processPayment(token, 100)) {
                 showAlert("Payment Successful", "Your payment was successful!", Alert.AlertType.INFORMATION);
             } else {
                 showAlert("Payment Failed", "Your payment could not be processed. Please try again.", Alert.AlertType.ERROR);
             }
-        } catch (SQLException e) {
-            showAlert("Database Error", "Error accessing database information.", Alert.AlertType.ERROR);
         } catch (NullPointerException e) {
             showAlert("Data Error", "No recent bookings found.", Alert.AlertType.ERROR);
         }

@@ -13,22 +13,21 @@ import java.util.List;
 public class FeedbackServices {
 
     // Add Feedback
-    public void add(feedback feedback) {
-        String query = "INSERT INTO Feedback (fk_guide_id, comment) VALUES (?, ?)";
-        try (Connection conn = MyDB.getInstance().getConnection();
-             PreparedStatement pst = conn.prepareStatement(query)) {
-
-            pst.setInt(1, feedback.getGuide_id());
-            pst.setString(2, feedback.getComment());
-            int result = pst.executeUpdate();
-            if (result > 0) {
-                System.out.println("Feedback added successfully");
-            } else {
-                System.out.println("No rows affected");
-            }
+    public boolean add(feedback feedback) {
+        // Implementation that adds feedback to the database
+        try {
+            String query = "INSERT INTO feedback (fk_guide_id, comment) VALUES (?, ?)";
+            Connection conn = MyDB.getInstance().getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, feedback.getGuide_id());
+            pstmt.setString(2, feedback.getComment());
+            int result = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return result > 0;
         } catch (SQLException e) {
-            System.out.println("Error adding feedback: " + e.getMessage());
-            e.printStackTrace(); // This will provide a stack trace which can be very helpful
+            e.printStackTrace();
+            return false;
         }
     }
 
