@@ -27,6 +27,7 @@ import java.util.List;
 
 public class BackController {
 
+    public Button ClaimB;
     @FXML
     private Button catB;
     @FXML
@@ -311,6 +312,31 @@ public class BackController {
             // Consider showing an error alert to the user here as well
         }
     }
+
+    @FXML
+    private void handleAddV() {
+        try {
+            // Load the second FXML file
+            // Ensure that the FXMLLoader uses the correct class to find the resource relative to its location in the classpath.
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tourjoy/add-rec.fxml"));
+            // Change 'loader' to 'fxmlLoader' to match the initialized FXMLLoader object.
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage or use an existing one
+            Stage stage = new Stage();
+            stage.setTitle("Add Claim");  // Updated title to reflect the function
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Optionally hide the current stage if it's a full screen change
+            // ((Stage) openSecondaryViewButton.getScene().getWindow()).hide();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            // Consider showing an error alert to the user here as well
+        }
+    }
+    
+    
 
 
 }

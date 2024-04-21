@@ -5,15 +5,21 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import models.categories;
 import services.ServiceCategories;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class CatController {
 
+    public Button RecB;
     @FXML
     private TableView<categories> View;
 
@@ -73,8 +79,8 @@ public class CatController {
                 return;
             }
 
-            if (name.length() < 3 || name.length() > 10) {
-                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name must be between 3 and 10 characters.");
+            if (name.length() < 3 || name.length() > 16) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name must be between 3 and 16 characters.");
                 return;
             }
 
@@ -150,8 +156,8 @@ public class CatController {
                     return;
                 }
 
-                if (name.length() < 3 || name.length() > 10) {
-                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name must be between 3 and 10 characters.");
+                if (name.length() < 3 || name.length() > 16) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name must be between 3 and 16 characters.");
                     return;
                 }
 
@@ -193,6 +199,28 @@ public class CatController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    private void handleRecV() {
+        try {
+            // Load the second FXML file
+            // Ensure that the FXMLLoader uses the correct class to find the resource relative to its location in the classpath.
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tourjoy/back.fxml"));
+            // Change 'loader' to 'fxmlLoader' to match the initialized FXMLLoader object.
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage or use an existing one
+            Stage stage = new Stage();
+            stage.setTitle("Claims List");  // Updated title to reflect the function
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Optionally hide the current stage if it's a full screen change
+            // ((Stage) openSecondaryViewButton.getScene().getWindow()).hide();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            // Consider showing an error alert to the user here as well
+        }
     }
 
 }

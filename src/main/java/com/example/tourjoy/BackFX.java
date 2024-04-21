@@ -18,7 +18,7 @@ public class BackFX extends Application {
         Parent root = fxmlLoader.load(); // Load the FXML file once
 
         BackController controller = fxmlLoader.getController();
-        Scene scene = new Scene(root, 700, 450); // Use the loaded root node
+        Scene scene = new Scene(root); // Use the loaded root node
         stage.setTitle("Welcome to TourJoy!");
         stage.setScene(scene);
         stage.show();

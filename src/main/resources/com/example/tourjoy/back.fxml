@@ -7,81 +7,82 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BackController">
+<AnchorPane prefHeight="840.0" prefWidth="1530.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BackController">
    <children>
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="912.0" style="-fx-background-color: white;" styleClass="btn_workbench" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1530.0" style="-fx-background-color: white;" styleClass="btn_workbench" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
          <children>
-            <VBox prefHeight="448.0" prefWidth="172.0" style="-fx-background-color: #F0F0F2;" />
-            <AnchorPane prefHeight="521.0" prefWidth="708.0" style="-fx-background-color: #F0F0F2;">
+            <VBox prefHeight="840.0" prefWidth="0.0" style="-fx-background-color: #F0F0F2;" />
+            <AnchorPane prefHeight="840.0" prefWidth="1498.0" style="-fx-background-color: #F0F0F2;">
                <children>
-                  <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="592.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="1397.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/settingss.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="650.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="1441.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/desktop.png" />
                      </image>
                   </ImageView>
 
-      <AnchorPane layoutX="200.0" layoutY="0.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.leftAnchor="200.0">
+      <AnchorPane layoutX="230.4" layoutY="69.0" prefHeight="710.0" prefWidth="1301.0" AnchorPane.leftAnchor="230.0">
          <children>
-            <TextField fx:id="titleM" layoutX="93.0" layoutY="67.0" />
-            <Label fx:id="titleMod" layoutX="16.0" layoutY="71.0" text="Title" />
-            <TextField fx:id="replyM" layoutX="92.0" layoutY="254.0" prefHeight="58.0" prefWidth="150.0" />
-            <TextField fx:id="descriptionM" layoutX="93.0" layoutY="112.0" />
-            <Label fx:id="descriptionMod" layoutX="15.0" layoutY="116.0" text="Description" />
-            <Label fx:id="stateMod" layoutX="15.0" layoutY="164.0" text="State" />
-            <Label fx:id="replyMod" layoutX="14.0" layoutY="261.0" text="Reply" />
-            <TableView fx:id="claimsTableView" layoutX="282.0" layoutY="64.0" prefHeight="298.0" prefWidth="531.0">
+            <TextField fx:id="titleM" layoutX="94.0" layoutY="37.0" prefHeight="38.0" prefWidth="334.0" />
+            <Label fx:id="titleMod" layoutX="17.0" layoutY="47.0" text="Title" />
+            <TextField fx:id="replyM" layoutX="97.0" layoutY="394.0" prefHeight="159.0" prefWidth="334.0" />
+            <TextField fx:id="descriptionM" layoutX="96.0" layoutY="121.0" prefHeight="38.0" prefWidth="334.0" />
+            <Label fx:id="descriptionMod" layoutX="19.0" layoutY="131.0" text="Description" />
+            <Label fx:id="stateMod" layoutX="19.0" layoutY="221.0" text="State" />
+            <Label fx:id="replyMod" layoutX="19.0" layoutY="401.0" text="Reply" />
+            <TableView fx:id="claimsTableView" layoutX="490.0" layoutY="35.0" prefHeight="658.0" prefWidth="748.0">
                <columns>
                   <TableColumn fx:id="idR" prefWidth="75.0" text="Id" />
-                  <TableColumn fx:id="titleR" prefWidth="75.0" text="Title" />
-                  <TableColumn fx:id="descriptionR" prefWidth="75.0" text="Description" />
-                  <TableColumn fx:id="createDateR" prefWidth="92.80001831054688" text="Creation Date" />
-                  <TableColumn fx:id="stateR" prefWidth="59.20001220703125" text="State" />
-                  <TableColumn fx:id="catView" prefWidth="75.0" text="Category" />
-                  <TableColumn fx:id="replyR" prefWidth="75.0" text="Reply" />
+                  <TableColumn fx:id="titleR" prefWidth="108.00006103515625" text="Title" />
+                  <TableColumn fx:id="descriptionR" prefWidth="146.4000244140625" text="Description" />
+                  <TableColumn fx:id="createDateR" prefWidth="87.199951171875" text="Creation Date" />
+                  <TableColumn fx:id="stateR" prefWidth="80.7999267578125" text="State" />
+                  <TableColumn fx:id="catView" prefWidth="84.79998779296875" text="Category" />
+                  <TableColumn fx:id="replyR" prefWidth="162.39990234375" text="Reply" />
                </columns>
             </TableView>
-            <Button fx:id="deleteButton" layoutX="156.0" layoutY="383.0" mnemonicParsing="false" onAction="#deleteClaims" prefHeight="26.0" prefWidth="86.0" text="Delete" />
-            <Button fx:id="updateButton" layoutX="26.0" layoutY="383.0" mnemonicParsing="false" onAction="#updateClaims" prefHeight="26.0" prefWidth="86.0" text="Update" />
-            <Button fx:id="catB" layoutX="610.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleCatV" prefHeight="26.0" prefWidth="107.0" text="Categories list" />
-            <ComboBox fx:id="stateBox" layoutX="92.0" layoutY="160.0" prefWidth="150.0" promptText="Select.." />
-            <Label fx:id="catL" layoutX="13.0" layoutY="212.0" text="Category" />
-            <ComboBox fx:id="catBo" layoutX="92.0" layoutY="208.0" prefWidth="150.0" promptText="Select.." />
+            <Button fx:id="deleteButton" layoutX="310.0" layoutY="655.0" mnemonicParsing="false" onAction="#deleteClaims" prefHeight="40.0" prefWidth="122.0" styleClass="btn_workbench" text="Delete" textFill="#fcf7f7" />
+
+            <Button fx:id="updateButton" layoutX="94.0" layoutY="655.0" mnemonicParsing="false" onAction="#updateClaims" prefHeight="40.0" prefWidth="122.0" styleClass="btn_workbench" text="Update" textFill="#fcf7f7" />
+            <ComboBox fx:id="stateBox" layoutX="96.0" layoutY="209.0" prefHeight="38.0" prefWidth="334.0" promptText="Select.." />
+            <Label fx:id="catL" layoutX="19.0" layoutY="309.0" text="Category" />
+            <ComboBox fx:id="catBo" layoutX="99.0" layoutY="300.0" prefHeight="38.0" prefWidth="334.0" promptText="Select.." />
          </children>
       </AnchorPane>
-                  <AnchorPane fx:id="side_ankerpane" layoutY="3.0" prefHeight="520.0" prefWidth="186.0" styleClass="side_ankerpane">
+                  <AnchorPane fx:id="side_ankerpane" prefHeight="840.0" prefWidth="231.0" styleClass="side_ankerpane">
                      <children>
-                        <Pane fx:id="inner_pane" layoutX="4.0" layoutY="29.0" prefHeight="48.0" prefWidth="188.0" styleClass="inner_pane">
+                        <Pane fx:id="inner_pane" layoutX="4.0" layoutY="29.0" prefHeight="48.0" prefWidth="220.0" styleClass="inner_pane">
                            <children>
-                              <Pane fx:id="most_inner_pane" layoutX="156.0" layoutY="4.0" prefHeight="41.0" prefWidth="18.0" styleClass="most_inner_pane">
-                                 <children>
-                                    <ImageView fitHeight="28.0" fitWidth="18.0" layoutX="6.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@images/dott.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children></Pane>
+                              <Pane fx:id="most_inner_pane" layoutX="185.0" layoutY="4.0" prefHeight="41.0" prefWidth="18.0" styleClass="most_inner_pane" />
                               <ImageView fitHeight="41.0" fitWidth="45.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/tourjoy.png" />
                                  </image>
                               </ImageView>
+                              <ImageView fitHeight="28.0" fitWidth="18.0" layoutX="191.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/dott.png" />
+                                 </image>
+                              </ImageView>
                            </children></Pane>
                         <Pane layoutX="-4.0" layoutY="111.0" prefHeight="41.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btn_workbench" layoutX="12.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="btn_workbench" text="User Management                 " textFill="#f7f2f2" />
-                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="148.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="btn_workbench" layoutX="12.0" layoutY="5.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="209.0" styleClass="btn_workbench" text="Users                                 " textFill="#f7f2f2" />
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="178.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/administrateur.png" />
                                  </image>
@@ -89,8 +90,8 @@
                            </children></Pane>
                         <Pane layoutX="-4.0" layoutY="159.0" prefHeight="41.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btn_workbench122" layoutX="12.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="btn_workbench" text="Accommodationn                 " textFill="#fcfafa" />
-                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="143.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="btn_workbench122" layoutX="12.0" layoutY="5.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="209.0" styleClass="btn_workbench" text="  Accommodations               " textFill="#fcfafa" />
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="174.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/home.png" />
                                  </image>
@@ -99,8 +100,8 @@
                         </Pane>
                         <Pane layoutX="-2.0" layoutY="258.0" prefHeight="41.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btn_workbench2" layoutX="12.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="btn_workbench" text="Guides                                " textFill="#f7f2f2" />
-                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="144.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="btn_workbench2" layoutX="12.0" layoutY="2.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="209.0" styleClass="btn_workbench" text="Guides                                " textFill="#f7f2f2" />
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="174.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/guides.png" />
                                  </image>
@@ -109,8 +110,8 @@
                         </Pane>
                         <Pane layoutX="-2.0" layoutY="308.0" prefHeight="41.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btn_workbench21" layoutX="12.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="btn_workbench" text="Transport                             " textFill="#f7f2f2" />
-                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="148.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="btn_workbench21" layoutX="12.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="209.0" styleClass="btn_workbench" text="Transports                           " textFill="#f7f2f2" />
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="176.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/transportt.png" />
                                  </image>
@@ -119,8 +120,8 @@
                         </Pane>
                         <Pane layoutX="-2.0" layoutY="208.0" prefHeight="41.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btn_workbench1" layoutX="10.0" layoutY="3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="btn_workbench" text="Monuments                      " textFill="#fcfafa" />
-                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="143.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="btn_workbench1" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="209.0" styleClass="btn_workbench" text="Monuments                      " textFill="#fcfafa" />
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="174.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/monuments.png" />
                                  </image>
@@ -129,8 +130,8 @@
                         </Pane>
                         <Pane layoutX="-2.0" layoutY="350.0" prefHeight="41.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="btn_workbench11" layoutX="10.0" layoutY="6.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" styleClass="btn_workbench" text="Claims                                  " textFill="#fcfafa" />
-                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="143.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="btn_workbench11" layoutX="10.0" layoutY="6.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="209.0" styleClass="btn_workbench" text="Claims                                 " textFill="#fcfafa" />
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="176.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@images/claims.png" />
                                  </image>
@@ -138,6 +139,17 @@
                            </children>
                         </Pane>
                      </children></AnchorPane>
+      <Button fx:id="catB" layoutX="1256.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleCatV" prefHeight="38.0" prefWidth="122.0" styleClass="btn_workbench" text="Categories list" textFill="#fcf7f7" />
+
+                  <Text layoutX="527.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-fill: #34495E;" text="Claims management">
+         <font>
+            <Font size="50.0" />
+         </font>
+         <effect>
+            <DropShadow color="rgba(0,0,0,0.5)" radius="5.0" />
+         </effect>
+      </Text>
+                  <Button fx:id="ClaimB" layoutX="1124.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleAddV" prefHeight="38.0" prefWidth="122.0" styleClass="btn_workbench" text="Add claims" textFill="#fcf7f7" />
 
    </children>
    <stylesheets>
