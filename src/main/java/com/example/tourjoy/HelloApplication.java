@@ -19,7 +19,6 @@ import javafx.scene.control.ProgressIndicator;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-
     private static Stage primaryStage;
     private static double xOffset = 0;
     private static double yOffset = 0;
@@ -41,8 +40,7 @@ public class HelloApplication extends Application {
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add("styles.css");
 
-        // Stage settings
-        primaryStage.initStyle(StageStyle.TRANSPARENT); // Important for custom title bar functionality
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -58,9 +56,6 @@ public class HelloApplication extends Application {
         titleBar.getStyleClass().add("title-bar");
         titleBar.setAlignment(Pos.CENTER_RIGHT);
         titleBar.setPadding(new Insets(5));
-
-
-
 
         return titleBar;
     }

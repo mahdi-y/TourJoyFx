@@ -14,7 +14,7 @@
 /* Form container */
 .formContainer {
     -fx-background-color: #FFFFFF;
-    -fx-background-radius: 20;
+    -fx-background-radius: 12;
     -fx-background-insets: 0;
     -fx-padding: 40;
 }
@@ -22,9 +22,9 @@
 /* Text fields */
 .text-field {
     -fx-font-size: 14px;
-    -fx-pref-width: 300px;
-    -fx-max-width: 300px;
-    -fx-background-radius: 5;
+    -fx-pref-width: 400px;
+    -fx-max-width: 400px;
+    -fx-background-radius: 8;
     -fx-border-color: #ccc;
     -fx-border-width: 2;
 }
