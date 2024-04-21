@@ -6,11 +6,11 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.LoginController"
-            prefHeight="700.0" prefWidth="700.0"
+            prefHeight="700.0" prefWidth="1200.0"
             stylesheets="@styles.css">
 
     <!-- AnchorPane allows for absolute positioning of elements -->
-    <VBox layoutX="150" layoutY="50" prefWidth="300" spacing="20" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+    <VBox layoutX="150" layoutY="50" prefWidth="700" spacing="20" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
         <Text text="Sign In" styleClass="title-text"/>
         <TextField fx:id="emailField" promptText="Email" styleClass="text-field"/>
         <PasswordField fx:id="passwordField" promptText="Password" styleClass="text-field"/>

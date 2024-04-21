@@ -24,28 +24,25 @@ public class HelloApplication extends Application {
     private static double xOffset = 0;
     private static double yOffset = 0;
 
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
 
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/signUp.fxml"));
         Parent root = fxmlLoader.load();
 
-        VBox mainContainer = new VBox();
-        mainContainer.getStyleClass().add("mainContainer");
+        makeStageDraggable(root);
 
-        HBox titleBar = createTitleBar();
-
-        mainContainer.getChildren().addAll(titleBar, root);
-
-        titleBar.setOnMousePressed(this::handleMousePressed);
-        titleBar.setOnMouseDragged(this::handleMouseDragged);
-
-        Scene scene = new Scene(mainContainer, 700, 700);
+        Scene scene = new Scene(root, 1250, 700);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add("styles.css");
+
+        // Stage settings
+        primaryStage.initStyle(StageStyle.TRANSPARENT); // Important for custom title bar functionality
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -63,20 +60,7 @@ public class HelloApplication extends Application {
         titleBar.setPadding(new Insets(5));
 
 
-        Button closeButton = new Button();
-        closeButton.getStyleClass().add("close-button");
-        closeButton.setOnAction(event -> primaryStage.close());
 
-        Button expandButton = new Button();
-        expandButton.getStyleClass().add("expand-button");
-        expandButton.setOnAction(event -> primaryStage.setMaximized(!primaryStage.isMaximized()));
-
-
-        Button minimizeButton = new Button();
-        minimizeButton.getStyleClass().add("minimize-button");
-        minimizeButton.setOnAction(event -> primaryStage.setIconified(true));
-
-        titleBar.getChildren().addAll(minimizeButton, expandButton, closeButton);
 
         return titleBar;
     }
@@ -99,7 +83,7 @@ public class HelloApplication extends Application {
 
         VBox loadingContainer = new VBox(createLoader());
         loadingContainer.setAlignment(Pos.CENTER);
-        Scene loadingScene = new Scene(loadingContainer, 700, 700);
+        Scene loadingScene = new Scene(loadingContainer, 1200, 700);
         loadingScene.setFill(Color.TRANSPARENT);
         primaryStage.setScene(loadingScene);
 
@@ -110,30 +94,34 @@ public class HelloApplication extends Application {
                 Parent content = loader.load();
 
                 HBox titleBar = createTitleBar();
-                titleBar.setOnMousePressed(event -> {
-                    xOffset = primaryStage.getX() - event.getScreenX();
-                    yOffset = primaryStage.getY() - event.getScreenY();
-                });
-                titleBar.setOnMouseDragged(event -> {
-                    primaryStage.setX(event.getScreenX() + xOffset);
-                    primaryStage.setY(event.getScreenY() + yOffset);
-                });
+                makeStageDraggable(content);
 
-                VBox mainContainer = new VBox(titleBar, content);
+                VBox mainContainer = new VBox(content);
                 mainContainer.getStyleClass().add("mainContainer");
                 Scene mainScene = new Scene(mainContainer);
                 mainScene.setFill(Color.TRANSPARENT);
                 mainScene.getStylesheets().add("styles.css");
 
-                // Switch back to the main UI thread to update the scene
                 javafx.application.Platform.runLater(() -> primaryStage.setScene(mainScene));
             } catch (IOException e) {
-                e.printStackTrace(); // Handle exceptions appropriately
+                e.printStackTrace();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }).start();
     }
+
+    private static void makeStageDraggable(Node node) {
+        node.setOnMousePressed(event -> {
+            xOffset = primaryStage.getX() - event.getScreenX();
+            yOffset = primaryStage.getY() - event.getScreenY();
+        });
+        node.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() + xOffset);
+            primaryStage.setY(event.getScreenY() + yOffset);
+        });
+    }
+
 
 
 

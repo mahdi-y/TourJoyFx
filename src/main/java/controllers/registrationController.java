@@ -169,4 +169,21 @@ public class registrationController {
     public void handleSignIn(ActionEvent actionEvent) throws IOException {
         loginInstead();
     }
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(ActionEvent actionEvent) {
+        getPrimaryStage().close();
+    }
 }
