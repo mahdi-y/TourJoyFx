@@ -78,6 +78,26 @@ public class RecController {
             String state = "Not treated";  // Default state
             Integer fkC = (catBox.getSelectionModel().getSelectedItem() != null) ? catBox.getSelectionModel().getSelectedItem().getId() : null;
             String reply = "-";  // Default reply
+// Validate inputs
+            if (title.isEmpty() || description.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Title and description cannot be empty.");
+                return;
+            }
+
+            if (title.length() < 3 || title.length() > 50) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "the title must be between 3 and 50 characters.");
+                return;
+            }
+
+            if (description.length() < 5 || description.length() > 300) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Description must be between 5 and 300 characters.");
+                return;
+            }
+
+            if (fkC == null) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please select a category.");
+                return;
+            }
 
             // Create claim object
             claims claims = new claims(title, description, createDate, state, fkC, reply);

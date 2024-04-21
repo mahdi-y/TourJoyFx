@@ -23,17 +23,19 @@ public class ServiceClaims implements IServices<claims> {
 
     @Override
     public void add(claims claims) throws SQLException {
-        String query = "INSERT INTO claims ( title, description, createDate, state, fkC, reply) VALUES (?, ?, ?, ?, ?, ?)";
-        pre = con.prepareStatement(query);
-
-        pre.setString(1, claims.getTitle());
-        pre.setString(2, claims.getDescription());
-        pre.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-        pre.setString(4, claims.getState());
-        pre.setInt(5, claims.getFkC());
-        pre.setString(6, claims.getReply());
-        pre.executeUpdate();
-
+        String query = "INSERT INTO claims (title, description, createDate, state, fkC, reply) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setString(1, claims.getTitle());
+            pre.setString(2, claims.getDescription());
+            pre.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            pre.setString(4, claims.getState());
+            pre.setInt(5, claims.getFkC());
+            pre.setString(6, claims.getReply());
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
     public List<claims> Read() throws SQLException {
         List<claims> claimsList = new ArrayList<>();
@@ -57,18 +59,20 @@ public class ServiceClaims implements IServices<claims> {
         return claimsList;
     }
     @Override
-    public void update(claims claims)
-            throws SQLException {
+    public void update(claims claims) throws SQLException {
         String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=? WHERE id=?";
-        pre = con.prepareStatement(query);
-        pre.setString(1, claims.getTitle());
-        pre.setString(2, claims.getDescription());
-
-        pre.setString(3, claims.getState());
-        pre.setInt(4, claims.getFkC());
-        pre.setString(5, claims.getReply());
-        pre.setInt(6, claims.getId()); // Ensure this is the last parameter according to the query
-        pre.executeUpdate();
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setString(1, claims.getTitle());
+            pre.setString(2, claims.getDescription());
+            pre.setString(3, claims.getState());
+            pre.setInt(4, claims.getFkC());
+            pre.setString(5, claims.getReply());
+            pre.setInt(6, claims.getId());
+            pre.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @Override

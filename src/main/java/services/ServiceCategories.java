@@ -21,9 +21,8 @@ public class ServiceCategories implements IServices<categories> {
     @Override
     public void add(categories categories) throws SQLException {
         String query = "INSERT INTO categories (name) VALUES (?)";
-        // Ensure you request the keys back when preparing the statement
-        try (Connection con = DBConnection.getInstance().getCnx();
-             PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        // Use the class-level connection 'con' which is already open
+        try (PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             pre.setString(1, categories.getName());
             pre.executeUpdate();
 
@@ -40,8 +39,8 @@ public class ServiceCategories implements IServices<categories> {
             e.printStackTrace();
             throw e;
         }
-
     }
+
 
 
 
@@ -71,6 +70,18 @@ public class ServiceCategories implements IServices<categories> {
 
         pre.setInt(2, categories.getId()); // Ensure this is the last parameter according to the query
         pre.executeUpdate();
+    }
+    public boolean isNameUnique(String name, Integer id) throws SQLException {
+        String query = "SELECT COUNT(*) FROM categories WHERE name = ? AND id != ?";
+        try (PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, name);
+            pst.setInt(2, (id == null) ? -1 : id);  // Use -1 if id is null to ensure no match
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) == 0;  // Returns true if no duplicates found
+            }
+        }
+        return false;  // Default to false to handle unexpected cases safely
     }
 
     @Override

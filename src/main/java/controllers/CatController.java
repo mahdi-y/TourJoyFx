@@ -67,11 +67,25 @@ public class CatController {
         try {
             String name = nameField.getText();
 
-            if (name.trim().isEmpty()) {
+
+            if (name.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a category name.");
                 return;
             }
 
+            if (name.length() < 3 || name.length() > 10) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name must be between 3 and 10 characters.");
+                return;
+            }
+
+            if (!name.matches("[\\w\\s-]+")) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name contains invalid characters.");
+                return;
+            }
+            if (!ServiceCategories.isNameUnique(name, null)) {
+                showAlert(Alert.AlertType.ERROR, "Duplicate Name", "A category with this name already exists.");
+                return;
+            }
             categories newCategory = new categories(name);
 
             // Add category to database; the object newCategory will have its ID updated
@@ -80,7 +94,7 @@ public class CatController {
             // Add the newly added category to the ObservableList to update the TableView
             ObservableList<categories> currentItems = View.getItems();
             currentItems.add(newCategory);
-            clearForm();
+
             showAlert(Alert.AlertType.INFORMATION, "Success", "Category added successfully!");
         } catch (SQLException e) {
             e.printStackTrace();  // Print stack trace for detailed error information
@@ -131,9 +145,26 @@ public class CatController {
             try {
                 String name = nameField.getText();
 
+                if (name.isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a category name.");
+                    return;
+                }
+
+                if (name.length() < 3 || name.length() > 10) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name must be between 3 and 10 characters.");
+                    return;
+                }
+
+                if (!name.matches("[\\w\\s-]+")) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "Category name contains invalid characters.");
+                    return;
+                }
 
 
-
+                if (!ServiceCategories.isNameUnique(name, selectedCategories.getId())) {
+                    showAlert(Alert.AlertType.ERROR, "Duplicate Name", "A category with this name already exists.");
+                    return;
+                }
 
                 // Update selected country object
                 selectedCategories.setName(name);
@@ -144,7 +175,7 @@ public class CatController {
 
                 // Refresh TableView
                 View.refresh();
-                clearForm();
+
                 // Show success message
                 showAlert(Alert.AlertType.INFORMATION, "Success", "category updated successfully!");
             } catch (NumberFormatException e) {

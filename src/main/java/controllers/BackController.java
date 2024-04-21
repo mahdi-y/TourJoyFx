@@ -57,6 +57,23 @@ public class BackController {
 
     @FXML
     private TextField replyM;
+    @FXML
+    private Button btn_workbench;
+
+    @FXML
+    private Button btn_workbench1;
+
+    @FXML
+    private Button btn_workbench11;
+
+    @FXML
+    private Button btn_workbench122;
+
+    @FXML
+    private Button btn_workbench2;
+
+    @FXML
+    private Button btn_workbench21;
 
     @FXML
     private Label stateMod;
@@ -223,7 +240,21 @@ public class BackController {
 
                 String reply = replyM.getText();
 
+// Validate state
+                if (state == null) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please select a state.");
+                    return;
+                }
 
+                if (reply.isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a reply.");
+                    return;
+                }
+                // Validate reply, for example, check if it's not too long
+                if (reply.length() < 5 || reply.length() > 200) {
+                    showAlert(Alert.AlertType.ERROR, "Invalid Input", "reply must be between 5 and 200 characters.");
+                    return;
+                }
 
 
                 // Update selected country object
@@ -237,7 +268,7 @@ public class BackController {
 
                 // Update country in the database
                 ServiceClaims.update(selectedClaims);
-                clearForm();
+
                 // Refresh TableView
                 claimsTableView.refresh();
 
