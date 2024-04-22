@@ -1,0 +1,90 @@
+/* styles.css */
+.main-container {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.subtitle-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.input-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+}
+
+.upload-button {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+}
+
+.image-path-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 12px;
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+}
+
+.submit-button {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 40px;
+    -fx-font-size: 16px;
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5px;
+}
+
+.close-button {
+    -fx-background-radius: 10em; /* Circular shape */
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #ff5f57; /* Red color */
+}
+
+.close-button:hover {
+    -fx-background-color: #ff3b30; /* Darker red on hover */
+}
+
+/* Style for minimize button */
+.minimize-button {
+    -fx-background-radius: 10em; /* Circular shape */
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #28c840; /* Green color */
+}
+
+.minimize-button:hover {
+    -fx-background-color: #14ae32; /* Darker green on hover */
+}
+
+.expand-button {
+    -fx-background-radius: 10em;
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #c7a807;
+}
+
+.expand-button:hover {
+    -fx-background-color: #e79519;
+}

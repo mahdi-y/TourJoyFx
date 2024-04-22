@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Home">
+
+    <children>
+        <Label fx:id="idU" layoutX="288.0" layoutY="575.0" text="Label" textFill="WHITE" />
+        <ImageView fitHeight="1011.0" fitWidth="1538.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/bg1.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="143.0" fitWidth="303.0" layoutX="29.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/tourjoy.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="847.0" layoutY="73.0" text="MONUMENTS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <Label layoutX="1209.0" layoutY="71.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <Label layoutX="1320.0" layoutY="73.0" text="CLAIMS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+
+        <ImageView fx:id="heroImageView" fitHeight="556.0" fitWidth="552.0" layoutX="867.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/globe.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="187.0" layoutY="413.0" text="Destinations!" textFill="WHITE">
+            <font>
+                <Font name="Britannic Bold" size="74.0" />
+            </font>
+        </Label>
+        <Label layoutX="173.0" layoutY="324.0" text="Discover Epic " textFill="WHITE">
+            <font>
+                <Font name="Britannic Bold" size="74.0" />
+            </font>
+        </Label>
+        <Button layoutX="238.0" layoutY="569.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="300.0" style="-fx-background-color: #fea116;" text="CRAFT YOUR JOURNEY" textFill="WHITE">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Button>
+        <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1425.0" layoutY="58.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/icons-utilisateur.png" />
+            </image>
+        </ImageView>
+        <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
+        <Button fx:id="homeButton" layoutX="760.0" layoutY="67.0" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="HOME" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
+        <Button fx:id="guideButton" layoutX="964.0" layoutY="67.0" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="GUIDES" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
+
+
+        <Label fx:id="SUBSCRIPTION" layoutX="1060.0" layoutY="71.0" prefHeight="26.0" prefWidth="134.0" text="SUBSCRIPTIONS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <HBox alignment="TOP_RIGHT" layoutX="1432.0" layoutY="18.0" spacing="10.0">
+            <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
+            <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
+            <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
+        </HBox>
+      <Button layoutX="1403.0" layoutY="162.0" mnemonicParsing="false" onAction="#logoutUser" prefHeight="15.0" prefWidth="101.0" style="-fx-background-color: #cc284b;" text="Logout" textFill="WHITE" />
+        <Button fx:id="adminButton" layoutX="1403.0" layoutY="128.0" onAction="#backoffice" mnemonicParsing="false" prefHeight="15.0" prefWidth="101.0" style="-fx-background-color: #e7401a;" text="Admin Button" textFill="WHITE"  />
+    </children>
+
+
+</AnchorPane>

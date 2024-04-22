@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.layout.VBox;
@@ -17,8 +18,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.ProgressIndicator;
 
 import java.io.IOException;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
+
 
 public class HelloApplication extends Application {
+
     private static Stage primaryStage;
     private static double xOffset = 0;
     private static double yOffset = 0;
@@ -43,6 +48,12 @@ public class HelloApplication extends Application {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+
     }
 
     private static Node createLoader() {

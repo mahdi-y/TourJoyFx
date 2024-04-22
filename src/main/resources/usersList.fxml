@@ -1,42 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.usersList"
-            prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@userListStyles.css">
-    <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;">
-        <Text text="Users" styleClass="header-text"/>
-        <!-- Other header elements like search, filters here -->
-    </HBox>
-    <TableView fx:id="usersTable" styleClass="table-view">
+<AnchorPane prefHeight="593.0" prefWidth="1031.0" stylesheets="@userListStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.usersList">
+    <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;"/>
+
+    <TableView fx:id="usersTable" layoutX="164.0" layoutY="89.0" styleClass="table-view">
         <columns>
-            <TableColumn text="ID" fx:id="idColumn" styleClass="table-column" />
-            <TableColumn text="Email" fx:id="emailColumn" styleClass="table-column" />
-            <TableColumn text="Role" fx:id="roleColumn" styleClass="table-column" />
-            <TableColumn text="First Name" fx:id="firstNameColumn" styleClass="table-column" />
-            <TableColumn text="Last Name" fx:id="lastNameColumn" styleClass="table-column" />
-            <TableColumn text="Phone Number" fx:id="phoneNumberColumn" styleClass="table-column" />
-            <TableColumn text="Country" fx:id="countryColumn" styleClass="table-column" />
-            <TableColumn text="Creation Date" fx:id="creationDateColumn" styleClass="table-column" />
-            <TableColumn fx:id="isVerifiedColumn" text="Verified" styleClass="table-column">
+            <TableColumn fx:id="idColumn" styleClass="table-column" text="ID" />
+            <TableColumn fx:id="emailColumn" styleClass="table-column" text="Email" />
+            <TableColumn fx:id="roleColumn" styleClass="table-column" text="Role" />
+            <TableColumn fx:id="firstNameColumn" styleClass="table-column" text="First Name" />
+            <TableColumn fx:id="lastNameColumn" styleClass="table-column" text="Last Name" />
+            <TableColumn fx:id="phoneNumberColumn" styleClass="table-column" text="Phone Number" />
+            <TableColumn fx:id="countryColumn" styleClass="table-column" text="Country" />
+            <TableColumn fx:id="creationDateColumn" styleClass="table-column" text="Creation Date" />
+            <TableColumn fx:id="isVerifiedColumn" styleClass="table-column" text="Verified">
                 <cellValueFactory>
-                    <PropertyValueFactory property="isVerified"/>
+                    <PropertyValueFactory property="isVerified" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="isBannedColumn" text="Banned" styleClass="table-column">
+            <TableColumn fx:id="isBannedColumn" styleClass="table-column" text="Banned">
                 <cellValueFactory>
-                    <PropertyValueFactory property="isBanned"/>
+                    <PropertyValueFactory property="isBanned" />
                 </cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
+     <Text layoutX="35.0" layoutY="278.0" styleClass="header-text" text="Users" />
+   <Button fx:id="deleteButton" layoutX="374.0" layoutY="525.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="114.0" text="Delete" />
+
+    <HBox alignment="TOP_RIGHT" layoutX="935.0" layoutY="28.0" spacing="10.0">
+        <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
+        <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
+        <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
+
+    </HBox>
+   <Button fx:id="frontoffice" layoutX="573.0" layoutY="525.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="114.0" text="Frontpage" onAction="#front"/>
+
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
 </AnchorPane>

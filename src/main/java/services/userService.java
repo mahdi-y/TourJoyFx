@@ -7,7 +7,6 @@ import models.User;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import utils.userUtils;
 
@@ -58,8 +57,18 @@ public class userService implements IServices<User> {
         }
     }
 
-
-
+    @Override
+    public boolean deleteUser(User user) throws SQLException {
+        if (con == null) {
+            throw new SQLException("Connection is null.");
+        }
+        String query = "DELETE FROM user WHERE id = ?";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setInt(1, user.getId());
+            int result = pre.executeUpdate();
+            return result > 0;
+        }
+    }
 
     @Override
     public void updateProfile(User user, String currentEmail) throws SQLException {
@@ -81,6 +90,27 @@ public class userService implements IServices<User> {
         }
     }
     @Override
+    public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
+        if (con == null) {
+            throw new SQLException("Connection is null.");
+        }
+        String query = "UPDATE user SET email = ?, first_name = ?, last_name = ?, country = ?, profile_picture = ?, modified_at = ? WHERE email = ?";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setString(1, user.getEmail());
+            pre.setString(2, user.getFirstName());
+            pre.setString(3, user.getLastName());
+            pre.setString(4, user.getCountry());
+            pre.setString(5, user.getProfilePicture());
+            pre.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+            pre.setString(7, currentEmail);
+
+            int result = pre.executeUpdate();
+            if (result == 0) {
+                throw new SQLException("Update failed, no rows affected.");
+            }
+        }
+    }
+    @Override
     public boolean emailExists(String email) throws SQLException {
         String query = "SELECT count(*) FROM user WHERE email = ?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
@@ -96,10 +126,7 @@ public class userService implements IServices<User> {
 
 
 
-    @Override
-    public boolean deleteUser(User user) throws SQLException {
-        return false;
-    }
+
 
     @Override
     public List<User> ReadUser() throws SQLException {

@@ -1,7 +1,19 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype');
+    /*font-weight: normal;*/
+    /*font-style: normal;*/
+}
+.root {
+    -fx-font-family: 'Poppins';
+}
+
+
 /* Main container */
 .mainContainer {
     -fx-background-color: white;
     -fx-background-radius: 8;
+    -fx-font-family: 'Poppins';
 }
 
 /* Header text */
@@ -9,6 +21,7 @@
     -fx-font-size: 32px;
     -fx-font-weight: bold;
     -fx-text-fill: #333;
+    -fx-font-family: 'Poppins';
 }
 
 /* Form container */
@@ -17,6 +30,7 @@
     -fx-background-radius: 12;
     -fx-background-insets: 0;
     -fx-padding: 40;
+    -fx-font-family: 'Poppins';
 }
 
 /* Text fields */
@@ -27,6 +41,7 @@
     -fx-background-radius: 8;
     -fx-border-color: #ccc;
     -fx-border-width: 2;
+    -fx-font-family: 'Poppins';
 }
 
 /* Register button */
@@ -39,6 +54,7 @@
     -fx-font-size: 16px;
     -fx-min-width: 100px;
     -fx-min-height: 35px;
+    -fx-font-family: 'Poppins';
 }
 
 .btn-register:hover {
@@ -49,12 +65,14 @@
 .normal-text {
     -fx-font-size: 14px;
     -fx-text-fill: #666;
+    -fx-font-family: 'Poppins';
 }
 
 /* Hyperlink */
 .hyperlink-text {
     -fx-text-fill: #0096C9;
     -fx-underline: true;
+    -fx-font-family: 'Poppins';
 }
 
 .hyperlink-text:hover {
@@ -63,7 +81,7 @@
 
 /* Applying global styles to all buttons and text fields */
 .button, .text-field {
-    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    -fx-font-family: 'Poppins';
 }
 
 .title-bar {
@@ -71,6 +89,7 @@
     -fx-text-fill: white;
     -fx-spacing: 10; /* Space between buttons */
     -fx-background-radius: 8;
+    -fx-font-family: 'Poppins';
 
 }
 
@@ -137,5 +156,21 @@
     -fx-alignment: center;
     -fx-min-width: 600px; /* Set a minimum width for the form */
     -fx-max-width: 600px; /* Set a maximum width for the form */
+    -fx-font-family: 'Poppins';
 }
 
+.btn-login {
+    -fx-background-color: #e7401a;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-min-width: 100px;
+    -fx-min-height: 35px;
+    -fx-font-family: 'Poppins';
+}
+
+.btn-login:hover{
+    -fx-text-fill: black;
+    -fx-background-color: #e1bf17;
+}

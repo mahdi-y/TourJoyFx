@@ -1,22 +1,29 @@
 package controllers;
 
+import com.example.tourjoy.HelloApplication;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import models.User;
 import services.userService;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class usersList {
+    public Button deleteButton;
+    public Button frontoffice;
     @FXML
     private TableView<User> usersTable;
     @FXML
@@ -48,6 +55,26 @@ public class usersList {
         userService = new userService();
         setupTableColumns();
         loadUsers();
+
+        deleteButton.setOnAction(event -> {
+            User selectedUser = usersTable.getSelectionModel().getSelectedItem();
+            if (selectedUser != null) {
+                try {
+                    boolean deleted = userService.deleteUser(selectedUser);
+                    if (deleted) {
+                        showAlert(Alert.AlertType.INFORMATION, "User Deleted", "User successfully deleted.");
+                        usersTable.getItems().remove(selectedUser);
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Delete Failed", "Failed to delete user.");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Delete Error", "An error occurred while deleting user.");
+                }
+            } else {
+                showAlert(Alert.AlertType.WARNING, "No User Selected", "Please select a user to delete.");
+            }
+        });
     }
 
     private void setupTableColumns() {
@@ -84,6 +111,25 @@ public class usersList {
     }
 
 
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
+    }
 
 
+    public void front(ActionEvent actionEvent) throws IOException {
+        HelloApplication.loadFXML("/Home.fxml");
+    }
 }

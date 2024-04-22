@@ -22,7 +22,6 @@ public class registrationController {
     @FXML
     private PasswordField passwordField;
 
-
     @FXML
     private TextField phoneNumberField;
 
@@ -34,8 +33,6 @@ public class registrationController {
     @FXML
     public void initialize() {
         userService = new userService();
-
-
         register.setOnAction(event -> {
             try {
                 registerUser();
@@ -56,7 +53,7 @@ public class registrationController {
         int phoneNumber = Integer.parseInt(phoneNumberField.getText());
         String confirmPassword = confirmPasswordField.getText();
         LocalDateTime createdAt = LocalDateTime.now();
-        String[] roles = {"ROLE_USER", "ROLE_ADMIN"};
+        String[] roles = {"ROLE_USER"};
 
         User user = new User(email, roles, password, phoneNumber, createdAt);
 
@@ -68,7 +65,6 @@ public class registrationController {
         showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully!");
 
         Stage stage = (Stage) register.getScene().getWindow();
-        stage.close();
 
         profileCompletionPage();
 

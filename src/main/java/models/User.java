@@ -78,6 +78,16 @@ public class User {
         this.googleId = googleId;
     }
 
+    public User(int id, String email, String firstName, String lastName, String country, String profilePicture, int phoneNumber) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.profilePicture = profilePicture;
+        this.phoneNumber = phoneNumber;
+    }
+
     public int getId() {
         return id;
     }
@@ -86,6 +96,30 @@ public class User {
         this.id = id;
     }
 
+    public User(int id, String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, String country, String profilePicture, LocalDateTime modifiedAt) {
+        this.id = id;
+        this.email = email;
+        this.roles = roles;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.profilePicture = profilePicture;
+        this.modifiedAt = modifiedAt;
+    }
+
+    public User(int id, String email, String[] roles, String password, String firstName, String lastName, String country, String profilePicture, int phoneNumber) {
+        this.id = id;
+        this.email = email;
+        this.roles = roles;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.country = country;
+        this.profilePicture = profilePicture;
+        this.phoneNumber = phoneNumber;
+    }
     public String getEmail() {
         return email;
     }
