@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="1550.0" style="-fx-background-color: white;" styleClass="btn_workbench" stylesheets="@Styles/styling.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ResBackController">
+    <children>
+        <VBox prefHeight="448.0" prefWidth="172.0" style="-fx-background-color: #F0F0F2;" stylesheets="@Styles/styling.css">
+            <children>
+                <AnchorPane fx:id="side_ankerpane" prefHeight="762.0" prefWidth="286.0" styleClass="side_ankerpane" stylesheets="@Styles/styling.css">
+                    <children>
+                        <Pane fx:id="inner_pane" layoutX="4.0" layoutY="29.0" prefHeight="48.0" prefWidth="250.0" styleClass="inner_pane" stylesheets="@Styles/styling.css">
+                            <children>
+                                <Pane fx:id="most_inner_pane" layoutX="200.0" layoutY="4.0" prefHeight="41.0" prefWidth="18.0" styleClass="most_inner_pane" stylesheets="@Styles/styling.css">
+                                    <children>
+                                        <ImageView fitHeight="28.0" fitWidth="18.0" layoutX="6.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/dott.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children></Pane>
+                                <ImageView fitHeight="41.0" fitWidth="45.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/tourjoy.png" />
+                                    </image>
+                                </ImageView>
+                            </children></Pane>
+                        <Pane layoutX="-4.0" layoutY="1.0" prefHeight="60.0" prefWidth="220.0">
+                            <children>
+                                <Button fx:id="btn_workbench" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="User Management                 " textFill="#f7f2f2" />
+                                <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/administrateur.png" />
+                                    </image>
+                                </ImageView>
+                            </children></Pane>
+                        <Pane layoutX="-4.0" layoutY="70.0" prefHeight="41.0" prefWidth="200.0">
+                            <children>
+                                <Button fx:id="btn_workbench211" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Accommodationn                 " textFill="#fcfafa" />
+                                <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/home.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <Pane layoutX="-2.0" layoutY="140.0" prefHeight="41.0" prefWidth="200.0" stylesheets="@Styles/styling.css">
+                            <children>
+                                <Button fx:id="btn_workbench2" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Guides                                " textFill="#f7f2f2" />
+                                <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/guides.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <Pane layoutX="-2.0" layoutY="210.0" prefHeight="41.0" prefWidth="200.0" stylesheets="@Styles/styling.css">
+                            <children>
+                                <Button fx:id="btn_workbench21" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Transport                             " textFill="#f7f2f2" />
+                                <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/transportt.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <Pane layoutX="-2.0" layoutY="280.0" prefHeight="41.0" prefWidth="200.0" stylesheets="@Styles/styling.css">
+                            <children>
+                                <Button fx:id="btn_workbench1" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Monuments                      " textFill="#fcfafa" />
+                                <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/monuments.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                        <Pane layoutX="-2.0" layoutY="350.0" prefHeight="41.0" prefWidth="200.0" stylesheets="@Styles/styling.css">
+                            <children>
+                                <Button fx:id="btn_workbench11" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Claims                                  " textFill="#fcfafa" />
+                                <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/claims.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </Pane>
+                    </children></AnchorPane>
+            </children>
+        </VBox>
+        <AnchorPane prefHeight="826.0" prefWidth="1344.0" style="-fx-background-color: #F0F0F2;">
+            <children>
+                <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="1247.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/settingss.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="1300.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/desktop.png" />
+                    </image>
+                </ImageView>
+                <TableView fx:id="DisplayReservations" layoutX="215.0" layoutY="120.0" prefHeight="560.0" prefWidth="786.0" stylesheets="@Styles/styling.css">
+                    <columns>
+                        <TableColumn fx:id="idRColumn" prefWidth="109.19998168945312" text="ID" />
+                        <TableColumn fx:id="nameRColumn" prefWidth="212.8000030517578" text="Accommodation reference" />
+                        <TableColumn fx:id="startColumn" prefWidth="232.800048828125" text="Check-in" />
+                        <TableColumn fx:id="endColumn" prefWidth="230.39996337890625" text="Check-out" />
+                    </columns>
+                </TableView>
+            <Label layoutX="290.0" layoutY="48.0" text="List of all  bookings" textFill="#0e1591">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+                <Button fx:id="deleteRButton" layoutX="1060.0" layoutY="339.0" mnemonicParsing="false" onAction="#deleteRes" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="DELETE" />
+            </children>
+        </AnchorPane>
+    </children>
+</HBox>
