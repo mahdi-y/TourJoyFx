@@ -1,10 +1,12 @@
 package services;
 
+import com.google.gson.Gson;
 import utils.DBConnection;
 import models.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import utils.userUtils;
@@ -23,29 +25,39 @@ public class userService implements IServices<User> {
     }
 
     @Override
-    public void registerUser(User user) throws SQLException {
+    public void registerUser(User user) {
         if (con == null) {
-            throw new SQLException("Connection is null.");
+            System.err.println("Connection is null.");
+            return;
         }
         String query = "INSERT INTO user (email, roles, password, phone_number, created_at) VALUES (?,?,?,?,?)";
-        pre = con.prepareStatement(query);
-        pre.setString(1, user.getEmail());
-        String[] roles = {"ROLE_USER"}; // Normally, this should be taken from `user.getRoles()`
-        pre.setString(2, Arrays.toString(roles));
-        String encryptedPassword = encrypt(user.getPassword());
-        pre.setString(3, encryptedPassword);
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setString(1, user.getEmail());
+            Gson gson = new Gson();
+            String rolesJson = gson.toJson(user.getRoles());
+            pre.setString(2, rolesJson);
+            String encryptedPassword = encrypt(user.getPassword());
+            pre.setString(3, encryptedPassword);
 
-        // Handle potentially null phoneNumber
-        if (user.getPhoneNumber() != null) {
-            pre.setInt(4, user.getPhoneNumber());
-        } else {
-            pre.setNull(4, java.sql.Types.INTEGER); // Set null if phoneNumber is null
+            if (user.getPhoneNumber() != null) {
+                pre.setInt(4, user.getPhoneNumber());
+            } else {
+                pre.setNull(4, Types.INTEGER);
+            }
+
+            pre.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            int result = pre.executeUpdate();
+            if (result > 0) {
+                System.out.println("User registered successfully!");
+            } else {
+                System.err.println("User was not registered. No rows affected.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("SQL Error: " + e.getMessage());
         }
-
-        pre.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
-        pre.executeUpdate();
-        pre.close();
     }
+
 
 
 
@@ -94,10 +106,6 @@ public class userService implements IServices<User> {
         return null;
     }
 
-    @Override
-    public List<User> selectAll() throws SQLException {
-        return null;
-    }
 
     public static User loginUser(String email, String password){
         // Query to fetch the user by email
@@ -144,6 +152,35 @@ public class userService implements IServices<User> {
     public static String encrypt(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
+
+    @Override
+    public List<User> fetchAllUsers() throws SQLException {
+        List<User> usersList = new ArrayList<>();
+        String query = "SELECT id, email, roles, first_name, last_name, phone_number, country, created_at, is_verified, is_banned FROM user";
+        Gson gson = new Gson();
+
+        try (Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String email = rs.getString("email");
+                String rolesJson = rs.getString("roles");
+                String[] roles = gson.fromJson(rolesJson, String[].class); // Convert JSON to String[]
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                Integer phoneNumber = rs.getObject("phone_number", Integer.class); // Handle nullability better
+                String country = rs.getString("country");
+                LocalDateTime createdAt = rs.getTimestamp("created_at").toLocalDateTime();
+                boolean isVerified = rs.getBoolean("is_verified");
+                boolean isBanned = rs.getBoolean("is_banned");
+
+                usersList.add(new User(id, email, roles, firstName, lastName, phoneNumber, country, createdAt, isVerified, isBanned));
+            }
+        }
+        return usersList;
+    }
+
 
 
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.usersList"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@userListStyles.css">
+    <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;">
+        <Text text="Users" styleClass="header-text"/>
+        <!-- Other header elements like search, filters here -->
+    </HBox>
+    <TableView fx:id="usersTable" styleClass="table-view">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn" styleClass="table-column" />
+            <TableColumn text="Email" fx:id="emailColumn" styleClass="table-column" />
+            <TableColumn text="Role" fx:id="roleColumn" styleClass="table-column" />
+            <TableColumn text="First Name" fx:id="firstNameColumn" styleClass="table-column" />
+            <TableColumn text="Last Name" fx:id="lastNameColumn" styleClass="table-column" />
+            <TableColumn text="Phone Number" fx:id="phoneNumberColumn" styleClass="table-column" />
+            <TableColumn text="Country" fx:id="countryColumn" styleClass="table-column" />
+            <TableColumn text="Creation Date" fx:id="creationDateColumn" styleClass="table-column" />
+            <TableColumn fx:id="isVerifiedColumn" text="Verified" styleClass="table-column">
+                <cellValueFactory>
+                    <PropertyValueFactory property="isVerified"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="isBannedColumn" text="Banned" styleClass="table-column">
+                <cellValueFactory>
+                    <PropertyValueFactory property="isBanned"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</AnchorPane>

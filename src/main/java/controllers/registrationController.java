@@ -51,27 +51,21 @@ public class registrationController {
         if (!validateInputs()) {
             return;
         }
-        try {
-            String email = emailField.getText();
-            String password = passwordField.getText();
-            int phoneNumber = Integer.parseInt(phoneNumberField.getText());
-            String confirmPassword = confirmPasswordField.getText();
-            LocalDateTime createdAt = LocalDateTime.now();
-            String[] roles = {"ROLE_USER"};
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        int phoneNumber = Integer.parseInt(phoneNumberField.getText());
+        String confirmPassword = confirmPasswordField.getText();
+        LocalDateTime createdAt = LocalDateTime.now();
+        String[] roles = {"ROLE_USER", "ROLE_ADMIN"};
 
-            User user = new User(email, roles, password, phoneNumber, createdAt);
+        User user = new User(email, roles, password, phoneNumber, createdAt);
 
+        userService.registerUser(user);
 
-            userService.registerUser(user);
+        SessionManager.setCurrentUser(user);
 
-            SessionManager.setCurrentUser(user);
-
-
-            System.out.println("User registered successfully!"); // Add this line
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully!");
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Error adding user to the database.");
-        }
+        System.out.println("User registered successfully!");
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully!");
 
         Stage stage = (Stage) register.getScene().getWindow();
         stage.close();

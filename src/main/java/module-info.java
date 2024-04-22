@@ -10,7 +10,8 @@ module com.example.tourjoy {
     requires com.google.gson;
     requires java.desktop;
 
-    opens com.example.tourjoy to javafx.fxml;
+    opens com.example.tourjoy to javafx.fxml, javafx.base;
+    opens models to javafx.base;
     exports com.example.tourjoy;
 
 

@@ -42,11 +42,12 @@ public class LoginController {
             if (user != null) {
                 UserSession.getInstance(user.getId(),user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCountry(),user.getProfilePicture(), String.valueOf(user.getPhoneNumber().intValue()), Arrays.toString(user.getRoles())).setUser(user);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getEmail() + "!");
+                System.out.println("Roles: " + Arrays.toString(user.getRoles()));
 
                 if (Arrays.asList(user.getRoles()).contains("ROLE_ADMIN")) {
-                    HelloApplication.loadFXML("/adminDashboard.fxml");
-                } else {
                     HelloApplication.loadFXML("/userDashboard.fxml");
+                } else {
+                    HelloApplication.loadFXML("/usersList.fxml");
                 }
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");

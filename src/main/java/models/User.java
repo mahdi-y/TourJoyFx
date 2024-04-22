@@ -49,6 +49,8 @@ public class User {
         this.createdAt = createdAt;
     }
 
+
+
     private boolean isBanned;
 
     private String googleId;
@@ -215,6 +217,19 @@ public class User {
         this.isVerified = isVerified;
         this.isBanned = isBanned;
         this.googleId = googleId;
+    }
+
+    public User(int id, String email, String[] roles, String firstName, String lastName, Integer phoneNumber, String country, LocalDateTime createdAt, boolean isVerified, boolean isBanned) {
+        this.id = id;
+        this.email = email;
+        this.roles = roles;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.createdAt = createdAt;
+        this.isVerified = isVerified;
+        this.isBanned = isBanned;
     }
 
     public User(String email, String password, String firstName, String lastName, Integer phoneNumber, LocalDateTime createdAt) {

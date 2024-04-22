@@ -14,6 +14,7 @@ public interface IServices<T>{
     boolean deleteUser(T t) throws SQLException;
     List<T> ReadUser() throws SQLException;
 
-    List<T> selectAll() throws SQLException;
 
+
+    List<User> fetchAllUsers() throws SQLException;
 }
