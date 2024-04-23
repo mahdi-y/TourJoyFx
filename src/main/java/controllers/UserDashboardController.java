@@ -21,14 +21,13 @@ public class UserDashboardController {
 
     @FXML
     public void initialize() {
-
-        UserSession session = UserSession.getInstance();
-
-        emailLabel.setText("Email: " + session.getEmail());
-        nameLabel.setText("Name: " + session.getFirstname() + " " + session.getLastname());
-        phoneLabel.setText("Phone: " + session.getPhonenumber());
-        countryLabel.setText("Country: " + session.getCountry());
-        roleLabel.setText("Role: " + session.getRole());
+//        UserSession session = UserSession.getInstance();
+//
+//        emailLabel.setText("Email: " + session.getEmail());
+//        nameLabel.setText("Name: " + session.getFirstname() + " " + session.getLastname());
+//        phoneLabel.setText("Phone: " + session.getPhonenumber());
+//        countryLabel.setText("Country: " + session.getCountry());
+//        roleLabel.setText("Role: " + session.getRole());
     }
 
     private Stage getPrimaryStage() {

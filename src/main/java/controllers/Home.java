@@ -4,6 +4,7 @@ import com.example.tourjoy.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import services.userService;
@@ -17,11 +18,16 @@ import java.util.Arrays;
 public class Home {
 
     public Button adminButton;
-    private userService userService;
+    public Label firstNameLabel;
 
     public void initialize(){
-        userService = new userService();
-        User currentUser = SessionManager.getCurrentUser();
+        UserSession session = UserSession.getInstance();
+
+        firstNameLabel.setText("Welcome " + session.getFirstname() + "!");
+        /*emailLabel.setText("Email: " + session.getEmail());
+        phoneLabel.setText("Phone: " + session.getPhonenumber());
+        countryLabel.setText("Country: " + session.getCountry());
+        roleLabel.setText("Role: " + session.getRole());*/
 
     }
 

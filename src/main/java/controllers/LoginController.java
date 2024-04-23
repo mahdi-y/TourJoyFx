@@ -1,7 +1,6 @@
 package controllers;
 
 import com.example.tourjoy.HelloApplication;
-import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -11,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import services.userService;
 
+import utils.SessionManager;
 import utils.UserSession;
 
 
@@ -49,6 +49,8 @@ public class LoginController {
                 String rolesString = Arrays.toString(user.getRoles());
                 String[] roles = rolesString.split(",");
                 System.out.println("Roles: " + Arrays.toString(roles));
+
+                SessionManager.setCurrentUser(user);
 
                 if (Arrays.asList(roles).contains("ROLE_ADMIN")) {
                     HelloApplication.loadFXML("/usersList.fxml");

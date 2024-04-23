@@ -1,31 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.userProfileController"
-            prefHeight="400.0" prefWidth="600.0">
 
-    <VBox alignment="CENTER" spacing="10" padding="20">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.userProfileController" prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label fx:id="idU" layoutX="288.0" layoutY="575.0" text="Label" textFill="WHITE" />
+        <ImageView fitHeight="1011.0" fitWidth="1538.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/bg1.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="143.0" fitWidth="303.0" layoutX="29.0" layoutY="29.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="@images/tourjoy.png"/>
+        </ImageView>
+        <Label layoutX="847.0" layoutY="73.0" text="MONUMENTS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <Label layoutX="1209.0" layoutY="71.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <Label layoutX="1320.0" layoutY="73.0" text="CLAIMS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+
+        <!--<ImageView fx:id="heroImageView" fitHeight="556.0" fitWidth="552.0" layoutX="867.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/globe.png" />
+            </image>
+        </ImageView>-->
+
+        <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
+        <Button fx:id="homeButton" layoutX="760.0" layoutY="67.0" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="HOME" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
+        <Button fx:id="guideButton" layoutX="964.0" layoutY="67.0" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="GUIDES" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
+
+
+        <Label fx:id="SUBSCRIPTION" layoutX="1060.0" layoutY="71.0" prefHeight="26.0" prefWidth="134.0" text="SUBSCRIPTIONS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <HBox alignment="TOP_RIGHT" layoutX="1432.0" layoutY="18.0" spacing="10.0">
+            <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
+            <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
+            <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
+        </HBox>
+<!--        <Button layoutX="1403.0" layoutY="162.0" mnemonicParsing="false" onAction="#logoutUser" prefHeight="15.0" prefWidth="101.0" style="-fx-background-color: #cc284b;" text="Logout" textFill="WHITE" />-->
+<!--        <Button fx:id="adminButton" layoutX="1403.0" layoutY="128.0" mnemonicParsing="false" onAction="#backoffice" prefHeight="15.0" prefWidth="101.0" style="-fx-background-color: #e7401a;" text="Admin Button" textFill="WHITE" />-->
+        <Label layoutX="173.0" layoutY="237.0" textFill="WHITE" fx:id="firstNameLabel">
+            <font>
+                <Font name="Britannic Bold" size="48.0" />
+            </font>
+        </Label>
+    </children>
+
+    <VBox alignment="CENTER" spacing="10" layoutX="50" layoutY="50">
         <Label text="Update Profile" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
         <TextField fx:id="firstNameField" promptText="First Name" />
         <TextField fx:id="lastNameField" promptText="Last Name" />
         <TextField fx:id="phoneNumberField" promptText="Phone Number" />
-        <TextField fx:id="countryField" promptText="Country" />
+        <ComboBox fx:id="countryComboBox" promptText="Country" styleClass="input-field">
+            <!-- If you have items, they must be nested properly inside the ComboBox -->
+        </ComboBox>
         <TextField fx:id="emailField" promptText="Email" />
-        <TextField fx:id="profilePictureField" promptText="Profile Picture URL" />
-
+        <HBox alignment="CENTER" prefHeight="329.0" prefWidth="1158.0" spacing="10">
+            <VBox prefHeight="307.0" prefWidth="445.0" spacing="5">
+                <ImageView fx:id="profileImageView" fitHeight="317.0" fitWidth="463.0" preserveRatio="true" />
+                <Button onAction="#handleUploadImage" styleClass="upload-button" text="Upload Image">
+                    <VBox.margin>
+                        <Insets left="170.0" top="12.0" />
+                    </VBox.margin></Button>
+                <TextField fx:id="imagePathField" editable="false" styleClass="image-path-field" visible="false" />
+                <HBox.margin>
+                    <Insets top="50.0" />
+                </HBox.margin>
+            </VBox>
+        </HBox>
         <HBox alignment="CENTER" spacing="10">
             <Button text="Save" onAction="#saveChanges" />
             <Button text="Cancel" onAction="#cancelUpdate" />
         </HBox>
     </VBox>
-
 </AnchorPane>
