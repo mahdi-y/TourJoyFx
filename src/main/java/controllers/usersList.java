@@ -30,8 +30,8 @@ public class usersList {
     private TableColumn<User, String> idColumn;
     @FXML
     private TableColumn<User, String> emailColumn;
-    @FXML
-    private TableColumn<User, String> roleColumn;
+//    @FXML
+//    private TableColumn<User, String> roleColumn;
     @FXML
     private TableColumn<User, String> firstNameColumn;
     @FXML
@@ -80,8 +80,8 @@ public class usersList {
     private void setupTableColumns() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        roleColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(String.join(", ", cellData.getValue().getRoles())));
+//        roleColumn.setCellValueFactory(cellData ->
+//                new SimpleStringProperty(String.join(", ", cellData.getValue().getRoles())));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));

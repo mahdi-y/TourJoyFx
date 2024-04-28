@@ -193,7 +193,7 @@ public class userService implements IServices<User> {
                 int id = rs.getInt("id");
                 String email = rs.getString("email");
                 String rolesJson = rs.getString("roles");
-                String[] roles = gson.fromJson(rolesJson, String[].class); // Convert JSON to String[]
+//                String[] roles = gson.fromJson(rolesJson, String[].class); // Convert JSON to String[]
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 Integer phoneNumber = rs.getObject("phone_number", Integer.class); // Handle nullability better
@@ -202,7 +202,7 @@ public class userService implements IServices<User> {
                 boolean isVerified = rs.getBoolean("is_verified");
                 boolean isBanned = rs.getBoolean("is_banned");
 
-                usersList.add(new User(id, email, roles, firstName, lastName, phoneNumber, country, createdAt, isVerified, isBanned));
+                usersList.add(new User(id, email, firstName, lastName, phoneNumber, country, createdAt, isVerified, isBanned));
             }
         }
         return usersList;

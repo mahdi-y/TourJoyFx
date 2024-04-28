@@ -275,6 +275,20 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public User(int id, String email, String firstName, String lastName, Integer phoneNumber, String country, LocalDateTime createdAt, boolean isVerified, boolean isBanned) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.createdAt = createdAt;
+        this.isVerified = isVerified;
+        this.isBanned = isBanned;
+    }
+
+    //    id, email, firstName, lastName, phoneNumber, country, createdAt, isVerified, isBanned
+
     @Override
     public String toString() {
         return "User{" +
