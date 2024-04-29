@@ -20,7 +20,7 @@
     </stylesheets>
 
     <VBox prefHeight="700.0" prefWidth="600" styleClass="image-container" HBox.hgrow="ALWAYS">
-        <ImageView fx:id="imageView" fitHeight="700.0" fitWidth="650">
+        <ImageView fx:id="imageView" fitHeight="708.0" fitWidth="650">
             <image>
                 <Image url="@images/registerSQR.jpg" />
             </image>
@@ -36,7 +36,7 @@
                   <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
                   <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
                <VBox.margin>
-                  <Insets top="-60.0" />
+                  <Insets right="8.0" top="4.0" />
                </VBox.margin>
               </HBox>
       
@@ -49,7 +49,11 @@
               <TextField fx:id="emailField" promptText="Email" styleClass="text-field" />
               <TextField fx:id="phoneNumberField" promptText="Phone Number" styleClass="text-field" />
               <PasswordField fx:id="passwordField" promptText="Password" styleClass="text-field" />
+              <TextField fx:id="passwordFieldVisible" managed="false" promptText="Password" styleClass="text-field" visible="false" />
               <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" styleClass="text-field" />
+              <TextField fx:id="confirmPasswordFieldVisible" managed="false" promptText="Confirm Password" styleClass="text-field" visible="false" />
+              <Button fx:id="toggleVisibilityButton" onAction="#togglePasswordVisibility" text="Show" />
+              <Button fx:id="generatePasswordButton" onAction="#generateStrongPassword" text="Generate Password" />
               <Button fx:id="register" onAction="#registerUser" styleClass="btn-register" text="Register">
               <VBox.margin>
                   <Insets top="12.0" />

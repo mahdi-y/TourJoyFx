@@ -12,10 +12,18 @@ import utils.SessionManager;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.security.SecureRandom;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+
 
 public class registrationController {
 
     public PasswordField confirmPasswordField;
+
     @FXML
     private TextField emailField;
 
@@ -28,6 +36,14 @@ public class registrationController {
     @FXML
     private Button register;
     private userService userService;
+
+    @FXML
+    private TextField passwordFieldVisible;
+    @FXML
+    private TextField confirmPasswordFieldVisible;
+    @FXML
+    private Button toggleVisibilityButton;
+
 
 
     @FXML
@@ -175,5 +191,85 @@ public class registrationController {
 
     public void closeWindow(ActionEvent actionEvent) {
         getPrimaryStage().close();
+    }
+
+
+    @FXML
+    void togglePasswordVisibility() {
+        if (passwordField.isVisible()) {
+            passwordFieldVisible.setText(passwordField.getText());
+            passwordFieldVisible.setVisible(true);
+            passwordFieldVisible.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+
+            confirmPasswordFieldVisible.setText(confirmPasswordField.getText());
+            confirmPasswordFieldVisible.setVisible(true);
+            confirmPasswordFieldVisible.setManaged(true);
+            confirmPasswordField.setVisible(false);
+            confirmPasswordField.setManaged(false);
+
+            toggleVisibilityButton.setText("Hide");
+        } else {
+            passwordField.setText(passwordFieldVisible.getText());
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            passwordFieldVisible.setVisible(false);
+            passwordFieldVisible.setManaged(false);
+
+            confirmPasswordField.setText(confirmPasswordFieldVisible.getText());
+            confirmPasswordField.setVisible(true);
+            confirmPasswordField.setManaged(true);
+            confirmPasswordFieldVisible.setVisible(false);
+            confirmPasswordFieldVisible.setManaged(false);
+
+            toggleVisibilityButton.setText("Show");
+        }
+    }
+
+    @FXML
+    private void generateStrongPassword() {
+        String strongPassword = generateRandomPassword(24); // Example with 12 characters length
+        passwordField.setText(strongPassword);
+        confirmPasswordField.setText(strongPassword);
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(strongPassword);
+        clipboard.setContent(content);
+
+        showAlert(Alert.AlertType.INFORMATION, "Password Copied", "A strong password has been generated and copied to your clipboard.");
+
+    }
+
+    private String generateRandomPassword(int length) {
+        String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowerCaseLetters = upperCaseLetters.toLowerCase();
+        String digits = "0123456789";
+        String specialChars = "!@#$%^&*()_-+=<>?";
+        String combinedChars = upperCaseLetters + lowerCaseLetters + digits + specialChars;
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+
+        // Ensure the password has at least one character of each type
+        sb.append(upperCaseLetters.charAt(random.nextInt(upperCaseLetters.length())));
+        sb.append(lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length())));
+        sb.append(digits.charAt(random.nextInt(digits.length())));
+        sb.append(specialChars.charAt(random.nextInt(specialChars.length())));
+
+        // Fill the rest of the password
+        for (int i = sb.length(); i < length; i++) {
+            sb.append(combinedChars.charAt(random.nextInt(combinedChars.length())));
+        }
+
+        // Shuffle the characters to avoid a predictable pattern
+        List<Character> letters = sb.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+        Collections.shuffle(letters);
+        StringBuilder shuffled = new StringBuilder();
+        for (char letter : letters) {
+            shuffled.append(letter);
+        }
+
+        return shuffled.toString();
     }
 }
