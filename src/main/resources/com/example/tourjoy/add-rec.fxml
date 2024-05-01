@@ -23,11 +23,6 @@
 <!-- Main Content Area -->
 <AnchorPane layoutX="260.0" layoutY="84.0" prefHeight="661.0" prefWidth="1008.0" styleClass="content-pane">
     <children>
-        <ImageView fitHeight="120.0" fitWidth="120.0">
-            <image>
-                <Image url="@images/tourjoy.png" />
-            </image>
-        </ImageView>
         <Text fill="#031231" layoutX="414.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a claim">
             <font>
                 <Font size="60.0" />
@@ -37,16 +32,59 @@
         <!-- Book Button -->
         <!-- Add your buttons, ComboBox, and DatePicker here -->
 
-        <TextField fx:id="titleT" layoutX="320.0" layoutY="214.0" prefHeight="38.0" prefWidth="500.0" />
-        <Label fx:id="title" layoutX="120.0" layoutY="215.0" prefHeight="30.0" prefWidth="58.0" text="Title" />
-        <TextField fx:id="descriptionT" layoutX="320.0" layoutY="302.0" prefHeight="38.0" prefWidth="500.0" />
-        <Label fx:id="description" layoutX="120.0" layoutY="303.0" text="Description" />
-        <ComboBox fx:id="catBox" layoutX="319.0" layoutY="387.0" prefHeight="38.0" prefWidth="500.0" promptText="Select.." />
-        <Label fx:id="catLabel" layoutX="120.0" layoutY="388.0" text="Category" />
+        <TextField fx:id="titleT" layoutX="320.0" layoutY="160.0" prefHeight="38.0" prefWidth="500.0" />
+        <Label fx:id="title" layoutX="120.0" layoutY="161.0" prefHeight="30.0" prefWidth="58.0" text="Title" />
+        <TextField fx:id="descriptionT" layoutX="320.0" layoutY="243.0" prefHeight="178.0" prefWidth="500.0" />
+        <Label fx:id="description" layoutX="120.0" layoutY="244.0" text="Description" />
+        <ComboBox fx:id="catBox" layoutX="319.0" layoutY="467.0" prefHeight="38.0" prefWidth="500.0" promptText="Select.." />
+        <Label fx:id="catLabel" layoutX="120.0" layoutY="468.0" text="Category" />
         <Button fx:id="button" layoutX="688.0" layoutY="585.0" onAction="#addClaims" prefHeight="47.0" prefWidth="132.0" style="-fx-background-color: #031231; -fx-text-fill: white;" text="Add" />
         <!-- Continue adding other nodes as needed -->
     </children>
 </AnchorPane>
+  <Label layoutX="1051.0" layoutY="27.0" text="MONUMENTS" textFill="#230f6e">
+      <font>
+          <Font name="System Bold" size="17.0" />
+      </font>
+  </Label>
+
+
+    <Label fx:id="HOME" layoutX="980.0" layoutY="27.0" prefHeight="30.0" prefWidth="80.0" text="HOME" textFill="#230f6e">
+        <font>
+            <Font name="System Bold" size="17.0" />
+        </font>
+    </Label>
+
+  <Label fx:id="SUBSCRIPTION" layoutX="1166.0" layoutY="27.0" prefHeight="26.0" prefWidth="134.0" text="SUBSCRIPTIONS" textFill="#230f6e">
+      <font>
+          <Font name="System Bold" size="17.0" />
+      </font>
+  </Label>
+  <Label layoutX="1293.0" layoutY="27.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
+      <font>
+          <Font name="System Bold" size="17.0" />
+      </font>
+  </Label>
+  <Label layoutX="1389.0" layoutY="27.0" text="CLAIMS" textFill="#230f6e">
+      <font>
+          <Font name="System Bold" size="17.0" />
+      </font>
+  </Label>
+
+
+
+
+  <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1462.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+          <Image url="@images/icons-utilisateur.png" />
+      </image>
+  </ImageView>
+  <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="17.0" layoutY="10.0">
+      <image>
+          <Image url="@images/tourjoy.png" />
+      </image>
+  </ImageView>
+   <Button fx:id="chat" layoutX="213.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleChat" text="open chat" />
 <stylesheets>
     <URL value="@style.css" />
 </stylesheets>

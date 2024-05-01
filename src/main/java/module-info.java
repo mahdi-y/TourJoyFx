@@ -5,6 +5,7 @@ module com.example.tourjoy {
     requires com.dlsc.formsfx;
     requires java.sql;
     requires charm.glisten;
+    requires java.mail;
 
     opens com.example.tourjoy to javafx.fxml;
     exports com.example.tourjoy;

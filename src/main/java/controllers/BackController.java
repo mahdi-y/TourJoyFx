@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import models.Message;
 import models.categories;
 import models.claims;
 import services.ServiceClaims;
@@ -23,13 +24,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class BackController {
-
+    @FXML
+    private Button chat;
     public Button ClaimB;
     @FXML
     private Button catB;
+    @FXML
+    private Button sort;
+    @FXML
+    private Button statsB;
     @FXML
     private TableColumn<claims, Integer> idR;
     @FXML
@@ -47,6 +55,8 @@ public class BackController {
 
     @FXML
     private Label descriptionMod;
+    @FXML
+    private TextField search;
     @FXML
     private Label catLabel;
 
@@ -82,6 +92,10 @@ public class BackController {
     @FXML
     ComboBox<String> stateBox;
     @FXML
+    ComboBox<String> order;
+    @FXML
+    ComboBox<String> field;
+    @FXML
     private Button deleteButton;
     @FXML
     ComboBox<categories> catBo;
@@ -95,9 +109,15 @@ public class BackController {
     private TableView<claims> claimsTableView;
 
 
+
     @FXML
     private TextField titleM;
     private ServiceClaims ServiceClaims;
+
+    @FXML
+    private ListView<Message> messageListView;
+    @FXML
+    private TextField messageInputField;
 
 
 
@@ -119,6 +139,7 @@ public class BackController {
         }
         loadClaimsData();
         setupTableColumns();
+
         // Add listener to handle row selection
         claimsTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -136,6 +157,90 @@ public class BackController {
                 catBo.setDisable(true);
             }
         });
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty()) {
+                searchData(newValue);
+            } else {
+                loadClaimsData();
+            }
+        });
+
+        // Set up the options for the order ComboBox
+        order.setItems(FXCollections.observableArrayList("Ascending", "Descending"));
+
+        // Set up the options for the field ComboBox
+        field.setItems(FXCollections.observableArrayList(
+                "Title", "Description", "Creation Date", "State", "Category", "Reply"));
+
+
+
+    }
+
+
+
+
+
+
+
+    @FXML
+    private void handleSortButtonAction() {
+        String selectedField = field.getValue();
+        String sortOrder = order.getValue();
+
+        Comparator<claims> comparator;
+        switch (selectedField) {
+            case "Title":
+                comparator = Comparator.comparing(claims::getTitle);
+                break;
+            case "Description":
+                comparator = Comparator.comparing(claims::getDescription);
+                break;
+            case "Create Date":
+                comparator = Comparator.comparing(claims::getCreateDate);
+                break;
+            case "State":
+                comparator = Comparator.comparing(claims::getState);
+                break;
+            case "Category":
+                comparator = Comparator.comparing(claims::getFkC);
+                break;
+            case "Reply":
+                comparator = Comparator.comparing(claims::getReply);
+                break;
+            default:
+                return;
+        }
+
+        // Reverse the comparator if descending order is selected
+        if ("Descending".equals(sortOrder)) {
+            comparator = comparator.reversed();
+        }
+
+        FXCollections.sort(claimsTableView.getItems(), comparator);
+    }
+
+
+    private void searchData(String searchTerm) {
+        ObservableList<claims> filteredData = FXCollections.observableArrayList();
+        Predicate<claims> titlePredicate = claim -> claim.getTitle().toLowerCase().contains(searchTerm.toLowerCase());
+        Predicate<claims> descriptionPredicate = claim -> claim.getDescription().toLowerCase().contains(searchTerm.toLowerCase());
+        Predicate<claims> statePredicate = claim -> claim.getState().toLowerCase().contains(searchTerm.toLowerCase());
+        Predicate<claims> replyPredicate = claim -> claim.getReply().toLowerCase().contains(searchTerm.toLowerCase());
+        Predicate<claims> fkCPredicate = claim -> String.valueOf(claim.getFkC()).contains(searchTerm);
+        Predicate<claims> createDatePredicate = claim -> claim.getCreateDate().toString().contains(searchTerm);
+
+        try {
+            for (claims claim : ServiceClaims.Read()) {
+                if (titlePredicate.or(descriptionPredicate).or(statePredicate).or(replyPredicate).or(fkCPredicate).or(createDatePredicate).test(claim)) {
+                    filteredData.add(claim);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        claimsTableView.setItems(filteredData);
     }
     private List<categories> loadCategories() throws SQLException {
         List<categories> categories = new ArrayList<>();
@@ -335,8 +440,52 @@ public class BackController {
             // Consider showing an error alert to the user here as well
         }
     }
-    
-    
+
+    @FXML
+    private void handleStats() {
+        try {
+            // Load the second FXML file
+            // Ensure that the FXMLLoader uses the correct class to find the resource relative to its location in the classpath.
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tourjoy/stats.fxml"));
+            // Change 'loader' to 'fxmlLoader' to match the initialized FXMLLoader object.
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage or use an existing one
+            Stage stage = new Stage();
+            stage.setTitle("stats");  // Updated title to reflect the function
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Optionally hide the current stage if it's a full screen change
+            // ((Stage) openSecondaryViewButton.getScene().getWindow()).hide();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            // Consider showing an error alert to the user here as well
+        }
+    }
+
+    @FXML
+    private void handleChat() {
+        try {
+            // Load the second FXML file
+            // Ensure that the FXMLLoader uses the correct class to find the resource relative to its location in the classpath.
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tourjoy/chatBot.fxml"));
+            // Change 'loader' to 'fxmlLoader' to match the initialized FXMLLoader object.
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage or use an existing one
+            Stage stage = new Stage();
+            stage.setTitle("chat");  // Updated title to reflect the function
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Optionally hide the current stage if it's a full screen change
+            // ((Stage) openSecondaryViewButton.getScene().getWindow()).hide();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            // Consider showing an error alert to the user here as well
+        }
+    }
 
 
 }

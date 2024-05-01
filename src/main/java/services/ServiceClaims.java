@@ -6,13 +6,16 @@ import utils.DBConnection;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceClaims implements IServices<claims> {
 
     private Connection con;
     private PreparedStatement pre;
     private ResultSet res;
+
 
 
     public ServiceClaims() {
@@ -95,6 +98,33 @@ public class ServiceClaims implements IServices<claims> {
             }
             // Do not close the connection here if it's being reused
         }
+    }
+
+    public Map<String, Integer> getCategoryStatistics() throws SQLException {
+        Map<String, Integer> stats = new HashMap<>();
+        String query = "SELECT c.name AS category, COUNT(*) AS count FROM claims cl JOIN categories c ON cl.fkC = c.id GROUP BY c.name";
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBConnection.getInstance().getCnx(); // Get the connection without auto-closing it
+            stmt = con.prepareStatement(query);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String category = rs.getString("category");
+                int count = rs.getInt("count");
+                stats.put(category, count);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Handle exception appropriately
+            throw e;  // Rethrow or handle as needed
+        } finally {
+            // Close result set and statement here, but not the connection
+            if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+            if (stmt != null) try { stmt.close(); } catch (SQLException ignore) {}
+        }
+        return stats;
     }
 
 

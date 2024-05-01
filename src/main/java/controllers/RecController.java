@@ -2,12 +2,18 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import models.Message;
 import models.categories;
 import models.claims;
 import services.ServiceClaims;
 import utils.DBConnection;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +24,14 @@ import java.util.List;
 
 public class RecController {
 
+    @FXML
+    private ListView<Message> messageListView;
+    @FXML
+    private TextField messageInputField;
+    @FXML
+    private Button sendButton;
+    @FXML
+    private Button chat;
     @FXML
     private Button button;
     @FXML
@@ -42,7 +56,7 @@ public class RecController {
     @FXML
     private TextField titleT;
     private ServiceClaims ServiceClaims;
-
+    private int selectedClaimId;
     @FXML
     void initialize() {
         ServiceClaims = new ServiceClaims();
@@ -106,13 +120,26 @@ public class RecController {
             ServiceClaims.add(claims);
             clearForm();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Claim added successfully!");
+            //processNewClaim();
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid ID.");
         } catch (SQLException e) {
             e.printStackTrace();  // Print stack trace for detailed error information
             showAlert(Alert.AlertType.ERROR, "Database Error", "Error adding claim to the database.");
         }
+
     }
+
+    /*private void processNewClaim() {
+        try {
+            MailUtil.sendEmail("Tourjoy-help@outlook.com");
+            System.out.println("Notification email sent.");
+        } catch (MessagingException e) {
+            System.out.println("Could not send email.");
+            e.printStackTrace();
+        }
+    }*/
+
     private void clearForm() {
         titleT.setText("");
         descriptionT.setText("");
@@ -126,4 +153,28 @@ public class RecController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    @FXML
+    private void handleChat() {
+        try {
+            // Load the second FXML file
+            // Ensure that the FXMLLoader uses the correct class to find the resource relative to its location in the classpath.
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tourjoy/chatClient.fxml"));
+            // Change 'loader' to 'fxmlLoader' to match the initialized FXMLLoader object.
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage or use an existing one
+            Stage stage = new Stage();
+            stage.setTitle("client chat");  // Updated title to reflect the function
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Optionally hide the current stage if it's a full screen change
+            // ((Stage) openSecondaryViewButton.getScene().getWindow()).hide();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            // Consider showing an error alert to the user here as well
+        }
+    }
+
 }

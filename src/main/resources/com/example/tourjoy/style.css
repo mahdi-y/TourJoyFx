@@ -156,7 +156,7 @@
 .label {
     -fx-padding: 5;
     -fx-text-fill: #333;
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
 }
 .orange-button {
     -fx-background-color: orange;
