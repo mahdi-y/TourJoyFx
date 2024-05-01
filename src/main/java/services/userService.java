@@ -4,10 +4,14 @@ import com.google.gson.Gson;
 import utils.DBConnection;
 import models.User;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+
 import utils.userUtils;
 
 
@@ -117,7 +121,7 @@ public class userService implements IServices<User> {
             pre.setString(1, email);
             try (ResultSet rs = pre.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1) > 0; // returns true if count is greater than 0
+                    return rs.getInt(1) > 0;
                 }
             }
         }
@@ -207,6 +211,159 @@ public class userService implements IServices<User> {
         }
         return usersList;
     }
+
+    public boolean isEmailTaken(String email) throws SQLException {
+        String query = "SELECT * FROM user WHERE email = ?";
+        PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(query);
+        preparedStatement.setString(1, email);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            return resultSet.next();
+        }
+    }
+
+
+
+    /*public User selectByPhoneNumber(String phoneNumber) {
+        User utilisateur = null;
+        String req = "SELECT * FROM Utilisateurs WHERE numeroTelephone = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setString(1, phoneNumber);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                utilisateur = new User();
+                utilisateur.setId(rs.getInt("id"));
+                utilisateur.setLastName(rs.getString("last_name"));
+                utilisateur.setFirstName(rs.getString("first_name"));
+//                utilisateur.setSurnom(rs.getString("surnom"));
+//                utilisateur.setSexe(rs.getString("sexe"));
+                utilisateur.setEmail(rs.getString("email"));
+                utilisateur.setPhoneNumber(rs.getInt("phone_number"));
+                String roleS = rs.getString("role");
+                Role role = Role.valueOf(roleS);
+                utilisateur.setRole(role);
+                utilisateur.setMotDePasse(rs.getString("password"));
+                utilisateur.setImage_user(rs.getString("profile_picture"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération de l'utilisateur par numéro de téléphone : " + e.getMessage());
+        }
+        return utilisateur;
+    }*/
+
+    public User selectByEmail(String email) throws SQLException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        User user = null;
+
+        try {
+            connection = DBConnection.getInstance().getConnection();
+            statement = connection.prepareStatement("SELECT * FROM user WHERE email = ?");
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                int id = resultSet.getInt("id");
+                String firstName = resultSet.getString("last_name");
+                String lastName = resultSet.getString("first_name");
+//                String username = resultSet.getString("surnom");
+//                String sexe = resultSet.getString("sexe");
+                String userEmail = resultSet.getString("email") ;
+//                int tel = resultSet.getInt("phone_number");
+//                String role = resultSet.getString("role");
+                String password = resultSet.getString("password");
+                String image_user = resultSet.getString("profile_picture");
+
+
+
+                user = new User(id, firstName, lastName ,userEmail, password,image_user);
+            }
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+        }
+
+        return user;
+    }
+
+    public  User selectById(int idUtilisateur) throws SQLException {
+        String req = "SELECT * FROM `user` WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(req);
+        ps.setInt(1, idUtilisateur);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            User u = new User();
+            u.setId(rs.getInt("idUtilisateur"));
+            u.setLastName(rs.getString("last_name"));
+            u.setFirstName(rs.getString("first_name"));
+//            u.setSurnom(rs.getString("surnom"));
+//            u.setSexe(rs.getString("sexe"));
+            u.setEmail(rs.getString("email"));
+            u.setPhoneNumber(rs.getInt("phone_number"));
+//            String roleString = rs.getString("role");
+//            Role role = Role.valueOf(roleString); // Convertir la chaîne en valeur d'énumération
+//            u.setRole(role);
+            u.setPassword(rs.getString("password"));
+            u.setProfilePicture(rs.getString("profile_picture"));
+
+            return u;
+        } else {
+            return null; // Retourner null si aucun utilisateur n'est trouvé avec cet ID
+        }
+    }
+
+    public void update(User utilisateur) throws SQLException {
+        String req = "UPDATE user SET last_name=?, first_name=?, email=?, phone_number=?,  password=?, profile_picture=? WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(req);
+
+        // Attribution des valeurs aux paramètres de la requête préparée.
+
+        ps.setString(1, utilisateur.getLastName());
+        ps.setString(2, utilisateur.getFirstName());
+//        ps.setString(3, utilisateur.getSurnom());
+//        ps.setString(4, utilisateur.getSexe());
+        ps.setString(3, utilisateur.getEmail());
+        ps.setInt(4, utilisateur.getPhoneNumber());
+        //ps.setString(7, utilisateur.getRole().toString());
+
+        String hashedPassword = null;
+        hashedPassword = encrypt(utilisateur.getPassword());
+        ps.setString(5,hashedPassword );
+        ps.setString(6, utilisateur.getProfilePicture());
+        ps.setInt(7, utilisateur.getId());
+
+        // Exécution de la requête de mise à jour.
+        int rowsAffected = ps.executeUpdate();
+
+        if (rowsAffected > 0) {
+            System.out.println("L'utilisateur " + utilisateur.getFirstName() + " a été mis à jour avec succès.");
+        } else {
+            System.out.println("La mise à jour de  " +  utilisateur.getFirstName() + " a échoué.");
+        }
+    }
+
+    public static void updateforgottenpassword(String email, String password) {
+        String passwordencrypted = encrypt(password);
+
+        String query = "UPDATE user " +
+                "SET password = ? WHERE email = ?";
+        try {
+            PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(query);
+            preparedStatement.setString(1, passwordencrypted);
+            preparedStatement.setString(2, email);
+            preparedStatement.executeUpdate();
+            System.out.println("Password updated!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 

@@ -58,7 +58,6 @@ public class registrationController {
         });
     }
 
-
     @FXML
     void registerUser() throws IOException, SQLException {
         if (!validateInputs()) {
@@ -69,7 +68,7 @@ public class registrationController {
         int phoneNumber = Integer.parseInt(phoneNumberField.getText());
         String confirmPassword = confirmPasswordField.getText();
         LocalDateTime createdAt = LocalDateTime.now();
-        String[] roles = {"ROLE_USER"};
+        String[] roles = {"ROLE_ADMIN"};
 
         User user = new User(email, roles, password, phoneNumber, createdAt);
 
@@ -80,7 +79,7 @@ public class registrationController {
         System.out.println("User registered successfully!");
         showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully!");
 
-        Stage stage = (Stage) register.getScene().getWindow();
+//        Stage stage = (Stage) register.getScene().getWindow();
 
         profileCompletionPage();
 

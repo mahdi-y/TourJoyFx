@@ -91,7 +91,7 @@ public class profileCompletionController {
             showAlert(Alert.AlertType.ERROR, "Unexpected Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+//            ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
             UserDashboardPage();
         }
     }
@@ -169,7 +169,7 @@ public class profileCompletionController {
 
     @FXML
     void UserDashboardPage() throws IOException {
-        HelloApplication.loadFXML("/userDashboard.fxml");
+        HelloApplication.loadFXML("/Home.fxml");
     }
 
     private Stage getPrimaryStage() {

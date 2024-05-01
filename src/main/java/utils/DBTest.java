@@ -1,5 +1,6 @@
 package utils;
 
+import com.google.gson.Gson;
 import models.User;
 
 import java.sql.Connection;
@@ -46,8 +47,9 @@ public class DBTest {
         PreparedStatement pre = connection.prepareStatement(query);
 
         pre.setString(1, user.getEmail());
-        pre.setString(2, user.getRoles() != null ? Arrays.toString(user.getRoles()) : "ROLE_USER");
-        pre.setString(3, user.getPassword());
+        Gson gson = new Gson();
+        String rolesJson = gson.toJson(user.getRoles()); // Convert Set<String> to JSON string
+        pre.setString(2, rolesJson != null ? rolesJson : "ROLE_USER");        pre.setString(3, user.getPassword());
         pre.setString(4, user.getFirstName());
         pre.setString(5, user.getLastName());
         int phoneNumber = user.getPhoneNumber() != null ? user.getPhoneNumber() : 0;

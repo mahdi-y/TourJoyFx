@@ -2,7 +2,11 @@ package utils;
 
 import models.User;
 
+import javax.mail.Authenticator;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
 
 public final class UserSession {
 
@@ -18,7 +22,9 @@ public final class UserSession {
     private String picture;
     private String phonenumber;
 
-    private String role;
+    private Set<String> roles;
+
+
 
     public int getId() { return id; }
     public String getEmail() { return email; }
@@ -29,11 +35,13 @@ public final class UserSession {
 
     public String getCountry() {return country;}
     public String getPhonenumber() { return phonenumber; }
-    public String getRole() { return role; }
+    public Set<String> getRoles() {
+        return roles;
+    }
 
     private UserSession() { }
 
-    public UserSession(int id, String email, String password, String firstname, String lastname, String country, String picture, String phonenumber, String role) {
+    public UserSession(int id, String email, String password, String firstname, String lastname, String country, String picture, String phonenumber, Set<String> role) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -42,7 +50,7 @@ public final class UserSession {
         this.country = country;
         this.picture = picture;
         this.phonenumber = phonenumber;
-        this.role = role;
+        this.roles = role;
     }
 
 
@@ -54,11 +62,11 @@ public final class UserSession {
         this.country = user.getCountry();
         this.picture = user.getProfilePicture();
         this.phonenumber = user.getPhoneNumber().toString();
-        this.role = Arrays.toString(user.getRoles());
+        this.roles = new HashSet<>(user.getRoles()); // Copy roles from User object
     }
 
     public static UserSession getInstance(int id, String email, String password, String firstname, String lastname
-            , String country,String picture, String phonenumber, String role) {
+            , String country,String picture, String phonenumber, Set<String> role) {
         if(instance == null) {
             instance = new UserSession(id, email, password, firstname, lastname, country, picture, phonenumber, role);
         }
@@ -72,6 +80,9 @@ public final class UserSession {
         return instance;
     }
 
+    public boolean hasRole(String role) {
+        return roles.contains(role);
+    }
 
     public void cleanUserSession() {
         id = 0;
@@ -85,7 +96,7 @@ public final class UserSession {
         picture = null;
         phonenumber = null;
 
-        role = null;
+        roles = null;
 
     }
 
@@ -100,7 +111,7 @@ public final class UserSession {
                 ", country'" + country + '\'' +
                 ", picture='" + picture + '\'' +
                 ", phonenumber='" + phonenumber + '\'' +
-                ", role='" + role + '\'' +
+                ", role='" + roles + '\'' +
                 '}';
     }
 }

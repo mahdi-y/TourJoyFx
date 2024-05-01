@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 import com.google.gson.Gson;
 
 public class LoginController {
@@ -43,20 +45,21 @@ public class LoginController {
         try {
             User user = userService.loginUser(email, password);
             if (user != null) {
-                UserSession.getInstance(user.getId(),user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCountry(),user.getProfilePicture(), String.valueOf(user.getPhoneNumber().intValue()), Arrays.toString(user.getRoles())).setUser(user);
+                UserSession.getInstance(user.getId(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCountry(), user.getProfilePicture(), String.valueOf(user.getPhoneNumber().intValue()), user.getRoles()).setUser(user);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getEmail() + "!");
 
-                String rolesString = Arrays.toString(user.getRoles());
-                String[] roles = rolesString.split(",");
-                System.out.println("Roles: " + Arrays.toString(roles));
+
 
                 SessionManager.setCurrentUser(user);
 
-                if (Arrays.asList(roles).contains("ROLE_ADMIN")) {
-                    HelloApplication.loadFXML("/usersList.fxml");
-                } else {
-                    HelloApplication.loadFXML("/Home.fxml");
+                if (UserSession.getInstance().hasRole("ROLE_ADMIN")) {
+                    showAlert(Alert.AlertType.INFORMATION, "Admin Access", "You have admin privileges.");
+                    redirect_passwordpage();
+                }else{
+                    showAlert(Alert.AlertType.INFORMATION, "Client Access", "You don't have admin privileges.");
+                    redirect_homePage();
                 }
+
 
 
 
@@ -103,4 +106,18 @@ public class LoginController {
     public void closeWindow(ActionEvent actionEvent) {
         getPrimaryStage().close();
     }
+
+    public void redirect_passwordpage() throws IOException {
+        HelloApplication.loadFXML("/forgotPassword.fxml");
+    }
+
+    public void redirect_homePage() throws IOException{
+        HelloApplication.loadFXML("/Home.fxml");
+    }
+
+    /*public boolean hasAdminRole(User user) {
+        Set<String> roles = user.getRoles();
+        return roles.contains("ROLE_ADMIN");
+    }*/
+
 }

@@ -41,6 +41,10 @@
               <PasswordField fx:id="passwordField" promptText="Password" styleClass="text-field" />
               <Button fx:id="signInButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="35.0" minWidth="100.0" onAction="#handleSignIn" prefHeight="35.0" prefWidth="100.0" styleClass="btn-login" text="Sign In" />
               <HBox alignment="CENTER" spacing="10">
+                  <Text text="Forgot your password?" />
+                  <Hyperlink fx:id="forgotPasswordLink" onAction="#redirect_passwordpage" text="Reset here" />
+              </HBox>
+              <HBox alignment="CENTER" spacing="10">
                   <Text text="Don't have an account?" />
                   <Hyperlink onAction="#handleSignUp" text="Sign Up" />
               </HBox>
@@ -70,7 +74,6 @@
                 <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
             </StackPane>
 
-            <!-- White circle behind the close button -->
             <StackPane>
                 <Circle fill="WHITE" radius="14.0" />
                 <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />

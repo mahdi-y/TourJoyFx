@@ -2,14 +2,21 @@ package models;
 //import javax.persistence;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class User {
+    private Set<String> roles = new HashSet<>();
+
+
 
     private int id;
 
     private String email;
 
-    private String[] roles;
+
 
     private String password;
 
@@ -33,7 +40,7 @@ public class User {
 
     public User(String email, String[] roles, String password, Integer phoneNumber, LocalDateTime createdAt) {
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.createdAt = createdAt;
@@ -41,7 +48,7 @@ public class User {
 
     public User(String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, LocalDateTime createdAt) {
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -57,7 +64,7 @@ public class User {
 
     public User(String email, String[] roles, String password, LocalDateTime createdAt) {
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.password = password;
         this.createdAt = createdAt;
     }
@@ -65,7 +72,7 @@ public class User {
     public User(int id, String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, String country, String profilePicture, String googleAuthenticatorSecret, boolean isVerified, boolean isBanned, String googleId) {
         this.id = id;
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -99,7 +106,7 @@ public class User {
     public User(int id, String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, String country, String profilePicture, LocalDateTime modifiedAt) {
         this.id = id;
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -112,7 +119,7 @@ public class User {
     public User(int id, String email, String[] roles, String password, String firstName, String lastName, String country, String profilePicture, int phoneNumber) {
         this.id = id;
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -128,12 +135,14 @@ public class User {
         this.email = email;
     }
 
-    public String[] getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
     public void setRoles(String[] roles) {
-        this.roles = roles;
+        this.roles.clear();
+        this.roles.add("ROLE_USER");  // Ensures ROLE_USER is always present
+        Collections.addAll(this.roles, roles);
     }
 
     public String getPassword() {
@@ -233,12 +242,13 @@ public class User {
     }
 
     public User() {
+        this.roles.add("ROLE_USER");
     }
 
     public User(int id, String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, String country, String profilePicture, LocalDateTime createdAt, String googleAuthenticatorSecret, LocalDateTime modifiedAt, boolean isVerified, boolean isBanned, String googleId) {
         this.id = id;
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -256,7 +266,7 @@ public class User {
     public User(int id, String email, String[] roles, String firstName, String lastName, Integer phoneNumber, String country, LocalDateTime createdAt, boolean isVerified, boolean isBanned) {
         this.id = id;
         this.email = email;
-        this.roles = roles;
+        setRoles(roles);
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -287,14 +297,36 @@ public class User {
         this.isBanned = isBanned;
     }
 
-    //    id, email, firstName, lastName, phoneNumber, country, createdAt, isVerified, isBanned
+//    User updatedUser = new User(user.getId(), existingUser.getLastName(), existingUser.getFirstName(), existingUser.getEmail(), existingUser.getPhoneNumber(), newPassword, existingUser.getProfilePicture());
+
+    public User(int id, String lastName, String firstName, String email, int phoneNumber, String password, String profilePicture) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.profilePicture = profilePicture;
+    }
+
+    public User(int id, String email, String password, String firstName, String lastName, String profilePicture) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.profilePicture = profilePicture;
+    }
+
+
+
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", roles=" + Arrays.toString(roles) +
+                ", roles=" + roles +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

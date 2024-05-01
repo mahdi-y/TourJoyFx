@@ -9,6 +9,16 @@ module com.example.tourjoy {
     requires jbcrypt;
     requires com.google.gson;
     requires java.desktop;
+    requires java.mail;
+    requires com.google.api.client.auth;
+    requires google.api.client;
+    requires com.google.api.client;
+    requires com.google.api.client.json.gson;
+    requires com.google.api.services.gmail;
+    requires org.apache.commons.codec;
+    requires com.google.api.client.extensions.java6.auth;
+    requires com.google.api.client.extensions.jetty.auth;
+    requires jdk.httpserver;
 
     opens com.example.tourjoy to javafx.fxml, javafx.base;
     opens models to javafx.base;
