@@ -223,9 +223,9 @@ public class userService implements IServices<User> {
 
 
 
-    /*public User selectByPhoneNumber(String phoneNumber) {
+    public User selectByPhoneNumber(String phoneNumber) {
         User utilisateur = null;
-        String req = "SELECT * FROM Utilisateurs WHERE numeroTelephone = ?";
+        String req = "SELECT * FROM user WHERE phone_number = ?";
         try {
             PreparedStatement ps = con.prepareStatement(req);
             ps.setString(1, phoneNumber);
@@ -239,17 +239,17 @@ public class userService implements IServices<User> {
 //                utilisateur.setSexe(rs.getString("sexe"));
                 utilisateur.setEmail(rs.getString("email"));
                 utilisateur.setPhoneNumber(rs.getInt("phone_number"));
-                String roleS = rs.getString("role");
-                Role role = Role.valueOf(roleS);
-                utilisateur.setRole(role);
-                utilisateur.setMotDePasse(rs.getString("password"));
-                utilisateur.setImage_user(rs.getString("profile_picture"));
+                /*String roleS = rs.getString("role");
+                Role role = Role.valueOf(roleS);*/
+//                utilisateur.setRole(role);
+                utilisateur.setPassword(rs.getString("password"));
+                utilisateur.setProfilePicture(rs.getString("profile_picture"));
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération de l'utilisateur par numéro de téléphone : " + e.getMessage());
         }
         return utilisateur;
-    }*/
+    }
 
     public User selectByEmail(String email) throws SQLException {
         Connection connection = null;

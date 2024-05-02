@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.CheckBox?>
 <HBox fx:id="mainContainer" alignment="TOP_CENTER" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.registrationController">
 
     <stylesheets>
@@ -53,7 +53,10 @@
               <TextField fx:id="passwordFieldVisible" managed="false" promptText="Password" styleClass="text-field" visible="false" />
               <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" styleClass="text-field" />
               <TextField fx:id="confirmPasswordFieldVisible" managed="false" promptText="Confirm Password" styleClass="text-field" visible="false" />
-              <CheckBox fx:id="toggleVisibilityCheckbox" layoutX="300" layoutY="250" text="Show Password" onAction="#togglePasswordVisibility"/>
+              <CheckBox fx:id="toggleVisibilityCheckbox" layoutX="300" layoutY="250" onAction="#togglePasswordVisibility" text="Show Password">
+               <VBox.margin>
+                  <Insets right="250.0" />
+               </VBox.margin></CheckBox>
               <Button fx:id="generatePasswordButton" onAction="#generateStrongPassword" text="Generate Password" />
               <Button fx:id="register" onAction="#registerUser" styleClass="btn-register" text="Register">
               <VBox.margin>

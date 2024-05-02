@@ -39,6 +39,11 @@ public class forgotPassword {
     public Label passwordLabel;
     @FXML
     public Label confirmLabel;
+    public Label phoneLabel;
+    public Label emailLabel;
+    public Label codeLabel;
+    public Button send_mail;
+    public Button code_button;
     @FXML
     private TextField mail;
 
@@ -59,18 +64,33 @@ public class forgotPassword {
     private int generatedCodeSMS;
 
 
-
-
     private String resetCodeByEmail; // Code généré par e-mail
     private String resetCodeBySMS;   // Code généré par SMS
+
     @FXML
     private void initialize() {
         List<Node> components = Arrays.asList(
-                password, confirm, updatePassword,passwordLabel,confirmLabel
+                password, confirm, updatePassword, passwordLabel, confirmLabel,mail,phoneNumberField, codeField,send_mail,phoneLabel,emailLabel, codeLabel,code_button
         );
         components.forEach(component -> component.setVisible(false));
+        radioEmail.setOnAction(event -> updateUIBasedOnSelection());
+        radioSMS.setOnAction(event -> updateUIBasedOnSelection());
+        updateUIBasedOnSelection(); // Call once to set initial state
     }
+    @FXML
+    private void updateUIBasedOnSelection() {
+        boolean isEmailSelected = radioEmail.isSelected();
+        boolean isPhoneSelected = radioSMS.isSelected();
+        emailLabel.setVisible(isEmailSelected);
+        mail.setVisible(isEmailSelected);
+        send_mail.setVisible(isEmailSelected);
 
+        phoneLabel.setVisible(isPhoneSelected);
+        phoneNumberField.setVisible(isPhoneSelected);
+        send_mail.setVisible(isPhoneSelected);
+
+
+    }
 
 
     @FXML
@@ -79,14 +99,21 @@ public class forgotPassword {
         String codeText = codeField.getText().trim();
 
         if (radioEmail.isSelected()) {
-            // Envoyer le code par e-mail
+            List<Node> components = Arrays.asList(
+                    emailLabel, mail, send_mail
+            );
+            components.forEach(component -> component.setVisible(true));
             sendResetCodeByEmail(email, codeText);
         }
-        /*else if (radioSMS.isSelected()) {
-            // Envoyer le code par SMS
+        else if (radioSMS.isSelected()) {
+            List<Node> components = Arrays.asList(
+                    phoneLabel, phoneNumberField, send_mail
+            );
+            components.forEach(component -> component.setVisible(true));
+            sendResetCodeByEmail(email, codeText);
             String phoneNumber = phoneNumberField.getText().trim();
             sendResetCodeBySMS(phoneNumber, codeText);
-        }*/
+        }
         else {
             System.out.println("Veuillez choisir le mode d'envoi du code de vérification.");
         }
@@ -109,13 +136,14 @@ public class forgotPassword {
 
             // Afficher le champ pour saisir le code
             codeField.setVisible(true);
+            code_button.setVisible(true);
         } catch (Exception e) {
             // Gérer l'erreur d'envoi de l'e-mail
             e.printStackTrace();
         }
     }
 
-    /*private void sendResetCodeBySMS(String phoneNumber, String code) {
+    private void sendResetCodeBySMS(String phoneNumber, String code) {
         // Vérifier si le numéro de téléphone existe dans la base de données
         userService userService = new userService();
         User utilisateur = userService.selectByPhoneNumber(phoneNumber);
@@ -131,21 +159,21 @@ public class forgotPassword {
             // Envoyer le code par SMS à l'utilisateur
             try {
                 String NumeroTelephone = "+216" + phoneNumber;
-                sms.sendSMS(NumeroTelephone, "Votre code de réinitialisation : " + String.valueOf(generatedCodeSMS));
+                SMS.sendSMS(NumeroTelephone, "Your verification code : " + String.valueOf(generatedCodeSMS));
 
                 System.out.println("Code envoyé avec succès par SMS. Veuillez vérifier votre téléphone.");
 
                 // Afficher le champ pour saisir le code
                 codeField.setVisible(true);
+                code_button.setVisible(true);
+
             } catch (Exception e) {
-                // Gérer l'erreur d'envoi du SMS
                 e.printStackTrace();
             }
         } else {
             System.out.println("Le numéro de téléphone n'est pas associé à un compte utilisateur.");
-            // Vous pouvez afficher un message à l'utilisateur pour l'informer que le numéro n'est pas valide
         }
-    }*/
+    }
 
     @FXML
     private void handleVerifyCode(ActionEvent event) {
@@ -154,17 +182,14 @@ public class forgotPassword {
             try {
                 int enteredCode = Integer.parseInt(codeText);
                 if (radioEmail.isSelected()) {
-                    // Si l'utilisateur a choisi l'envoi par e-mail, vérifier le code généré par e-mail
                     if (enteredCode == Integer.parseInt(resetCodeByEmail)) {
                         showAlert(Alert.AlertType.INFORMATION, "Tourjoy", "Correct code, please update your password!");
                         System.out.println("Code correct pour l'e-mail, vous pouvez réinitialiser votre mot de passe.");
-
-                        // Récupérer l'utilisateur depuis la base de données en utilisant son email
                         String email = mail.getText();
                         userService userService = new userService();
                         User user = userService.selectByEmail(email);
                         List<Node> components = Arrays.asList(
-                                password, confirm, updatePassword,passwordLabel,confirmLabel
+                                password, confirm, updatePassword, passwordLabel, confirmLabel
                         );
                         components.forEach(component -> component.setVisible(true));
 
@@ -172,28 +197,22 @@ public class forgotPassword {
                         showAlert(Alert.AlertType.ERROR, "Error", "Incorrect code, try again!");
                         System.out.println("Code incorrect pour l'e-mail, veuillez réessayer.");
                     }
-                }
-               /* else if (radioSMS.isSelected()) {
-                    // Si l'utilisateur a choisi l'envoi par SMS, vérifier le code généré par SMS
+                } else if (radioSMS.isSelected()) {
                     if (enteredCode == Integer.parseInt(resetCodeBySMS)) {
                         System.out.println("Code correct pour le SMS, vous pouvez réinitialiser votre mot de passe.");
-
-                        // Récupérer l'utilisateur depuis la base de données en utilisant son numéro de téléphone
                         String phoneNumber = phoneNumberField.getText().trim();
                         userService userService = new userService();
                         User user = userService.selectByPhoneNumber(phoneNumber);
 
-                        // Fermer la fenêtre actuelle
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.close();
-
-                        // Charger la page newPassword.fxml
-                        loadNewPasswordPage(user);
+                        List<Node> components = Arrays.asList(
+                                password, confirm, updatePassword, passwordLabel, confirmLabel
+                        );
+                        components.forEach(component -> component.setVisible(true));
                     } else {
+                        showAlert(Alert.AlertType.ERROR, "Error", "Incorrect code, try again!");
                         System.out.println("Code incorrect pour le SMS, veuillez réessayer.");
                     }
-                } */
-                else {
+                } else {
                     showAlert(Alert.AlertType.ERROR, "Error", "Choose verification method!");
                     System.out.println("Veuillez choisir le mode d'envoi du code de vérification.");
                 }
@@ -217,11 +236,11 @@ public class forgotPassword {
     void updatePassword(ActionEvent event) throws IOException {
         String newpassword = password.getText();
         String retype_newpassword = confirm.getText();
-        if(newpassword.equals(retype_newpassword)){
+        if (newpassword.equals(retype_newpassword)) {
             userService.updateforgottenpassword(mail.getText(), newpassword);
             showAlert(Alert.AlertType.INFORMATION, "Tourjoy", "Password updated, please log in with your new credentials.");
             loadNewPasswordPage();
-        }else {
+        } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match.");
         }
     }

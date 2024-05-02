@@ -21,6 +21,7 @@ module com.example.tourjoy {
     requires jdk.httpserver;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
+    requires twilio;
 
     opens com.example.tourjoy to javafx.fxml, javafx.base;
     opens models to javafx.base;

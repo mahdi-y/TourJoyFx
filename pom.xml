@@ -109,6 +109,11 @@
           <artifactId>poi-ooxml</artifactId>
           <version>5.2.3</version>
       </dependency>
+      <dependency>
+          <groupId>com.twilio.sdk</groupId>
+          <artifactId>twilio</artifactId>
+          <version>8.22.0</version> <!-- Assurez-vous de vérifier la dernière version sur https://mvnrepository.com/artifact/com.twilio.sdk/twilio -->
+      </dependency>
   </dependencies>
 
   <build>

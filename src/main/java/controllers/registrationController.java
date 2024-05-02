@@ -222,14 +222,13 @@ public class registrationController {
             confirmPasswordField.setManaged(true);
             confirmPasswordFieldVisible.setVisible(false);
             confirmPasswordFieldVisible.setManaged(false);
-
             toggleVisibilityCheckbox.setText("Show password");
         }
     }
 
     @FXML
     private void generateStrongPassword() {
-        String strongPassword = generateRandomPassword(24); // Example with 12 characters length
+        String strongPassword = generateRandomPassword(24);
         passwordField.setText(strongPassword);
         confirmPasswordField.setText(strongPassword);
 
