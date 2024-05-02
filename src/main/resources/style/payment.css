@@ -1,0 +1,30 @@
+/* Input Label */
+.input-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* Text Field */
+.text-field {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-color: #CCCCCC;
+    -fx-border-radius: 5px;
+    -fx-background-color: #F5F5F5;
+}
+
+/* Submit Button */
+.submit-button {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5 22;
+    -fx-font-weight: bold;
+}
+
+/* Hover effect for Submit Button */
+.submit-button:hover {
+    -fx-background-color: #005a9e;
+}

@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.Rating?>
+<?import javafx.scene.layout.VBox?>
+
 
 <!-- ComboBox -->
 
@@ -30,12 +33,13 @@
             </font>
          </Text>
       <ComboBox fx:id="guideCombo" layoutX="174.0" layoutY="181.0" prefWidth="150.0" promptText="Select Guide" />
-         <TextField fx:id="CommentField" layoutX="124.0" layoutY="224.0" onAction="#addFeedback" prefHeight="100.0" prefWidth="249.0" />
-      <Button fx:id="adddF" layoutX="223.0" layoutY="343.0" mnemonicParsing="false" text="Submit" />
+         <TextField fx:id="CommentField" layoutX="124.0" layoutY="260.0" onAction="#addFeedback" prefHeight="100.0" prefWidth="249.0" />
+         <Rating fx:id="ratingControl" layoutX="170.0" layoutY="224.0" max="5" partialRating="true" />
+         <Button fx:id="adddF" layoutX="223.0" layoutY="450.0" mnemonicParsing="false" text="Submit" />
       </children>
    </AnchorPane>
-   <stylesheets>
-      <URL value="@/style/styles.css" />
-   </stylesheets>
+   <!--<stylesheets>
+      <URL value="@style/styles.css" />
+   </stylesheets>-->
 
 </AnchorPane>

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import entities.Guide; // Import statement for the Guide class
 import services.GuideServices;
+import test.GMailer;
 
 
 public class BookingsBack {
@@ -66,6 +67,7 @@ public class BookingsBack {
 
 
 
+
     public void deleteBooking() {
         Booking selectedBooking = ListBookings.getSelectionModel().getSelectedItem();
         if (selectedBooking != null) {
@@ -76,11 +78,18 @@ public class BookingsBack {
                 // Remove the booking from the TableView
                 ListBookings.getItems().remove(selectedBooking);
 
+                // Send the cancellation email
+                new GMailer().sendMail("eya.benouhiba@esprit.tn", "Booking Cancelled", "Your booking has been cancelled.");
+
                 // Show a success alert
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Booking deleted successfully!");
             } catch (SQLException e) {
                 // If there's an SQL error, show an error alert
                 showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to delete the booking.");
+                e.printStackTrace();
+            } catch (Exception e) {
+                // Handle exceptions from the email sending
+                showAlert(Alert.AlertType.ERROR, "Email Sending Error", "Failed to send cancellation email.");
                 e.printStackTrace();
             }
         } else {
@@ -88,6 +97,10 @@ public class BookingsBack {
             showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a booking to delete.");
         }
     }
+
+
+
+
 
 
 

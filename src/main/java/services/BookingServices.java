@@ -16,12 +16,21 @@ public class BookingServices {
     private static Connection connection;
 
     public BookingServices() {
-        // Initialize the connection when the BookingServices instance is created
-        connection = MyDB.getInstance().getConnection();
+        // Ensure connection is initialized here
+        initializeConnection();
+    }
+
+    private void initializeConnection() {
+        if (connection == null) {
+            // Initialize the connection when the BookingServices instance is created
+            connection = MyDB.getInstance().getConnection();
+        }
     }
 
     public boolean addBooking(String selectedGuideName, Map<Integer, String> guideMap, LocalDate selectedDate) {
         try {
+            initializeConnection(); // Ensure connection is active
+
             // Get selected guide ID from the map
             int selectedGuideId = guideMap.entrySet().stream()
                     .filter(entry -> entry.getValue().equals(selectedGuideName))
@@ -58,9 +67,16 @@ public class BookingServices {
         }
     }
 
+
+
     // Check if the guide is already booked on the selected date
     private boolean isGuideBooked(int guideId, LocalDate selectedDate) throws SQLException {
+        if (connection == null) {
+            // Initialize the connection when the BookingServices instance is created, if it's not already initialized
+            connection = MyDB.getInstance().getConnection();
+        }
         String query = "SELECT COUNT(*) AS count FROM Booking WHERE guide_id = ? AND date = ?";
+        connection = MyDB.getInstance().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, guideId);
         preparedStatement.setDate(2, Date.valueOf(selectedDate));
@@ -71,20 +87,10 @@ public class BookingServices {
         return count > 0;
     }
 
-    // Ensure the connection is closed when necessary
-    public void closeConnection() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle any errors here
-        }
-    }
 
     public static List<Booking> Read() throws SQLException {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT id, guide_id, date FROM Booking";
+        String query = "SELECT id, guide_id, date, status FROM Booking";
         try (Connection connection = MyDB.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -92,9 +98,9 @@ public class BookingServices {
                 int id = resultSet.getInt("id");
                 int guideId = resultSet.getInt("guide_id");
                 LocalDate date = resultSet.getDate("date").toLocalDate(); // Assuming date is stored as a SQL DATE type
-
+                String status = resultSet.getString("status");
                 // Create a Booking object with the retrieved information
-                Booking booking = new Booking(id, guideId, date);
+                Booking booking = new Booking(id, guideId, date, status);
                 bookings.add(booking);
             }
         } catch (SQLException e) {
@@ -134,7 +140,9 @@ public class BookingServices {
                 int id = rs.getInt("id");
                 int guideId = rs.getInt("guide_id");
                 LocalDate date = rs.getDate("date").toLocalDate();
-                lastBooking = new Booking(id, guideId, date);
+                 String status = rs.getString("status");
+
+                lastBooking = new Booking(id, guideId, date, status);
             }
         }
         return lastBooking;
@@ -142,7 +150,7 @@ public class BookingServices {
 
     public List<Booking> getBookingsByGuide(int guideId) {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT id, guide_id, date FROM Booking WHERE guide_id = ?"; // Corrected to 'Booking' if that's your table name
+        String query = "SELECT id, guide_id, date, status FROM Booking WHERE guide_id = ?"; // Corrected to 'Booking' if that's your table name
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -163,8 +171,9 @@ public class BookingServices {
                 int id = rs.getInt("id");
                 int guide = rs.getInt("guide_id");
                 LocalDate date = rs.getDate("date").toLocalDate(); // Ensure 'date' is of type DATE in the database
+                String status = rs.getString("status");
 
-                Booking booking = new Booking(id, guide, date);
+                Booking booking = new Booking(id, guideId, date, status);
                 bookings.add(booking);
             }
         } catch (SQLException e) {
@@ -182,6 +191,75 @@ public class BookingServices {
         }
 
         return bookings;
+    }
+    public void updateBooking(Booking booking) throws SQLException {
+        String updateBookingStatusQuery = "UPDATE booking SET status = ? WHERE id = ?";
+
+        Connection connection = null;
+        PreparedStatement pst = null;
+        try {
+            connection = MyDB.getInstance().getConnection();
+            connection.setAutoCommit(false); // Start transaction
+
+            pst = connection.prepareStatement(updateBookingStatusQuery);
+            pst.setString(1, booking.getStatus());
+            pst.setInt(2, booking.getId()); // Assuming you have an ID field in your Booking class
+            int rowsUpdated = pst.executeUpdate();
+
+            // Check if any rows were affected
+            if (rowsUpdated > 0) {
+                System.out.println("Booking status updated successfully!");
+                connection.commit(); // Commit transaction if update is successful
+            } else {
+                System.out.println("Error updating booking status: No rows affected.");
+                connection.rollback(); // Rollback transaction if no rows are updated
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating booking status: " + e.getMessage());
+            if (connection != null) {
+                try {
+                    connection.rollback(); // Ensure rollback on error
+                } catch (SQLException ex) {
+                    System.out.println("Error rolling back transaction: " + ex.getMessage());
+                }
+            }
+        } finally {
+            if (pst != null) {
+                pst.close(); // Ensure PreparedStatement is closed
+            }
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true); // Reset auto-commit to true
+                } catch (SQLException e) {
+                    System.out.println("Error setting auto-commit to true: " + e.getMessage());
+                }
+            }
+        }
+    }
+    public Guide fetchGuideById(int guideId) throws SQLException {
+        String query = "SELECT * FROM Guide WHERE CIN = ?";
+        try (Connection conn = MyDB.getInstance().getConnection();
+             PreparedStatement pst = conn.prepareStatement(query)) {
+
+            pst.setInt(1, guideId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return new Guide(
+                        rs.getInt("CIN"),
+                        rs.getString("firstname_g"),
+                        rs.getString("lastname_g"),
+                        rs.getString("emailaddress_g"),
+                        rs.getString("phonenumber_g"),
+                        rs.getString("gender_g"),
+                        rs.getString("language"),
+                        rs.getString("dob"),
+                        rs.getDouble("price"),
+                        rs.getString("image"),
+                        rs.getInt("country_id")
+                );
+            }
+        }
+        return null; // Return null if no guide is found
     }
 
 

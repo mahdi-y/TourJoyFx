@@ -137,3 +137,91 @@
     -fx-border-radius: 5;
     -fx-padding: 4px;
 }
+
+.orange-button {
+    -fx-background-color: orange;
+    -fx-text-fill: white;
+}
+/* Style for the guide card box */
+.guide-box {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+/* Style for the guide image */
+.guide-image {
+    -fx-clip: true;
+    -fx-clip-radius: 5;
+}
+
+/* Style for the container of guide details */
+.guide-details {
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-spacing: 5; /* space between elements within the VBox */
+}
+
+/* Style for the guide's title label */
+.guide-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-alignment: center;
+}
+
+/* Style for the guide's price label */
+.guide-price {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #666;
+    -fx-alignment: center;
+}
+
+/* Style for buttons in the guide card */
+.guide-button {
+    -fx-background-color: #5a5;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-font-size: 12px;
+}
+
+/* Hover effect for buttons */
+.guide-button:hover {
+    -fx-background-color: #484;
+}
+
+/* CSS for Add button hover */
+.button-add:hover {
+    -fx-background-color: #66bb6a; /* Lighter shade of green */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for Clear button hover */
+.button-clear:hover {
+    -fx-background-color: #ffca28; /* Lighter shade of orange */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for Delete button hover */
+.button-delete:hover {
+    -fx-background-color: #ef5350; /* Lighter shade of red */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for Update button hover */
+.button-update:hover {
+    -fx-background-color: #81c784; /* Lighter shade of teal */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for See Bookings button hover */
+.button-seebookings:hover {
+    -fx-background-color: #26a69a; /* Lighter shade of blue-green */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}

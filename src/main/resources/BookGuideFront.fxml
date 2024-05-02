@@ -34,7 +34,7 @@
             <!-- Add your buttons, ComboBox, and DatePicker here -->
             <ComboBox fx:id="guideComboBox" layoutX="146.0" layoutY="182.0" prefWidth="250.0" promptText="Guide" />
             <DatePicker fx:id="datePicker" layoutX="146.0" layoutY="237.0" prefWidth="250.0" promptText="Date" />
-            <Button fx:id="bookButton" layoutX="249.0" layoutY="286.0" onAction="#addBooking" style="-fx-background-color: #031231; -fx-text-fill: white;" text="Book" />
+            <Button fx:id="bookButton" styleClass="guide-button" layoutX="249.0" layoutY="286.0" onAction="#addBooking" style="-fx-background-color: #031231; -fx-text-fill: white;" text="Book" />
             <!-- Continue adding other nodes as needed -->
         </children>
     </AnchorPane>

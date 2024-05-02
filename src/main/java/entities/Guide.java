@@ -1,5 +1,7 @@
 package entities;
 
+import services.ServiceCountry;
+
 public class Guide {
     private int CIN; // Assuming CIN is the primary key and not auto-incremented in the database
     private String firstname_g;
@@ -11,9 +13,11 @@ public class Guide {
     private String dob;
     private double price; // Price attribute moved before image
     private String image; // Image path or URL
+    private int country_id; // Foreign key to Country entity
+
 
     public Guide(int CIN, String firstname_g, String lastname_g, String emailaddress_g,
-                 String phonenumber_g, String gender_g, String language, String dob, double price, String image) {
+                 String phonenumber_g, String gender_g, String language, String dob, double price, String image, int country_id) {
         this.CIN = CIN;
         this.firstname_g = firstname_g;
         this.lastname_g = lastname_g;
@@ -24,11 +28,12 @@ public class Guide {
         this.dob = dob;
         this.price = price;
         this.image = image;
+        this.country_id = country_id;
     }
 
 
     public Guide(String firstname_g, String lastname_g, String emailaddress_g,
-                 String phonenumber_g, String gender_g, String language, String dob, double price, String image) {
+                 String phonenumber_g, String gender_g, String language, String dob, double price, String image, Country country_id) {
         this.firstname_g = firstname_g;
         this.lastname_g = lastname_g;
         this.emailaddress_g = emailaddress_g;
@@ -38,6 +43,10 @@ public class Guide {
         this.dob = dob;
         this.price = price; // Initialize price before image
         this.image = image;
+        this.country_id = country_id.getId();
+    }
+
+    public Guide(  String firstName, String lastName, String email, String phoneNumber, String gender, String language, String dob, double price, String imagePath, int country_id) {
     }
 
     // Getters and Setters
@@ -122,6 +131,26 @@ public class Guide {
         this.image = image;
     }
 
+    public int getCountry() {
+        return country_id;
+    }
+
+    public void setCountry(int country_id) {
+        this.country_id = country_id;
+    }
+    public String getCountryName() {
+        String countryName = null;
+        try {
+            // Implement logic to retrieve the country name based on the country_id
+            ServiceCountry countryService = new ServiceCountry(); // Assuming you have a CountryService class
+            countryName = countryService.getCountryNameById(country_id);
+        } catch (Exception e) {
+            System.out.println("Error getting country name: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return countryName;
+    }
+
     @Override
     public String toString() {
         return "Guide{" +
@@ -135,6 +164,7 @@ public class Guide {
                 ", dob='" + dob + '\'' +
                 ", price=" + price +  // Price displayed before image in the toString method
                 ", image='" + image + '\'' +
+                ", country_id=" + country_id + // Include country in the toString method
                 '}';
     }
 }

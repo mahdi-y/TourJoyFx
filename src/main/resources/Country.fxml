@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1550.0" style="-fx-background-color: white;" styleClass="btn_workbench" stylesheets="@Styles/styling.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCountry">
+   <children>
+      <VBox prefHeight="448.0" prefWidth="172.0" style="-fx-background-color: #F0F0F2;">
+         <children>
+            <AnchorPane fx:id="side_ankerpane" prefHeight="762.0" prefWidth="286.0" styleClass="side_ankerpane" stylesheets="@Styles/styling.css">
+               <children>
+                  <!-- Your existing content goes here -->
+                  <Pane fx:id="inner_pane" layoutX="4.0" layoutY="29.0" prefHeight="48.0" prefWidth="250.0" styleClass="inner_pane" stylesheets="@Styles/styling.css">
+                     <children>
+                        <Pane fx:id="most_inner_pane" layoutX="200.0" layoutY="4.0" prefHeight="41.0" prefWidth="18.0" styleClass="most_inner_pane" stylesheets="@Styles/styling.css">
+                           <children>
+                              <ImageView fitHeight="28.0" fitWidth="18.0" layoutX="6.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/dott.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <ImageView fitHeight="41.0" fitWidth="45.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/tourjoy.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="-4.0" layoutY="1.0" prefHeight="60.0" prefWidth="220.0">
+                     <children>
+                        <Button fx:id="btn_workbench" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="User Management                 " textFill="#f7f2f2" />
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/administrateur.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="-4.0" layoutY="70.0" prefHeight="41.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_workbench211" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Accommodationn                 " textFill="#fcfafa" />
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/home.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="-2.0" layoutY="140.0" prefHeight="41.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_workbench2" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="220.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Guides                                " textFill="#f7f2f2" />
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/guides.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="-2.0" layoutY="210.0" prefHeight="41.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_workbench21" layoutX="12.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Transport                             " textFill="#f7f2f2" />
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/transportt.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="-2.0" layoutY="280.0" prefHeight="41.0" prefWidth="200.0" />
+                  <Pane layoutX="-2.0" layoutY="350.0" prefHeight="41.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_workbench11" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Claims                                  " textFill="#fcfafa" />
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="160.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/claims.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="420.0" prefHeight="50.0" prefWidth="230.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#goToMonument" prefHeight="50.0" prefWidth="220.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Monuments" textFill="WHITE" />
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="168.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/monuments.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Button layoutX="15.0" layoutY="552.0" mnemonicParsing="false" onAction="#goToCountry" prefHeight="50.0" prefWidth="220.0" styleClass="btn_workbench" stylesheets="@Styles/styling.css" text="Countries" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <!-- Country Management UI AnchorPane -->
+      <AnchorPane prefHeight="521.0" prefWidth="1550.0" style="-fx-background-color: #F0F0F2;">
+         <children>
+            <Text layoutX="255.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Countries Management">
+               <font>
+                  <Font name="Arial Black" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nameField" layoutX="420.0" layoutY="154.0" prefWidth="150.0" promptText="Name" />
+            <ComboBox fx:id="regionComboBox" layoutX="420.0" layoutY="202.0" prefWidth="150.0" promptText="Continent" />
+            <CheckBox fx:id="visaRequiredCheckbox" layoutX="420.0" layoutY="255.0" mnemonicParsing="false" text="Visa Required" />
+            <Button fx:id="addButton" layoutX="754.0" layoutY="273.0" mnemonicParsing="false" onAction="#addCountry" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #6C3483; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Add" />
+            <Button fx:id="deleteButton" layoutX="890.0" layoutY="273.0" mnemonicParsing="false" onAction="#deleteCountry" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Delete" />
+            <Button fx:id="updateButton" layoutX="611.0" layoutY="274.0" mnemonicParsing="false" onAction="#updateCountry" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Update" />
+            <TableView fx:id="DisplayCountries" layoutX="181.0" layoutY="331.0" prefHeight="409.0" prefWidth="1027.0" styleClass="table-view">
+               <columns>
+                  <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="nameColumn" prefWidth="294.39996337890625" text="Name" />
+                  <TableColumn fx:id="regionColumn" prefWidth="284.0000915527344" text="Continent" />
+                  <TableColumn fx:id="visaRequiredColumn" prefWidth="374.400146484375" text="Visa Required" />
+               </columns>
+            </TableView>
+            <ImageView fitHeight="37.0" fitWidth="32.0" layoutX="1220.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/settingss.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1150.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/desktop.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="180.0" fitWidth="282.0" layoutX="900.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/plane.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="clearButton1" layoutX="1028.0" layoutY="274.0" mnemonicParsing="false" onAction="#Clearc" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #F43; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Clear" />
+         </children>
+
+      </AnchorPane>
+
+   </children>
+</HBox>

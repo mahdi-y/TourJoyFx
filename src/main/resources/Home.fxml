@@ -21,11 +21,11 @@
                 <Image url="@image/tourjoy.png" />
             </image>
         </ImageView>
-        <Label layoutX="841.0" layoutY="45.0" text="MONUMENTS" textFill="#230f6e">
+        <Button fx:id="monumentsButton" layoutX="840.0" layoutY="39.0" onAction="#goToMonumentsView" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-border: none;" text="MONUMENTS" textFill="#230f6e">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
-        </Label>
+        </Button>
         <Label layoutX="1212.0" layoutY="45.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
             <font>
                 <Font name="System Bold" size="17.0" />

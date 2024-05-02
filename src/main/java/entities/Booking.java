@@ -6,12 +6,16 @@ public class Booking {
     private int id;
     private int guide;
     private LocalDate date;
+    private String status; // Added status attribute
 
-    public Booking(int id, int guide, LocalDate date) {
+
+    public Booking(int id, int guide, LocalDate date, String status) {
         this.id = id;
         this.guide = guide;
         this.date = date;
+        this.status = status; // Initialize status in the constructor
     }
+
 
 
     public int getId() {
@@ -37,13 +41,21 @@ public class Booking {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+    public String getStatus() {
+        return status;
+    }
 
+    // Setter for status
+    public void setStatus(String status) {
+        this.status = status;
+    }
     @Override
     public String toString() {
         return "Booking{" +
                 "id=" + id +
                 ", guide=" + guide +
                 ", date=" + date +
+                ", status='" + status + '\'' + // Include status in toString
                 '}';
     }
 }

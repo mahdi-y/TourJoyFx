@@ -18,7 +18,7 @@ public class Main {
         GuideServices guideServices = new GuideServices();
 
         // Add a new guide to the database
-        Guide newGuide = new Guide(123456799, "John", "Doe", "john@example.com", "1234567890", "Male", "English", "1990-01-01",100, "");
+        Guide newGuide = new Guide(123456799, "John", "Doe", "john@example.com", "1234567890", "Male", "English", "1990-01-01",100, "",1);
         guideServices.add(newGuide);
 
         // Display all guides from the database

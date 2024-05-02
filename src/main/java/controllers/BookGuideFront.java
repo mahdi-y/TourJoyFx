@@ -2,19 +2,20 @@ package controllers;
 
 import entities.Booking;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Button;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import services.BookingServices;
 import utils.MyDB;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class BookGuideFront {
     private String selectedGuideName;
@@ -37,11 +38,26 @@ public class BookGuideFront {
 
     @FXML
     void initialize() {
+      //  guideComboBox.setDisable(true); // Disables the ComboBox
+
         populateGuideComboBox();
         if (selectedGuideName != null && !selectedGuideName.isEmpty()) {
             selectGuideByName(selectedGuideName);  // Use the new method for selecting the guide
         }
-        bookButton.setOnAction(event -> addBooking());
+        bookButton.setOnAction(event -> {
+            try {
+                addBooking();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        datePicker.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+                setDisable(empty || date.isBefore(today.plusDays(1)));
+            }
+        });
     }
 
 
@@ -77,15 +93,24 @@ public class BookGuideFront {
     }
 
     @FXML
-    private void addBooking() {
+    private void addBooking() throws SQLException {
+        // Check if the DatePicker is empty
+        LocalDate selectedDate = datePicker.getValue();
+        if (selectedDate == null) {
+            // Show an alert if the date is not selected
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Date Selection Required");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select a date to proceed with the booking.");
+            alert.showAndWait();
+            return; // Exit the method early if no date is selected
+        }
+
         // Get selected guide name from ComboBox
         String selectedGuideName = guideComboBox.getValue();
 
         // Retrieve the guide map from ComboBox user data
         Map<Integer, String> guideMap = (Map<Integer, String>) guideComboBox.getUserData();
-
-        // Get selected date from DatePicker
-        LocalDate selectedDate = datePicker.getValue();
 
         boolean bookingAdded = bookingService.addBooking(selectedGuideName, guideMap, selectedDate);
 
@@ -96,6 +121,27 @@ public class BookGuideFront {
             alert.setHeaderText(null);
             alert.setContentText("Booking has been successfully added!");
             alert.showAndWait();
+
+            // Ask if the user wants to pay now or later
+            List<String> choices = Arrays.asList("Pay Now", "Pay Later");
+            ChoiceDialog<String> dialog = new ChoiceDialog<>("Pay Later", choices);
+            dialog.setTitle("Payment");
+            dialog.setHeaderText("Payment Options");
+            dialog.setContentText("Would you like to pay now or pay later?");
+
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                if (result.get().equals("Pay Now")) {
+                    // Navigate to the payment interface
+                    goToPaymentInterface();
+                } else {
+                    // Set the booking status as "Unpaid"
+                    setBookingStatusUnpaid();
+                    // Close the current stage
+                    Stage currentStage = (Stage) guideComboBox.getScene().getWindow();
+                    currentStage.close();
+                }
+            }
         } else {
             // Alert the user if booking failed
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -106,11 +152,58 @@ public class BookGuideFront {
         }
     }
 
-    // Close the connection when the controller is destroyed
-    @FXML
-    public void finalize() {
-        bookingService.closeConnection();
+
+
+    private void setBookingStatusUnpaid() throws SQLException {
+        // Update the status of the booking to "Unpaid"
+        // Get the last added booking or the booking you want to update
+        Booking lastBooking = bookingService.getLastBooking(); // Implement this method accordingly
+
+        // Set the status of the booking to "Unpaid"
+        lastBooking.setStatus("Unpaid");
+
+        // Update the booking status in the database
+        try {
+            bookingService.updateBooking(lastBooking);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the SQL exception appropriately
+        }
     }
+
+
+    private void goToPaymentInterface() {
+        try {
+            // Load the FXML file for the payment interface
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/Payment.fxml"));
+            Parent Payment = loader.load();
+
+            // Get the current stage
+            Stage currentStage = (Stage) guideComboBox.getScene().getWindow();
+
+            // Create a new scene with the payment interface as the root node
+            Scene paymentScene = new Scene(Payment);
+
+            // Set the scene on the current stage
+            currentStage.setScene(paymentScene);
+
+            // Show the stage
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the FXML loading exception
+            System.err.println("Error loading PaymentInterface.fxml: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+    // Close the connection when the controller is destroyed
+
 
 
     public void selectGuideByName(String guideName) {

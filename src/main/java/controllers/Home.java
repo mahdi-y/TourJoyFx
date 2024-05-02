@@ -16,15 +16,23 @@ public class Home {
     private Button homeButton;
 
     @FXML
+    private Button monumentsButton;
+
+    @FXML
     private void goToGuideView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/guidesFront.fxml"));
+        loader.setLocation(getClass().getResource("/guidesFront.fxml")); // Make sure the path is correct
         Parent root = loader.load();
 
+        Scene scene = new Scene(root);
+        String css = this.getClass().getResource("/style/styles.css").toExternalForm(); // Update the path to your CSS file
+        scene.getStylesheets().add(css); // Adding CSS to the scene
+
         Stage stage = (Stage) guideButton.getScene().getWindow(); // Retrieves the current window
-        stage.setScene(new Scene(root));
+        stage.setScene(scene);
         stage.show();
     }
+
     @FXML
     private void goToHomeView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -32,6 +40,16 @@ public class Home {
         Parent root = loader.load();
 
         Stage stage = (Stage) homeButton.getScene().getWindow(); // Retrieves the current window
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    private void goToMonumentsView() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/MonumentFront.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) monumentsButton.getScene().getWindow(); // Retrieves the current window
         stage.setScene(new Scene(root));
         stage.show();
     }

@@ -1,14 +1,14 @@
 package controllers;
 
 import entities.feedback;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import services.FeedbackServices;
 import utils.MyDB;
+import org.controlsfx.control.Rating;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -29,7 +29,27 @@ public class AddFeedback {
 
     @FXML
     private Button adddF;
-    private List<String> badWords = Arrays.asList("badword1", "badword2", "badword3"); // Example bad words
+    private List<String> badWords = Arrays.asList(
+            "Bollocks",
+            "Shit",
+            "Bugger",
+            "Piss",
+            "Bitch",
+            "Bloody",
+            "Damn",
+            "Fuck",
+            "Urination",
+            "Bastard",
+            "Cunt",
+            "Twat",
+            "Wanker",
+            "Motherfucker",
+            "Asshole",
+            "Cocksucker",
+            "wtf"
+    );
+    @FXML
+    private Rating ratingControl;
 
 
     @FXML
@@ -93,12 +113,18 @@ public class AddFeedback {
                 .orElse(null);
 
         String comment = CommentField.getText();
+        double rating = ratingControl.getRating(); // Get the current rating
+
+        // Round the rating to one decimal place
+        double roundedRating = Math.round(rating * 10) / 10.0;
 
         if (selectedGuideId != null && isValidComment(comment)) {
-            feedback feedback = new feedback(selectedGuideId, comment);
+            feedback feedback = new feedback(selectedGuideId, comment, roundedRating); // Use the rounded rating
             FeedbackServices feedbackServices = new FeedbackServices();
             if (feedbackServices.add(feedback)) {
                 showAlert("Thank You", "Thank you for your feedback.", Alert.AlertType.INFORMATION);
+                CommentField.clear();  // Clear the comment field after submission
+                ratingControl.setRating(0);  // Reset the rating control
             } else {
                 showAlert("Error", "Failed to submit feedback.", Alert.AlertType.ERROR);
             }
@@ -107,13 +133,22 @@ public class AddFeedback {
         }
     }
 
+
+
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
+        // We must modify this part to close the window after the alert is dismissed
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                // Close the current window, assuming `adddF` (the button) is part of the same window
+                ((Stage) adddF.getScene().getWindow()).close();
+            }
+        });
     }
+
     public void selectGuideByName(String guideName) {
         for (int i = 0; i < guideCombo.getItems().size(); i++) {
             if (guideCombo.getItems().get(i).equalsIgnoreCase(guideName)) {
