@@ -45,24 +45,22 @@ public class LoginController {
         try {
             User user = userService.loginUser(email, password);
             if (user != null) {
+                if (user.isBanned()) {
+                    showAlert(Alert.AlertType.ERROR, "Access Denied", "Your account has been banned.");
+                    return;
+                }
                 UserSession.getInstance(user.getId(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCountry(), user.getProfilePicture(), String.valueOf(user.getPhoneNumber().intValue()), user.getRoles()).setUser(user);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getEmail() + "!");
-
-
 
                 SessionManager.setCurrentUser(user);
 
                 if (UserSession.getInstance().hasRole("ROLE_ADMIN")) {
                     showAlert(Alert.AlertType.INFORMATION, "Admin Access", "You have admin privileges.");
                     redirect_passwordpage();
-                }else{
+                } else {
                     showAlert(Alert.AlertType.INFORMATION, "Client Access", "You don't have admin privileges.");
                     redirect_homePage();
                 }
-
-
-
-
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
             }
@@ -71,6 +69,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void registerInstead() throws IOException {

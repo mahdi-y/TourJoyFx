@@ -365,6 +365,20 @@ public class userService implements IServices<User> {
     }
 
 
+    public void banUser(User user) throws SQLException {
+        String query = "UPDATE user SET is_banned = TRUE WHERE id = ?";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setInt(1, user.getId());
+            pre.executeUpdate();
+        }
+    }
 
 
+    public void unBanUser(User user) throws SQLException{
+        String query = "UPDATE user SET is_banned = FALSE WHERE id = ?";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setInt(1, user.getId());
+            pre.executeUpdate();
+        }
+    }
 }

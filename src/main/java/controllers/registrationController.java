@@ -41,8 +41,9 @@ public class registrationController {
     private TextField passwordFieldVisible;
     @FXML
     private TextField confirmPasswordFieldVisible;
+
     @FXML
-    private Button toggleVisibilityButton;
+    private CheckBox toggleVisibilityCheckbox;
 
 
 
@@ -208,7 +209,7 @@ public class registrationController {
             confirmPasswordField.setVisible(false);
             confirmPasswordField.setManaged(false);
 
-            toggleVisibilityButton.setText("Hide");
+            toggleVisibilityCheckbox.setText("Hide password");
         } else {
             passwordField.setText(passwordFieldVisible.getText());
             passwordField.setVisible(true);
@@ -222,7 +223,7 @@ public class registrationController {
             confirmPasswordFieldVisible.setVisible(false);
             confirmPasswordFieldVisible.setManaged(false);
 
-            toggleVisibilityButton.setText("Show");
+            toggleVisibilityCheckbox.setText("Show password");
         }
     }
 
@@ -271,4 +272,18 @@ public class registrationController {
 
         return shuffled.toString();
     }
+    /*@FXML
+    void togglePasswordVisibility() {
+        if (toggleVisibilityCheckbox.isSelected()) {
+            passwordFieldVisible.setText(passwordField.getText());
+            passwordFieldVisible.setVisible(true);
+            passwordField.setVisible(false);
+            toggleVisibilityCheckbox.setText("Hide Password");
+        } else {
+            passwordField.setText(passwordFieldVisible.getText());
+            passwordField.setVisible(true);
+            passwordFieldVisible.setVisible(false);
+            toggleVisibilityCheckbox.setText("Show Password");
+        }
+    }*/
 }

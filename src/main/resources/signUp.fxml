@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.CheckBox?>
 <HBox fx:id="mainContainer" alignment="TOP_CENTER" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.registrationController">
 
     <stylesheets>
@@ -52,7 +53,7 @@
               <TextField fx:id="passwordFieldVisible" managed="false" promptText="Password" styleClass="text-field" visible="false" />
               <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" styleClass="text-field" />
               <TextField fx:id="confirmPasswordFieldVisible" managed="false" promptText="Confirm Password" styleClass="text-field" visible="false" />
-              <Button fx:id="toggleVisibilityButton" onAction="#togglePasswordVisibility" text="Show" />
+              <CheckBox fx:id="toggleVisibilityCheckbox" layoutX="300" layoutY="250" text="Show Password" onAction="#togglePasswordVisibility"/>
               <Button fx:id="generatePasswordButton" onAction="#generateStrongPassword" text="Generate Password" />
               <Button fx:id="register" onAction="#registerUser" styleClass="btn-register" text="Register">
               <VBox.margin>

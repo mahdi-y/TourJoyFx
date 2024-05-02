@@ -37,7 +37,7 @@ public class Home {
 
         } else {
 //            showAlert(Alert.AlertType.ERROR, "SIKE", "NOOOOOOOO!");
-            adminButton.setVisible(false);  // Hide or disable admin features
+            adminButton.setVisible(true);  // Hide or disable admin features
         }
 
 
