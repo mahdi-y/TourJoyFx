@@ -28,6 +28,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.CheckBox?>
 <AnchorPane maxHeight="801.0" maxWidth="1569.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1569.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.usersList">
 
     <!--  SideNav  -->
@@ -111,95 +112,29 @@
         </font>
     </Label>
     <Button fx:id="frontoffice" layoutX="1262.0" layoutY="37.0" mnemonicParsing="false" onAction="#front" prefHeight="23.0" prefWidth="114.0" text="Frontpage" />
-   <TabPane layoutX="289.0" layoutY="87.0" prefHeight="714.0" prefWidth="1282.0" tabClosingPolicy="UNAVAILABLE">
-     <tabs>
-       <Tab text="Untitled Tab 1">
-         <content>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="507.0">
-                  <children>
-                      <TextField fx:id="nameField" layoutX="50.0" layoutY="33.0" prefWidth="150.0" promptText="Name" />
-                      <ComboBox fx:id="countryComboBox" layoutX="297.0" layoutY="111.0" prefWidth="150.0" promptText="Country" />
-                      <TextField fx:id="entryPriceField" layoutX="50.0" layoutY="78.0" prefWidth="150.0" promptText="Entry Price" />
-                      <ComboBox fx:id="typeComboBox" layoutX="297.0" layoutY="59.0" prefWidth="150.0" promptText="Type">
-                          <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                  <String fx:value="War Memorials" />
-                                  <String fx:value="Historical Monuments" />
-                                  <String fx:value="Architectural Monuments" />
-                                  <String fx:value="Cultural Monuments" />
-                                  <String fx:value="National Monuments" />
-                                  <String fx:value="Artistic Monuments" />
-                                  <String fx:value="Natural Monuments" />
-                                  <String fx:value="Memorials" />
-                                  <String fx:value="Functional Monuments" />
-                                  <String fx:value="Symbolic Monuments" />
-                                  <String fx:value="Heritage Monuments" />
-                                  <String fx:value="Public Monuments" />
-                              </FXCollections>
-                          </items>
-                      </ComboBox>
-                      <ComboBox fx:id="statusComboBox" layoutX="297.0" layoutY="174.0" prefWidth="150.0" promptText="Status">
-                          <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                  <String fx:value="Active" />
-                                  <String fx:value="Not Active" />
-                              </FXCollections>
-                          </items>
-                      </ComboBox>
-                      <Button fx:id="updateButton" layoutX="269.0" layoutY="558.0" mnemonicParsing="false" onAction="#updateMonument" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Update" />
-                      <Button fx:id="addButton" layoutX="157.0" layoutY="558.0" mnemonicParsing="false" onAction="#addMonument" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #6C3483; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Add" />
-                      <Button fx:id="deleteButton" layoutX="50.0" layoutY="558.0" mnemonicParsing="false" onAction="#deleteMonument" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Delete" />
-                      <ImageView fx:id="imageViewMonument" fitHeight="98.0" fitWidth="91.0" layoutX="315.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../images/image.png" />
-                          </image>
-                     </ImageView>
-                  
-                            <!-- Button for selecting an image -->
-                      <Button fx:id="SelectImageMonumentButton" layoutX="319.0" layoutY="353.0" onAction="#selectImageMonument" text="Select Image" />
-                      <TextField fx:id="longitudeField" layoutX="50.0" layoutY="410.0" prefWidth="150.0" promptText="Longitude" />
-                      <TextField fx:id="latitudeField" layoutX="50.0" layoutY="365.0" prefWidth="150.0" promptText="Latitude" />
-                      <TextArea fx:id="descriptionField" layoutX="50.0" layoutY="137.0" prefHeight="174.0" prefWidth="150.0" promptText="Description" />
-                  
-                      <TableView fx:id="displayMonuments" layoutX="494.0" layoutY="365.0" prefHeight="298.0" prefWidth="765.0" style="-fx-background-color: #ffffff;">
-                          <columns>
-                              <TableColumn fx:id="countryColumn" prefWidth="100.0" text="Country" />
-                              <TableColumn fx:id="nameColumn" prefWidth="114.39999389648438" text="Name" />
-                              <TableColumn fx:id="typeColumn" prefWidth="161.5999755859375" text="Type" />
-                              <TableColumn fx:id="entryPriceColumn" prefWidth="95.20010375976562" text="Entry Price" />
-                              <TableColumn fx:id="statusColumn" prefWidth="108.0" text="Status" />
-                              <TableColumn fx:id="descriptionColumn" prefWidth="222.39990234375" text="Description" />
-                              <TableColumn fx:id="latitudeColumn" prefWidth="139.20001220703125" text="Latitude" />
-                              <TableColumn fx:id="longitudeColumn" prefWidth="156.0" text="Longitude" />
-                          </columns>
-                      </TableView>
-                      <TextField fx:id="searchField" layoutX="512.0" layoutY="316.0" prefHeight="22.0" prefWidth="317.0" promptText="Search Monument" />
-
-                  </children>
-               </AnchorPane>
-         </content>
-       </Tab>
-       <Tab text="Untitled Tab 2">
-         <content>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                  <children>
-                      <StackedBarChart fx:id="monumentChart" layoutX="505.0" layoutY="465.0" prefHeight="280.0" prefWidth="671.0">
-                          <xAxis>
-                              <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-                          </xAxis>
-                          <yAxis>
-                              <NumberAxis fx:id="yAxis" side="LEFT" />
-                          </yAxis>
-                      </StackedBarChart>
-                  </children>
-           </AnchorPane>
-         </content>
-       </Tab>
-     </tabs>
-   </TabPane>
     <!--  Navbar  -->
+    <AnchorPane prefHeight="521.0" prefWidth="1550.0" style="-fx-background-color: #F0F0F2;">
+        <Text layoutX="255.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Countries Management">
+            <font>
+                <Font name="Arial Black" size="24.0" />
+            </font>
+        </Text>
+        <TextField fx:id="nameField" layoutX="420.0" layoutY="154.0" prefWidth="150.0" promptText="Name" />
+        <ComboBox fx:id="regionComboBox" layoutX="420.0" layoutY="202.0" prefWidth="150.0" promptText="Continent" />
+        <CheckBox fx:id="visaRequiredCheckbox" layoutX="420.0" layoutY="255.0" mnemonicParsing="false" text="Visa Required" />
+        <Button fx:id="addButton" layoutX="754.0" layoutY="273.0" mnemonicParsing="false" onAction="#addCountry" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #6C3483; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Add" />
+        <Button fx:id="deleteButton" layoutX="890.0" layoutY="273.0" mnemonicParsing="false" onAction="#deleteCountry" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Delete" />
+        <Button fx:id="updateButton" layoutX="611.0" layoutY="274.0" mnemonicParsing="false" onAction="#updateCountry" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Update" />
+        <TableView fx:id="DisplayCountries" layoutX="181.0" layoutY="331.0" prefHeight="409.0" prefWidth="1027.0" styleClass="table-view">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="nameColumn" prefWidth="294.39996337890625" text="Name" />
+                <TableColumn fx:id="regionColumn" prefWidth="284.0000915527344" text="Continent" />
+                <TableColumn fx:id="visaRequiredColumn" prefWidth="374.400146484375" text="Visa Required" />
+            </columns>
+        </TableView>
 
-    <stylesheets>
+        <stylesheets>
         <URL value="@Styles/backoffice.css" />
     </stylesheets>
 </AnchorPane>

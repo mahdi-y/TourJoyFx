@@ -71,7 +71,6 @@ public class MonumentFrontController {
         loadMonumentsData();
         setupSearchFilter();
         populateCurrencyComboBox();
-        populateCurrencyComboBox();
         selectedCurrency = "TND"; // Set TND as the default currency
 
         // Find the label with the text "TND" and set it as the selected value
@@ -98,11 +97,11 @@ public class MonumentFrontController {
             List<String> countryNames = countries.stream()
                     .map(Country::getName)
                     .collect(Collectors.toList());
-            ObservableList<String> countryList = FXCollections.observableArrayList(countryNames);
+            ObservableList<String> countryList = FXCollections.observableArrayList();
+            countryList.add("Select Country"); // Add default selection option
+            countryList.addAll(countryNames);
             countryComboBox.setItems(countryList);
-            if (!countryList.isEmpty()) {
-                countryComboBox.setValue(countryList.get(0)); // Set default value
-            }
+            countryComboBox.setValue("Select Country"); // Set default value to show all monuments
         } catch (SQLException e) {
             System.out.println("Error loading countries from the database: " + e.getMessage());
             e.printStackTrace();
@@ -128,8 +127,7 @@ public class MonumentFrontController {
         filteredData.setPredicate(monument -> {
             boolean matchesSearch = searchText.isEmpty() || monument.getName().toLowerCase().contains(searchText);
             boolean withinPriceRange = monument.getEntryPrice() <= maxPrice;
-            // Adjusted to call getName() on the Country object
-            boolean matchesCountry = monument.getCountry().getName().equalsIgnoreCase(selectedCountry);
+            boolean matchesCountry = "Select Country".equals(selectedCountry) || monument.getCountry().getName().equalsIgnoreCase(selectedCountry);
             return matchesSearch && withinPriceRange && matchesCountry;
         });
         updatePagination();
@@ -239,6 +237,9 @@ public class MonumentFrontController {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Database Error", "Error loading monuments.");
         }
+        masterData.clear();
+        masterData.addAll(monuments);
+        updatePagination(); // Ensure the pagination updates to reflect changes
     }
 
 
@@ -290,11 +291,12 @@ public class MonumentFrontController {
         nameLabel.setMaxWidth(Double.MAX_VALUE);
         nameLabel.setAlignment(Pos.CENTER);
 
-        // Use the converted price for display, if it's available; otherwise, use the original entry price
-        Label priceLabel = new Label("Entry Price: " +
-                (monument.getConvertedEntryPrice() != null ? monument.getConvertedEntryPrice() : monument.getEntryPrice()) +
-                " " + (selectedCurrency != null ? selectedCurrency : "TND"));
-        System.out.println("Creating entry for: " + monument.getName() + " with price: " + priceLabel.getText()); // Debugging line
+        // Use the converted price if available, otherwise fall back to the entry price
+        String displayPrice = (monument.getConvertedEntryPrice() != null ?
+                monument.getConvertedEntryPrice().toString() :
+                Integer.toString(monument.getEntryPrice())) + " " + selectedCurrency;
+
+        Label priceLabel = new Label("Entry Price: " + displayPrice);
         priceLabel.getStyleClass().add("monument-price");
         priceLabel.setMaxWidth(Double.MAX_VALUE);
         priceLabel.setAlignment(Pos.CENTER);
