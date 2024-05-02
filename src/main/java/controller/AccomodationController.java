@@ -1,26 +1,24 @@
 package controller;
 import Entities.Accomodation;
-import Entities.Reservation;
 import Services.ServiceAccomodation;
-import Services.ServiceResBack;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import javafx.stage.FileChooser;
+import java.io.File;
+
 
 public class AccomodationController {
 
     @FXML
     private TableView<Accomodation> DisplayAccommodations;
-    @FXML
-    private TableColumn<Accomodation, Integer> refAColumn;
     @FXML
     private TableColumn<Accomodation, String> nameColumn;
     @FXML
@@ -34,6 +32,7 @@ public class AccomodationController {
 
     @FXML
     private TextField refAField;
+
     @FXML
     private TextField nameField;
     @FXML
@@ -51,7 +50,15 @@ public class AccomodationController {
     private Button updateButton;
     @FXML
     private Button deleteButton;
-   // @FXML
+    @FXML
+    private Button selectImageButton;
+
+    @FXML
+    private ImageView imageViewAccommodation;
+
+    private String image_name = "images/image.jpg"; // Default image path
+
+    // @FXML
    // private Button clear1;
 
 
@@ -60,9 +67,22 @@ public class AccomodationController {
 
     @FXML
     void initialize() {
+        try {
+            String defaultImage_name = "/images/image.jpg";  // Corrected path assuming your images folder is directly under resources
+            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(defaultImage_name)));
+            imageViewAccommodation.setImage(defaultImage);
+        } catch (NullPointerException e) {
+            System.out.println("Default image not found");
+        }
+        // Initialize the ImageView with the default image
+        String defaultImage_name = "/images/image.jpg"; // Assuming "images" is a package in your resources folder
+        Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(defaultImage_name)));
+        imageViewAccommodation.setImage(defaultImage);
         serviceAccomodation = new ServiceAccomodation();
-        refAColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRefA()).asObject());
+
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        typeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getType()));
+
         typeComboBox.getItems().addAll(
                 "Villa", "Guesthouse", "Private house", "Apartment", "Farm house"
         );
@@ -79,7 +99,7 @@ public class AccomodationController {
             List<Accomodation> listAccomodations = serviceAccomodation.Read();
             DisplayAccommodations.getItems().addAll(listAccomodations);
         } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to fetch accommodations from the database.");
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to fetch accommodations from the database.", "Failed to load the selected image.");
         }
 
         // Add listener to handle row selection
@@ -92,16 +112,49 @@ public class AccomodationController {
                 locationField.setText(newSelection.getLocation());
                 priceField.setText(String.valueOf(newSelection.getPrice()));
                 roomField.setText(String.valueOf(newSelection.getNb_rooms()));
+                try {
+                    Image image = new Image(newSelection.getImage_name());
+                    imageViewAccommodation.setImage(image);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
 
 
             }
         });
     }
+    @FXML
+    void selectImageAccommodation() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
 
+        // Filter files to show only images
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif")
+        );
+
+        // Show file dialog
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        // Check if a file is selected
+        if (selectedFile != null) {
+            // Get the path to the selected image
+            image_name = selectedFile.toURI().toString();
+
+            // Load the image into the ImageView
+            try {
+                Image image = new Image(image_name);
+                imageViewAccommodation.setImage(image);
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Error", "Error loading image", "Failed to load the selected image.");
+            }
+        }
+    }
     @FXML
     void addAccomodation() {
         try {
-            int refA = Integer.parseInt(refAField.getText());
             String name = nameField.getText();
             String type = typeComboBox.getValue();
             String location = locationField.getText();
@@ -109,37 +162,38 @@ public class AccomodationController {
             float price= Float.parseFloat(priceField.getText());
 
 
+            String selectedImage_name = image_name;
 
 
             // Validate fields
 
             if (name.isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Input Error", "Name is obligatory.");
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Name is obligatory.", "Failed to load the selected image.");
                 return;
             }
             if(name.length()<6){
-                showAlert(Alert.AlertType.ERROR, "Input Error", "Name is too short.");
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Name is too short.", "Failed to load the selected image.");
                 return;
             }
             if (type == null || type.isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Input Error", "Type is obligatory.");
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Type is obligatory.", "Failed to load the selected image.");
                 return;
             }
             if (location.isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Input Error", "Location is obligatory.");
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Location is obligatory.", "Failed to load the selected image.");
                 return;
             }
             if (price <= 0) {
-                showAlert(Alert.AlertType.ERROR, "Input Error", "Price must be positive.");
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Price must be positive.", "Failed to load the selected image.");
                 return;
             }
             if (nb_rooms < 0 || nb_rooms > 6) {
-                showAlert(Alert.AlertType.ERROR, "Input Error", "Number of rooms must be between 0 and 6.");
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Number of rooms must be between 0 and 6.", "Failed to load the selected image.");
                 return;
             }
 
             // Create accommodation object
-            Accomodation accomodation = new Accomodation(refA, name,  type, location, price, nb_rooms);
+            Accomodation accomodation = new Accomodation( name, type, location, price, nb_rooms,selectedImage_name);
 
             // Add accommodation to database
             serviceAccomodation.add(accomodation);
@@ -148,11 +202,11 @@ public class AccomodationController {
             DisplayAccommodations.getItems().add(accomodation);
 
             // Show success message
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation added successfully!");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation added successfully!", "Failed to load the selected image.");
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid ID.");
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid ID.", "Failed to load the selected image.");
         } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Error adding Accommodation to the database.");
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Error adding Accommodation to the database.", "Failed to load the selected image.");
         }
     }
 
@@ -163,12 +217,12 @@ public class AccomodationController {
             try {
                 serviceAccomodation.delete(selectedAccomodation);
                 DisplayAccommodations.getItems().remove(selectedAccomodation);
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation deleted successfully!");
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation deleted successfully!", "Failed to load the selected image.");
             } catch (SQLException e) {
-                showAlert(Alert.AlertType.ERROR, "Database Error", "Error deleting accommodation from the database.");
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Error deleting accommodation from the database.", "Failed to load the selected image.");
             }
         } else {
-            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select an accommodation to delete.");
+            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select an accommodation to delete.", "Failed to load the selected image.");
         }
     }
 
@@ -177,7 +231,7 @@ public class AccomodationController {
         Accomodation selectedAccomodation = DisplayAccommodations.getSelectionModel().getSelectedItem();
         if (selectedAccomodation != null) {
             try {
-                int refA = Integer.parseInt(refAField.getText());
+                int refA=Integer.parseInt(refAField.getText());
                 String name = nameField.getText();
                 String type = typeComboBox.getValue();
                 String location = locationField.getText();
@@ -187,32 +241,31 @@ public class AccomodationController {
                 // Validate fields
 
                 if (name.isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, "Input Error", "Name is obligatory.");
+                    showAlert(Alert.AlertType.ERROR, "Input Error", "Name is obligatory.", "Failed to load the selected image.");
                     return;
                 }
                 if(name.length()<6){
-                    showAlert(Alert.AlertType.ERROR, "Input Error", "Name is too short.");
+                    showAlert(Alert.AlertType.ERROR, "Input Error", "Name is too short.", "Failed to load the selected image.");
                     return;
                 }
                 if (type == null || type.isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, "Input Error", "Type is obligatory.");
+                    showAlert(Alert.AlertType.ERROR, "Input Error", "Type is obligatory.", "Failed to load the selected image.");
                     return;
                 }
                 if (location.isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, "Input Error", "Location is obligatory.");
+                    showAlert(Alert.AlertType.ERROR, "Input Error", "Location is obligatory.", "Failed to load the selected image.");
                     return;
                 }
                 if (price <= 0) {
-                    showAlert(Alert.AlertType.ERROR, "Input Error", "Price must be positive.");
+                    showAlert(Alert.AlertType.ERROR, "Input Error", "Price must be positive.", "Failed to load the selected image.");
                     return;
                 }
                 if (nb_rooms < 0 || nb_rooms > 6) {
-                    showAlert(Alert.AlertType.ERROR, "Input Error", "Number of rooms must be between 0 and 6.");
+                    showAlert(Alert.AlertType.ERROR, "Input Error", "Number of rooms must be between 0 and 6.", "Failed to load the selected image.");
                     return;
                 }
 
                 // Update selected accommodation object
-                selectedAccomodation.setRefA(refA);
                 selectedAccomodation.setName(name);
                 selectedAccomodation.setType(type);
                 selectedAccomodation.setLocation(location);
@@ -228,18 +281,18 @@ public class AccomodationController {
                 DisplayAccommodations.refresh();
 
                 // Show success message
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation updated successfully!");
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation updated successfully!", "Failed to load the selected image.");
             } catch (NumberFormatException e) {
-                showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid ID.");
+                showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid ID.", "Failed to load the selected image.");
             } catch (SQLException e) {
-                showAlert(Alert.AlertType.ERROR, "Database Error", "Error updating accommodation in the database.");
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Error updating accommodation in the database.", "Failed to load the selected image.");
             }
         } else {
-            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a accommodation to update.");
+            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select a accommodation to update.", "Failed to load the selected image.");
         }
     }
 
-    private void showAlert(Alert.AlertType type, String title, String message) {
+    private void showAlert(Alert.AlertType type, String title, String message, String s) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setContentText(message);

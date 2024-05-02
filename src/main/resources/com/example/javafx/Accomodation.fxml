@@ -89,57 +89,67 @@
                         </children></AnchorPane>
                 </children>
             </VBox>
-        <AnchorPane prefHeight="761.0" prefWidth="1354.0" style="-fx-background-color: #F0F0F2;">
+        <AnchorPane prefHeight="826.0" prefWidth="1282.0" style="-fx-background-color: #F0F0F2;">
             <children>
-                <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="1247.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="1196.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/settingss.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="1300.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="1236.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/desktop.png" />
                     </image>
                 </ImageView>
 
 
-                                      <AnchorPane layoutX="21.0" layoutY="170.0" minHeight="0.0" minWidth="0.0" prefHeight="525.0" prefWidth="1340.0" styleClass="pane_11">
+                                      <AnchorPane layoutX="98.0" layoutY="96.0" minHeight="0.0" minWidth="0.0" prefHeight="523.0" prefWidth="354.0" styleClass="pane_11">
                                           <children>
-                                              <Label layoutX="89.0" layoutY="58.0" text="Name:" />
+                                              <Label layoutX="89.0" layoutY="27.0" text="Name:" />
 
-                                              <Label layoutX="90.0" layoutY="117.0" text="Type:" />
-                                              <TextField fx:id="nameField" layoutX="89.0" layoutY="79.0" prefWidth="200.0" />
+                                              <Label layoutX="90.0" layoutY="86.0" text="Type:" />
+                                              <TextField fx:id="nameField" layoutX="89.0" layoutY="48.0" prefWidth="200.0" />
 
 
-                                              <Label layoutX="89.0" layoutY="219.0" text="Location:" />
+                                              <Label layoutX="89.0" layoutY="188.0" text="Location:" />
 
-                                              <Label layoutX="89.0" layoutY="171.0" text="Room number:" />
-                                              <TextField fx:id="roomField" layoutX="89.0" layoutY="193.0" prefWidth="200.0" />
+                                              <Label layoutX="89.0" layoutY="140.0" text="Room number:" />
+                                              <TextField fx:id="roomField" layoutX="89.0" layoutY="162.0" prefWidth="200.0" />
 
-                                              <Button fx:id="addButton" layoutX="122.0" layoutY="338.0" onAction="#addAccomodation" styleClass="btn_workbench" text="Add Accommodation" textFill="#fcf7f7" />
-                                              <Label layoutX="91.0" layoutY="274.0" text="Price per night:" />
-                                              <TextField fx:id="priceField" layoutX="89.0" layoutY="296.0" prefWidth="200.0" />
-                                              <TextField fx:id="locationField" layoutX="89.0" layoutY="240.0" prefWidth="200.0" />
-                                              <Label layoutX="87.0" layoutY="14.0" text="Reference:" />
-                                              <TextField fx:id="refAField" layoutX="87.0" layoutY="32.0" prefWidth="200.0" />
-                                              <ComboBox fx:id="typeComboBox" layoutX="89.0" layoutY="137.0" prefHeight="26.0" prefWidth="200.0" promptText="Select Type">
+                                              <Button fx:id="addButton" layoutX="120.0" layoutY="436.0" onAction="#addAccomodation" prefHeight="30.0" prefWidth="134.0" styleClass="btn_workbench" text="Add Accommodation" textFill="#fcf7f7" />
+                                              <Label layoutX="91.0" layoutY="243.0" text="Price per night:" />
+                                              <TextField fx:id="priceField" layoutX="89.0" layoutY="265.0" prefWidth="200.0" />
+                                              <TextField fx:id="locationField" layoutX="89.0" layoutY="209.0" prefWidth="200.0" />
+                                              <TextField fx:id="refAField" layoutX="87.0" prefWidth="200.0" style="-fx-border-color: white; -fx-background-color: white ; -fx-text-fill: black;" />
+                                              <ComboBox fx:id="typeComboBox" layoutX="89.0" layoutY="106.0" prefHeight="26.0" prefWidth="200.0" promptText="Select Type">
 
                                               </ComboBox>
-                                              <TableView fx:id="DisplayAccommodations" layoutX="425.0" layoutY="25.0" prefHeight="373.0" prefWidth="787.0" stylesheets="@Styles/styling.css">
-                                                  <columns>
-                                                      <TableColumn fx:id="refAColumn" prefWidth="48.20001220703125" text="ID" />
-                                                      <TableColumn fx:id="nameColumn" prefWidth="167.79998779296875" text="Name" />
-                                                      <TableColumn fx:id="typeColumn" prefWidth="110.20001220703125" text="Type" />
-                                                      <TableColumn fx:id="priceColumn" prefWidth="111.60003662109375" text="Price" />
-                                                      <TableColumn fx:id="roomColumn" prefWidth="151.199951171875" text="Room number" />
-                                                      <TableColumn fx:id="locationColumn" prefWidth="201.4000244140625" text="Location" />
-                                                  </columns>
-                                              </TableView>
-                                              <Button fx:id="updateButton" layoutX="726.0" layoutY="419.0" mnemonicParsing="false" onAction="#updateAccomodation" prefHeight="28.0" prefWidth="80.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="UPDATE" />
-                                              <Button fx:id="deleteButton" layoutX="819.0" layoutY="417.0" mnemonicParsing="false" onAction="#deleteAccomodation" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="DELETE" />
+                  <Button fx:id="SelectImageButton" layoutX="91.0" layoutY="299.0" mnemonicParsing="false" onAction="#selectImageAccommodation" text="Select image" />
+                  <ImageView fx:id="imageViewAccommodation" fitHeight="70.0" fitWidth="134.0" layoutX="94.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/image.jpg" />
+                     </image>
+                  </ImageView>
+                                              
                                           </children>
                                       </AnchorPane>
-            <Label layoutX="357.0" layoutY="61.0" text="Accommodations' management" textFill="#151186">
+                                              <AnchorPane layoutX="472.0" layoutY="97.0" minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="610.0" styleClass="pane_11">
+                                                  <children>
+
+                                              <TableView fx:id="DisplayAccommodations" layoutX="21.0" layoutY="25.0" prefHeight="246.0" prefWidth="551.0" stylesheets="@Styles/styling.css">
+                                                  <columns>
+                                                      <TableColumn fx:id="nameColumn" prefWidth="109.0" text="Name" />
+                                                      <TableColumn fx:id="typeColumn" prefWidth="97.5999755859375" text="Type" />
+                                                      <TableColumn fx:id="priceColumn" prefWidth="95.0" text="Price" />
+                                                      <TableColumn fx:id="roomColumn" prefWidth="94.7999267578125" text="Room number" />
+                                                      <TableColumn fx:id="locationColumn" prefWidth="152.99993896484375" text="Location" />
+                                                  </columns>
+                                              </TableView>
+                                              <Button fx:id="updateButton" layoutX="221.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateAccomodation" prefHeight="30.0" prefWidth="84.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="UPDATE" />
+                                              <Button fx:id="deleteButton" layoutX="317.0" layoutY="291.0" mnemonicParsing="false" onAction="#deleteAccomodation" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="DELETE" />
+                                          </children>
+                                      </AnchorPane>
+            <Label layoutX="357.0" layoutY="34.0" text="Accommodations' management" textFill="#151186">
                <font>
                   <Font name="System Bold Italic" size="30.0" />
                </font>

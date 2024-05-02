@@ -1,5 +1,6 @@
 package Entities;
-
+import java.util.ArrayList;
+import java.util.List;
 public class Accomodation {
     private Integer refA;
     private String name;
@@ -8,13 +9,26 @@ public class Accomodation {
     private float price;
     private Integer nb_rooms;
 
-    public Accomodation(int refA, String name, String type, String location, float price, int nb_rooms) {
+    private String image_name;
+
+    private List<String> photoNames;
+    public Accomodation(Integer refA, String name, String type, String location, float price, Integer nb_rooms, String image_name) {
         this.refA = refA;
         this.name = name;
         this.type = type;
         this.location = location;
         this.price = price;
         this.nb_rooms = nb_rooms;
+        this.image_name = image_name;
+    }
+//constructor without refA
+    public Accomodation(String name, String type, String location, float price, int nb_rooms, String image_name) {
+        this.name = name;
+        this.type = type;
+        this.location = location;
+        this.price = price;
+        this.nb_rooms = nb_rooms;
+        this.image_name= image_name;
     }
 
     public int getRefA() {
@@ -65,6 +79,14 @@ public class Accomodation {
         this.nb_rooms = nb_rooms;
     }
 
+    public String getImage_name() {
+        return image_name;
+    }
+
+    public void setImage_name(String image_name) {
+        this.image_name = image_name;
+    }
+
     @Override
     public String toString() {
         return "Accomodation{" +
@@ -74,6 +96,7 @@ public class Accomodation {
                 ", location='" + location + '\'' +
                 ", price=" + price +
                 ", nb_rooms=" + nb_rooms +
+                ", image_name='" + image_name + '\'' +
                 '}';
     }
 }

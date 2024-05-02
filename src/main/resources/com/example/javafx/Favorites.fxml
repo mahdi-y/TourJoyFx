@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Favorites">
+    <children>
+        <ImageView fitHeight="1011.0" fitWidth="1538.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/bg1.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="143.0" fitWidth="303.0" layoutX="34.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/tourjoy.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="1212.0" layoutY="45.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <Label layoutX="1314.0" layoutY="45.0" text="CLAIMS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Label>
+        <ScrollPane layoutX="50" layoutY="200" prefHeight="600.0" prefWidth="1400.0">
+            <content>
+                <VBox fx:id="favoritesVBox" spacing="10">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <Button fx:id="clearFavoritesButton" layoutX="1340.0" layoutY="720.0" onAction="#clearFavorites" style="-fx-background-color: red;" text="Clear Favorites" textFill="#f4eeee">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Button>
+    </children>
+    <stylesheets>
+        <URL value="@Styles/Main.css" />
+    </stylesheets>
+</AnchorPane>

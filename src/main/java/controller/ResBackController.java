@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -24,8 +25,7 @@ public class ResBackController {
 
     @FXML
     private TableView<Reservation> DisplayReservations;
-    @FXML
-    private TableColumn<Reservation, Integer> idRColumn;
+
     @FXML
     private TableColumn<Reservation, String> nameRColumn;
     @FXML
@@ -35,6 +35,8 @@ public class ResBackController {
     @FXML
     private Button deleteRButton;
 
+    @FXML
+    private PieChart accPie;
     private ServiceResBack serviceResBack;
 
 
@@ -42,7 +44,6 @@ public class ResBackController {
     @FXML
     void initialize() {
         serviceResBack = new ServiceResBack();
-        idRColumn.setCellValueFactory(new PropertyValueFactory<>("idR"));
         nameRColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         startColumn.setCellValueFactory(new PropertyValueFactory<>("start_date"));
         endColumn.setCellValueFactory(new PropertyValueFactory<>("end_date"));

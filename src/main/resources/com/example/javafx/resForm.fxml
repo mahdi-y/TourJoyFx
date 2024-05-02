@@ -2,14 +2,15 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="642.0" prefWidth="1153.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ResController">
+<AnchorPane prefHeight="693.0" prefWidth="1004.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ResController">
     <FlowPane fx:id="calendar" hgap="10.0" layoutX="14.0" layoutY="193.0" prefHeight="498.0" prefWidth="716.0" vgap="5.0" />
     <HBox alignment="CENTER" layoutX="163.0" layoutY="108.0" prefHeight="44.0" prefWidth="419.0" spacing="5.0">
         <children>
-            <Button mnemonicParsing="false" text="&lt;" />
+            <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
             <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
                 <font>
                     <Font size="22.0" />
@@ -20,7 +21,7 @@
                     <Font size="22.0" />
                 </font>
             </Text>
-            <Button mnemonicParsing="false" text="&gt;" />
+            <Button mnemonicParsing="false" onAction="#forwardOneMonth" text="&gt;" />
         </children>
     </HBox>
     <HBox alignment="CENTER" layoutX="14.0" layoutY="153.0" prefHeight="44.0" prefWidth="716.0" spacing="88.75">
@@ -37,20 +38,28 @@
             <Insets right="9.0" />
         </padding>
     </HBox>
-   <VBox layoutX="757.0" layoutY="152.0" prefHeight="522.0" prefWidth="187.0">
-      <children>
-          <Label text="Accommodation name:" />
-          <ComboBox fx:id="NameComboBox" layoutX="143.0" layoutY="223.0" prefHeight="26.0" prefWidth="234.0" promptText="Select accommodation" />
-          <Label text="idR:" />
-          <TextField fx:id="idRField" prefHeight="26.0" prefWidth="165.0" />
-         <Label text="Check-in:" />
-          <DatePicker fx:id="startPicker" layoutX="314.0" layoutY="284.0" prefHeight="39.0" prefWidth="175.0" promptText="Pick the date" styleClass="styled-date-picker" />
-         <Label layoutX="10.0" layoutY="10.0" text="Check-out :" />
-          <DatePicker fx:id="endPicker" layoutX="314.0" layoutY="284.0" prefHeight="39.0" prefWidth="175.0" promptText="Pick the date" styleClass="styled-date-picker" />
-         <Button fx:id="bookButton" mnemonicParsing="false" onAction="#BookAccommodation" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #F4D03F #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Book Now" />
-      </children>
-   </VBox>
-   <Label layoutX="461.0" layoutY="25.0" text="Fill in the form" textFill="#3c2ba9">
+    <VBox layoutX="753.0" layoutY="213.0" prefHeight="368.0" prefWidth="214.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 20;">
+        <children>
+            <ComboBox fx:id="NameComboBox" prefHeight="26.0" prefWidth="234.0" promptText="Select accommodation" />
+            <Label text="Check-in:" />
+            <DatePicker fx:id="startPicker" prefHeight="39.0" prefWidth="175.0" promptText="Pick the date" styleClass="styled-date-picker" />
+            <Label text="Check-out :" />
+            <DatePicker fx:id="endPicker" prefHeight="39.0" prefWidth="175.0" promptText="Pick the date" styleClass="styled-date-picker" />
+            <Button fx:id="bookButton" mnemonicParsing="false" onAction="#BookAccommodation" prefHeight="34.0" prefWidth="175.0" style="-fx-background-color: blue; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Book Now" />
+         <Button fx:id="weatherButton" layoutX="20.0" layoutY="277.0" mnemonicParsing="false" onAction="#seeW" prefHeight="28.0" prefWidth="187.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Explore this week's weather" />
+         <ImageView fitHeight="35.0" fitWidth="39.0" layoutX="100.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/msa7ba.png" />
+            </image>
+         </ImageView>
+        </children>
+        <alignment>BASELINE_CENTER</alignment>
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+    </VBox>
+
+    <Label layoutX="461.0" layoutY="25.0" text="Fill in the form" textFill="#3c2ba9">
       <font>
          <Font name="Arial Black" size="35.0" />
       </font>

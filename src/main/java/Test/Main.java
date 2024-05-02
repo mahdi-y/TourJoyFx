@@ -8,10 +8,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Accomodation a1 = new Accomodation(3, "mi appartamento", "Apartment", "hhhh", 5002, 3);
-        Accomodation a2 = new Accomodation(4, "dar jaddy", "farm house", "hhhh", 505, 3);
-        Accomodation a3 = new Accomodation(5, "hhh", "guesthouse", "hhhh", 5023 , 3);
-        Accomodation a4 = new Accomodation(6, "saif", "guefrachi", "hhhh5", 500000000, 3);
+        Accomodation a1 = new Accomodation( "mi appartamento", "Apartment", "hhhh", 5002, 3, "image");
+        Accomodation a2 = new Accomodation( "dar jaddy", "farm house", "hhhh", 505, 3, "image1");
+        Accomodation a3 = new Accomodation( "hhh", "guesthouse", "hhhh", 5023 , 3, "ima");
+        Accomodation a4 = new Accomodation( "saif", "guefrachi", "hhhh5", 500000000, 3, "im");
 
 
         // Create an instance of ServiceAccommodation

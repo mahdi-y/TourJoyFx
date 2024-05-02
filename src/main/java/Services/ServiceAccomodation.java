@@ -26,14 +26,15 @@ public class ServiceAccomodation implements IServices<Accomodation> {
     @Override
     public void add(Accomodation accomodation) throws SQLException {
 
-        String query = "INSERT INTO Accomodation (refA, name, type, nb_rooms ,location, price ) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Accomodation (name, type, nb_rooms ,location, price, image_name ) VALUES (?, ?, ?, ?, ?, ?)";
         pre = con.prepareStatement(query);
-        pre.setInt(1, accomodation.getRefA());
-        pre.setString(2, accomodation.getName());
-        pre.setString(3, accomodation.getType());
-        pre.setInt(4, accomodation.getNb_rooms());
-        pre.setString(5, accomodation.getLocation());
-        pre.setFloat(6, accomodation.getPrice());
+        pre.setString(1, accomodation.getName());
+        pre.setString(2, accomodation.getType());
+        pre.setInt(3, accomodation.getNb_rooms());
+        pre.setString(4, accomodation.getLocation());
+        pre.setFloat(5, accomodation.getPrice());
+        pre.setString(6, accomodation.getImage_name());
+
 
 
 
@@ -95,14 +96,16 @@ public class ServiceAccomodation implements IServices<Accomodation> {
         pre = con.prepareStatement(query);
         res = pre.executeQuery();
         while (res.next()) {
-            int refA = res.getInt("refA");
+            int refA=res.getInt("refA");
+
             String name = res.getString("name");
             String type = res.getString("type");
             int nb_rooms=res.getInt("nb_rooms");
             String location = res.getString("location");
             float price = res.getFloat("price");
+            String image_name = res.getString("image_name");
 
-            Accomodation accomodation = new Accomodation(refA, name, type, location, price, nb_rooms);
+            Accomodation accomodation = new Accomodation(refA,name, type, location, price, nb_rooms, image_name);
             accomodations.add(accomodation);
         }
         return accomodations;

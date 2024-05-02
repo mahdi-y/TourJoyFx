@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -101,20 +102,20 @@
                         <Image url="@../../../images/desktop.png" />
                     </image>
                 </ImageView>
-                <TableView fx:id="DisplayReservations" layoutX="215.0" layoutY="120.0" prefHeight="560.0" prefWidth="786.0" stylesheets="@Styles/styling.css">
+                <TableView fx:id="DisplayReservations" layoutX="145.0" layoutY="120.0" prefHeight="438.0" prefWidth="429.0" stylesheets="@Styles/styling.css">
                     <columns>
-                        <TableColumn fx:id="idRColumn" prefWidth="109.19998168945312" text="ID" />
-                        <TableColumn fx:id="nameRColumn" prefWidth="212.8000030517578" text="Accommodation reference" />
-                        <TableColumn fx:id="startColumn" prefWidth="232.800048828125" text="Check-in" />
-                        <TableColumn fx:id="endColumn" prefWidth="230.39996337890625" text="Check-out" />
+                        <TableColumn fx:id="nameRColumn" prefWidth="132.19996643066406" text="acc name" />
+                        <TableColumn fx:id="startColumn" prefWidth="141.4000244140625" text="Check-in" />
+                        <TableColumn fx:id="endColumn" prefWidth="156.79998779296875" text="Check-out" />
                     </columns>
                 </TableView>
-            <Label layoutX="290.0" layoutY="48.0" text="List of all  bookings" textFill="#0e1591">
+            <Label layoutX="290.0" layoutY="48.0" text="List of bookings" textFill="#0e1591">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-                <Button fx:id="deleteRButton" layoutX="1060.0" layoutY="339.0" mnemonicParsing="false" onAction="#deleteRes" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="DELETE" />
+                <Button fx:id="deleteRButton" layoutX="296.0" layoutY="605.0" mnemonicParsing="false" onAction="#deleteRes" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="DELETE" />
+            <PieChart fx:id="accPie" layoutX="731.0" layoutY="131.0" />
             </children>
         </AnchorPane>
     </children>

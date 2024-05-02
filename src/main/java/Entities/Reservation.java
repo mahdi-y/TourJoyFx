@@ -17,6 +17,12 @@ public class Reservation {
         this.name=name;
     }
 
+    public Reservation(Date start_date, Date end_date, int name) {
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.name = name;
+    }
+
     public int getName() {
         return name;
     }

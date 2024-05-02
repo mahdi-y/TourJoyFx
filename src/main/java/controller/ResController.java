@@ -6,9 +6,15 @@ import Services.ServiceReservation;
 import Services.ServiceAccomodation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 
 import javax.xml.namespace.QName;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.TextStyle;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,11 +22,30 @@ import java.sql.Date;
 import java.util.Map;
 import java.sql.Date;
 import java.sql.SQLException;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class ResController {
+import java.io.IOException;
+import java.net.URL;
+import java.time.ZonedDateTime;
+import java.util.*;
 
-    @FXML
-    private TextField idRField;
+public class ResController implements Initializable{
+
+
+
     @FXML
     private DatePicker startPicker;
     @FXML
@@ -29,19 +54,67 @@ public class ResController {
     private ComboBox<String> NameComboBox;
     @FXML
     private Button bookButton;
+    @FXML
+    private Button weatherButton;
+
 
     private ServiceReservation serviceReservation;
     private ServiceAccomodation serviceAccomodation;
     private Map<String, Integer> accommodationNameIdMap;
+    ZonedDateTime dateFocus;
+    ZonedDateTime today;
 
     @FXML
-    public void initialize() throws SQLException {
-        serviceReservation = new ServiceReservation();
-        serviceAccomodation = new ServiceAccomodation();
-        loadAccommodations();
+    private Text year;
+
+    @FXML
+    private Text month;
+
+    @FXML
+    private FlowPane calendar;
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            serviceReservation = new ServiceReservation();
+            serviceAccomodation = new ServiceAccomodation();
+            loadAccommodations();
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Error initializing database connection: " + e.getMessage());
+            return;  // Exit if there's an error in initial setup
+        }
         bookButton.setOnAction(event -> BookAccommodation());
+
+
+        dateFocus = ZonedDateTime.now();
+        today = ZonedDateTime.now();
+
+        // Initialize the calendar after setting up accommodations
+        NameComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+            // Redraw the calendar whenever a new accommodation is selected
+            if (newValue != null) {
+                drawCalendar();
+            }
+        });
+
+        // Draw the calendar for the first time
+        drawCalendar();
     }
 
+
+    @FXML
+    void backOneMonth(ActionEvent event) {
+        dateFocus = dateFocus.minusMonths(1);
+        calendar.getChildren().clear();
+        drawCalendar();
+    }
+
+    @FXML
+    void forwardOneMonth(ActionEvent event) {
+        dateFocus = dateFocus.plusMonths(1);
+        calendar.getChildren().clear();
+        drawCalendar();
+    }
     private void loadAccommodations() throws SQLException {
         accommodationNameIdMap = serviceAccomodation.getAccommodationNameIdMap();
         NameComboBox.getItems().addAll(accommodationNameIdMap.keySet());
@@ -52,7 +125,6 @@ public class ResController {
     @FXML
     void BookAccommodation() {
         try {
-            int idR = Integer.parseInt(idRField.getText());
 
             // Get start and end dates from DatePickers
             Date start_date = Date.valueOf(startPicker.getValue());
@@ -80,7 +152,7 @@ public class ResController {
                 return;
             }
             // Create reservation object with only the name
-            Reservation reservation = new Reservation(idR, start_date, end_date, name);
+            Reservation reservation = new Reservation( start_date, end_date, name);
 
             // Add reservation to database
             serviceReservation.add(reservation);
@@ -100,4 +172,89 @@ public class ResController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void drawCalendar() {
+        year.setText(String.valueOf(dateFocus.getYear()));
+        month.setText(dateFocus.getMonth().toString());
+
+        double calendarWidth = calendar.getPrefWidth();
+        double calendarHeight = calendar.getPrefHeight();
+        double strokeWidth = 1;
+        double spacingH = calendar.getHgap();
+        double spacingV = calendar.getVgap();
+
+        calendar.getChildren().clear();
+
+        int yearValue = dateFocus.getYear();
+        int monthValue = dateFocus.getMonthValue();
+        LocalDate firstOfMonth = LocalDate.of(yearValue, monthValue, 1);
+        DayOfWeek dayOfWeek = firstOfMonth.getDayOfWeek();
+        int daysToPrepend = dayOfWeek.getValue() % 7;
+
+        for (int i = 0; i < daysToPrepend; i++) {
+            calendar.getChildren().add(new StackPane());
+        }
+
+        LocalDate currentDate = LocalDate.now();
+        int daysInMonth = YearMonth.from(dateFocus).lengthOfMonth();
+        List<LocalDate> bookedDates = new ArrayList<>();
+        try {
+            if (NameComboBox.getValue() != null) {
+                bookedDates = serviceReservation.getBookedDates(accommodationNameIdMap.get(NameComboBox.getValue()));
+            }
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load booked dates.");
+        }
+
+        for (int day = 1; day <= daysInMonth; day++) {
+            StackPane dayCell = new StackPane();
+            Text dayText = new Text(String.valueOf(day));
+            Rectangle rectangle = new Rectangle((calendarWidth - (spacingH * 6)) / 7, (calendarHeight - (spacingV * 5)) / 6);
+            rectangle.setFill(Color.TRANSPARENT);
+            rectangle.setStroke(Color.BLACK);
+            rectangle.setStrokeWidth(strokeWidth);
+            dayCell.getChildren().addAll(rectangle, dayText);
+            StackPane.setAlignment(dayText, Pos.TOP_RIGHT);
+            StackPane.setMargin(dayText, new Insets(5, 10, 0, 0));
+
+            LocalDate cellDate = LocalDate.of(yearValue, monthValue, day);
+
+            if (cellDate.equals(currentDate)) {
+                rectangle.setFill(Color.LIGHTBLUE);
+                dayText.setFill(Color.RED);
+            }
+
+            if (bookedDates.contains(cellDate)) {
+                rectangle.setFill(Color.RED);  // Highlight the booked dates in red
+                dayText.setFill(Color.WHITE);  // Set text color to white for better readability
+            }
+
+            if (cellDate.getMonth() == dateFocus.getMonth()) {
+                calendar.getChildren().add(dayCell);
+            }
+        }
+    }
+
+
+    public void initializeWithAccommodationName(String accommodationName) {
+        if (accommodationName != null && !accommodationName.isEmpty()) {
+            NameComboBox.getItems().clear(); // Clear existing items if any
+            NameComboBox.getItems().add(accommodationName); // Add the passed accommodation name
+            NameComboBox.getSelectionModel().select(accommodationName); // Select the passed name
+        }
+        initialize(); // Continue with other initializations
+    }
+
+    private void initialize() {
+    }
+
+    public void seeW(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/javafx/weather.fxml"));
+            weatherButton.getScene().setRoot(root);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
 }

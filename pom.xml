@@ -5,15 +5,21 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>Tourjoy</artifactId>
+  <artifactId>JavaFX</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Tourjoy</name>
+  <name>JavaFX</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 <junit.version>5.9.2</junit.version>  </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.33</version>
+    </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -23,6 +29,11 @@
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
       <version>17.0.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jfxtras</groupId>
+      <artifactId>jfxtras-agenda</artifactId>
+      <version>8.0-r6</version>
     </dependency>
 <dependency>
       <groupId>com.dlsc.formsfx</groupId>
@@ -46,7 +57,35 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+      <dependency>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-graphics</artifactId>
+          <version>17.0.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.13</version>
+      </dependency>
+      <!-- JSON Processing -->
+      <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20210307</version>
+      </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.11</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>25.1-android</version>
+    </dependency>
+
+  </dependencies>
 
   <build>
     <plugins>
@@ -68,7 +107,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.example.tourjoy/com.example.tourjoy.HelloApplication</mainClass>
+              <mainClass>com.example.javafx/com.example.javafx.HelloApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

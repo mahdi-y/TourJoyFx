@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="mainContainer" prefHeight="750.0" prefWidth="1172.0" style="-fx-background-color: #08457E;" stylesheets="@Styles/weather.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Weather">
+   <children>
+      <HBox prefHeight="250.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" top="50.0" />
+         </VBox.margin>
+
+         <children>
+
+            <VBox prefHeight="250.0" prefWidth="458.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="time" prefHeight="142.0" prefWidth="269.0" text="###" textFill="WHITE">
+                           <font>
+                              <Font size="96.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="amorpm" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="272.0" text="##" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="date" alignment="BOTTOM_LEFT" prefHeight="44.0" prefWidth="458.0" text="###############" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER" layoutX="346.0" layoutY="-26.0" prefHeight="250.0" prefWidth="264.0">
+                     <children>
+                        <Label alignment="BOTTOM_LEFT" prefHeight="44.0" prefWidth="458.0" text="Enter city name" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="cityTextField" onAction="#enterCity" prefHeight="26.0" prefWidth="157.0" />
+                     </children>
+                  </VBox>
+               </children></Pane>
+         </children>
+      </HBox>
+
+      <VBox prefHeight="189.0" prefWidth="1280.0" VBox.vgrow="ALWAYS" />
+      <HBox prefHeight="275.0" prefWidth="1153.0" spacing="20.0" styleClass="bottom-container" stylesheets="@Styles/weather.css">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="320.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="300.0" prefWidth="320.0">
+                     <children>
+                        <ImageView fx:id="todayWeatherIcon" fitHeight="94.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/sun.png" />
+                           </image></ImageView>
+                        <VBox alignment="CENTER" prefHeight="298.0" prefWidth="154.0" spacing="20.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="40.0" prefWidth="105.0" styleClass="days_background" stylesheets="@Styles/weather.css" text="Today" textFill="WHITE" />
+                              <Label fx:id="todayTemperatureLabel" alignment="CENTER" prefHeight="142.0" prefWidth="181.0" text="##" textFill="WHITE">
+                                 <font>
+                                    <Font size="55.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children></VBox>
+            <VBox alignment="CENTER" prefHeight="298.0" prefWidth="154.0" spacing="20.0">
+               <children>
+                  <Label fx:id="day1" alignment="CENTER" prefHeight="40.0" prefWidth="105.0" styleClass="days_background" stylesheets="@Styles/weather.css" text="##" textFill="WHITE" />
+                  <ImageView fx:id="next1" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/sun.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="w1" alignment="CENTER" prefHeight="67.0" prefWidth="154.0" text="##" textFill="WHITE">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="330.0" layoutY="10.0" prefHeight="298.0" prefWidth="154.0" spacing="20.0">
+               <children>
+                  <Label fx:id="day2" alignment="CENTER" prefHeight="40.0" prefWidth="105.0" styleClass="days_background" stylesheets="@Styles/weather.css" text="##" textFill="WHITE" />
+                  <ImageView fx:id="next2" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/sun.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="w2" alignment="CENTER" prefHeight="67.0" prefWidth="154.0" text="##" textFill="WHITE">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="484.0" layoutY="10.0" prefHeight="298.0" prefWidth="154.0" spacing="20.0">
+               <children>
+                  <Label fx:id="day3" alignment="CENTER" prefHeight="40.0" prefWidth="105.0" styleClass="days_background" stylesheets="@Styles/weather.css" text="##" textFill="WHITE" />
+                  <ImageView fx:id="next3" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/sun.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="w3" alignment="CENTER" prefHeight="67.0" prefWidth="154.0" text="##" textFill="WHITE">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="639.0" layoutY="10.0" prefHeight="298.0" prefWidth="154.0" spacing="20.0">
+               <children>
+                  <Label fx:id="day4" alignment="CENTER" prefHeight="40.0" prefWidth="105.0" styleClass="days_background" stylesheets="@Styles/weather.css" text="##" textFill="WHITE" />
+                  <ImageView fx:id="next4" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/sun.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="w4" alignment="CENTER" prefHeight="67.0" prefWidth="154.0" text="##" textFill="WHITE">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="793.0" layoutY="10.0" prefHeight="298.0" prefWidth="154.0" spacing="20.0">
+               <children>
+                  <Label fx:id="day5" alignment="CENTER" prefHeight="40.0" prefWidth="105.0" styleClass="days_background" stylesheets="@Styles/weather.css" text="##" textFill="WHITE" />
+                  <ImageView fx:id="next5" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/sun.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="w5" alignment="CENTER" prefHeight="67.0" prefWidth="154.0" text="##" textFill="WHITE">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children></HBox>
+   </children>
+</VBox>
