@@ -17,7 +17,6 @@
         <HBox spacing="10">
             <TextField fx:id="messageField" HBox.hgrow="ALWAYS"/>
             <Button text="Send" onAction="#sendMessage"/>
-            <Button fx:id="clear" text="Clear Messages" onAction="#clearMessages"/>
 
         </HBox>
     </VBox>

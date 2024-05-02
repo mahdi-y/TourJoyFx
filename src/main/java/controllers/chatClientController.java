@@ -1,18 +1,16 @@
 package controllers;
 
 
-
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import models.Message;
 import services.MessageService;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
-import javafx.util.Duration;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -21,8 +19,7 @@ import java.util.List;
 public class chatClientController {
         @FXML
         public VBox chatPanel;
-    @FXML
-    public Button clear;
+
         @FXML
         private ListView<Message> messageList;
         @FXML
@@ -41,10 +38,8 @@ public class chatClientController {
             }
         }
 
-    @FXML
-    private void clearMessages() {
-        messageList.getItems().clear();
-    }
+
+
     private void startScheduledService() {
         refreshService = new ScheduledService<Void>() {
             @Override

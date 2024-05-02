@@ -3,7 +3,6 @@ package controllers;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -19,14 +18,15 @@ import java.util.List;
 public class ChatController {
     @FXML
     public VBox chatPanel;
-    @FXML
-    public Button clear;
+
     @FXML
     private ListView<Message> messageList;
     @FXML
     private TextField messageField;
     private MessageService messageService;
     private ScheduledService<Void> refreshService;
+    private LocalDateTime lastUpdatedTime = LocalDateTime.now().minusDays(1); // Initialize to a time in the past
+
     @FXML
     public void initialize() {
         try {
@@ -38,10 +38,7 @@ public class ChatController {
             e.printStackTrace();  // Consider better error handling or logging
         }
     }
-    @FXML
-    private void clearMessages() {
-        messageList.getItems().clear();
-    }
+
     private void startScheduledService() {
         refreshService = new ScheduledService<Void>() {
             @Override

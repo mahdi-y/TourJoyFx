@@ -1,6 +1,7 @@
 package services;
 
 import models.claims;
+import models.notification;
 import utils.DBConnection;
 
 import java.sql.*;
@@ -130,7 +131,45 @@ public class ServiceClaims implements IServices<claims> {
 
 
 
+        public void addNotification(String message) throws SQLException {
+            String sql = "INSERT INTO notification (message, is_read, created_at) VALUES (?, ?, ?)";
+            try (Connection conn = DBConnection.getInstance().getCnx();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, message);
+                pstmt.setInt(2, 0);
+                pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                pstmt.executeUpdate();
+            }
+        }
 
-}
+    public List<notification> getAllNotifications() throws SQLException {
+        List<notification> notifications = new ArrayList<>();
+        String sql = "SELECT * FROM notification ORDER BY created_at DESC";
+        PreparedStatement pstmt = con.prepareStatement(sql);  // Use the existing connection
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            notifications.add(new notification(
+                    rs.getInt("id"),
+                    rs.getString("message"),
+                    rs.getBoolean("is_read"),
+                    rs.getTimestamp("created_at").toLocalDateTime()
+            ));
+        }
+        rs.close();  // Close ResultSet manually
+        pstmt.close();  // Close PreparedStatement manually
+        return notifications;
+    }
+
+    public void closeConnection() throws SQLException {
+        if (con != null && !con.isClosed()) {
+            con.close();  // Close connection when sure it's no longer needed
+        }
+    }
+
+
+    }
+
+
+
 
 

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import models.Message;
 import models.categories;
 import models.claims;
+import models.notification;
 import services.ServiceClaims;
 import utils.DBConnection;
 
@@ -119,6 +120,11 @@ public class BackController {
     @FXML
     private TextField messageInputField;
 
+    @FXML
+    private ListView<notification> notificationListView;
+
+
+
 
 
     @FXML
@@ -139,6 +145,7 @@ public class BackController {
         }
         loadClaimsData();
         setupTableColumns();
+        loadNotifications();
 
         // Add listener to handle row selection
         claimsTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -177,7 +184,14 @@ public class BackController {
     }
 
 
-
+    public void loadNotifications() {
+        try {
+            List<notification> notifications = ServiceClaims.getAllNotifications();
+            notificationListView.getItems().setAll(notifications);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

@@ -11,6 +11,7 @@ import models.Message;
 import models.categories;
 import models.claims;
 import services.ServiceClaims;
+
 import utils.DBConnection;
 
 import java.io.IOException;
@@ -118,6 +119,8 @@ public class RecController {
 
             // Add claim to database
             ServiceClaims.add(claims);
+            ServiceClaims.addNotification("A new claim has been submitted"); // Add notification
+
             clearForm();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Claim added successfully!");
             //processNewClaim();
