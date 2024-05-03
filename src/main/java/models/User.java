@@ -8,15 +8,11 @@ import java.util.Set;
 
 
 public class User {
-    private Set<String> roles = new HashSet<>();
-
-
+    private String[] roles;
 
     private int id;
 
     private String email;
-
-
 
     private String password;
 
@@ -135,15 +131,20 @@ public class User {
         this.email = email;
     }
 
-    public Set<String> getRoles() {
+//    public Set<String> getRoles() {
+//        return roles;
+//    }
+
+
+    public String[] getRoles() {
         return roles;
     }
 
     public void setRoles(String[] roles) {
-        this.roles.clear();
-        this.roles.add("ROLE_USER");  // Ensures ROLE_USER is always present
-        Collections.addAll(this.roles, roles);
+        this.roles = roles;
     }
+
+
 
     public String getPassword() {
         return password;
@@ -242,7 +243,7 @@ public class User {
     }
 
     public User() {
-        this.roles.add("ROLE_USER");
+
     }
 
     public User(int id, String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, String country, String profilePicture, LocalDateTime createdAt, String googleAuthenticatorSecret, LocalDateTime modifiedAt, boolean isVerified, boolean isBanned, String googleId) {

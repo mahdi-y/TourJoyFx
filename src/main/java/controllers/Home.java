@@ -31,16 +31,23 @@ public class Home {
 
         firstNameLabel.setText("Welcome " + session.getFirstname() + "!");
 
-        if (session.hasRole("ROLE_ADMIN")) {
-//            showAlert(Alert.AlertType.INFORMATION, "Admin", "YES!");
-            adminButton.setVisible(true);  // Show admin features
-
+        if (isAdmin()) {
+            adminButton.setVisible(true); // Show admin features if user is admin
         } else {
-//            showAlert(Alert.AlertType.ERROR, "SIKE", "NOOOOOOOO!");
-            adminButton.setVisible(true);  // Hide or disable admin features
+            adminButton.setVisible(false); // Hide admin features if user is not admin
         }
 
 
+    }
+
+    private boolean isAdmin() {
+        String[] roles = UserSession.getInstance().getRoles();
+        for (String role : roles) {
+            if ("ROLE_ADMIN".equals(role)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Stage getPrimaryStage() {

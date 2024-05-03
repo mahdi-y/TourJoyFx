@@ -252,6 +252,23 @@ public class forgotPassword {
         alert.setContentText(s);
         alert.showAndWait();
     }
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
+    }
 }
 
 

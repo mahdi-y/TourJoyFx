@@ -69,7 +69,7 @@ public class registrationController {
         int phoneNumber = Integer.parseInt(phoneNumberField.getText());
         String confirmPassword = confirmPasswordField.getText();
         LocalDateTime createdAt = LocalDateTime.now();
-        String[] roles = {"ROLE_ADMIN"};
+        String[] roles = {"ROLE_USER","ROLE_ADMIN"};
 
         User user = new User(email, roles, password, phoneNumber, createdAt);
 

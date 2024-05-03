@@ -36,9 +36,8 @@ public class userService implements IServices<User> {
         String query = "INSERT INTO user (email, roles, password, phone_number, created_at) VALUES (?,?,?,?,?)";
         try (PreparedStatement pre = con.prepareStatement(query)) {
             pre.setString(1, user.getEmail());
-            Gson gson = new Gson();
-            String rolesJson = gson.toJson(user.getRoles());
-            pre.setString(2, rolesJson);
+            String rolesString = String.join(",", user.getRoles());
+            pre.setString(2, rolesString);
             String encryptedPassword = encrypt(user.getPassword());
             pre.setString(3, encryptedPassword);
 
@@ -139,7 +138,6 @@ public class userService implements IServices<User> {
 
 
     public static User loginUser(String email, String password){
-        // Query to fetch the user by email
         String query = "SELECT * FROM user WHERE email = ?";
 
         try (PreparedStatement preparedStatement = DBConnection.getInstance().getConnection().prepareStatement(query)) {
@@ -148,10 +146,7 @@ public class userService implements IServices<User> {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     String storedPassword = resultSet.getString("password");
-
-                    // Check if the password matches the hashed password in the database
                     if (BCrypt.checkpw(password, storedPassword)) {
-                        // If passwords match, extract user information
                         int id = resultSet.getInt("id");
                         String email1 = resultSet.getString("email");
                         String[] roles = userUtils.extractRoles(resultSet);
@@ -171,10 +166,10 @@ public class userService implements IServices<User> {
                         return new User(id, email1, roles, storedPassword, first_name, last_name, phone_number, country, profile_picture, google_authenticator_secret, is_verified, is_banned, google_id);
                     }
                 }
-                return null; // Return null if no user found or passwords do not match
+                return null;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e); // Consider handling this more gracefully
+            throw new RuntimeException(e);
         }
     }
 

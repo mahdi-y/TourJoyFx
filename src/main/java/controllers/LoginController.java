@@ -17,12 +17,7 @@ import utils.UserSession;
 import models.User;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
-import com.google.gson.Gson;
 
 public class LoginController {
 
@@ -54,13 +49,7 @@ public class LoginController {
 
                 SessionManager.setCurrentUser(user);
 
-                if (UserSession.getInstance().hasRole("ROLE_ADMIN")) {
-                    showAlert(Alert.AlertType.INFORMATION, "Admin Access", "You have admin privileges.");
-                    redirect_passwordpage();
-                } else {
-                    showAlert(Alert.AlertType.INFORMATION, "Client Access", "You don't have admin privileges.");
-                    redirect_homePage();
-                }
+                redirect_homePage();
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
             }

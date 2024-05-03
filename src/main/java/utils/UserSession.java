@@ -22,7 +22,7 @@ public final class UserSession {
     private String picture;
     private String phonenumber;
 
-    private Set<String> roles;
+    private String[] roles;
 
 
 
@@ -35,13 +35,16 @@ public final class UserSession {
 
     public String getCountry() {return country;}
     public String getPhonenumber() { return phonenumber; }
-    public Set<String> getRoles() {
+//    public Set<String> getRoles() {
+//        return roles;
+//    }
+    public String[] getRoles(){
         return roles;
     }
 
     private UserSession() { }
 
-    public UserSession(int id, String email, String password, String firstname, String lastname, String country, String picture, String phonenumber, Set<String> role) {
+    public UserSession(int id, String email, String password, String firstname, String lastname, String country, String picture, String phonenumber, String[] role) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -62,13 +65,13 @@ public final class UserSession {
         this.country = user.getCountry();
         this.picture = user.getProfilePicture();
         this.phonenumber = user.getPhoneNumber().toString();
-        this.roles = new HashSet<>(user.getRoles()); // Copy roles from User object
+        this.roles = user.getRoles(); // Copy roles from User object
     }
 
     public static UserSession getInstance(int id, String email, String password, String firstname, String lastname
-            , String country,String picture, String phonenumber, Set<String> role) {
+            , String country,String picture, String phonenumber, String[] roles) {
         if(instance == null) {
-            instance = new UserSession(id, email, password, firstname, lastname, country, picture, phonenumber, role);
+            instance = new UserSession(id, email, password, firstname, lastname, country, picture, phonenumber, roles);
         }
         return instance;
     }
@@ -80,9 +83,9 @@ public final class UserSession {
         return instance;
     }
 
-    public boolean hasRole(String role) {
-        return roles.contains(role);
-    }
+//    public boolean hasRole(String role) {
+//        return roles.contains(role);
+//    }
 
     public void cleanUserSession() {
         id = 0;
@@ -92,12 +95,9 @@ public final class UserSession {
         firstname = null;
         lastname = null;
         country = null;
-
         picture = null;
         phonenumber = null;
-
         roles = null;
-
     }
 
     @Override
