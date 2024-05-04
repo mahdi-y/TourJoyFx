@@ -1,6 +1,5 @@
 package controllers;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Message;
 import models.categories;
@@ -31,6 +32,8 @@ import java.util.function.Predicate;
 
 public class BackController {
     @FXML
+    public ImageView chatImageView;
+    @FXML
     private Button chat;
     public Button ClaimB;
     @FXML
@@ -39,6 +42,12 @@ public class BackController {
     private Button sort;
     @FXML
     private Button statsB;
+    @FXML
+    private ImageView notificationImageView;
+
+    @FXML
+    private VBox notificationPanel; // Initial visibility set in FXML
+
     @FXML
     private TableColumn<claims, Integer> idR;
     @FXML
@@ -136,6 +145,8 @@ public class BackController {
 
         updateButton.setOnAction(event -> updateClaims());
         deleteButton.setOnAction(event -> deleteClaims());
+        notificationImageView.onMouseClickedProperty();
+        chatImageView.onMouseClickedProperty();
         try {
             List<categories> categories = loadCategories(); // This should return a list of Category objects
             catBo.setItems(FXCollections.observableArrayList(categories));
@@ -182,8 +193,37 @@ public class BackController {
 
 
     }
+    @FXML
+    private void handleChatClick() {
+        // Logic to open the chat interface
+        handleChat();
+    }
 
 
+    @FXML
+    void handleNotificationClick() {
+        toggleNotificationPanel();
+    }
+    @FXML
+    private void toggleNotificationPanel() {
+        // Toggle the visibility of the notification panel
+        if (notificationPanel.isVisible()) {
+            notificationPanel.setVisible(false);
+        } else {
+            updateNotifications(); // Load or refresh notifications
+            notificationPanel.setVisible(true);
+        }
+    }
+
+    private void updateNotifications() {
+        try {
+            List<notification> notifications = ServiceClaims.getAllNotifications();
+            notificationListView.getItems().setAll(notifications);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void loadNotifications() {
         try {
             List<notification> notifications = ServiceClaims.getAllNotifications();
@@ -298,7 +338,6 @@ public class BackController {
         return categoryName;
     }
     private void setupTableColumns() {
-        idR.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         titleR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         descriptionR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
         createDateR.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreateDate()));

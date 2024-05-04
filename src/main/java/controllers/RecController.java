@@ -1,6 +1,9 @@
 package controllers;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +14,6 @@ import models.Message;
 import models.categories;
 import models.claims;
 import services.ServiceClaims;
-
 import utils.DBConnection;
 
 import java.io.IOException;
@@ -35,17 +37,22 @@ public class RecController {
     private Button chat;
     @FXML
     private Button button;
-    @FXML
-    private TableColumn<claims, Integer> idR;
-    @FXML
-    private TableColumn<claims, String> titleR;
-    @FXML
-    private TableColumn<claims, String> descriptionR;
-    @FXML
-    private TableColumn<claims, LocalDateTime> createDateR;
-    @FXML
-    private TableColumn<claims, String> catView;
 
+
+    @FXML
+    private TableColumn<claims, Integer> idR1;
+    @FXML
+    private TableColumn<claims, String> titleR1;
+    @FXML
+    private TableColumn<claims, String> descriptionR1;
+    @FXML
+    private TableColumn<claims, LocalDateTime> createDateR1;
+    @FXML
+    private TableColumn<claims, String> catView1;
+    @FXML
+    private TableColumn<claims, String> stateR1;
+    @FXML
+    private TableColumn<claims, String> replyR1;
     @FXML
     private Label description;
     @FXML
@@ -56,12 +63,16 @@ public class RecController {
     private Label title;
     @FXML
     private TextField titleT;
+    @FXML
+    private TableView<claims> claimsTableView1;
     private ServiceClaims ServiceClaims;
     private int selectedClaimId;
     @FXML
     void initialize() {
         ServiceClaims = new ServiceClaims();
         button.setOnAction(event -> addClaims());
+        loadClaimsData();
+        setupTableColumns();
         try {
             List<categories> categories = loadCategories(); // This should return a list of Category objects
             catBox.setItems(FXCollections.observableArrayList(categories));
@@ -179,5 +190,48 @@ public class RecController {
             // Consider showing an error alert to the user here as well
         }
     }
+    private String getCategoryNameById(Integer id) {
+        // Logic to fetch the category name from the database or a cache
+        // For demonstration purposes, let's assume we have a map with category names
+        String categoryName = ""; // Default to an empty string if category is not found
+        try {
+            // Here you would have the actual code to query your database
+            Connection connection = DBConnection.getInstance().getCnx();
+            String query = "SELECT name FROM categories WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, id);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        categoryName = resultSet.getString("name");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categoryName;
+    }
+    private void setupTableColumns() {
+        titleR1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+        descriptionR1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+        createDateR1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreateDate()));
+        stateR1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getState()));
+        // Assuming you have a method getCategoryNameById that returns the category name
+        catView1.setCellValueFactory(cellData -> {
+            Integer categoryId = cellData.getValue().getFkC(); // This is the foreign key ID
+            String categoryName = getCategoryNameById(categoryId); // You need to implement this method
+            return new SimpleStringProperty(categoryName);
+        });
 
+        replyR1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReply()));
+    }
+    private void loadClaimsData() {
+        try {
+            List<claims> claimsList = ServiceClaims.Read();
+            ObservableList<claims> observableClaims = FXCollections.observableArrayList(claimsList);
+            claimsTableView1.setItems(observableClaims);
+        } catch (SQLException e) {
+            e.printStackTrace();  // Handle exceptions, log them, and maybe show an error message to the user
+        }
+    }
 }

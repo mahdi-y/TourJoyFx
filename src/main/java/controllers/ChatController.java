@@ -64,7 +64,7 @@ public class ChatController {
         String text = messageField.getText().trim();
         if (!text.isEmpty()) {
             try {
-                Message message = new Message(text, LocalDateTime.now(), "TourJoy", "admin");
+                Message message = new Message(text, LocalDateTime.now(), "Tourjoy", "admin");
                 messageService.saveMessage(message);
                 messageField.clear();
                 updateMessages();
@@ -103,4 +103,7 @@ public class ChatController {
             }
         });
     }
+
+
+
 }

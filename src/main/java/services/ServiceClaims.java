@@ -47,14 +47,14 @@ public class ServiceClaims implements IServices<claims> {
         try (PreparedStatement pre = con.prepareStatement(query);
              ResultSet res = pre.executeQuery()) {
             while (res.next()) {
-                int id = res.getInt("id");
+
                 String title = res.getString("title");
                 String description = res.getString("description");
                 LocalDateTime createDate = res.getTimestamp("createDate").toLocalDateTime();
                 String state = res.getString("state");
                 int fkC = res.getInt("fkC");
                 String reply = res.getString("reply");
-                claims claim = new claims(id, title, description, createDate, state,fkC, reply);
+                claims claim = new claims(title, description, createDate, state,fkC, reply);
                 claimsList.add(claim);
             }
         } catch (SQLException e) {

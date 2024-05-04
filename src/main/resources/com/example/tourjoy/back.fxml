@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import java.lang.*?>
-<?import java.net.URL?>
+
 <AnchorPane prefHeight="840.0" prefWidth="1530.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BackController">
    <children>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1530.0" style="-fx-background-color: white;" styleClass="btn_workbench" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
@@ -26,60 +37,6 @@
                         <Image url="@images/desktop.png" />
                      </image>
                   </ImageView>
-
-      <AnchorPane layoutX="230.4" layoutY="69.0" prefHeight="710.0" prefWidth="1301.0" AnchorPane.leftAnchor="230.0">
-         <children>
-            <TextField fx:id="titleM" layoutX="94.0" layoutY="37.0" prefHeight="38.0" prefWidth="334.0" />
-            <Label fx:id="titleMod" layoutX="17.0" layoutY="47.0" text="Title" />
-            <TextField fx:id="replyM" layoutX="97.0" layoutY="394.0" prefHeight="159.0" prefWidth="334.0" />
-            <TextField fx:id="descriptionM" layoutX="96.0" layoutY="121.0" prefHeight="38.0" prefWidth="334.0" />
-            <Label fx:id="descriptionMod" layoutX="19.0" layoutY="131.0" text="Description" />
-            <Label fx:id="stateMod" layoutX="19.0" layoutY="221.0" text="State" />
-            <Label fx:id="replyMod" layoutX="19.0" layoutY="401.0" text="Reply" />
-            <TableView fx:id="claimsTableView" layoutX="490.0" layoutY="86.0" prefHeight="658.0" prefWidth="748.0">
-               <columns>
-                  <TableColumn fx:id="idR" prefWidth="75.0" text="Id" />
-                  <TableColumn fx:id="titleR" prefWidth="108.00006103515625" text="Title" />
-                  <TableColumn fx:id="descriptionR" prefWidth="146.4000244140625" text="Description" />
-                  <TableColumn fx:id="createDateR" prefWidth="115.199951171875" text="Creation Date" />
-                  <TableColumn fx:id="stateR" prefWidth="82.4000244140625" text="State" />
-                  <TableColumn fx:id="catView" prefWidth="93.5999755859375" text="Category" />
-                  <TableColumn fx:id="replyR" prefWidth="126.39990234375" text="Reply" />
-               </columns>
-            </TableView>
-            <Button fx:id="deleteButton" layoutX="310.0" layoutY="703.0" mnemonicParsing="false" onAction="#deleteClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #FF4500; -fx-text-fill: white; -fx-font-size: 14px;" text="Delete" />
-
-            <Button fx:id="updateButton" layoutX="94.0" layoutY="703.0" mnemonicParsing="false" onAction="#updateClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #3FBFD9; -fx-text-fill: white; -fx-font-size: 14px;" text="Reply" />
-            <ComboBox fx:id="stateBox" layoutX="96.0" layoutY="209.0" prefHeight="38.0" prefWidth="334.0" promptText="Select.." />
-            <Label fx:id="catL" layoutX="19.0" layoutY="309.0" text="Category" />
-            <ComboBox fx:id="catBo" layoutX="99.0" layoutY="300.0" prefHeight="38.0" prefWidth="334.0" promptText="Select.." />
-                        <TextField fx:id="search" layoutX="489.0" layoutY="36.0" prefHeight="38.0" prefWidth="334.0" />
-                        <ComboBox fx:id="order" layoutX="894.0" layoutY="39.0" prefHeight="35.0" prefWidth="122.0" promptText="Select order">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Id" />
-                                 <String fx:value="Title" />
-                                 <String fx:value="Description" />
-                                 <String fx:value="Creation date" />
-                                 <String fx:value="State" />
-                                 <String fx:value="Category" />
-                                 <String fx:value="Reply" />
-                                 <!-- Add more fields as necessary -->
-                              </FXCollections>
-                           </items>
-                        </ComboBox>
-
-                        <ComboBox fx:id="field" layoutX="1028.0" layoutY="39.0" prefHeight="35.0" prefWidth="122.0" promptText="Select field">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Ascending" />
-                                 <String fx:value="Descending" />
-                              </FXCollections>
-                           </items>
-                        </ComboBox>
-                        <Button fx:id="sort" layoutX="1160.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleSortButtonAction" prefHeight="28.0" prefWidth="78.0" text="Sort" />
-         </children>
-      </AnchorPane>
                   <AnchorPane fx:id="side_ankerpane" prefHeight="840.0" prefWidth="231.0" styleClass="side_ankerpane">
                      <children>
                         <Pane fx:id="inner_pane" layoutX="4.0" layoutY="29.0" prefHeight="48.0" prefWidth="220.0" styleClass="inner_pane">
@@ -168,25 +125,90 @@
                      </children></AnchorPane>
 
                   <Text layoutX="527.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-fill: #34495E;" text="Claims management">
-         <font>
-            <Font size="50.0" />
-         </font>
-         <effect>
-            <DropShadow color="rgba(0,0,0,0.5)" radius="5.0" />
-         </effect>
-      </Text>
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <effect>
+                        <DropShadow color="rgba(0,0,0,0.5)" radius="5.0" />
+                     </effect>
+                  </Text>
                   <Button fx:id="ClaimB" layoutX="1238.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleAddV" prefHeight="38.0" prefWidth="122.0" style="-fx-background-color: #9F00C5; -fx-text-fill: white; -fx-font-size: 14px;" text="Add claims" />
                   <Button fx:id="statsB" layoutX="1107.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleStats" prefHeight="38.0" prefWidth="122.0" text="Stats" />
-                  <Button fx:id="chat" layoutX="294.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="122.0" text="chat" />
-                  <ListView fx:id="notificationListView" />
+                  <ImageView fx:id="notificationImageView" fitHeight="43.0" fitWidth="48.0" layoutX="234.0" layoutY="16.0" onMouseClicked="#handleNotificationClick">
+                     <Image url="@images/notification_icon.png" />
+                  </ImageView>
 
-   </children>
-   <stylesheets>
-      <URL value="@css.css" />
-   </stylesheets>
-</AnchorPane>
+                  <AnchorPane layoutX="230.4" layoutY="69.0" prefHeight="710.0" prefWidth="1301.0" AnchorPane.leftAnchor="230.0">
+                     <children>
+                        <TextField fx:id="titleM" layoutX="94.0" layoutY="37.0" prefHeight="38.0" prefWidth="334.0" />
+                        <Label fx:id="titleMod" layoutX="17.0" layoutY="47.0" text="Title" />
+                        <TextField fx:id="replyM" layoutX="97.0" layoutY="394.0" prefHeight="159.0" prefWidth="334.0" />
+                        <TextField fx:id="descriptionM" layoutX="96.0" layoutY="121.0" prefHeight="38.0" prefWidth="334.0" />
+                        <Label fx:id="descriptionMod" layoutX="19.0" layoutY="131.0" text="Description" />
+                        <Label fx:id="stateMod" layoutX="19.0" layoutY="221.0" text="State" />
+                        <Label fx:id="replyMod" layoutX="19.0" layoutY="401.0" text="Reply" />
+                        <TableView fx:id="claimsTableView" layoutX="490.0" layoutY="86.0" prefHeight="658.0" prefWidth="748.0">
+                           <columns>
+                              <TableColumn fx:id="titleR" prefWidth="108.00006103515625" text="Title" />
+                              <TableColumn fx:id="descriptionR" prefWidth="132.0" text="Description" />
+                              <TableColumn fx:id="createDateR" prefWidth="147.9998779296875" text="Creation Date" />
+                              <TableColumn fx:id="stateR" prefWidth="96.800048828125" text="State" />
+                              <TableColumn fx:id="catView" prefWidth="116.0" text="Category" />
+                              <TableColumn fx:id="replyR" prefWidth="149.5999755859375" text="Reply" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="deleteButton" layoutX="310.0" layoutY="703.0" mnemonicParsing="false" onAction="#deleteClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #FF4500; -fx-text-fill: white; -fx-font-size: 14px;" text="Delete" />
+
+                        <Button fx:id="updateButton" layoutX="94.0" layoutY="703.0" mnemonicParsing="false" onAction="#updateClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #3FBFD9; -fx-text-fill: white; -fx-font-size: 14px;" text="Reply" />
+                        <ComboBox fx:id="stateBox" layoutX="96.0" layoutY="209.0" prefHeight="38.0" prefWidth="334.0" promptText="Select.." />
+                        <Label fx:id="catL" layoutX="19.0" layoutY="309.0" text="Category" />
+                        <ComboBox fx:id="catBo" layoutX="99.0" layoutY="300.0" prefHeight="38.0" prefWidth="334.0" promptText="Select.." />
+                        <TextField fx:id="search" layoutX="489.0" layoutY="36.0" prefHeight="38.0" prefWidth="334.0" />
+                        <ComboBox fx:id="order" layoutX="894.0" layoutY="39.0" prefHeight="35.0" prefWidth="122.0" promptText="Select order">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Id" />
+                                 <String fx:value="Title" />
+                                 <String fx:value="Description" />
+                                 <String fx:value="Creation date" />
+                                 <String fx:value="State" />
+                                 <String fx:value="Category" />
+                                 <String fx:value="Reply" />
+                                 <!-- Add more fields as necessary -->
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+
+                        <ComboBox fx:id="field" layoutX="1028.0" layoutY="39.0" prefHeight="35.0" prefWidth="122.0" promptText="Select field">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Ascending" />
+                                 <String fx:value="Descending" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <Button fx:id="sort" layoutX="1160.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleSortButtonAction" prefHeight="28.0" prefWidth="78.0" text="Sort" />
+
+                        <VBox id="notificationPanel" fx:id="notificationPanel" visible="false">
+                           <ListView fx:id="notificationListView" layoutY="477.0" prefHeight="367.0" prefWidth="313.0" />
+                        </VBox>
+
+                     </children>
+                  </AnchorPane>
+                  <ImageView fx:id="chatImageView" fitHeight="35.0" fitWidth="48.0" layoutX="307.0" layoutY="25.0" onMouseClicked="#handleChatClick" pickOnBounds="true" preserveRatio="true">
+
+                           <Image url="@images/chat_icon.png" />
+                  </ImageView>
+
+
+
+               </children>
+               <stylesheets>
+                  <URL value="@css.css" />
+               </stylesheets>
+            </AnchorPane>
          </children>
 
-</HBox>
+      </HBox>
    </children>
 </AnchorPane>
