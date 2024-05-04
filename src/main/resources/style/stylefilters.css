@@ -1,0 +1,47 @@
+/* General Text Field Style */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-border-color: #333;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Search Field Specific Style */
+#searchField {
+    -fx-background-color: #fff;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+/* Range Slider Style */
+.range-slider {
+    -fx-padding: 10px;
+    -fx-background-color: transparent;
+}
+
+.range-slider .track {
+    -fx-stroke: #888;
+    -fx-stroke-width: 2px;
+    -fx-background-color: #DDD;
+    -fx-background-radius: 10px;
+}
+
+.range-slider .thumb {
+    -fx-fill: #666;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 5);
+}
+
+/* Checkbox Style */
+.check-box {
+    -fx-font-size: 14px;
+}
+
+.check-box .box {
+    -fx-background-color: #eee;
+    -fx-padding: 5px;
+}
+
+
+
+/* Button Style */
+

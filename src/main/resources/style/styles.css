@@ -1,0 +1,67 @@
+
+/* Style for the guide card box */
+.guide-box {
+    -fx-background-color: transparent;
+    -fx-border-color: #de1e1e;
+    -fx-border-width: 0;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+
+    -fx-padding: 0;
+}
+
+/* Style for the guide image */
+.guide-image {
+    -fx-fit-to-width: true;
+    -fx-preserve-ratio: true;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+/* Style for the container of guide details */
+.guide-details {
+    -fx-alignment: center;
+    -fx-padding: 10;
+}
+
+/* Style for the guide's title label */
+.guide-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Adjust the color to match your design */
+}
+
+/* Style for the guide's price label */
+.guide-price {
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #666;
+    -fx-alignment: center;
+}
+
+/* Style for buttons in the guide card */
+.guide-button {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5 22;
+    -fx-font-weight: bold;
+}
+
+/* Hover effect for buttons */
+.guide-button:hover {
+    -fx-background-color: #005a9e;
+}
+
+
+
+/* Date picker */
+.date-picker {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* White background with reduced opacity */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
+

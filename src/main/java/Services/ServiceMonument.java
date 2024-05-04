@@ -88,6 +88,12 @@ public class ServiceMonument implements IServices<Monument> {
         }
         return monuments;
     }
+
+    @Override
+    public void update(Monument monument, int oldCIN) throws SQLException {
+
+    }
+
     public Map<String, Integer> getMonumentCountByCountry() throws SQLException {
         Map<String, Integer> monumentCount = new HashMap<>();
         String query = "SELECT c.name, COUNT(m.ref) as monument_count FROM Country c LEFT JOIN Monument m ON c.id = m.fkcountry_id GROUP BY c.name";

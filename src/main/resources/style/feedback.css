@@ -1,0 +1,46 @@
+.container {
+    -fx-background-color: transparent; /* Set background color to transparent */
+}
+
+.feedback-box {
+    -fx-border-color: black; /* Set the border color */
+    -fx-background-color: #afb7b9; /* Set the background color of the ScrollPane to transparent */
+
+    -fx-border-width: 1px; /* Set the border width */
+    -fx-padding: 5px; /* Add padding around each feedback box */
+}
+
+.scroll {
+    -fx-background-color: transparent; /* Set the background color of the ScrollPane to transparent */
+
+    -fx-padding: 5px; /* Add padding around each feedback box */
+}
+
+
+.add-button {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5 22;
+    -fx-font-weight: bold;
+}
+
+/* Hover effect for buttons */
+.add-button:hover {
+    -fx-background-color: #005a9e;
+}
+/* Style for ComboBox */
+.guideCombo {
+    -fx-background-color: #FFFFFF; /* Set background color */
+    -fx-text-fill: #ffffff; /* Set text color */
+    -fx-border-color: #000000; /* Set border color */
+    -fx-border-radius: 5px; /* Set border radius */
+    -fx-pref-height: 40px; /* Set preferred height */
+    -fx-padding: 0 10px; /* Add padding */
+}
+
+.user-label {
+    -fx-text-fill: blue; /* Set text color to blue */
+    -fx-underline: true; /* Underline the text */
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+}
