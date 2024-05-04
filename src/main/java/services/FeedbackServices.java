@@ -88,21 +88,26 @@ public class FeedbackServices {
     public static List<feedback> getFeedbackByGuideId(int guideId) throws SQLException {
         List<feedback> feedbackList = new ArrayList<>();
         String query = "SELECT * FROM feedback WHERE fk_guide_id = ?";
-        Connection conn = MyDB.getInstance().getConnection();
-        try (PreparedStatement statement = conn.prepareStatement(query)) {
+        // Using try-with-resources to ensure the connection is also closed
+        try (Connection conn = MyDB.getInstance().getConnection();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+
             statement.setInt(1, guideId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     feedback feedback = new feedback();
                     feedback.setId(resultSet.getInt("id"));
                     feedback.setGuide_id(resultSet.getInt("fk_guide_id"));
-                    feedback.setRating(resultSet.getInt("rating"));
+                    feedback.setRating(resultSet.getDouble("rating")); // Ensure data type matches DB schema
                     feedback.setComment(resultSet.getString("comment"));
-                    // Assuming other fields exist in your Feedback entity
                     feedbackList.add(feedback);
                 }
             }
+        } catch (SQLException e) {
+            System.err.println("SQL Error in getFeedbackByGuideId: " + e.getMessage());
+            throw e; // rethrow or handle as necessary
         }
         return feedbackList;
     }
+
 }

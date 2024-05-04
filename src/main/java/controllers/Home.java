@@ -43,15 +43,6 @@ public class Home {
         stage.setScene(new Scene(root));
         stage.show();
     }
-    @FXML
-    private void goToMonumentsView() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/MonumentFront.fxml"));
-        Parent root = loader.load();
 
-        Stage stage = (Stage) monumentsButton.getScene().getWindow(); // Retrieves the current window
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 
 }

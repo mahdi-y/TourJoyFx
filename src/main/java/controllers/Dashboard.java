@@ -39,14 +39,5 @@ public class Dashboard {
         stage.show();
     }
 
-    @FXML
-    private void gotoMonumentManagement() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Monument.fxml"));
-        Parent root = loader.load();
 
-        Stage stage = (Stage) gotoGuideManagement.getScene().getWindow(); // Retrieves the current window
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 }
