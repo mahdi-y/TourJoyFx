@@ -324,37 +324,41 @@ public class MonumentFrontController {
 
     private ImageView loadImage(String imagePath) {
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(200);  // Set the width to be consistent for all images.
-        imageView.setFitHeight(150); // Set the height to be consistent for all images.
-        imageView.setPreserveRatio(false); // Setting this to false will fill the given dimensions.
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(150);
+        imageView.setPreserveRatio(false);
 
-        // Create a clipping rectangle to ensure images are not distorted
-        Rectangle clip = new Rectangle(
-                imageView.getFitWidth(), imageView.getFitHeight()
-        );
-        clip.setArcWidth(20); // If you want rounded corners, otherwise set to 0
-        clip.setArcHeight(20); // If you want rounded corners, otherwise set to 0
+        Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
+        clip.setArcWidth(20);
+        clip.setArcHeight(20);
         imageView.setClip(clip);
 
-        // Smooth the image even when it's resized
         imageView.setSmooth(true);
-        imageView.setCache(true); // Cache the image for faster loading
+        imageView.setCache(true);
 
+        Image image = null;
         try {
-            File file = new File(new URI(imagePath));
-            if (!file.exists()) {
-                throw new FileNotFoundException("File not found: " + imagePath);
+            if (imagePath.startsWith("http://") || imagePath.startsWith("https://") || imagePath.startsWith("file:/")) {
+                image = new Image(imagePath, imageView.getFitWidth(), imageView.getFitHeight(), false, true);
+            } else {
+                // Attempt to load from the classpath
+                InputStream is = getClass().getResourceAsStream(imagePath.startsWith("/") ? imagePath : "/" + imagePath);
+                if (is == null) {
+                    // If resource stream is null, load default image
+                    is = getClass().getResourceAsStream("/images/no_image_found.png");
+                }
+                image = new Image(is, imageView.getFitWidth(), imageView.getFitHeight(), false, true);
             }
-            Image image = new Image(file.toURI().toString(), imageView.getFitWidth(), imageView.getFitHeight(), false, true, true);
-            imageView.setImage(image);
-        } catch (URISyntaxException | FileNotFoundException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-            // Optionally set a placeholder image if the file doesn't exist
+        } catch (Exception e) {
+            // Fallback to default image in any exception
+            InputStream is = getClass().getResourceAsStream("/images/no_image_found.png");
+            image = new Image(is, imageView.getFitWidth(), imageView.getFitHeight(), false, true);
         }
 
+        imageView.setImage(image);
         return imageView;
     }
+
 
 
     private Button createDetailsButton(Monument monument) {

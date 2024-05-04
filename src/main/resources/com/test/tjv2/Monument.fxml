@@ -112,13 +112,13 @@
    <Button fx:id="frontoffice" layoutX="1262.0" layoutY="37.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="114.0" text="Frontpage" />
    <TabPane layoutX="289.0" layoutY="87.0" prefHeight="714.0" prefWidth="1282.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-         <Tab text="Untitled Tab 1">
+         <Tab text="Monument">
             <content>
                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="507.0">
                   <children>
                      <Button layoutX="294.0" layoutY="416.0" onAction="#fetchDescription" prefHeight="39.0" prefWidth="141.0" text="Fetch Description" />
 
-                     <TextField fx:id="nameField" layoutX="50.0" layoutY="33.0" prefWidth="150.0" promptText="Name" />
+                     <TextField fx:id="MonumentnameField" layoutX="50.0" layoutY="33.0" prefWidth="150.0" promptText="Name" />
                      <ComboBox fx:id="countryComboBox" layoutX="297.0" layoutY="111.0" prefWidth="150.0" promptText="Country" />
                      <TextField fx:id="entryPriceField" layoutX="50.0" layoutY="78.0" prefWidth="150.0" promptText="Entry Price" />
                      <ComboBox fx:id="typeComboBox" layoutX="297.0" layoutY="59.0" prefWidth="150.0" promptText="Type">
@@ -160,7 +160,7 @@
                      <Button fx:id="SelectImageMonumentButton" layoutX="319.0" layoutY="353.0" onAction="#selectImageMonument" text="Select Image" />
                      <TextField fx:id="longitudeField" layoutX="50.0" layoutY="410.0" prefWidth="150.0" promptText="Longitude" />
                      <TextField fx:id="latitudeField" layoutX="50.0" layoutY="365.0" prefWidth="150.0" promptText="Latitude" />
-                     <TextArea fx:id="descriptionField" wrapText="true"  layoutX="50.0" layoutY="143.0" prefHeight="174.0" prefWidth="150.0" promptText="Description" />
+                     <TextArea fx:id="descriptionField" layoutX="50.0" layoutY="143.0" prefHeight="174.0" prefWidth="150.0" promptText="Description" wrapText="true" />
 
                      <TableView fx:id="displayMonuments" layoutX="494.0" layoutY="98.0" prefHeight="565.0" prefWidth="766.0" style="-fx-background-color: #ffffff;">
                         <columns>
@@ -175,12 +175,13 @@
                         </columns>
                      </TableView>
                      <TextField fx:id="searchField" layoutX="522.0" layoutY="46.0" prefHeight="22.0" prefWidth="317.0" promptText="Search Monument" />
+                     <Button fx:id="GotoCountry" layoutX="1125.0" layoutY="46.0" mnemonicParsing="false" onAction="#goToCountry" text="Go To  Country" />
 
                   </children>
                </AnchorPane>
             </content>
          </Tab>
-         <Tab text="Untitled Tab 2">
+         <Tab text="Statistics">
             <content>
                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>

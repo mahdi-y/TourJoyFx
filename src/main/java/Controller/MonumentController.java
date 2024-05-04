@@ -4,6 +4,7 @@ import Entities.Country;
 import Entities.Monument;
 import Services.ServiceCountry;
 import Services.ServiceMonument;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +29,7 @@ import javafx.stage.FileChooser;
 import Services.WikipediaAPI;
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -37,34 +39,29 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MonumentController {
 
     public Button SelectImageMonumentButton;
-    public Pane inner_pane;
-    public Pane most_inner_pane;
-    public AnchorPane side_ankerpane;
-    public Button btn_workbench;
-    public Button btn_workbench211;
-    public Button btn_workbench2;
-    public Button btn_workbench21;
-    public Button btn_workbench1;
-    public Button btn_workbench11;
+
     public TextField searchField;
     public Button clearButton1;
+    public ComboBox regionComboBox;
+    public CheckBox visaRequiredCheckbox;
+
+    public TableView DisplayCountries;
+    public TableColumn nameColumn1;
+    public TableColumn regionColumn;
+    public TableColumn visaRequiredColumn;
+    public TextField CountrynameField;
+    public TextField MonumentnameField;
     @FXML
     private Button addButton;
 
-    @FXML
-    private Button deleteButton;
 
-    @FXML
-    private Button updateButton;
 
-    @FXML
-    private TextField idField;
+
 
     @FXML
     private ComboBox<String> countryComboBox;
 
-    @FXML
-    private TextField nameField;
+
 
     @FXML
     private ComboBox<String> typeComboBox;
@@ -211,7 +208,7 @@ public class MonumentController {
                     int styleIndex = (i % 6) + 1; // This ensures a cycle through 1 to 6
                     String styleClass = "chart-bar-" + styleIndex;
                     node.getStyleClass().add(styleClass);
-                    System.out.println("Applied style: " + node.getStyleClass()); // Debugging line
+                  //  System.out.println("Applied style: " + node.getStyleClass()); // Debugging line
                 }
             }
         }
@@ -254,33 +251,59 @@ public class MonumentController {
     }
     @FXML
     public void initialize() throws SQLException {
+        // Initialize services
+        serviceMonument = new ServiceMonument();
+        serviceCountry = new ServiceCountry();
 
+        // Load default image for monuments
         loadDefaultImage();
 
+        // Setup column bindings for both monuments and countries
         setupColumnBindings();
+
+        // Populate ComboBoxes and load data
+        populateCountryComboBox();
+        loadData();  // Loads monument data
+
+        // Setup search filters and listeners
+        setupSearchFilter();
+        setupMonumentTableListeners();
+
+        // Chart loading for monuments
         try {
-            populateCountryComboBox();
+            loadMonumentStatsToChart();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        loadData();
-        setupSearchFilter();
+        // Setup actions for buttons (monuments and countries)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void setupMonumentTableListeners() {
         displayMonuments.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             updateFormFields(newSelection);
         });
-        loadMonumentStatsToChart();  // Make sure this is called after all setups
-
-
-
     }
+
 
     private WikipediaAPI wikipediaService = new WikipediaAPI();
 
     private void updateFormFields(Monument monument) {
         if (monument != null) {
             countryComboBox.setValue(monument.getCountry().getName());
-            nameField.setText(monument.getName());
+            MonumentnameField.setText(monument.getName());
             typeComboBox.setValue(monument.getType());
             entryPriceField.setText(String.valueOf(monument.getEntryPrice()));
             statusComboBox.setValue(monument.getStatus());
@@ -310,7 +333,7 @@ public class MonumentController {
 
     @FXML
     public void fetchDescription() {
-        String query = nameField.getText().trim().replace(" ", "_");
+        String query = MonumentnameField.getText().trim().replace(" ", "_");
         String description = wikipediaService.getMonumentDescription(query);
         descriptionField.setText(description);
     }
@@ -385,14 +408,13 @@ public class MonumentController {
 
     @FXML
     public void addMonument() {
-        // Start by ensuring all input fields are validated
-        if (!validateInput()) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please check your inputs and try again.");
-            return;
-        }
-
         try {
-            String selectedCountryName = countryComboBox.getValue();
+            // Validation for adding a monument
+            if (!validateInput()) {
+                return;
+            }
+
+            String selectedCountryName = countryComboBox.getValue(); // Get the selected country name
             Country selectedCountry = serviceCountry.getCountryByName(selectedCountryName);
             if (selectedCountry == null) {
                 showAlert(Alert.AlertType.ERROR, "Selection Error", "Selected country is not available.");
@@ -400,7 +422,7 @@ public class MonumentController {
             }
 
             // Gather all inputs
-            String name = nameField.getText();
+            String name = MonumentnameField.getText();
             String type = typeComboBox.getValue();
             String status = statusComboBox.getValue();
             String description = descriptionField.getText();
@@ -422,13 +444,11 @@ public class MonumentController {
             clearFields();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Monument added successfully!");
             searchField.setText("");
-            // Notify the TableView to update
             displayMonuments.setItems(null);
             displayMonuments.layout();
-            displayMonuments.setItems(masterData); // This will force the TableView to update
+            displayMonuments.setItems(masterData);
 
             loadMonumentStatsToChart();
-
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Input Error", "Please enter valid numeric values for Entry Price, Latitude, and Longitude.");
         } catch (SQLException e) {
@@ -443,32 +463,16 @@ public class MonumentController {
             e.printStackTrace(); // Handle or log the exception as needed
         }
     }
-
-    private boolean validateInput() {
-        // Vérifier si une option est sélectionnée dans la ComboBox country
-        if (countryComboBox.getValue() == null) {
-            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please select a country.");
+    private boolean validateMonumentInput() {
+        // Check if all mandatory fields for monument are filled
+        if (countryComboBox.getValue() == null || typeComboBox.getValue() == null ||
+                statusComboBox.getValue() == null || MonumentnameField.getText().isEmpty() ||
+                descriptionField.getText().isEmpty() || entryPriceField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please fill all mandatory fields for the monument.");
             return false;
         }
 
-        // Vérifier si une option est sélectionnée dans la ComboBox type
-        if (typeComboBox.getValue() == null) {
-            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please select a type.");
-            return false;
-        }
-
-        // Vérifier si une option est sélectionnée dans la ComboBox status
-        if (statusComboBox.getValue() == null) {
-            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please select a status.");
-            return false;
-        }
-
-        // Vérifier les autres champs
-        if (nameField.getText().isEmpty() || descriptionField.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Invalid input", "Name and Description fields cannot be empty.");
-            return false;
-        }
-
+        // Check if entry price is a positive integer
         if (!entryPriceField.getText().matches("\\d+")) {
             showAlert(Alert.AlertType.ERROR, "Invalid input", "Entry Price must be a positive integer.");
             return false;
@@ -477,6 +481,41 @@ public class MonumentController {
         return true;
     }
 
+
+
+    private boolean validateInput() {
+        // Check if a country is selected
+        if (countryComboBox.getValue() == null) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please select a country.");
+            return false;
+        }
+
+        // Check if a type is selected
+        if (typeComboBox.getValue() == null) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please select a type.");
+            return false;
+        }
+
+        // Check if a status is selected
+        if (statusComboBox.getValue() == null) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Please select a status.");
+            return false;
+        }
+
+        // Check if name and description fields are empty
+        if (MonumentnameField.getText().isEmpty() || descriptionField.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Name and Description fields cannot be empty.");
+            return false;
+        }
+
+        // Check if entry price is a positive integer
+        if (!entryPriceField.getText().matches("\\d+")) {
+            showAlert(Alert.AlertType.ERROR, "Invalid input", "Entry Price must be a positive integer.");
+            return false;
+        }
+
+        return true;
+    }
 
     @FXML
     public void deleteMonument() throws SQLException {
@@ -505,12 +544,12 @@ public class MonumentController {
         if (selectedMonument != null) {
             try {
                 // Validate input fields
-                if (validateInput()) {
+                if (validateMonumentInput()) {
                    // int id = Integer.parseInt(idField.getText());
                     String selectedCountryName = countryComboBox.getValue(); // Get the selected country name
                     Country selectedCountry = serviceCountry.getCountryByName(selectedCountryName);
 
-                    String name = nameField.getText();
+                    String name = MonumentnameField.getText();
                     String type = typeComboBox.getValue();
                     int entryPrice = Integer.parseInt(entryPriceField.getText());
                     String status = statusComboBox.getValue();
@@ -555,7 +594,7 @@ public class MonumentController {
 
     private void clearFields() {
         countryComboBox.getSelectionModel().clearSelection();
-        nameField.clear();
+        MonumentnameField.clear();
         typeComboBox.getSelectionModel().clearSelection();
         entryPriceField.clear();
         statusComboBox.getSelectionModel().clearSelection();
@@ -609,7 +648,10 @@ public class MonumentController {
 
     }
 
-    public void clearMonument(ActionEvent actionEvent) {
-        clearFields();
+
+    public void Clearc(ActionEvent actionEvent) {
+        clearFields();;
     }
+
+
 }

@@ -1,6 +1,6 @@
 package Test;
 
-import Controller.AddCountry;
+import Controller.CountryController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +15,7 @@ public class MainFX extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainFX.class.getResource("Country.fxml"));
         Parent root = fxmlLoader.load();
-        AddCountry Controller = fxmlLoader.getController(); // Get the controller instance
+      //  AddCountry Controller = fxmlLoader.getController(); // Get the controller instance
         Scene scene = new Scene(root, 700, 390);
         stage.setTitle("Country Management");
         stage.setScene(scene);

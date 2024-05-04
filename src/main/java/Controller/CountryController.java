@@ -3,7 +3,6 @@ package Controller;
 import Entities.Country;
 import Services.ServiceCountry;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,32 +10,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.net.HttpURLConnection;
-import java.net.URL;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
 
-public class AddCountry {
+public class CountryController {
 
-    public Button btn_workbench;
-    public Button btn_workbench211;
-    public AnchorPane side_ankerpane;
-    public Pane inner_pane;
-    public Pane most_inner_pane;
-    public Button btn_workbench2;
-    public Button btn_workbench21;
-    public Button btn_workbench1;
-    public Button btn_workbench11;
     public Button clearButton1;
     @FXML
     private TableView<Country> DisplayCountries;
