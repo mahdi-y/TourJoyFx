@@ -8,22 +8,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import java.net.URL?>
-<AnchorPane prefHeight="800.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Home">
+<AnchorPane prefHeight="800.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Home">
     <children>
         <Label fx:id="idU" layoutX="288.0" layoutY="575.0" text="Label" textFill="WHITE" />
         <ImageView fitHeight="1011.0" fitWidth="1538.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/bg1.jpg" />
+                <Image url="@image/bg1.jpg" />
             </image>
         </ImageView>
         <ImageView fitHeight="143.0" fitWidth="303.0" layoutX="34.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/tourjoy.png" />
+                <Image url="@image/tourjoy.png" />
             </image>
         </ImageView>
-
-
+        <Button fx:id="monumentsButton" layoutX="840.0" layoutY="39.0"  prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-border: none;" text="MONUMENTS" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
         <Label layoutX="1212.0" layoutY="45.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
             <font>
                 <Font name="System Bold" size="17.0" />
@@ -37,7 +39,7 @@
 
         <ImageView fx:id="heroImageView" fitHeight="556.0" fitWidth="552.0" layoutX="867.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/globe.png" />
+                <Image url="@image/globe.png" />
             </image>
         </ImageView>
         <Label layoutX="187.0" layoutY="413.0" text="Destinations!" textFill="WHITE">
@@ -57,26 +59,26 @@
         </Button>
         <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1419.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/icons-utilisateur.png" />
+                <Image url="@image/icons-utilisateur.png" />
             </image>
         </ImageView>
         <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
-        <Label layoutX="751.0" layoutY="45.0" text="HOME" textFill="#fea116">
+        <Button fx:id="homeButton" layoutX="754.0" layoutY="39.0" onAction="#goToHomeView" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="HOME" textFill="#230f6e">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
-        </Label>
-        <!-- Guide Button -->
-        <Button fx:id="guideButton" layoutX="957.0" layoutY="39.0" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="GUIDES" textFill="#230f6e" />
+        </Button>
+        <Button fx:id="guideButton" layoutX="967.0" layoutY="39.0" onAction="#goToGuideView" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="GUIDES" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
 
-        <!-- Monument Button -->
-        <Button fx:id="MonumentButton" layoutX="821.0" layoutY="39.0" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="MONUMENTS" textFill="#230f6e" onAction="#goToMonuments" />
 
-        <!-- Subscription Button -->
-        <Button fx:id="SubscriptionButton" layoutX="1043.0" layoutY="39.0" prefHeight="38.0" prefWidth="166.0" styleClass="custom-button" text="SUBSCRIPTION" textFill="#230f6e" />
-
+        <Label fx:id="SUBSCRIPTION" layoutX="1054.0" layoutY="45.0" prefHeight="26.0" prefWidth="134.0" text="SUBSCRIPTIONS" textFill="#230f6e">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
     </children>
-    <stylesheets>
-        <URL value="@Styles/Main.css"/>
-    </stylesheets>
 </AnchorPane>

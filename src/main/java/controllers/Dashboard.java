@@ -21,7 +21,7 @@ public class Dashboard {
     @FXML
     private void gotoGuideManagement() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/AddGuide.fxml"));
+        loader.setLocation(getClass().getResource("/com/test/tjv2/AddGuide.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) gotoGuideManagement.getScene().getWindow(); // Retrieves the current window
@@ -31,7 +31,7 @@ public class Dashboard {
     @FXML
     private void gotoFrontOffice() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Home.fxml"));
+        loader.setLocation(getClass().getResource("/com/test/tjv2/Home.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) frontoffice.getScene().getWindow(); // Retrieves the current window

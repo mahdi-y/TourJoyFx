@@ -20,7 +20,21 @@ module com.test.tjv2 {
     requires com.google.protobuf;
   //  requires unirest.java;
     requires java.net.http;
+    requires org.controlsfx.controls;
+    requires org.apache.pdfbox;
+    requires com.google.api.client.auth;
+    requires com.google.api.services.gmail;
+    requires mail;
+    requires com.google.api.client;
+    requires google.api.client;
+    requires com.google.api.client.json.gson;
+    requires stripe.java;
+    requires org.apache.commons.codec;
+    requires com.google.api.client.extensions.java6.auth;
+    requires com.google.api.client.extensions.jetty.auth;
     //requires java.net.http; // Corrected line
+    exports controllers to javafx.fxml;
+    opens controllers to javafx.fxml; // if your controllers use reflection, for example, for @FXML annotations
 
     opens com.test.tjv2 to javafx.fxml;
     exports com.test.tjv2;

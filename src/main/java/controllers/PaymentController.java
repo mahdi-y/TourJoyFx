@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import test.PaymentService;
+import Test.PaymentService;
 import Services.BookingServices;
 import Services.GuideServices;
 import org.apache.pdfbox.pdmodel.PDDocument;

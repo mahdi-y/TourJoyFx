@@ -21,7 +21,7 @@ public class Home {
     @FXML
     private void goToGuideView() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/guidesFront.fxml")); // Make sure the path is correct
+        loader.setLocation(getClass().getResource("/com/test/tjv2/guidesFront.fxml")); // Make sure the path is correct
         Parent root = loader.load();
 
         Scene scene = new Scene(root);

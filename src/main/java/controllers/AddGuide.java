@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 import Services.BookingServices;
 import Services.GuideServices;
 import Services.ServiceCountry;
-import test.GMailer;
+import Test.GMailer;
 import utils.MyDB;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

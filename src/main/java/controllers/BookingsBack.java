@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Entities.Guide; // Import statement for the Guide class
 import Services.GuideServices;
-import test.GMailer;
+import Test.GMailer;
 
 
 public class BookingsBack {
