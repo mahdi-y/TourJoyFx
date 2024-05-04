@@ -47,14 +47,14 @@ public class ServiceClaims implements IServices<claims> {
         try (PreparedStatement pre = con.prepareStatement(query);
              ResultSet res = pre.executeQuery()) {
             while (res.next()) {
-
+                Integer id = res.getObject("id", Integer.class);  // Using getObject to safely handle nulls
                 String title = res.getString("title");
                 String description = res.getString("description");
-                LocalDateTime createDate = res.getTimestamp("createDate").toLocalDateTime();
+                LocalDateTime createDate = res.getTimestamp("createDate") != null ? res.getTimestamp("createDate").toLocalDateTime() : null;
                 String state = res.getString("state");
-                int fkC = res.getInt("fkC");
+                Integer fkC = res.getObject("fkC", Integer.class); // Safe null handling
                 String reply = res.getString("reply");
-                claims claim = new claims(title, description, createDate, state,fkC, reply);
+                claims claim = new claims(id, title, description, createDate, state, fkC, reply);
                 claimsList.add(claim);
             }
         } catch (SQLException e) {
@@ -62,6 +62,7 @@ public class ServiceClaims implements IServices<claims> {
         }
         return claimsList;
     }
+
     @Override
     public void update(claims claims) throws SQLException {
         String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=? WHERE id=?";

@@ -338,28 +338,30 @@ public class BackController {
         return categoryName;
     }
     private void setupTableColumns() {
+        idR.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId())); // Handles Integer directly, including nulls
         titleR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
         descriptionR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
         createDateR.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCreateDate()));
         stateR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getState()));
-        // Assuming you have a method getCategoryNameById that returns the category name
         catView.setCellValueFactory(cellData -> {
-            Integer categoryId = cellData.getValue().getFkC(); // This is the foreign key ID
-            String categoryName = getCategoryNameById(categoryId); // You need to implement this method
+            Integer categoryId = cellData.getValue().getFkC();
+            String categoryName = categoryId != null ? getCategoryNameById(categoryId) : "Unknown"; // Handle null categoryId
             return new SimpleStringProperty(categoryName);
         });
-
         replyR.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReply()));
     }
+
     private void loadClaimsData() {
         try {
             List<claims> claimsList = ServiceClaims.Read();
             ObservableList<claims> observableClaims = FXCollections.observableArrayList(claimsList);
             claimsTableView.setItems(observableClaims);
         } catch (SQLException e) {
-            e.printStackTrace();  // Handle exceptions, log them, and maybe show an error message to the user
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Error loading claims data from the database.");
         }
     }
+
     private void clearForm() {
         titleM.setText("");
         descriptionM.setText("");

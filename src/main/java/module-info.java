@@ -10,6 +10,7 @@ module com.example.tourjoy {
     requires com.google.gson;
     requires org.testng;
     requires org.junit.jupiter.api;
+    requires org.json;
 
     opens com.example.tourjoy to javafx.fxml;
     exports com.example.tourjoy;

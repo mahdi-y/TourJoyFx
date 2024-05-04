@@ -147,14 +147,15 @@
                         <Label fx:id="descriptionMod" layoutX="19.0" layoutY="131.0" text="Description" />
                         <Label fx:id="stateMod" layoutX="19.0" layoutY="221.0" text="State" />
                         <Label fx:id="replyMod" layoutX="19.0" layoutY="401.0" text="Reply" />
-                        <TableView fx:id="claimsTableView" layoutX="490.0" layoutY="86.0" prefHeight="658.0" prefWidth="748.0">
+                        <TableView fx:id="claimsTableView" layoutX="489.0" layoutY="101.0" prefHeight="586.0" prefWidth="694.0">
                            <columns>
-                              <TableColumn fx:id="titleR" prefWidth="108.00006103515625" text="Title" />
-                              <TableColumn fx:id="descriptionR" prefWidth="132.0" text="Description" />
-                              <TableColumn fx:id="createDateR" prefWidth="147.9998779296875" text="Creation Date" />
-                              <TableColumn fx:id="stateR" prefWidth="96.800048828125" text="State" />
-                              <TableColumn fx:id="catView" prefWidth="116.0" text="Category" />
-                              <TableColumn fx:id="replyR" prefWidth="149.5999755859375" text="Reply" />
+                              <TableColumn fx:id="idR" prefWidth="40.799957275390625" text="id" />
+                              <TableColumn fx:id="titleR" prefWidth="84.79998779296875" text="Title" />
+                              <TableColumn fx:id="descriptionR" prefWidth="135.20001220703125" text="Description" />
+                              <TableColumn fx:id="createDateR" prefWidth="121.5999755859375" text="Creation Date" />
+                              <TableColumn fx:id="stateR" prefWidth="85.5999755859375" text="State" />
+                              <TableColumn fx:id="catView" prefWidth="101.5999755859375" text="Category" />
+                              <TableColumn fx:id="replyR" prefWidth="124.0" text="Reply" />
                            </columns>
                         </TableView>
                         <Button fx:id="deleteButton" layoutX="310.0" layoutY="703.0" mnemonicParsing="false" onAction="#deleteClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #FF4500; -fx-text-fill: white; -fx-font-size: 14px;" text="Delete" />

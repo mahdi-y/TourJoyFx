@@ -1,9 +1,12 @@
 package controllers;
 
 
+import Filter.ProfanityFilter;
+import javafx.application.Platform;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -61,21 +64,43 @@ public class chatClientController {
             refreshService.cancel();
         }
     }
-        public void sendMessage() {
-            String text = messageField.getText().trim();
-            if (!text.isEmpty()) {
-                try {
-                    Message message = new Message(text, LocalDateTime.now(), "yasmine", "client");
-                    messageService.saveMessage(message);
-                    messageField.clear();
-                    updateMessages();
-                } catch (SQLException e) {
-                    e.printStackTrace();  // Consider showing a user-friendly error message
-                }
-            }
-        }
 
-        private void updateMessages() {
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    public void sendMessage() {
+        String text = messageField.getText().trim();
+        if (!text.isEmpty()) {
+            ProfanityFilter.containsProfanity(text).thenAccept(containsProfanity -> {
+                Platform.runLater(() -> {
+                    if (containsProfanity) {
+                        showAlert("Please enter user-friendly words");
+                    } else {
+                        try {
+                            // Proceed to send the message if no profanity is detected
+                            Message message = new Message(text, LocalDateTime.now(), "yasmine", "client");
+                            messageService.saveMessage(message);
+                            messageField.clear();
+                            updateMessages();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            showAlert("Failed to send message. Please try again.");
+                        }
+                    }
+                });
+            }).exceptionally(ex -> {
+                Platform.runLater(() -> showAlert("Failed to check message content. Please try again."));
+                return null;
+            });
+        }
+    }
+
+
+    private void updateMessages() {
             try {
                 List<Message> messages = messageService.getAllMessages();
                 messageList.getItems().setAll(messages);

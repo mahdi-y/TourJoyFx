@@ -3,6 +3,7 @@ package controllers;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -60,6 +61,10 @@ public class ChatController {
             refreshService.cancel();
         }
     }
+
+
+
+
     public void sendMessage() {
         String text = messageField.getText().trim();
         if (!text.isEmpty()) {
@@ -73,6 +78,8 @@ public class ChatController {
             }
         }
     }
+
+
 
     private void updateMessages() {
         try {
