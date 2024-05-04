@@ -266,13 +266,31 @@ public class AccFront {
         nameLabel.setMaxWidth(Double.MAX_VALUE); // Ensure the label uses all available horizontal space
         nameLabel.setAlignment(Pos.CENTER); // Center align the text
 
-        Button bookButton = new Button("Book Now");
-        bookButton.setOnAction(event -> BookA(accomodation));
 
-        Button favoriteButton = new Button("Add to Favorites");
-        favoriteButton.setOnAction(event -> {Favorites.addFavorite(accomodation);
+        Button detailsButton = createDetailsButton(accomodation);
+        detailsButton.getStyleClass().add("accommodation-button");
+        styleButton(detailsButton);
+
+        Button favoriteButton = new Button("\u2764");
+        favoriteButton.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/Favorites.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+                Favorites favoritesController = loader.getController();
+                favoritesController.addFavorite(accomodation);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
-        detailsBox.getChildren().addAll(nameLabel, priceLabel,LocationLabel,typeLabel,roomLabel, bookButton, favoriteButton);
+        styleButton(favoriteButton);
+
+        HBox buttonBox = new HBox(10);  // Spacing between buttons
+        buttonBox.getChildren().addAll(detailsButton, favoriteButton);
+        buttonBox.setAlignment(Pos.CENTER);
+
+
+        detailsBox.getChildren().addAll(nameLabel, priceLabel,LocationLabel,typeLabel,roomLabel,buttonBox);
         AnchorPane.setTopAnchor(imageView, 0.0);
         AnchorPane.setLeftAnchor(imageView, 0.0);
         AnchorPane.setRightAnchor(imageView, 0.0);
@@ -284,6 +302,9 @@ public class AccFront {
         accomodationCard.getChildren().addAll(imageView,detailsBox);
 
         return accomodationCard;
+    }
+    private void styleButton(Button button) {
+        button.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;");
     }
 
     private ImageView loadImage(String image_name) {
@@ -320,26 +341,35 @@ public class AccFront {
         return imageView;
     }
 
-    public void BookA(Accomodation accomodation) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/resForm.fxml")); // Ensure the path is correct.
-            Parent root = loader.load();
 
-            // Get the controller for the next view and pass the accommodation name
-            ResController controller = loader.getController();
-            controller.initializeWithAccommodationName(accomodation.getName()); // We will create this method in ResController
 
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            showAlert(Alert.AlertType.ERROR, "Load Error", "Cannot load the booking form.");
-            ex.printStackTrace();
-        }
+
+
+    private Button createDetailsButton(Accomodation accomodation) {
+        Button detailsButton = new Button("Explore !");
+        detailsButton.setOnAction(event -> showAccomodationDetails(accomodation));
+        return detailsButton;
     }
 
+    private void showAccomodationDetails(Accomodation accomodation) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/AccDetails.fxml"));
+            // The root of the AccDetails.fxml is now a StackPane, so cast it correctly here.
+            StackPane dialogContent = loader.load();
+            detailsA detailsController = loader.getController();
+            detailsController.initData(accomodation);
 
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setTitle("Accommodation Details");
+            // Create a scene with the StackPane as the root.
+            dialogStage.setScene(new Scene(dialogContent));
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Loading Error", "Failed to load accommodation details view.");
+            e.printStackTrace();
+        }
+    }
 
 
     private void showAlert(Alert.AlertType type, String title, String message) {

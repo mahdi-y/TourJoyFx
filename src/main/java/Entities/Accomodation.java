@@ -11,7 +11,7 @@ public class Accomodation {
 
     private String image_name;
 
-    private List<String> photoNames;
+
     public Accomodation(Integer refA, String name, String type, String location, float price, Integer nb_rooms, String image_name) {
         this.refA = refA;
         this.name = name;
@@ -20,8 +20,10 @@ public class Accomodation {
         this.price = price;
         this.nb_rooms = nb_rooms;
         this.image_name = image_name;
+
     }
-//constructor without refA
+
+    //constructor without refA
     public Accomodation(String name, String type, String location, float price, int nb_rooms, String image_name) {
         this.name = name;
         this.type = type;
@@ -31,7 +33,12 @@ public class Accomodation {
         this.image_name= image_name;
     }
 
-    public int getRefA() {
+
+
+
+
+
+    public Integer getRefA() {
         return refA;
     }
 
@@ -71,7 +78,7 @@ public class Accomodation {
         this.price = price;
     }
 
-    public int getNb_rooms() {
+    public Integer getNb_rooms() {
         return nb_rooms;
     }
 

@@ -7,15 +7,20 @@ import Services.ServiceResBack;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BackgroundImage;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +40,8 @@ public class ResBackController {
     @FXML
     private Button deleteRButton;
 
+    @FXML
+    private Button manageAccomButton;
     @FXML
     private PieChart accPie;
     private ServiceResBack serviceResBack;
@@ -85,5 +92,14 @@ public class ResBackController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    void goToAccomManagement(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/javafx/Accomodation.fxml"));
+            manageAccomButton.getScene().setRoot(root);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

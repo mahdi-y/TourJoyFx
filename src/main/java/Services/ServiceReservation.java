@@ -7,7 +7,9 @@ import utils.MyDB;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceReservation implements IReservation<Reservation>{
     private Connection con;
@@ -48,6 +50,17 @@ public class ServiceReservation implements IReservation<Reservation>{
             }
         }
         return bookedDates;
+    }
+    public Map<Integer, Integer> getBookingCounts() throws SQLException {
+        Map<Integer, Integer> bookingCounts = new HashMap<>();
+        String query = "SELECT name, COUNT(*) as count FROM Reservation GROUP BY name";
+        try (PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                bookingCounts.put(rs.getInt("name"), rs.getInt("count"));
+            }
+        }
+        return bookingCounts;
     }
 
 

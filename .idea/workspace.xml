@@ -34,6 +34,7 @@
         <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -58,6 +59,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -157,7 +159,11 @@
       <workItem from="1714511619268" duration="8579000" />
       <workItem from="1714557582304" duration="354000" />
       <workItem from="1714558098002" duration="24455000" />
-      <workItem from="1714640260670" duration="634000" />
+      <workItem from="1714640260670" duration="9027000" />
+      <workItem from="1714750914985" duration="15591000" />
+      <workItem from="1714813881031" duration="7527000" />
+      <workItem from="1714823069713" duration="4385000" />
+      <workItem from="1714831269968" duration="8658000" />
     </task>
     <servers />
   </component>

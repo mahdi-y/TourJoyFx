@@ -175,24 +175,22 @@ public class ResController implements Initializable{
 
     private void drawCalendar() {
         year.setText(String.valueOf(dateFocus.getYear()));
-        month.setText(dateFocus.getMonth().toString());
+        month.setText(dateFocus.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()));
 
         double calendarWidth = calendar.getPrefWidth();
         double calendarHeight = calendar.getPrefHeight();
-        double strokeWidth = 1;
-        double spacingH = calendar.getHgap();
-        double spacingV = calendar.getVgap();
+        double dayCellWidth = (calendarWidth - calendar.getHgap() * 6) / 7;
+        double dayCellHeight = (calendarHeight - calendar.getVgap() * 5) / 6;
 
         calendar.getChildren().clear();
 
-        int yearValue = dateFocus.getYear();
-        int monthValue = dateFocus.getMonthValue();
-        LocalDate firstOfMonth = LocalDate.of(yearValue, monthValue, 1);
-        DayOfWeek dayOfWeek = firstOfMonth.getDayOfWeek();
-        int daysToPrepend = dayOfWeek.getValue() % 7;
+        LocalDate firstOfMonth = LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), 1);
+        int daysToPrepend = firstOfMonth.getDayOfWeek().getValue() % 7;
+        daysToPrepend = (daysToPrepend + 6) % 7; // Adjust to start from Sunday (if needed)
 
+        // Add empty cells for days before the first of the month
         for (int i = 0; i < daysToPrepend; i++) {
-            calendar.getChildren().add(new StackPane());
+            calendar.getChildren().add(createEmptyDayCell(dayCellWidth, dayCellHeight));
         }
 
         LocalDate currentDate = LocalDate.now();
@@ -206,33 +204,42 @@ public class ResController implements Initializable{
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load booked dates.");
         }
 
+        // Create cells for each day of the month
         for (int day = 1; day <= daysInMonth; day++) {
-            StackPane dayCell = new StackPane();
-            Text dayText = new Text(String.valueOf(day));
-            Rectangle rectangle = new Rectangle((calendarWidth - (spacingH * 6)) / 7, (calendarHeight - (spacingV * 5)) / 6);
-            rectangle.setFill(Color.TRANSPARENT);
-            rectangle.setStroke(Color.BLACK);
-            rectangle.setStrokeWidth(strokeWidth);
-            dayCell.getChildren().addAll(rectangle, dayText);
-            StackPane.setAlignment(dayText, Pos.TOP_RIGHT);
-            StackPane.setMargin(dayText, new Insets(5, 10, 0, 0));
-
-            LocalDate cellDate = LocalDate.of(yearValue, monthValue, day);
-
-            if (cellDate.equals(currentDate)) {
-                rectangle.setFill(Color.LIGHTBLUE);
-                dayText.setFill(Color.RED);
-            }
-
-            if (bookedDates.contains(cellDate)) {
-                rectangle.setFill(Color.RED);  // Highlight the booked dates in red
-                dayText.setFill(Color.WHITE);  // Set text color to white for better readability
-            }
-
-            if (cellDate.getMonth() == dateFocus.getMonth()) {
-                calendar.getChildren().add(dayCell);
-            }
+            LocalDate cellDate = LocalDate.of(dateFocus.getYear(), dateFocus.getMonthValue(), day);
+            StackPane dayCell = createDayCell(dayCellWidth, dayCellHeight, day, cellDate, currentDate, bookedDates);
+            calendar.getChildren().add(dayCell);
         }
+    }
+
+    private StackPane createEmptyDayCell(double width, double height) {
+        StackPane cell = new StackPane();
+        Rectangle rect = new Rectangle(width, height);
+        rect.setFill(Color.TRANSPARENT);
+        rect.setStroke(Color.BLACK);
+        cell.getChildren().add(rect);
+        return cell;
+    }
+
+    private StackPane createDayCell(double width, double height, int day, LocalDate cellDate, LocalDate currentDate, List<LocalDate> bookedDates) {
+        StackPane dayCell = new StackPane();
+        Text dayText = new Text(String.valueOf(day));
+        Rectangle rectangle = new Rectangle(width, height);
+        rectangle.setFill(Color.TRANSPARENT);
+        rectangle.setStroke(Color.BLACK);
+
+        if (cellDate.equals(currentDate)) {
+            rectangle.setFill(Color.LIGHTBLUE);
+            dayText.setFill(Color.RED);
+        } else if (bookedDates.contains(cellDate)) {
+            rectangle.setFill(Color.RED);  // Highlight booked dates
+            dayText.setFill(Color.WHITE);
+        }
+
+        dayCell.getChildren().addAll(rectangle, dayText);
+        StackPane.setAlignment(dayText, Pos.TOP_RIGHT);
+        StackPane.setMargin(dayText, new Insets(5, 10, 0, 0));
+        return dayCell;
     }
 
 

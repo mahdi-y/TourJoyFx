@@ -1,8 +1,8 @@
 package Services;
 
 import Entities.Accomodation;
+import Entities.Images;
 import utils.MyDB;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -110,4 +110,35 @@ public class ServiceAccomodation implements IServices<Accomodation> {
         }
         return accomodations;
     }
+
+    public void addImage(Images image) throws SQLException {
+        String query = "INSERT INTO Images (accommodation, name) VALUES (?, ?)";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setInt(1, image.getAccommodation());
+            pre.setString(2, image.getName());
+            int result = pre.executeUpdate();
+            System.out.println("Insert result: " + result);
+        } catch (SQLException e) {
+            System.err.println("Error adding image to database: " + e.getMessage());
+            throw e;  // Propagate the error
+        }
+    }
+
+
+
+
+    public List<Images> getImagesByAccommodationId(int accommodationId) throws SQLException {
+        List<Images> images = new ArrayList<>();
+        String query = "SELECT * FROM Images WHERE accommodation = ?";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setInt(1, accommodationId);
+            ResultSet res = pre.executeQuery();
+            while (res.next()) {
+                images.add(new Images(res.getInt("id"), res.getInt("accommodation"), res.getString("name")));
+            }
+        }
+        return images;
+    }
+
+
 }

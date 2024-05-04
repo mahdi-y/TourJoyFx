@@ -13,4 +13,6 @@ module com.example.javafx {
     opens Entities to javafx.base;
     opens com.example.javafx to javafx.fxml;
     exports com.example.javafx;
+
+
 }
