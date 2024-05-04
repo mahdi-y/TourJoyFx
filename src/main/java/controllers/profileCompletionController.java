@@ -109,6 +109,7 @@ public class profileCompletionController {
                 Image image = new Image(selectedFile.toURI().toString());
                 profileImageView.setImage(image);
             } else {
+                showAlert(Alert.AlertType.ERROR, "Invalid profile image", "Invalid image type, please select a png|jpg|jpeg file.");
                 System.out.println("Invalid file format. Please select a PNG or JPG file.");
             }
         } else {

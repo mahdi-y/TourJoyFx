@@ -2,32 +2,19 @@ package controllers;
 
 import com.example.tourjoy.HelloApplication;
 import javafx.event.ActionEvent;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
 import services.userService;
 import utils.GMailer;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import models.User;
-import services.userService;
-import utils.GMailer;
-
 
 public class forgotPassword {
 
@@ -64,18 +51,23 @@ public class forgotPassword {
     private int generatedCodeSMS;
 
 
-    private String resetCodeByEmail; // Code généré par e-mail
-    private String resetCodeBySMS;   // Code généré par SMS
+    private String resetCodeByEmail;
+    private String resetCodeBySMS;
+
+    @FXML
+    private ToggleGroup toggleGroup = new ToggleGroup();
 
     @FXML
     private void initialize() {
+        radioEmail.setToggleGroup(toggleGroup);
+        radioSMS.setToggleGroup(toggleGroup);
         List<Node> components = Arrays.asList(
                 password, confirm, updatePassword, passwordLabel, confirmLabel,mail,phoneNumberField, codeField,send_mail,phoneLabel,emailLabel, codeLabel,code_button
         );
         components.forEach(component -> component.setVisible(false));
         radioEmail.setOnAction(event -> updateUIBasedOnSelection());
         radioSMS.setOnAction(event -> updateUIBasedOnSelection());
-        updateUIBasedOnSelection(); // Call once to set initial state
+        updateUIBasedOnSelection();
     }
     @FXML
     private void updateUIBasedOnSelection() {
@@ -83,11 +75,11 @@ public class forgotPassword {
         boolean isPhoneSelected = radioSMS.isSelected();
         emailLabel.setVisible(isEmailSelected);
         mail.setVisible(isEmailSelected);
-        send_mail.setVisible(isEmailSelected);
 
         phoneLabel.setVisible(isPhoneSelected);
         phoneNumberField.setVisible(isPhoneSelected);
-        send_mail.setVisible(isPhoneSelected);
+
+        send_mail.setVisible(isEmailSelected || isPhoneSelected);
 
 
     }
