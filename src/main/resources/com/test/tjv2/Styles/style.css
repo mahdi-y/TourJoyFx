@@ -1,0 +1,136 @@
+/* Apply some basic styling to the root pane */
+.root {
+    -fx-background-color: #C3B1E1; /* Light Purple */
+}
+
+/* Style for navigation buttons */
+.nav-button {
+    -fx-background-color: black; /* Black */
+    -fx-text-fill: white; /* White */
+    -fx-font-size: 16px;
+    -fx-pref-width: 200; /* Adjusted width */
+    -fx-pref-height: 50;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2);
+}
+
+/* Hover effect for navigation buttons */
+.nav-button:hover {
+    -fx-background-color: #64b5f6; /* Light Blue */
+}
+
+/* Style for action buttons */
+.action-button {
+    -fx-background-color: black; /* Black */
+    -fx-text-fill: white; /* White */
+    -fx-font-size: 16px;
+    -fx-pref-width: 120;
+    -fx-pref-height: 50;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0, 2, 2);
+}
+
+/* Hover effect for action buttons */
+.action-button:hover {
+    -fx-background-color: #ff7043; /* Light Orange */
+}
+
+/* Style for table view */
+.table-view {
+    -fx-font-size: 14px;
+    -fx-border-color: #e0e0e0; /* Light Gray */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10;
+    -fx-background-color: #ffffff; /* White */
+}
+
+/* Style for the content pane */
+.content-pane {
+    -fx-background-color: #ffffff; /* White */
+    -fx-padding: 20;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 2, 2);
+}
+
+/* Style for TextField */
+.text-field {
+    -fx-background-color: white, -fx-text-box-border, -fx-control-inner-background;
+    -fx-background-insets: -0.4, 1, 2;
+    -fx-background-radius: 3, 3, 2;
+    -fx-padding: 3 5 3 5;
+    -fx-text-fill: #4a4a4a;
+    -fx-border-color: #b6b6b6;
+    -fx-border-radius: 3;
+}
+
+/* Style for ComboBox */
+.combo-box {
+    -fx-background-color: white, -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: -0.4, 1, 2;
+    -fx-background-radius: 3, 3, 2;
+    -fx-padding: 3 5 3 5;
+    -fx-text-fill: #4a4a4a;
+    -fx-border-color: #b6b6b6;
+    -fx-border-radius: 3;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #f0f0f0;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #333333;
+}
+
+/* Style for the button inside the ComboBox */
+.combo-box-base .button {
+    -fx-background-color: transparent, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2, 3;
+    -fx-background-radius: 3, 3, 2, 2;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER; /* center the text and the arrow */
+}
+
+/* Hover and focus styles */
+.text-field:hover, .combo-box:hover {
+    -fx-border-color: #a8a8a8;
+}
+
+
+/* Style for check box */
+.check-box {
+    -fx-font-size: 14px;
+    -fx-text-fill: #4A235A; /* Dark Purple */
+}
+/* Default chart bar styling (optional) */
+
+/* Unique color styles for each bar */
+.chart-bar-1 { -fx-bar-fill: #FF6384; } /* Red */
+.chart-bar-2 { -fx-bar-fill: #36A2EB; } /* Blue */
+.chart-bar-3 { -fx-bar-fill: #FFCE56; } /* Yellow */
+.chart-bar-4 { -fx-bar-fill: #4BC0C0; } /* Green */
+.chart-bar-5 { -fx-bar-fill: #9966FF; } /* Purple */
+.chart-bar-6 { -fx-bar-fill: #FF9F40; } /* Orange */
+/* Add more styles for additional categories as needed... */
+
+/* Axis and Tick Label Styling */
+.axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.axis-tick-label {
+    -fx-font-size: 12px;
+    -fx-rotate: -45;
+}
+
+/* Legend Styling */
+.chart-legend-item-symbol {
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
+
+.chart-legend-item-text {
+    -fx-text-fill: #666;
+    -fx-font-weight: bold;
+}

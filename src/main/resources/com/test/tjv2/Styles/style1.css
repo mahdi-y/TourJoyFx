@@ -1,0 +1,99 @@
+/* General application styling */
+.root {
+    -fx-background-color: #ffffff; /* Change to the desired background color */
+}
+
+/* Application name styling */
+.app-name {
+    -fx-font-size: 24px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold; /* Assuming the logo text is bold */
+    -fx-alignment: center-left;
+    -fx-padding: 10px 20px; /* Adjust padding to match your layout */
+}
+
+/* Menu bar styling */
+.menu-bar {
+    -fx-background-color: transparent; /* Makes the menu bar transparent */
+}
+
+.menu {
+    -fx-font-size: 14px;
+    -fx-text-fill: black; /* Black menu text */
+    -fx-background-color: transparent; /* Transparent background for menu buttons */
+}
+
+.menu-item {
+    -fx-font-size: 24px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold; /* Assuming the logo text is bold */
+    -fx-alignment: center-left;
+    -fx-padding: 10px 20px; /* Adjust padding to match your layout */
+
+}
+
+/* Menu holder to align the menus to the right */
+.menu-holder {
+    -fx-alignment: center-right;
+}
+
+/* Styling for the HBox that contains the application name and menu bar */
+#menu-container {
+    -fx-background-color: #ffffff; /* Assuming white background for the menu bar */
+    -fx-spacing: 5; /* Space between elements */
+    -fx-alignment: center-left; /* Align items to the left */
+    -fx-font-size: 24px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold}
+
+/* Region used as a spacer to push items to the right */
+.region {
+    -fx-pref-width: 10000; /* Large preferred width to push everything else to the right */
+    -fx-background-color: transparent; /* Transparent so it does not show */
+}
+
+/* Hover effect for menu items */
+.menu-item:hover {
+    -fx-background-color: #eeeeee; /* Light grey background on hover */
+}
+
+/* Optional: Add a drop shadow effect to the menu bar */
+.menu-bar:showing {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 5, 0, 0, 1);
+}
+.background-image {
+    -fx-background-image: url('/images/imageback.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+.main-content {
+    -fx-alignment: center;
+    -fx-padding: 100px; /* Adjust padding as necessary */
+    -fx-spacing: 20; /* Space between label and text */
+}
+
+.main-label {
+    -fx-font-size: 36px; /* Adjust font size as necessary */
+    -fx-text-fill: white; /* White text color */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Text shadow for better readability */
+}
+
+.main-text {
+    -fx-font-size: 18px; /* Adjust font size as necessary */
+    -fx-text-fill: white;
+    -fx-wrap-text: true;
+}
+
+.craft-button {
+    -fx-font-size: 20px; /* Adjust font size as necessary */
+    -fx-background-color: #ffa500; /* Button background color */
+    -fx-text-fill: white; /* Button text color */
+    -fx-background-radius: 20; /* Rounded corners for the button */
+    -fx-padding: 10px 20px; /* Padding inside the button */
+}
+
+.craft-button:hover {
+    -fx-background-color: #cc8400; /* Darker button color on hover */
+}

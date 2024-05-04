@@ -1,0 +1,107 @@
+/* main.css */
+
+/* Style for custom buttons */
+.custom-button {
+    -fx-background-color: transparent;
+    -fx-border: none;
+    -fx-cursor: hand; /* Change cursor to hand when hovering over the button */
+    -fx-font-family: "System Bold";
+    -fx-font-size: 17.0;
+    -fx-font-weight: bold; /* Make the text bold */
+}
+
+/* Style for custom buttons on hover */
+.custom-button:hover {
+    -fx-background-color: #f0f0f0; /* Change background color when hovering */
+    -fx-text-fill: #808080; /* Change text color when hovering */
+}
+
+.monument-box {
+    -fx-background-color: transparent;
+    -fx-border-color: #d0d0d0;
+    -fx-border-width: 0;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+
+    -fx-padding: 0;
+}
+
+.monument-image {
+    -fx-fit-to-width: true;
+    -fx-preserve-ratio: true;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.monument-details {
+    -fx-alignment: center;
+    -fx-padding: 10;
+}
+
+.monument-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Adjust the color to match your design */
+}
+
+.monument-button {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5 22;
+    -fx-font-weight: bold;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+.details-box {
+    -fx-background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    -fx-padding: 20;
+    -fx-spacing: 10; /* Spacing between children nodes */
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+
+.label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
+
+.text {
+    -fx-fill: #000000;
+}
+
+.web-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 10);
+}
+.detail-label {
+    -fx-text-fill: white; /* Sets the text color of the label to white */
+    -fx-font-size: 16px; /* You can adjust the size as needed */
+    -fx-font-weight: bold; /* This will make the label text bold */
+}
+
+
+.detail-text {
+    -fx-fill: white;  /* For SVGPath or shapes */
+    -fx-text-fill: white;  /* For Text nodes */
+    font-size: 16px;
+}
+
+.detail-text .text {  /* Ensures targeting Text nodes inside a TextFlow with specific class */
+    -fx-fill: white !important;
+}
+
+.text-flow .text {  /* Targeting Text nodes inside any TextFlow */
+    -fx-fill: white !important;
+}
+
+
+/* USA flag */
+
+/* EU flag */
