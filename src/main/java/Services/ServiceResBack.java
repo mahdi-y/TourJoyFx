@@ -32,26 +32,25 @@ public void delete(Reservation reservation) throws SQLException {
         }
 
 
-public List<Reservation> Read() throws SQLException {
-        List<Reservation> reservations = new ArrayList<>();
-        String query = "SELECT * FROM Reservation";
-        pre = con.prepareStatement(query);
-        res = pre.executeQuery();
-        while (res.next()) {
-        int idR = res.getInt("idR");
-        Date start_date = res.getDate("start_date");
-        Date end_date = res.getDate("end_date");
-                int name = res.getInt("name");
+        public List<Reservation> Read() throws SQLException {
+                List<Reservation> reservations = new ArrayList<>();
+                String query = "SELECT Reservation.idR, Reservation.start_date, Reservation.end_date, Reservation.name AS refA, Accomodation.name AS accommodationName " +
+                        "FROM Reservation JOIN Accomodation ON Reservation.name = Accomodation.refA";
+                pre = con.prepareStatement(query);
+                res = pre.executeQuery();
+                while (res.next()) {
+                        int idR = res.getInt("idR");
+                        Date start_date = res.getDate("start_date");
+                        Date end_date = res.getDate("end_date");
+                        int refA = res.getInt("refA");
+                        String accommodationName = res.getString("accommodationName");
 
-
-        Reservation reservation = new Reservation(idR, start_date, end_date, name);
-        reservations.add(reservation);
-
-
+                        Reservation reservation = new Reservation(idR, start_date, end_date, refA);
+                        reservation.setAccommodationName(accommodationName);  // Set the accommodation name for display
+                        reservations.add(reservation);
+                }
+                return reservations;
         }
-        return reservations;
-        }
-
 
 }
 

@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import Entities.Accomodation;
 import Services.ServiceAccomodation;
@@ -21,7 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import Entities.Favs;
-import controller.Favorites;
+import Controller.Favorites;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

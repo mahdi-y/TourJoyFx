@@ -50,6 +50,8 @@ public class ServiceFavs {
                 float price = rs.getFloat("price");
                 int nb_rooms = rs.getInt("nb_rooms");
                 String image_name = rs.getString("image_name");
+                int fkpays_id = rs.getInt("fkpays_id");
+
                 favorites.add(new Accomodation(refA, name, type, location, price, nb_rooms, image_name));
             }
         }

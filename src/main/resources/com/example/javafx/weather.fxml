@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="mainContainer" prefHeight="750.0" prefWidth="1172.0" style="-fx-background-color: #08457E;" stylesheets="@Styles/weather.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Weather">
+<VBox fx:id="mainContainer" prefHeight="750.0" prefWidth="1172.0" style="-fx-background-color: #08457E;" stylesheets="@Styles/weather.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Weather">
    <children>
       <HBox prefHeight="250.0" prefWidth="200.0">
          <VBox.margin>

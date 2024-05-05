@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import Entities.Accomodation;
 import Services.ServiceFavs;
@@ -48,15 +48,19 @@ public class Favorites {
             int row = 0, col = 0;
             for (Accomodation fav : favorites) {
                 ImageView imageView = new ImageView(new Image(fav.getImage_name()));
-                imageView.setFitHeight(100);
-                imageView.setFitWidth(100);
+                imageView.setFitHeight(200);
+                imageView.setFitWidth(200);
 
                 Label nameLabel = new Label(fav.getName());
+                nameLabel.setStyle("-fx-font-size: 16px;");
+
                 Button deleteButton = new Button("Delete");
+                deleteButton.setStyle("-fx-font-size: 14px;-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 5 10 5 10;");
                 deleteButton.setOnAction(event -> deleteFavorite(fav.getRefA()));
 
-                VBox vbox = new VBox(10, imageView, nameLabel, deleteButton);
+                VBox vbox = new VBox(25, imageView, nameLabel, deleteButton);
                 vbox.setAlignment(Pos.CENTER);
+                vbox.setStyle(" -fx-padding: 10px; ;-fx-border-style: solid inside;-fx-border-width: 2px;-fx-border-insets: 5px; -fx-border-radius: 5px;-fx-border-color: rgb(128,128,128);");
 
                 favoritesGrid.add(vbox, col, row);
                 col++;

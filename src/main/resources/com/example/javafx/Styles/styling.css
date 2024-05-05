@@ -66,7 +66,7 @@
     -fx-text-fill: #000000;
 }
 .table-row-cell:selected{
-    -fx-background-color: rgb(EBE9F6);
+    -fx-background-color: #EBE9F6;
 }
 .table-row-cell:selected .text{
     -fx-fill : #52438F;

@@ -1,8 +1,9 @@
-package controller;
+package Controller;
 import Entities.Accomodation;
 import Entities.Images;
 import Services.ServiceAccomodation;
 import Services.ServiceReservation;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,7 +18,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,11 @@ import java.util.stream.Collectors;
 public class AccomodationController {
 
     @FXML
+    private ImageView imageViewAccommodation;
+
+    @FXML
+    private Button seePie;
+    @FXML
     private TableView<Accomodation> DisplayAccommodations;
     @FXML
     private TableColumn<Accomodation, String> nameColumn;
@@ -42,8 +51,9 @@ public class AccomodationController {
     private TableColumn<Accomodation, Float> priceColumn;
     @FXML
     private TableColumn<Accomodation, Integer> roomColumn;
-    @FXML
-    private PieChart piechart;
+
+
+
     @FXML
     private TextField refAField;
 
@@ -51,6 +61,7 @@ public class AccomodationController {
     private TextField nameField;
     @FXML
     private ComboBox<String> typeComboBox;
+
     @FXML
     private TextField locationField;
     @FXML
@@ -69,64 +80,57 @@ public class AccomodationController {
     private Button SeeRes;
 
 
-    @FXML
-    private ImageView imageViewAccommodation;
+
 
     @FXML
     private ListView<ImageView> ListViewAcc;  // Ensure this matches the fx:id in your FXML
 
 
 
-    private String image_name = "images/image.jpg"; // Default image path
+    private String image_name = "images/image.png"; // Default image path
 
 
 
 
     private ServiceAccomodation serviceAccomodation;
-    private ServiceReservation serviceReservation;
 
 
     @FXML
     void initialize() {
-        try {
-            String defaultImage_name = "/images/image.jpg";  // Corrected path assuming your images folder is directly under resources
-            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(defaultImage_name)));
-            imageViewAccommodation.setImage(defaultImage);
-        } catch (NullPointerException e) {
-            System.out.println("Default image not found");
-        }
+
         // Initialize the ImageView with the default image
-        String defaultImage_name = "/images/image.jpg"; // Assuming "images" is a package in your resources folder
+        String defaultImage_name = "/images/image.png"; // Assuming "images" is a package in your resources folder
         Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(defaultImage_name)));
         imageViewAccommodation.setImage(defaultImage);
         serviceAccomodation = new ServiceAccomodation();
-        serviceReservation = new ServiceReservation();
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         typeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getType()));
-
+        serviceAccomodation = new ServiceAccomodation();
         typeComboBox.getItems().addAll(
                 "Villa", "Guesthouse", "Private house", "Apartment", "Farm house"
         );
         locationColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLocation()));
         roomColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getNb_rooms()).asObject());
         priceColumn.setCellValueFactory(cellData -> new SimpleFloatProperty(cellData.getValue().getPrice()).asObject());
+
         addButton.setOnAction(event -> addAccomodation());
         deleteButton.setOnAction(event -> deleteAccomodation());
         updateButton.setOnAction(event -> updateAccomodation());
-      //  clear1.setOnAction(event -> ClearAcc());
+        //  clear1.setOnAction(event -> ClearAcc());
 
         // Load accommodations into the table
         try {
             List<Accomodation> listAccomodations = serviceAccomodation.Read();
             DisplayAccommodations.getItems().addAll(listAccomodations);
+            DisplayAccommodations.refresh();
+
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to fetch accommodations from the database.", "Failed to load the selected image.");
         }
 
-        // Add listener to handle row selection
         DisplayAccommodations.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                currentAccommodationId = newSelection.getRefA();  // Assuming getRefA() returns the ID of the accommodation
+                currentAccommodationId = newSelection.getRefA();
                 nameField.setText(newSelection.getName());
                 typeComboBox.setValue(newSelection.getType());
                 locationField.setText(newSelection.getLocation());
@@ -134,20 +138,25 @@ public class AccomodationController {
                 roomField.setText(String.valueOf(newSelection.getNb_rooms()));
 
                 try {
-                    // Assuming getImage_name() returns the URL/path to the primary image
+
                     Image image = new Image(newSelection.getImage_name());
                     imageViewAccommodation.setImage(image);
                 } catch (Exception e) {
                     showAlert(Alert.AlertType.ERROR, "Error Loading Image", "Could not load the image.", e.getMessage());
                 }
             } else {
-                currentAccommodationId = -1; // Invalidate ID when there is no selection
-                clearInputForm(); // Clear form if nothing is selected
+                currentAccommodationId = -1;
+                clearInputForm();
             }
         });
-        loadPieChartData();
+
+
 
     }
+
+
+
+
     @FXML
     void selectImageAccommodation() {
         FileChooser fileChooser = new FileChooser();
@@ -165,20 +174,17 @@ public class AccomodationController {
         if (selectedFile != null) {
             // Get the path to the selected image
             image_name = selectedFile.toURI().toString();
-
+// For debugging, you could load it directly (although normally you would use the URI)
+            Image image = new Image("file:" + selectedFile.getAbsolutePath());
+            imageViewAccommodation.setImage(image);
             // Load the image into the ImageView
-            try {
-                Image image = new Image(image_name);
-                imageViewAccommodation.setImage(image);
-            } catch (Exception e) {
-                e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Error", "Error loading image", "Failed to load the selected image.");
-            }
         }
     }
     @FXML
     void addAccomodation() {
         try {
+
+
             String name = nameField.getText();
             String type = typeComboBox.getValue();
             String location = locationField.getText();
@@ -241,30 +247,31 @@ public class AccomodationController {
     @FXML
     void deleteAccomodation() {
         Accomodation selectedAccomodation = DisplayAccommodations.getSelectionModel().getSelectedItem();
-        if (selectedAccomodation != null) {
+        if (selectedAccomodation != null && selectedAccomodation.getRefA() != null) {
             try {
                 serviceAccomodation.delete(selectedAccomodation);
                 DisplayAccommodations.getItems().remove(selectedAccomodation);
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation deleted successfully!", "Failed to load the selected image.");
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Accommodation deleted successfully!", "The accommodation has been successfully deleted from the database.");
             } catch (SQLException e) {
-                showAlert(Alert.AlertType.ERROR, "Database Error", "Error deleting accommodation from the database.", "Failed to load the selected image.");
+                showAlert(Alert.AlertType.ERROR, "Database Error", "Error deleting accommodation from the database.", "Failed to delete the accommodation due to a database error.");
             }
         } else {
-            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select an accommodation to delete.", "Failed to load the selected image.");
+            showAlert(Alert.AlertType.WARNING, "Selection Error", "Please select an accommodation to delete or ensure it has a valid reference ID.", "No accommodation selected or the selected accommodation lacks a valid ID.");
         }
     }
+
 
     @FXML
     void updateAccomodation() {
         Accomodation selectedAccomodation = DisplayAccommodations.getSelectionModel().getSelectedItem();
         if (selectedAccomodation != null) {
             try {
-                int refA=Integer.parseInt(refAField.getText());
                 String name = nameField.getText();
                 String type = typeComboBox.getValue();
                 String location = locationField.getText();
                 int nb_rooms= Integer.parseInt(roomField.getText());
                 float price= Float.parseFloat(priceField.getText());
+
 
                 // Validate fields
 
@@ -293,12 +300,15 @@ public class AccomodationController {
                     return;
                 }
 
+
+
                 // Update selected accommodation object
                 selectedAccomodation.setName(name);
                 selectedAccomodation.setType(type);
                 selectedAccomodation.setLocation(location);
                 selectedAccomodation.setPrice(price);
                 selectedAccomodation.setNb_rooms(nb_rooms);
+
 
 
 
@@ -368,27 +378,12 @@ public class AccomodationController {
         priceField.clear();
         roomField.clear();
         ListViewAcc.getItems().clear();
+
+
+
     }
 
 
-    @FXML
-    private void loadPieChartData() {
-        try {
-            Map<Integer, Integer> bookingCounts = serviceReservation.getBookingCounts();
-            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-
-            List<Accomodation> accommodations = serviceAccomodation.Read();
-            for (Accomodation accomodation : accommodations) {
-                Integer bookings = bookingCounts.getOrDefault(accomodation.getRefA(), 0);
-                pieChartData.add(new PieChart.Data(accomodation.getName(), bookings));
-            }
-
-            piechart.setData(pieChartData);
-            piechart.setTitle("Booking Statistics");
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to fetch booking statistics.", e.getMessage());
-        }
-    }
 
     public void SeeRes(ActionEvent event) {
         try {
@@ -399,10 +394,18 @@ public class AccomodationController {
         }
     }
 
+    @FXML
+    public void seePie(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/javafx/PieAcc.fxml"));
+            seePie.getScene().setRoot(root);
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 
 
 }
-
 
 
 

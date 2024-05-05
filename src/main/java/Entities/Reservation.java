@@ -9,7 +9,7 @@ public class Reservation {
 
     private Date end_date;
     private int name; // Foreign key to Accommodation
-
+    private transient String accommodationName;
     public Reservation(int idR, Date start_date, Date end_date, int name) {
         this.idR = idR;
         this.start_date = start_date;
@@ -53,6 +53,14 @@ public class Reservation {
 
     public void setEnd_date(Date endDate) {
         this.end_date = endDate;
+    }
+
+    public void setAccommodationName(String accommodationName) {
+        this.accommodationName = accommodationName;
+    }
+
+    public String getAccommodationName() {
+        return accommodationName;
     }
 
     @Override

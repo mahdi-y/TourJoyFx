@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import Entities.Accomodation;
 import Entities.Reservation;

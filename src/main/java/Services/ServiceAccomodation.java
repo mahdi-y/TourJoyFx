@@ -23,23 +23,27 @@ public class ServiceAccomodation implements IServices<Accomodation> {
         con = MyDB.getInstance().getConnection();
     }
 
-    @Override
     public void add(Accomodation accomodation) throws SQLException {
+        String query = "INSERT INTO Accomodation (name, type, nb_rooms, location, price, image_name) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pre = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            pre.setString(1, accomodation.getName());
+            pre.setString(2, accomodation.getType());
+            pre.setInt(3, accomodation.getNb_rooms());
+            pre.setString(4, accomodation.getLocation());
+            pre.setFloat(5, accomodation.getPrice());
+            pre.setString(6, accomodation.getImage_name());
+            pre.executeUpdate();
 
-        String query = "INSERT INTO Accomodation (name, type, nb_rooms ,location, price, image_name ) VALUES (?, ?, ?, ?, ?, ?)";
-        pre = con.prepareStatement(query);
-        pre.setString(1, accomodation.getName());
-        pre.setString(2, accomodation.getType());
-        pre.setInt(3, accomodation.getNb_rooms());
-        pre.setString(4, accomodation.getLocation());
-        pre.setFloat(5, accomodation.getPrice());
-        pre.setString(6, accomodation.getImage_name());
-
-
-
-
-        pre.executeUpdate();
+            try (ResultSet generatedKeys = pre.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    accomodation.setRefA(generatedKeys.getInt(1));  // Assuming `refA` is the first column
+                } else {
+                    throw new SQLException("Creating accommodation failed, no ID obtained.");
+                }
+            }
+        }
     }
+
     public List<String> readNames() throws SQLException {
         List<String> accommodationNames = new ArrayList<>();
         String query = "SELECT name FROM Accomodation";
@@ -56,7 +60,7 @@ public class ServiceAccomodation implements IServices<Accomodation> {
     @Override
     public void update(Accomodation accomodation) throws SQLException {
 
-        String query = "UPDATE Accomodation SET name=?, type=?, nb_rooms=?, price=?, location=? WHERE refA=?";
+        String query = "UPDATE Accomodation SET name=?, type=?, nb_rooms=?, price=?, location=?, WHERE refA=?";
         pre = con.prepareStatement(query);
         pre.setString(1, accomodation.getName());
         pre.setString(2, accomodation.getType());
@@ -65,16 +69,36 @@ public class ServiceAccomodation implements IServices<Accomodation> {
         pre.setString(5, accomodation.getLocation());
         pre.setInt(6, accomodation.getRefA());
 
+
         pre.executeUpdate();
     }
 
     @Override
     public void delete(Accomodation accomodation) throws SQLException {
         String query = "DELETE FROM Accomodation WHERE refA=?";
-        pre = con.prepareStatement(query);
-        pre.setInt(1, accomodation.getRefA());
-        pre.executeUpdate();
+        PreparedStatement pre = null;
+        try {
+            pre = con.prepareStatement(query);
+            pre.setInt(1, accomodation.getRefA());
+            int affectedRows = pre.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting accommodation failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error on delete operation: " + e.getMessage());
+            throw e; // Rethrow the exception to handle it further up in the call stack
+        } finally {
+            if (pre != null) {
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    System.err.println("Error closing PreparedStatement: " + ex.getMessage());
+                }
+            }
+        }
     }
+
     public Map<String, Integer> getAccommodationNameIdMap() {
         Map<String, Integer> accommodationMap = new HashMap<>();
         String query = "SELECT refA, name FROM Accomodation";
@@ -104,6 +128,7 @@ public class ServiceAccomodation implements IServices<Accomodation> {
             String location = res.getString("location");
             float price = res.getFloat("price");
             String image_name = res.getString("image_name");
+
 
             Accomodation accomodation = new Accomodation(refA,name, type, location, price, nb_rooms, image_name);
             accomodations.add(accomodation);

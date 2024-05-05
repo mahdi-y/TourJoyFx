@@ -1,6 +1,6 @@
 package Test;
 
-import controller.AccomodationController;
+import Controller.AccomodationController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

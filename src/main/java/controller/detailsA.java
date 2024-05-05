@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import Services.ServiceAccomodation;
 import javafx.event.ActionEvent;
@@ -48,10 +48,12 @@ public class detailsA {
         try {
             imagesList = serviceAccomodation.getImagesByAccommodationId(accommodationId);
             tilePane.getChildren().clear();
+            int imageSize = 130; // Desired size for the images
+
             for (Images img : imagesList) {
                 ImageView imageView = new ImageView(new Image(img.getName()));
-                imageView.setFitHeight(100);
-                imageView.setFitWidth(100);
+                imageView.setFitHeight(imageSize);
+                imageView.setFitWidth(imageSize);
                 imageView.setPreserveRatio(true);
                 imageView.setOnMouseClicked(event -> openPreview(imageView));
                 tilePane.getChildren().add(imageView);

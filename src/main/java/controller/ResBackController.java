@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import Entities.Accomodation;
 import Entities.Reservation;
@@ -55,7 +55,7 @@ public class ResBackController {
     @FXML
     void initialize() {
         serviceResBack = new ServiceResBack();
-        nameRColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameRColumn.setCellValueFactory(new PropertyValueFactory<>("accommodationName"));
         startColumn.setCellValueFactory(new PropertyValueFactory<>("start_date"));
         endColumn.setCellValueFactory(new PropertyValueFactory<>("end_date"));
 

@@ -12,6 +12,8 @@ public class Accomodation {
     private String image_name;
 
 
+
+
     public Accomodation(Integer refA, String name, String type, String location, float price, Integer nb_rooms, String image_name) {
         this.refA = refA;
         this.name = name;
@@ -20,7 +22,15 @@ public class Accomodation {
         this.price = price;
         this.nb_rooms = nb_rooms;
         this.image_name = image_name;
+    }
 
+    public Accomodation(String name, String type, String location, float price, Integer nb_rooms, String image_name) {
+        this.name = name;
+        this.type = type;
+        this.location = location;
+        this.price = price;
+        this.nb_rooms = nb_rooms;
+        this.image_name = image_name;
     }
 
     //constructor without refA
@@ -31,11 +41,11 @@ public class Accomodation {
         this.price = price;
         this.nb_rooms = nb_rooms;
         this.image_name= image_name;
+
     }
 
-
-
-
+    public Accomodation(String name, String type, String location, float price, int nbRooms, String selectedImageName, Country selectedCountry) {
+    }
 
 
     public Integer getRefA() {
@@ -94,6 +104,7 @@ public class Accomodation {
         this.image_name = image_name;
     }
 
+
     @Override
     public String toString() {
         return "Accomodation{" +
@@ -105,5 +116,8 @@ public class Accomodation {
                 ", nb_rooms=" + nb_rooms +
                 ", image_name='" + image_name + '\'' +
                 '}';
+    }
+
+    public void setFkpays_id(Country selectedCountry) {
     }
 }
