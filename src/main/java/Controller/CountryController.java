@@ -38,7 +38,7 @@ public class CountryController {
     private TableColumn<Country, Boolean> visaRequiredColumn;
 
 //    @FXML
-  //  private TextField idField;
+    //  private TextField idField;
 
     @FXML
     private TextField nameField;
@@ -64,7 +64,7 @@ public class CountryController {
     void initialize() {
 
         serviceCountry = new ServiceCountry();
-       // idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        // idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         regionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRegion()));
 
@@ -111,7 +111,7 @@ public class CountryController {
         DisplayCountries.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Populate fields with selected country's data
-               // idField.setText(String.valueOf(newSelection.getId()));
+                // idField.setText(String.valueOf(newSelection.getId()));
                 nameField.setText(newSelection.getName());
                 regionComboBox.setValue(newSelection.getRegion());
                 visaRequiredCheckbox.setSelected(newSelection.isVisa_required());
@@ -148,9 +148,9 @@ public class CountryController {
                 return;
             }
 
-            // Validate country name (no numbers)
-            if (name.matches(".*\\d+.*")) {
-                showAlert(Alert.AlertType.ERROR, "Invalid name", "Country name should not contain numbers.");
+            // Validate country name (no numbers and starts with a capital letter)
+            if (!name.matches("[A-Z].*")) {
+                showAlert(Alert.AlertType.ERROR, "Invalid name", "Country name should start with a capital letter.");
                 return;
             }
 
@@ -177,6 +177,7 @@ public class CountryController {
             showAlert(Alert.AlertType.ERROR, "Database Error", "Error adding country to the database.");
         }
     }
+
     @FXML
     void deleteCountry() {
         Country selectedCountry = DisplayCountries.getSelectionModel().getSelectedItem();
@@ -197,7 +198,7 @@ public class CountryController {
         Country selectedCountry = DisplayCountries.getSelectionModel().getSelectedItem();
         if (selectedCountry != null) {
             try {
-              //  int id = Integer.parseInt(idField.getText());
+                //  int id = Integer.parseInt(idField.getText());
                 String name = nameField.getText();
                 String region = regionComboBox.getValue();
                 boolean visaRequired = visaRequiredCheckbox.isSelected();
@@ -215,7 +216,7 @@ public class CountryController {
                 }
 
                 // Update selected country object
-              //  selectedCountry.setId(id);
+                //  selectedCountry.setId(id);
                 selectedCountry.setName(name);
                 selectedCountry.setRegion(region);
                 selectedCountry.setVisa_required(visaRequired);

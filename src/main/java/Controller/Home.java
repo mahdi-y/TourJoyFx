@@ -24,7 +24,7 @@ public class Home {
 
 
     public void goToMonuments(ActionEvent actionEvent) {
-        URL url = getClass().getResource("/com/test/tjv2/MonumentDetails.fxml");
+        URL url = getClass().getResource("/com/test/tjv2/MonumentFront.fxml");
         if (url == null) {
             System.err.println("Cannot find MonumentDetails.fxml");
         } else {

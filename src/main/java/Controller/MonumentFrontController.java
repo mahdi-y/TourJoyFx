@@ -501,4 +501,18 @@ public class MonumentFrontController {
     }
 
 
+    public void goToGuides(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/guidesFront.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Guides.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                guideButton.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
 }

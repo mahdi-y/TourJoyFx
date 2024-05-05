@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -28,6 +29,7 @@ import javafx.geometry.Insets;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +45,8 @@ public class GuidesFront {
     private RangeSlider priceRangeSlider;
     @FXML
     private Button homeButton;
+    @FXML
+    private Button MonumentButton;
     @FXML
     private TextField minPriceField;
 
@@ -434,16 +438,7 @@ public class GuidesFront {
         }
     }
 
-    @FXML
-    private void goToGuideView() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/guidesFront.fxml"));
-        Parent root = loader.load();
 
-        Stage stage = (Stage) guideButton.getScene().getWindow(); // Retrieves the current window
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 
     @FXML
     private void goToHomeView() throws IOException {
@@ -455,6 +450,32 @@ public class GuidesFront {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    public void goToMonuments(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/MonumentFront.fxml");
+        if (url == null) {
+            System.err.println("Cannot find MonumentDetails.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                MonumentButton.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
 
+    public void goToGuides(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/guidesFront.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Guides.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                guideButton.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
 
 }

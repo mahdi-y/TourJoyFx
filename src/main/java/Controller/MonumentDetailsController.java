@@ -33,19 +33,28 @@ public class MonumentDetailsController {
 
     public void initData(Monument monument) {
         descriptionText.setText(monument.getDescription());
-        descriptionText.setStyle("-fx-fill: white;"); // Set the text color directly
-        nameText.setText(monument.getName());
-        typeText.setText(monument.getType());
-        priceText.setText(String.valueOf(monument.getEntryPrice()));
-        statusText.setText(monument.getStatus());
+        descriptionText.setFill(Color.WHITE); // Set the fill color to white
+        descriptionText.setStyle("-fx-text-fill: white; -fx-fill: white; -fx-font-size: 18px;"); // Set text size
 
-        // Reset previous texts and add new text
+        nameText.setText(monument.getName());
+        nameText.setStyle("-fx-font-size: 16px;");
+        typeText.setText(monument.getType());
+        typeText.setStyle("-fx-font-size: 16px;");
+        priceText.setText(String.valueOf(monument.getEntryPrice()));
+        priceText.setStyle("-fx-font-size: 16px;");
+        // statusText.setText(monument.getStatus());
+        // statusText.setStyle("-fx-font-size: 16px;");
+
+        // Reset previous texts and add new text with updated style
         descriptionFlow.getChildren().clear();
         Text descriptionContent = new Text(monument.getDescription());
+        descriptionContent.setFill(Color.WHITE);
+        descriptionContent.setStyle("-fx-text-fill: white; -fx-fill: white; -fx-font-size: 18px;"); // Set text size
         descriptionFlow.getChildren().add(descriptionContent);
 
         updateMapView(monument.getLatitude(), monument.getLongitude());
     }
+
 
     private void updateMapView(double latitude, double longitude) {
         WebEngine webEngine = webView.getEngine();

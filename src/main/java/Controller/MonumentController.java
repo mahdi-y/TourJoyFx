@@ -53,6 +53,12 @@ public class MonumentController {
     public TextField MonumentnameField;
     @FXML
     private Button addButton;
+    @FXML
+    private Button frontoffice;
+    @FXML
+    private Button gotoMonumentManagement;
+    @FXML
+    private Button gotoGuideManagement;
 
 
 
@@ -653,5 +659,45 @@ public class MonumentController {
         clearFields();;
     }
 
+    public void gotoFrontOffice(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/Home.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+    public void gotoGuideManagement(javafx.event.ActionEvent actionEvent) {
+        URL url = getClass().getResource("/AddGuide.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Guides.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gotoGuideManagement.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void gotoMonumentManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/Monument.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gotoMonumentManagement.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
 
 }

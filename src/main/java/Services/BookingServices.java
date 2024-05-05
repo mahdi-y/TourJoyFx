@@ -254,7 +254,7 @@ public class BookingServices {
                         rs.getString("language"),
                         rs.getString("dob"),
                         rs.getDouble("price"),
-                        rs.getString("image"),
+                        rs.getString("image_name"),
                         rs.getInt("country_id")
                 );
             }

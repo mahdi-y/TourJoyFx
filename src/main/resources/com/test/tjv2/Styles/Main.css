@@ -51,6 +51,10 @@
     -fx-padding: 5 22;
     -fx-font-weight: bold;
 }
+/* Hover effect for buttons */
+.monument-button:hover {
+    -fx-background-color: #005a9e;
+}
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-background: transparent;
@@ -101,6 +105,48 @@
     -fx-fill: white !important;
 }
 
+/* Style for buttons in the guide card */
+.guide-button {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 5 22;
+    -fx-font-weight: bold;
+}
+
+/* Hover effect for buttons */
+.guide-button:hover {
+    -fx-background-color: #005a9e;
+}
+.text-field {
+    -fx-font-size: 14px;
+    -fx-border-color: #333;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Search Field Specific Style */
+#searchField {
+    -fx-background-color: #fff;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+.combo-box {
+    -fx-background-color: #ffffff; /* White background for the combo box */
+    -fx-border-color: #000000; /* Black border */
+    -fx-border-width: 0.7; /* Very thin border width */
+    -fx-border-radius: 6; /* More rounded corners for the border */
+}
+
+.combo-box .list-cell {
+    -fx-padding: 8 10; /* Padding inside the drop-down list cells */
+    -fx-text-fill: #333333; /* Dark gray text color */
+}
+
+.combo-box .list-cell:filled:selected, .combo-box .list-cell:filled:hover {
+    -fx-background-color: #e6e6e6; /* Light gray background for selected or hovered item */
+    -fx-text-fill: #000000; /* Black text for selected or hovered item */
+}
 
 /* USA flag */
 
