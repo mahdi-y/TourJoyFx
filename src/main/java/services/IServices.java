@@ -10,10 +10,14 @@ public interface IServices<T>{
     void updateProfile(T t, String currentEmail) throws SQLException;
 
     void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException;
+    void add(T t) throws SQLException;
 
     boolean emailExists(String email) throws SQLException;
 
     boolean deleteUser(T t) throws SQLException;
+    void update(T t) throws SQLException;
+    void delete(T t) throws SQLException;
+    List<T> Read() throws SQLException;
 
     boolean phoneNumberExists(int phone) throws SQLException;
 

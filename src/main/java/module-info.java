@@ -1,8 +1,7 @@
 module com.example.tourjoy {
     requires javafx.controls;
     requires javafx.fxml;
-    exports controllers;
-    opens controllers;
+
     requires com.dlsc.formsfx;
     requires java.sql;
     requires mysql.connector.j;
@@ -22,10 +21,20 @@ module com.example.tourjoy {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires twilio;
+    requires java.sql;
+    requires charm.glisten;
+    requires java.mail;
+    requires java.net.http;
+    requires com.google.gson;
+    requires org.testng;
+    requires org.junit.jupiter.api;
+    requires org.json;
 
     opens com.example.tourjoy to javafx.fxml, javafx.base;
     opens models to javafx.base;
     exports com.example.tourjoy;
+    exports controllers;
+    opens controllers to javafx.fxml;
 
 
 }
