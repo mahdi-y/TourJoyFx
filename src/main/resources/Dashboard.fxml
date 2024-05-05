@@ -31,7 +31,7 @@
 
     <!--  SideNav  -->
     <VBox fx:id="sidePanel" layoutX="0" prefHeight="800.0" prefWidth="287.0" style="-fx-padding: 10;" styleClass="side-panel" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0.0">
-        <Button prefWidth="218.0" styleClass="side-panel-button" text="User Management">
+        <Button prefWidth="218.0" onAction="#gotoUserManagment" styleClass="side-panel-button" text="User Management">
             <graphic>
                 <SVGPath content="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
             </graphic>
@@ -71,7 +71,7 @@
                 <Insets bottom="50.0" right="30.0" />
             </VBox.margin>
         </Button>
-        <Button styleClass="side-panel-button" text="Claims Management">
+        <Button styleClass="side-panel-button" text="Claims Management" onAction="#goToClaimsManagement">
             <graphic>
                 <SVGPath content="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
             </graphic>

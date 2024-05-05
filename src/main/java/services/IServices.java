@@ -2,6 +2,7 @@ package Services;
 
 import Entities.Guide;
 import models.User;
+import models.claims;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,6 +18,8 @@ public interface IServices<T>{
 
     boolean deleteUser(T t) throws SQLException;
     void update(T t) throws SQLException;
+
+    void update(claims claims, Integer fkUser) throws SQLException;
 
     void update(Guide guide, int oldCIN) throws SQLException;
 

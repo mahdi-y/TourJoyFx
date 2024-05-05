@@ -159,11 +159,12 @@ public class BookingServices {
 
     public List<Booking> getBookingsByGuide(int guideId) {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT id, guide_id, user_id date, status FROM Booking WHERE guide_id = ?"; // Corrected to 'Booking' if that's your table name
+        String query = "SELECT id, guide_id, date, status FROM Booking WHERE guide_id = ?"; // Corrected to 'Booking' if that's your table name
 
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        int userId = 9;
 
         try {
             conn = MyDB.getInstance().getConnection();
@@ -179,11 +180,11 @@ public class BookingServices {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int guide = rs.getInt("guide_id");
-//                int userId = rs.getInt("user_id");
+
                 LocalDate date = rs.getDate("date").toLocalDate(); // Ensure 'date' is of type DATE in the database
                 String status = rs.getString("status");
 
-                Booking booking = new Booking(id, guideId, date, status);
+                Booking booking = new Booking(id, guideId, userId, date, status);
                 bookings.add(booking);
             }
         } catch (SQLException e) {

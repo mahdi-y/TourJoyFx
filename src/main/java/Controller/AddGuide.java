@@ -605,5 +605,18 @@ public class AddGuide {
     }
 
 
+    public void gotoUserManagment(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/usersList.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Userlist.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
     }
+}
 

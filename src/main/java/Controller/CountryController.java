@@ -286,4 +286,5 @@ public class CountryController {
     public void Clearc(ActionEvent actionEvent) {
         clearFields();;
     }
+
 }

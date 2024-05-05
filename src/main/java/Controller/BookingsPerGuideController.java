@@ -16,7 +16,7 @@ import javafx.geometry.Insets;
 import Entities.Booking;
 import Services.BookingServices;
 import Services.GuideServices;
-import Test.GMailer;
+import utils.GMailer;
 
 import java.sql.SQLException;
 import java.util.List;

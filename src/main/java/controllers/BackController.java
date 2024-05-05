@@ -18,7 +18,7 @@ import models.claims;
 import models.notification;
 import Services.ServiceClaims;
 import utils.DBConnection;
-
+import utils.UserSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -120,6 +120,7 @@ public class BackController {
     @FXML
     private TableView<claims> claimsTableView;
 
+    UserSession session = UserSession.getInstance();
 
 
     @FXML
@@ -133,6 +134,8 @@ public class BackController {
 
     @FXML
     private ListView<notification> notificationListView;
+
+
 
 
 
@@ -430,7 +433,7 @@ public class BackController {
 
 
                 // Update country in the database
-                ServiceClaims.update(selectedClaims);
+                ServiceClaims.update(selectedClaims, session.getId());
 
                 // Refresh TableView
                 claimsTableView.refresh();

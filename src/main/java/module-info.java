@@ -8,7 +8,7 @@ module com.example.tourjoy {
     requires java.sql;
     requires mysql.connector.j;
     requires jbcrypt;
-    requires com.google.gson;
+   // requires com.google.gson;
     opens Entities to javafx.base;
     requires jakarta.json;
     requires org.json;

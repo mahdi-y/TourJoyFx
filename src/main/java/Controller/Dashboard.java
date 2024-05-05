@@ -65,4 +65,32 @@ public class Dashboard {
             }
         }
     }
+
+    public void gotoUserManagment(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/usersList.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void goToClaimsManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/tourjoy/back.fxml");
+        if (url == null) {
+            System.err.println("Cannot find back.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
 }

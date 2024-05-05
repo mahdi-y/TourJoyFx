@@ -3,6 +3,7 @@ package Services;
 import Entities.Guide;
 import Entities.feedback;
 import models.User;
+import models.claims;
 import utils.MyDB;
 
 import java.sql.*;
@@ -117,6 +118,11 @@ public class GuideServices implements IServices<Guide> {
 
     @Override
     public void update(Guide guide) throws SQLException {
+
+    }
+
+    @Override
+    public void update(claims claims, Integer fkUser) throws SQLException {
 
     }
 
