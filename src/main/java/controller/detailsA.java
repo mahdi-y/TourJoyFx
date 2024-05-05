@@ -25,7 +25,7 @@ import java.util.List;
 
 public class detailsA {
 
-    @FXML private Text nameText, typeText, priceText;
+    @FXML private Text nameText, typeText, priceText, roomsText;
     @FXML private TilePane tilePane;
 
     @FXML private Button bookButton;
@@ -39,6 +39,8 @@ public class detailsA {
         nameText.setText(accomodation.getName());
         typeText.setText(accomodation.getType());
         priceText.setText(String.valueOf(accomodation.getPrice()));
+        roomsText.setText(String.valueOf(accomodation.getNb_rooms()));
+
         loadImages(accomodation.getRefA());
     }
 
@@ -105,4 +107,6 @@ public class detailsA {
 
     private void showAlert(Alert.AlertType alertType, String loadError, String s) {
     }
+
+
 }

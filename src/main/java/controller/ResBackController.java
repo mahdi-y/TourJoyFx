@@ -4,9 +4,7 @@ import Entities.Accomodation;
 import Entities.Reservation;
 import Services.ServiceAccomodation;
 import Services.ServiceResBack;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BackgroundImage;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -100,6 +104,47 @@ public class ResBackController {
             manageAccomButton.getScene().setRoot(root);
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    public void ExportRes() {
+        FileChooser fileChooser = new FileChooser();
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+        fileChooser.getExtensionFilters().add(extFilter);
+        // Show save file dialog
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            try (Workbook workbook = new XSSFWorkbook(); FileOutputStream outputStream = new FileOutputStream(file)) {
+                Sheet sheet = workbook.createSheet("Reservations");
+
+                // Create the header row
+                Row header = sheet.createRow(0);
+                header.createCell(0).setCellValue("Accommodation Name");
+                header.createCell(1).setCellValue("Check-in Date");
+                header.createCell(2).setCellValue("Check-out Date");
+
+                // Fill data
+                int rowIndex = 1;
+                for (Reservation res : DisplayReservations.getItems()) {
+                    Row row = sheet.createRow(rowIndex++);
+                    row.createCell(0).setCellValue(res.getName());
+                    row.createCell(1).setCellValue(res.getStart_date().toString());
+                    row.createCell(2).setCellValue(res.getEnd_date().toString());
+                }
+
+                // Autosize columns
+                for (int i = 0; i < 3; i++) {
+                    sheet.autoSizeColumn(i);
+                }
+
+                workbook.write(outputStream);
+                showAlert(Alert.AlertType.INFORMATION, "Export Successful", "Data exported to Excel file successfully!");
+            } catch (IOException e) {
+                showAlert(Alert.AlertType.ERROR, "File Error", "Failed to write to file.");
+            }
         }
     }
 }

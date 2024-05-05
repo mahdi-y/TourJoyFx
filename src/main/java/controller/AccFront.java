@@ -2,6 +2,8 @@ package controller;
 
 import Entities.Accomodation;
 import Services.ServiceAccomodation;
+import Services.ServiceFavs;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,14 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
-import javafx.geometry.Insets;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import Entities.Favs;
+import controller.Favorites;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -61,10 +61,12 @@ public class AccFront {
     public Button filter;
 
     private ServiceAccomodation serviceAccomodation;
+    private Favorites favsController;
 
     @FXML
     public void initialize() {
         serviceAccomodation = new ServiceAccomodation();
+        favsController = new Favorites();
         loadAccommodatons();
     }
 
@@ -109,6 +111,7 @@ public class AccFront {
         }
 
     }
+
 
     @FXML
     public void filterButton(ActionEvent event) throws SQLException {
@@ -244,23 +247,12 @@ public class AccFront {
         nameLabel.setMaxWidth(Double.MAX_VALUE); // Ensure the label uses all available horizontal space
         nameLabel.setAlignment(Pos.CENTER); // Center align the text
 
-        Label typeLabel = new Label(accomodation.getType());
-        typeLabel.getStyleClass().add("type");
-        typeLabel.setMaxWidth(Double.MAX_VALUE); // Ensure the label uses all available horizontal space
-        typeLabel.setAlignment(Pos.CENTER); // Center align the text
 
-        Label LocationLabel = new Label(accomodation.getLocation());
-        LocationLabel.getStyleClass().add("location");
-        LocationLabel.setMaxWidth(Double.MAX_VALUE); // Ensure the label uses all available horizontal space
-        LocationLabel.setAlignment(Pos.CENTER); // Center align the text
 
-        Label priceLabel = new Label("Price per night: " + accomodation.getPrice() + " TND");
-        priceLabel.setMaxWidth(Double.MAX_VALUE); // Ensure the label uses all available horizontal space
-        priceLabel.setAlignment(Pos.CENTER); // Center align the text
 
-        Label roomLabel = new Label("Number of rooms: " + accomodation.getNb_rooms() );
-        roomLabel.setMaxWidth(Double.MAX_VALUE); // Ensure the label uses all available horizontal space
-        roomLabel.setAlignment(Pos.CENTER); // Center align the text
+
+
+
 
         nameLabel.getStyleClass().add("accommodation-title");
         nameLabel.setMaxWidth(Double.MAX_VALUE); // Ensure the label uses all available horizontal space
@@ -271,26 +263,16 @@ public class AccFront {
         detailsButton.getStyleClass().add("accommodation-button");
         styleButton(detailsButton);
 
-        Button favoriteButton = new Button("\u2764");
-        favoriteButton.setOnAction(event -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/Favorites.fxml"));
-            Parent root;
-            try {
-                root = loader.load();
-                Favorites favoritesController = loader.getController();
-                favoritesController.addFavorite(accomodation);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        styleButton(favoriteButton);
+        Button favoriteButton = createFavoriteButton(accomodation);
+        favoriteButton.getStyleClass().add("accommodation-button");
+        styleButton(detailsButton);
 
         HBox buttonBox = new HBox(10);  // Spacing between buttons
         buttonBox.getChildren().addAll(detailsButton, favoriteButton);
         buttonBox.setAlignment(Pos.CENTER);
 
 
-        detailsBox.getChildren().addAll(nameLabel, priceLabel,LocationLabel,typeLabel,roomLabel,buttonBox);
+        detailsBox.getChildren().addAll(nameLabel,buttonBox);
         AnchorPane.setTopAnchor(imageView, 0.0);
         AnchorPane.setLeftAnchor(imageView, 0.0);
         AnchorPane.setRightAnchor(imageView, 0.0);
@@ -306,6 +288,16 @@ public class AccFront {
     private void styleButton(Button button) {
         button.setStyle("-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;");
     }
+    private Button createFavoriteButton(Accomodation accomodation) {
+        Button favoriteButton = new Button("\u2764");
+        favoriteButton.setOnAction(event -> {
+            favsController.addAccommodationToFavorites(accomodation.getRefA(), 1);  // Use the instance of FavsController
+        });
+        styleButton(favoriteButton);
+        return favoriteButton;
+    }
+
+
 
     private ImageView loadImage(String image_name) {
         ImageView imageView = new ImageView();

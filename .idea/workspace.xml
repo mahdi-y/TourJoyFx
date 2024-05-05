@@ -33,8 +33,8 @@
         <option value="Interface" />
         <option value="CSS File" />
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -65,7 +65,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/elabe/IdeaProjects/TourJoyFx-koussaymonument (1)&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/elabe/IdeaProjects/TourJoyFx-eya&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -163,7 +163,9 @@
       <workItem from="1714750914985" duration="15591000" />
       <workItem from="1714813881031" duration="7527000" />
       <workItem from="1714823069713" duration="4385000" />
-      <workItem from="1714831269968" duration="8658000" />
+      <workItem from="1714831269968" duration="9280000" />
+      <workItem from="1714841681659" duration="4217000" />
+      <workItem from="1714855455040" duration="8231000" />
     </task>
     <servers />
   </component>

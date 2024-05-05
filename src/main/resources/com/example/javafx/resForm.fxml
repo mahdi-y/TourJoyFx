@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="693.0" prefWidth="1004.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ResController">
-    <FlowPane fx:id="calendar" hgap="10.0" layoutX="14.0" layoutY="193.0" prefHeight="498.0" prefWidth="716.0" vgap="5.0" />
+<AnchorPane prefHeight="693.0" prefWidth="1492.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ResController">
+    <FlowPane fx:id="calendar" hgap="10.0" layoutX="14.0" layoutY="193.0" prefHeight="498.0" prefWidth="726.0" vgap="5.0" />
     <HBox alignment="CENTER" layoutX="163.0" layoutY="108.0" prefHeight="44.0" prefWidth="419.0" spacing="5.0">
         <children>
             <Button mnemonicParsing="false" onAction="#backOneMonth" text="&lt;" />
@@ -38,7 +38,7 @@
             <Insets right="9.0" />
         </padding>
     </HBox>
-    <VBox layoutX="753.0" layoutY="213.0" prefHeight="368.0" prefWidth="214.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 20;">
+    <VBox layoutX="772.0" layoutY="213.0" prefHeight="446.0" prefWidth="238.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 20;">
         <children>
             <ComboBox fx:id="NameComboBox" prefHeight="26.0" prefWidth="234.0" promptText="Select accommodation" />
             <Label text="Check-in:" />
@@ -64,5 +64,10 @@
          <Font name="Arial Black" size="35.0" />
       </font>
    </Label>
+   <ImageView fitHeight="363.0" fitWidth="372.0" layoutX="1101.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../images/wejden.png" />
+      </image>
+   </ImageView>
 
 </AnchorPane>

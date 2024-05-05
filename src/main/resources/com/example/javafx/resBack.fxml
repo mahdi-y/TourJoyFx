@@ -29,6 +29,7 @@
              <HBox spacing="10">
                  <Button fx:id="deleteRButton" mnemonicParsing="false" onAction="#deleteRes" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="DELETE" />
                  <Button fx:id="manageAccomButton" mnemonicParsing="false" onAction="#goToAccomManagement" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: blue; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Manage your accommodations" />
+               <Button fx:id="ExportRes" layoutX="138.0" layoutY="10.0" mnemonicParsing="false" onAction="#ExportRes" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="EXPORT EXCEL" />
              </HBox>
          </children>
         </VBox>

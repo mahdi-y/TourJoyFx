@@ -29,13 +29,13 @@
                 <Font name="System Bold" size="17.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="50" layoutY="200" prefHeight="600.0" prefWidth="1400.0">
+        <ScrollPane layoutX="313.0" layoutY="200" prefHeight="406.0" prefWidth="964.0">
             <content>
-                <VBox fx:id="favoritesVBox" spacing="10">
+                <GridPane fx:id="favoritesGrid" hgap="10" vgap="10">
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
-                </VBox>
+                </GridPane>
             </content>
         </ScrollPane>
         <Button fx:id="clearFavoritesButton" layoutX="1340.0" layoutY="720.0" onAction="#clearFavorites" style="-fx-background-color: red;" text="Clear Favorites" textFill="#f4eeee">

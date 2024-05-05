@@ -22,10 +22,12 @@
                 <Text fx:id="typeText" styleClass="detail-text" />
                 <Label styleClass="detail-label" text="Price per night:" />
                 <Text fx:id="priceText" styleClass="detail-text" />
+                <Label styleClass="detail-label" text="rooms' number:" />
+                <Text fx:id="roomsText" styleClass="detail-text" />
                 <TilePane fx:id="tilePane" hgap="5" prefColumns="3" vgap="5" />
-            <HBox alignment="CENTER" prefHeight="77.0" prefWidth="460.0">
+            <HBox alignment="CENTER" prefHeight="306.0" prefWidth="460.0">
                <children>
-                  <Button fx:id="bookButton" mnemonicParsing="false" onAction="#BookA" prefHeight="32.0" prefWidth="88.0" text="Book now" />
+                  <Button fx:id="bookButton" mnemonicParsing="false" onAction="#BookA" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: pink; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Book now" />
                </children>
             </HBox>
 

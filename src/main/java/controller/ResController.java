@@ -232,7 +232,7 @@ public class ResController implements Initializable{
             rectangle.setFill(Color.LIGHTBLUE);
             dayText.setFill(Color.RED);
         } else if (bookedDates.contains(cellDate)) {
-            rectangle.setFill(Color.RED);  // Highlight booked dates
+            rectangle.setFill(Color.web("#f69697"));  // Highlight booked dates
             dayText.setFill(Color.WHITE);
         }
 

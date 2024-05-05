@@ -10,6 +10,8 @@ module com.example.javafx {
     requires org.apache.httpcomponents.httpclient;
     requires org.apache.httpcomponents.httpcore;
     requires org.json;
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
     opens Entities to javafx.base;
     opens com.example.javafx to javafx.fxml;
     exports com.example.javafx;
