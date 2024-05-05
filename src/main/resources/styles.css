@@ -1,0 +1,176 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype');
+    /*font-weight: normal;*/
+    /*font-style: normal;*/
+}
+.root {
+    -fx-font-family: 'Poppins';
+}
+
+
+/* Main container */
+.mainContainer {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-font-family: 'Poppins';
+}
+
+/* Header text */
+.header-text {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-font-family: 'Poppins';
+}
+
+/* Form container */
+.formContainer {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-background-insets: 0;
+    -fx-padding: 40;
+    -fx-font-family: 'Poppins';
+}
+
+/* Text fields */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-pref-width: 400px;
+    -fx-max-width: 400px;
+    -fx-background-radius: 8;
+    -fx-border-color: #ccc;
+    -fx-border-width: 2;
+    -fx-font-family: 'Poppins';
+}
+
+/* Register button */
+.btn-register {
+    -fx-background-color: #0487E2;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 15 30;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-min-width: 100px;
+    -fx-min-height: 35px;
+    -fx-font-family: 'Poppins';
+}
+
+.btn-register:hover {
+    -fx-background-color: #4cae4c;
+}
+
+/* Normal text */
+.normal-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666;
+    -fx-font-family: 'Poppins';
+}
+
+/* Hyperlink */
+.hyperlink-text {
+    -fx-text-fill: #0096C9;
+    -fx-underline: true;
+    -fx-font-family: 'Poppins';
+}
+
+.hyperlink-text:hover {
+    -fx-text-fill: #23527c;
+}
+
+/* Applying global styles to all buttons and text fields */
+.button, .text-field {
+    -fx-font-family: 'Poppins';
+}
+
+.title-bar {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+    -fx-spacing: 10; /* Space between buttons */
+    -fx-background-radius: 8;
+    -fx-font-family: 'Poppins';
+
+}
+
+/* Style for close button */
+.close-button {
+    -fx-background-radius: 10em; /* Circular shape */
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #ff5f57; /* Red color */
+}
+
+.close-button:hover {
+    -fx-background-color: #ff3b30; /* Darker red on hover */
+}
+
+/* Style for minimize button */
+.minimize-button {
+    -fx-background-radius: 10em; /* Circular shape */
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #28c840; /* Green color */
+}
+
+.minimize-button:hover {
+    -fx-background-color: #14ae32; /* Darker green on hover */
+}
+
+.expand-button {
+    -fx-background-radius: 10em;
+    -fx-min-width: 14px;
+    -fx-min-height: 14px;
+    -fx-max-width: 14px;
+    -fx-max-height: 14px;
+    -fx-background-color: #c7a807;
+}
+
+.expand-button:hover {
+    -fx-background-color: #e79519;
+}
+
+/* General button styling to remove borders */
+.button {
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 5px; /* Adjust padding as needed */
+}
+
+.image-container {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-background-radius: 20;
+}
+
+.form-container {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 20;
+    -fx-background-insets: 0;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-min-width: 600px; /* Set a minimum width for the form */
+    -fx-max-width: 600px; /* Set a maximum width for the form */
+    -fx-font-family: 'Poppins';
+}
+
+.btn-login {
+    -fx-background-color: #e7401a;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-min-width: 100px;
+    -fx-min-height: 35px;
+    -fx-font-family: 'Poppins';
+}
+
+.btn-login:hover{
+    -fx-text-fill: black;
+    -fx-background-color: #e1bf17;
+}
