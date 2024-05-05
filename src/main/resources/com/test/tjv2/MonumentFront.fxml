@@ -31,7 +31,7 @@
             <children>
                 <TextField fx:id="searchField" layoutX="24.0" layoutY="65.0" prefHeight="26.0" prefWidth="251.0" promptText="Search by name" />
                 <Slider fx:id="priceSlider" layoutX="24.0" layoutY="156.0" majorTickUnit="25" max="100" min="0" prefWidth="251.0" showTickLabels="true" showTickMarks="true" value="50" />
-                <ComboBox fx:id="countryComboBox" styleClass="combo-box" layoutX="24.0" layoutY="274.0" prefWidth="251.0" />
+                <ComboBox fx:id="countryComboBox" layoutX="24.0" layoutY="274.0" prefWidth="251.0" styleClass="combo-box" />
             <Label layoutX="24.0" layoutY="27.0" prefHeight="18.0" prefWidth="187.0" text="Search Monuments :">
                <font>
                   <Font size="14.0" />
@@ -49,7 +49,7 @@
             </Label>
             </children>
         </AnchorPane>
-        <Label layoutX="1212.0" layoutY="45.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
+        <Label layoutX="1212.0" layoutY="45.0" prefHeight="26.0" prefWidth="101.0" text="ACCOMODATIONS" textFill="#230f6e">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
@@ -60,7 +60,7 @@
             </font>
         </Label>
 
-              <Pagination fx:id="pagination" styleClass="pagination" layoutX="172.8" layoutY="140.8" prefHeight="670.0" prefWidth="1210.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="156.0" AnchorPane.topAnchor="141.0" />
+              <Pagination fx:id="pagination" layoutX="172.8" layoutY="140.8" prefHeight="670.0" prefWidth="1210.0" styleClass="pagination" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="156.0" AnchorPane.topAnchor="141.0" />
 
 
 
@@ -76,10 +76,10 @@
             </font>
         </Label>
         <!-- Guide Button -->
-        <Button fx:id="guideButton" onAction="#goToGuides" layoutX="957.0" layoutY="39.0" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="GUIDES" textFill="#230f6e" />
+        <Button fx:id="guideButton" layoutX="957.0" layoutY="39.0" onAction="#goToGuides" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="GUIDES" textFill="#230f6e" />
 
         <!-- Monument Button -->
-        <Button fx:id="MonumentButton" layoutX="821.0" layoutY="39.0" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="MONUMENTS" textFill="#230f6e" onAction="#goToMonuments" />
+        <Button fx:id="MonumentButton" layoutX="821.0" layoutY="39.0" onAction="#goToMonuments" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="MONUMENTS" textFill="#230f6e" />
 
         <!-- Subscription Button -->
         <Button fx:id="SubscriptionButton" layoutX="1043.0" layoutY="39.0" prefHeight="38.0" prefWidth="166.0" styleClass="custom-button" text="SUBSCRIPTION" textFill="#230f6e" />

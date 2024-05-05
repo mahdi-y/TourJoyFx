@@ -3,6 +3,7 @@ package Services;
 import Entities.Guide;
 import models.User;
 import models.categories;
+import models.claims;
 import utils.DBConnection;
 
 import java.sql.*;
@@ -111,6 +112,11 @@ public class ServiceCategories implements IServices<categories> {
 
         pre.setInt(2, categories.getId()); // Ensure this is the last parameter according to the query
         pre.executeUpdate();
+    }
+
+    @Override
+    public void update(claims claims, Integer fkUser) throws SQLException {
+
     }
 
     @Override

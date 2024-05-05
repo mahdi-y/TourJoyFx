@@ -68,6 +68,11 @@ public class ServiceClaims implements IServices<claims> {
         return false;
     }
 
+    @Override
+    public void update(claims claims) throws SQLException {
+
+    }
+
     public List<claims> ReadBackList() throws  SQLException{
         List<claims> claimsList = new ArrayList<>();
         String query = "SELECT * FROM claims";
@@ -132,7 +137,7 @@ public class ServiceClaims implements IServices<claims> {
     }
 
     @Override
-    public void update(claims claims) throws SQLException {
+    public void update(claims claims, Integer fkUser) throws SQLException {
         String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=?, fkUser=? WHERE id=?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
             pre.setString(1, claims.getTitle());
@@ -141,7 +146,7 @@ public class ServiceClaims implements IServices<claims> {
             pre.setInt(4, claims.getFkC());
             pre.setString(5, claims.getReply());
             pre.setInt(6, claims.getId());
-            pre.setInt(7, claims.getFkUser());
+            pre.setInt(7, fkUser);
             pre.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

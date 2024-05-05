@@ -1,7 +1,8 @@
 package Services;
 
 import Entities.Guide;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
+import models.claims;
 import utils.DBConnection;
 import models.User;
 
@@ -201,7 +202,7 @@ public class userService implements IServices<User> {
     public List<User> fetchAllUsers() throws SQLException {
         List<User> usersList = new ArrayList<>();
         String query = "SELECT id, email, roles, first_name, last_name, phone_number, country, created_at, is_verified, is_banned FROM user";
-        Gson gson = new Gson();
+     //   Gson gson = new Gson();
 
         try (Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -359,6 +360,11 @@ public class userService implements IServices<User> {
         } else {
             System.out.println("La mise à jour de  " +  utilisateur.getFirstName() + " a échoué.");
         }
+    }
+
+    @Override
+    public void update(claims claims, Integer fkUser) throws SQLException {
+
     }
 
     @Override
