@@ -26,17 +26,17 @@ public class Home {
     public Button adminButton;
     public Label firstNameLabel;
 
-    public void initialize(){
+    public void initialize() throws IOException {
         UserSession session = UserSession.getInstance();
 
         firstNameLabel.setText("Welcome " + session.getFirstname() + "!");
+        System.out.println(session.getFirstname() + " " + session.getPhonenumber());
 
         if (isAdmin()) {
             adminButton.setVisible(true); // Show admin features if user is admin
         } else {
             adminButton.setVisible(false); // Hide admin features if user is not admin
         }
-
 
     }
 
@@ -79,38 +79,16 @@ public class Home {
     public void backoffice(ActionEvent actionEvent) throws IOException {
         HelloApplication.loadFXML("/usersList.fxml");
     }
-        /*public boolean isAdmin() {
-            Gson gson = new Gson();
-            String rolesJson = UserSession.getInstance().getRoles();  // Ensure this returns a JSON array string like '["ROLE_USER", "ROLE_ADMIN"]'
-            try {
-                String[] rolesArray = gson.fromJson(rolesJson, String[].class);  // Correctly parse the JSON array
-                Set<String> roles = new HashSet<>(Arrays.asList(rolesArray));
-                return roles.contains("ROLE_ADMIN");
-            } catch (JsonSyntaxException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }*/
 
-
-    /*public boolean isAdmin() {
-        User currentUser = SessionManager.getCurrentUser();
-        if (currentUser != null) {
-            String roles = Arrays.toString(currentUser.getRoles());
-            String[] roleArray = roles.split(",");
-            for (String role : roleArray) {
-                if (role.trim().equals("ROLE_ADMIN")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
     private void showAlert(Alert.AlertType alertType, String error, String s) {
         Alert alert = new Alert(alertType);
         alert.setTitle(error);
         alert.setHeaderText(null);
         alert.setContentText(s);
         alert.showAndWait();
+    }
+
+    public void profileCompletion() throws IOException{
+        HelloApplication.loadFXML("/profileCompletion.fxml");
     }
 }

@@ -51,10 +51,10 @@ public class userProfileController {
     public void initialize() {
         userService = new userService();
         User currentUser = SessionManager.getCurrentUser();
-        emailField.setText("Email: " + currentUser.getEmail());
-        firstNameField.setText("Firstname: " + currentUser.getFirstName());
-        lastNameField.setText("Lastname:" + currentUser.getLastName());
-        phoneNumberField.setText("Phone: " + currentUser.getPhoneNumber());
+        emailField.setText("" +currentUser.getEmail());
+        firstNameField.setText("" +currentUser.getFirstName());
+        lastNameField.setText("" +currentUser.getLastName());
+        phoneNumberField.setText("" + currentUser.getPhoneNumber());
 //        countryField.setText("Country: " + currentUser.getCountry());
 //        lastNameField.setText("Role: " + Arrays.toString(currentUser.getRoles()));
     }
@@ -177,8 +177,6 @@ public class userProfileController {
             showAlert(Alert.AlertType.ERROR, "Invalid First Name", "First name must contain more than 2 characters");
             return false;
         }
-
-
         return true;
     }
 
@@ -198,4 +196,11 @@ public class userProfileController {
         getPrimaryStage().close();
     }
 
+    public void homepage(ActionEvent actionEvent) throws IOException {
+        homepage();
+    }
+
+    public void homepage() throws IOException{
+        HelloApplication.loadFXML("/Home.fxml");
+    }
 }

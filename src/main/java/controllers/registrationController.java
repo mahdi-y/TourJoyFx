@@ -15,9 +15,11 @@ import java.time.LocalDateTime;
 import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import utils.UserSession;
 
 
 public class registrationController {
@@ -44,6 +46,10 @@ public class registrationController {
 
     @FXML
     private CheckBox toggleVisibilityCheckbox;
+
+    private String resetCodeBySMS;
+    private int generatedCodeSMS;
+
 
 
 
@@ -73,16 +79,14 @@ public class registrationController {
 
         User user = new User(email, roles, password, phoneNumber, createdAt);
 
-        userService.registerUser(user);
-
         SessionManager.setCurrentUser(user);
 
+        userService.registerUser(user);
+//        sendResetCodeBySMS();
         System.out.println("User registered successfully!");
-        showAlert(Alert.AlertType.INFORMATION, "Success", "Account created successfully!");
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Account successfully created! Please verify your account.");
 
-//        Stage stage = (Stage) register.getScene().getWindow();
-
-        profileCompletionPage();
+        accountVerification();
 
     }
 
@@ -94,8 +98,8 @@ public class registrationController {
     }
 
     @FXML
-    void profileCompletionPage() throws IOException {
-        HelloApplication.loadFXML("/profileCompletion.fxml");
+    void login() throws IOException {
+        HelloApplication.loadFXML("/login.fxml");
     }
 
     private boolean validateInputs() throws SQLException {
@@ -154,7 +158,11 @@ public class registrationController {
             return false;
         }
 
-        // Phone number validation
+        if (userService.phoneNumberExists(Integer.parseInt(phoneNumber))){
+            showAlert(Alert.AlertType.ERROR,"Phone Number Exists", "This phone number is already registered.");
+            return false;
+        }
+
         if (!phoneNumber.matches("\\d+")) {
             showAlert(Alert.AlertType.ERROR, "Invalid Phone Number", "Phone number should contain only digits.");
             return false;
@@ -174,6 +182,10 @@ public class registrationController {
     }
     public void handleSignIn(ActionEvent actionEvent) throws IOException {
         loginInstead();
+    }
+
+    public void accountVerification() throws IOException{
+        HelloApplication.loadFXML("/accountVerification.fxml");
     }
 
     private Stage getPrimaryStage() {
@@ -271,18 +283,25 @@ public class registrationController {
 
         return shuffled.toString();
     }
-    /*@FXML
-    void togglePasswordVisibility() {
-        if (toggleVisibilityCheckbox.isSelected()) {
-            passwordFieldVisible.setText(passwordField.getText());
-            passwordFieldVisible.setVisible(true);
-            passwordField.setVisible(false);
-            toggleVisibilityCheckbox.setText("Hide Password");
+    private void sendResetCodeBySMS() {
+        if (phoneNumberField.getText() != null) {
+            Random random = new Random();
+            generatedCodeSMS = 100000 + random.nextInt(900000);
+
+            this.resetCodeBySMS = String.valueOf(generatedCodeSMS);
+
+            try {
+                String NumeroTelephone = "+216" + phoneNumberField.getText().trim();
+                SMS.sendSMS(NumeroTelephone, "Your verification code : " + String.valueOf(generatedCodeSMS));
+
+                System.out.println("Code envoyé avec succès par SMS. Veuillez vérifier votre téléphone.");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
-            passwordField.setText(passwordFieldVisible.getText());
-            passwordField.setVisible(true);
-            passwordFieldVisible.setVisible(false);
-            toggleVisibilityCheckbox.setText("Show Password");
+            System.out.println("Le numéro de téléphone n'est pas associé à un compte utilisateur.");
         }
-    }*/
+    }
 }

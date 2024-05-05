@@ -98,7 +98,7 @@
             </TableColumn>
         </columns>
     </TableView>
-   <Button fx:id="deleteButton" layoutX="560.0" layoutY="725.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="114.0" text="Delete" />
+   <Button fx:id="deleteButton" layoutX="495.0" layoutY="726.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="114.0" text="Delete" />
 
     <!--  Navbar  -->
 
@@ -151,8 +151,9 @@
          <Image url="@images/export.png" />
       </image>
    </ImageView>
-   <Button fx:id="ban" layoutX="687.0" layoutY="725.0" mnemonicParsing="false" onAction="#ban" prefHeight="25.0" prefWidth="114.0" text="Ban" />
-   <Button fx:id="unban" layoutX="816.0" layoutY="725.0" mnemonicParsing="false" onAction="#unban" prefHeight="25.0" prefWidth="114.0" text="Unban" />
+   <Button fx:id="ban" layoutX="622.0" layoutY="726.0" mnemonicParsing="false" onAction="#ban" prefHeight="25.0" prefWidth="114.0" text="Ban" />
+   <Button fx:id="unban" layoutX="751.0" layoutY="726.0" mnemonicParsing="false" onAction="#unban" prefHeight="25.0" prefWidth="114.0" text="Unban" />
+   <Button fx:id="admin" layoutX="881.0" layoutY="726.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="114.0" text="Promote" onAction="#makeAdmin" />
     <!--  Navbar  -->
 
     <stylesheets>

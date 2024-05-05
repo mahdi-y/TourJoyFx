@@ -128,7 +128,11 @@ public class profileCompletionController {
     private boolean validateInputs() throws SQLException {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
+        String country = countryComboBox.toString();
 
+        if(country.isEmpty()){
+            showAlert(Alert.AlertType.ERROR, "Invalid Country", "You must select a country.");
+        }
         if (firstName.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Invalid First Name", "First name cannot be empty.");
             return false;

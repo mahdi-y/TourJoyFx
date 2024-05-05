@@ -6,6 +6,7 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 10);
     -fx-padding: 20px;
     -fx-spacing: 15px;
+    -fx-border-radius: 10px;
 }
 
 .input-field {
@@ -16,10 +17,11 @@
     -fx-border-color: #ccc;
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
+    -fx-padding: 10px;
 }
 
 .button {
-    -fx-background-color: #007bff; /* Primary color */
+    -fx-background-color: #007bff;
     -fx-text-fill: white;
     -fx-font-size: 16px;
     -fx-padding: 10px 20px;
@@ -30,55 +32,57 @@
 }
 
 .button:hover {
-    -fx-background-color: #45A049; /* Darker shade for hover */
+    -fx-background-color: #28c840;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 0, 5, 0, 5);
 }
 
 .upload-button, .submit-button {
-    -fx-background-color: #007bff;
+    -fx-background-color: #0056b3;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
+    -fx-padding: 12px 24px;
 }
 
 .title-label, .subtitle-label {
+    -fx-font-size: 20px;
     -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 2, 0, 0, 2);
 }
 
 .image-path-field {
     -fx-pref-width: 200px;
     -fx-pref-height: 30px;
     -fx-font-size: 12px;
-    -fx-background-color: #f8f8f8;
-    -fx-border-color: #ccc;
+    -fx-background-color: invisble;
+    -fx-border-color: invisible;
     -fx-border-width: 1px;
 }
 
-
 .close-button {
-    -fx-background-radius: 10em; /* Circular shape */
+    -fx-background-radius: 10em;
     -fx-min-width: 14px;
     -fx-min-height: 14px;
     -fx-max-width: 14px;
     -fx-max-height: 14px;
-    -fx-background-color: #ff5f57; /* Red color */
+    -fx-background-color: #ff5f57;
 }
 
 .close-button:hover {
-    -fx-background-color: #ff3b30; /* Darker red on hover */
+    -fx-background-color: #ff3b30;
 }
 
-/* Style for minimize button */
 .minimize-button {
-    -fx-background-radius: 10em; /* Circular shape */
+    -fx-background-radius: 10em;
     -fx-min-width: 14px;
     -fx-min-height: 14px;
     -fx-max-width: 14px;
     -fx-max-height: 14px;
-    -fx-background-color: #28c840; /* Green color */
+    -fx-background-color: #28c840;
 }
 
 .minimize-button:hover {
-    -fx-background-color: #14ae32; /* Darker green on hover */
+    -fx-background-color: #14ae32;
 }
 
 .expand-button {

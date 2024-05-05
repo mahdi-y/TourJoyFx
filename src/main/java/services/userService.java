@@ -4,13 +4,10 @@ import com.google.gson.Gson;
 import utils.DBConnection;
 import models.User;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import utils.userUtils;
 
@@ -120,6 +117,20 @@ public class userService implements IServices<User> {
             pre.setString(1, email);
             try (ResultSet rs = pre.executeQuery()) {
                 if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean phoneNumberExists(int phone) throws SQLException{
+        String query = "SELECT count(*) FROM user WHERE phone_number = ?";
+        try(PreparedStatement pre = con.prepareStatement(query)){
+            pre.setInt(1,phone);
+            try(ResultSet rs = pre.executeQuery()){
+                if(rs.next()){
                     return rs.getInt(1) > 0;
                 }
             }
@@ -368,6 +379,23 @@ public class userService implements IServices<User> {
         }
     }
 
+    public void verifyUser(String email) throws SQLException {
+        String query = "SELECT id FROM user WHERE email = ?";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setString(1, email);
+            ResultSet rs = pre.executeQuery();
+            if (rs.next()) {
+                int userId = rs.getInt("id");
+                String updateQuery = "UPDATE user SET is_verified = TRUE WHERE id = ?";
+                try (PreparedStatement updatePre = con.prepareStatement(updateQuery)) {
+                    updatePre.setInt(1, userId);
+                    updatePre.executeUpdate();
+                }
+            }
+        }
+    }
+
+
 
     public void unBanUser(User user) throws SQLException{
         String query = "UPDATE user SET is_banned = FALSE WHERE id = ?";
@@ -376,4 +404,21 @@ public class userService implements IServices<User> {
             pre.executeUpdate();
         }
     }
+
+    public void updateUserRoles(int userId, String newRoles) throws SQLException {
+        String query = "UPDATE user SET roles = CONCAT(roles, ',ROLE_ADMIN') WHERE id = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("User roles updated successfully.");
+            } else {
+                System.out.println("No user was updated. Check if the user ID is correct.");
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            throw e;
+        }
+    }
+
 }

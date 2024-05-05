@@ -216,4 +216,22 @@ public class usersList {
             showAlert(Alert.AlertType.WARNING, "No User Selected", "Please select a user to ban.");
         }
     }
+
+    @FXML
+    public void makeAdmin(ActionEvent actionEvent) {
+        User selectedUser = usersTable.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            try {
+                String newRoles = selectedUser.getRoles() + ",ROLE_ADMIN";
+                userService.updateUserRoles(selectedUser.getId(), newRoles);
+                showAlert(Alert.AlertType.INFORMATION, "Update Successful", "User has been granted admin rights.");
+                // Refresh user's display or roles view here if necessary
+            } catch (SQLException e) {
+                showAlert(Alert.AlertType.ERROR, "Update Failed", "Failed to update user roles.");
+                e.printStackTrace();
+            }
+        } else {
+            showAlert(Alert.AlertType.WARNING, "No User Selected", "Please select a user to grant admin rights.");
+        }
+    }
 }

@@ -36,7 +36,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/profileCompletion.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/signUp.fxml"));
         Parent root = fxmlLoader.load();
 
         makeStageDraggable(root);

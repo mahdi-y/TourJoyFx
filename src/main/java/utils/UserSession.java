@@ -3,6 +3,7 @@ package utils;
 import models.User;
 
 import javax.mail.Authenticator;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Properties;
@@ -23,6 +24,7 @@ public final class UserSession {
     private String phonenumber;
 
     private String[] roles;
+
 
 
 
@@ -83,13 +85,8 @@ public final class UserSession {
         return instance;
     }
 
-//    public boolean hasRole(String role) {
-//        return roles.contains(role);
-//    }
-
     public void cleanUserSession() {
         id = 0;
-
         email = null;
         password = null;
         firstname = null;

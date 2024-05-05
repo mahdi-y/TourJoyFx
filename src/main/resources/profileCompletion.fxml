@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -14,15 +13,9 @@
 <?import javafx.scene.text.Font?>
 
 <StackPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.profileCompletionController">
-    <!-- Background Image -->
-    <ImageView fitHeight="700.0" fitWidth="1200.0">
-        <image>
-            <Image url="@images/bg1.jpg" />
-        </image>
-    </ImageView>
 
     <!-- Content VBox -->
-    <VBox alignment="CENTER" spacing="10.0" styleClass="main-container">
+    <VBox alignment="CENTER" prefHeight="819.0" prefWidth="1200.0" spacing="10.0" styleClass="main-container">
         <HBox alignment="TOP_RIGHT" spacing="10.0">
             <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button">
             <HBox.margin>

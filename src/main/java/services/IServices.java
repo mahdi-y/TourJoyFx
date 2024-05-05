@@ -14,6 +14,9 @@ public interface IServices<T>{
     boolean emailExists(String email) throws SQLException;
 
     boolean deleteUser(T t) throws SQLException;
+
+    boolean phoneNumberExists(int phone) throws SQLException;
+
     List<T> ReadUser() throws SQLException;
 
 

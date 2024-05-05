@@ -49,7 +49,12 @@ public class LoginController {
 
                 SessionManager.setCurrentUser(user);
 
-                redirect_homePage();
+                if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
+                    redirect_profileCompletionPage();
+                } else {
+                    redirect_homePage();
+                }
+
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid email or password.");
             }
@@ -103,9 +108,8 @@ public class LoginController {
         HelloApplication.loadFXML("/Home.fxml");
     }
 
-    /*public boolean hasAdminRole(User user) {
-        Set<String> roles = user.getRoles();
-        return roles.contains("ROLE_ADMIN");
-    }*/
+    public void redirect_profileCompletionPage() throws IOException {
+        HelloApplication.loadFXML("/profileCompletion.fxml");
+    }
 
 }

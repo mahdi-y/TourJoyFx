@@ -12,6 +12,4 @@ public class SessionManager {
     public static User getCurrentUser() {
         return currentUser; // Retrieve the current user
     }
-
-
 }
