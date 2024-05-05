@@ -1,55 +1,107 @@
+/*
 package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-// Déclaration d'une classe publique appelée DBConnection, utilisée pour établir une connexion à une base de données MySQL.
 public class DBConnection {
+    private final String URL = "jdbc:mysql://localhost:3306/db";
+    private final String USER = "root";
+    private final String PWD = "";
 
-    private static final String URL = "jdbc:mysql://localhost:3306/db";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
-
-    //////////     Second Step: Creer une instance static de meme type que la classe
-    private static DBConnection instance;
-    // private static :Cela signifie qu'il n'y aura qu'une seule copie partagée de cette variable pour toute la classe DBConnection
     private Connection cnx;
+    private static DBConnection instance;
 
-    //////////First Step: Rendre le constructeur privé
-    private DBConnection() {     // Définition du constructeur de la classe DBConnection.
+    private DBConnection() {
         try {
-            cnx = DriverManager.getConnection(URL, USER, PASSWORD); // Établissement de la connexion à la base de données en utilisant DriverManager.
-            // Le DriverManager est une classe fournie par Java pour gérer les pilotes de connexion aux bases de données via JDBC
-            System.out.println("Connected To DATABASE !");
+
+            cnx = DriverManager.getConnection(URL, USER, PWD);
+            System.out.println("Connection established !");
         } catch (SQLException e) {
-            System.err.println("Error: "+e.getMessage());
+            System.out.println("Error while trying to establish connection : " + e.getMessage());
         }
     }
 
-
-
-    //////////   Thrid Step: Creer une methode static pour recuperer l'instance
-// Définition d'une méthode statique getInstance() pour récupérer l'instance unique de DBConnection
-    public static DBConnection getInstance(){
-        if (instance == null) instance = new DBConnection(); // Création d'une nouvelle instance si aucune instance n'existe
-        return instance; // Retour de l'instance existante.
-    }
-
-    // Définition d'une méthode getCnx() pour récupérer la connexion à la base de données.
     public Connection getCnx() {
-        return cnx; // Retour de la connexion à la base de données.
+        return cnx;
     }
 
+    public static DBConnection getInstance() {
+        if (instance == null) {
+            instance = new DBConnection();
+        }
+        return instance;
+    }
+}*/
+
+
+package utils;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+    private final String URL = "jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false&serverTimezone=UTC";
+    private final String USER = "root";
+    private final String PWD = "";
+
+    private Connection cnx;
+    private static DBConnection instance;
+
+    private DBConnection() {
+        connect(); // Moved connection logic to a separate method for clarity and reuse
+        //addShutdownHook(); // Add shutdown hook to close the connection when the JVM shuts down
+    }
+
+    // Method to establish or re-establish a connection
+    private void connect() {
+        try {
+            if (cnx != null && !cnx.isClosed()) {
+                cnx.close(); // Close the existing connection if open
+            }
+            cnx = DriverManager.getConnection(URL, USER, PWD);
+            System.out.println("Connection successfully established!");
+        } catch (SQLException e) {
+            System.err.println("Error while trying to establish connection: " + e.getMessage());
+        }
+    }
+
+    // Method to add a shutdown hook to the Runtime
+    private void addShutdownHook() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (cnx != null) {
+                try {
+                    cnx.close();
+                    System.out.println("Database connection closed successfully.");
+                } catch (SQLException e) {
+                    System.err.println("Failed to close the database connection: " + e.getMessage());
+                }
+            }
+        }));
+    }
+
+    // Public method to get the connection instance
+    public Connection getCnx() {
+        try {
+            // Check if connection is valid or not closed before returning it
+            if (cnx == null || cnx.isClosed() || !cnx.isValid(5)) {
+                System.out.println("Reconnecting to the database...");
+                connect();
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to validate the connection, attempting to reconnect...");
+            connect();
+        }
+        return cnx;
+    }
+
+    // Singleton access method
+    public static DBConnection getInstance() {
+        if (instance == null) {
+            instance = new DBConnection();
+        }
+        return instance;
+    }
 }
-
-// le modèle de conception Singleton, qui garantit qu'une seule instance de
-// la classe DBConnection est créée.
-//il s'applique sur la classe et non sur la base de donées
-
-//JDBC: Java DataBase Connectivity : c'est une API (Application Programming Interface) d’interaction avec un SGBD contenant :
-//un ensemble de classes et d’interfaces
-//Permet de:
-//1*Établir une connexion avec un SGBD
-//2*Envoyer des requêtes SQL
-//3*Récupérer des résultats de requêtes

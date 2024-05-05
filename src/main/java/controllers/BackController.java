@@ -34,6 +34,8 @@ public class BackController {
     @FXML
     public ImageView chatImageView;
     @FXML
+    public Button frontoffice;
+    @FXML
     private Button chat;
     public Button ClaimB;
     @FXML

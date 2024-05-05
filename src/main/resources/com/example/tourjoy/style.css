@@ -65,7 +65,7 @@
 /* Table cells */
 .table-cell {
     -fx-background-color: transparent; /* Transparent background */
-    -fx-border-color: #ccc; /* Border color */
+    -fx-border-color: transparent; /* Border color */
     -fx-border-width: 1px; /* Border width */
     -fx-padding: 8px; /* Padding */
     -fx-font-size: 14px; /* Font size */
@@ -143,7 +143,11 @@
 .tile-pane {
     -fx-background-color: #f0f0f2;
 }
-
+.table-row-cell:selected {
+    -fx-background-color: #dae7f3;;
+    -fx-text-fill: black;
+    -fx-table-cell-border-color: transparent;
+}
 .vbox {
     -fx-padding: 10 10 10 10;  // Correct padding
 -fx-background-color: #ffffff;

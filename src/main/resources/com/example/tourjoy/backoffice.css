@@ -53,24 +53,30 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 10, 0, 0, 0);
 }
 
+
+/* Table view */
 .table-view {
-    -fx-background-color: #f4f4f4;
-    -fx-table-cell-border-color: transparent;
-    -fx-border-radius: 5;
-    -fx-border-width: 1;
-    -fx-border-color: #dcdcdc;
+    -fx-background-color: #f5f5f5; /* Background color */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
 }
 
+/* Table cells */
+.table-cell {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-color: transparent; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-padding: 8px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
 /*.table-row-cell {
     -fx-padding: 10 0 10 0;
     -fx-border-color: transparent transparent #e2e2e2 transparent;
     -fx-background-color: white;
 }*/
 
-.table-row-cell:selected {
-    -fx-background-color: #dae7f3; /* Light blue selection */
-    -fx-text-fill: black;
-}
+
 
 /*.table-column {
     -fx-font-size: 14px;
@@ -115,3 +121,22 @@
     -fx-background-color: #f4f4f4;
 }
 */
+
+.button {
+    -fx-background-radius: 20px; /* Rounded edges */
+    -fx-padding: 8px 16px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: black; /* Text color */
+}
+.table-row-cell:selected {
+    -fx-background-color: #dae7f3;
+    -fx-text-fill: black;
+    -fx-table-cell-border-color: transparent;
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5;
+    -fx-padding: 4px;
+}

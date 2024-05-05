@@ -38,6 +38,7 @@ public class RecController {
     @FXML
     private Button button;
 
+    private ObservableList<claims> observableClaims = FXCollections.observableArrayList();
 
     @FXML
     private TableColumn<claims, Integer> idR1;
@@ -71,6 +72,8 @@ public class RecController {
     void initialize() {
         ServiceClaims = new ServiceClaims();
         button.setOnAction(event -> addClaims());
+        claimsTableView1.setItems(observableClaims);  // Bind the TableView to the observable list
+
         loadClaimsData();
         setupTableColumns();
         try {
@@ -130,6 +133,7 @@ public class RecController {
 
             // Add claim to database
             ServiceClaims.add(claims);
+            observableClaims.add(claims);
             ServiceClaims.addNotification("A new claim has been submitted"); // Add notification
 
             clearForm();
@@ -228,10 +232,9 @@ public class RecController {
     private void loadClaimsData() {
         try {
             List<claims> claimsList = ServiceClaims.Read();
-            ObservableList<claims> observableClaims = FXCollections.observableArrayList(claimsList);
-            claimsTableView1.setItems(observableClaims);
+            observableClaims.setAll(claimsList);  // Refresh the observable list
         } catch (SQLException e) {
-            e.printStackTrace();  // Handle exceptions, log them, and maybe show an error message to the user
+            e.printStackTrace();
         }
     }
 }

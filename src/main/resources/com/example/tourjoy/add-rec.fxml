@@ -16,7 +16,7 @@
 <AnchorPane prefHeight="840.0" prefWidth="1530.0" styleClass="main-container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RecController">
 
 
-<ImageView fitHeight="840.0" fitWidth="1530.0">
+<ImageView fitHeight="840.0" fitWidth="1537.0">
     <image>
         <Image url="@images/bg1.jpg" />
     </image>
@@ -34,14 +34,14 @@
         <!-- Book Button -->
         <!-- Add your buttons, ComboBox, and DatePicker here -->
 
-        <TextField fx:id="titleT" layoutX="153.0" layoutY="158.0" opacity="0.9" prefHeight="38.0" prefWidth="500.0" />
-        <Label fx:id="title" layoutX="10.0" layoutY="162.0" prefHeight="30.0" prefWidth="58.0" text="Title" />
-        <TextField fx:id="descriptionT" layoutX="153.0" layoutY="241.0" opacity="0.9" prefHeight="178.0" prefWidth="500.0" />
-        <Label fx:id="description" layoutX="10.0" layoutY="245.0" text="Description" />
-        <ComboBox fx:id="catBox" layoutX="152.0" layoutY="465.0" opacity="0.9" prefHeight="38.0" prefWidth="500.0" promptText="Select.." />
+        <TextField fx:id="titleT" layoutX="153.0" layoutY="119.0" opacity="0.8" prefHeight="38.0" prefWidth="500.0" style="-fx-border-color: lightBlue;" />
+        <Label fx:id="title" layoutX="13.0" layoutY="123.0" prefHeight="30.0" prefWidth="58.0" text="Title" />
+        <TextField fx:id="descriptionT" layoutX="153.0" layoutY="225.0" opacity="0.8" prefHeight="178.0" prefWidth="500.0" style="-fx-border-color: lightBlue;" />
+        <Label fx:id="description" layoutX="10.0" layoutY="253.0" text="Description" />
+        <ComboBox fx:id="catBox" layoutX="152.0" layoutY="465.0" opacity="0.8" prefHeight="38.0" prefWidth="500.0" promptText="Select.." />
         <Label fx:id="catLabel" layoutX="10.0" layoutY="469.0" text="Category" />
-        <Button fx:id="button" layoutX="521.0" layoutY="586.0" onAction="#addClaims" prefHeight="47.0" prefWidth="132.0" style="-fx-background-color: #031231; -fx-text-fill: white;" text="Add" />
-         <Button fx:id="chat" layoutX="143.0" layoutY="586.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="47.0" prefWidth="132.0" style="-fx-background-color: #031231;" text="open chat" />
+        <Button fx:id="button" layoutX="521.0" layoutY="622.0" onAction="#addClaims" prefHeight="47.0" prefWidth="132.0" style="-fx-background-color: #031231; -fx-text-fill: white;" text="Add" />
+         <Button fx:id="chat" layoutX="144.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="47.0" prefWidth="132.0" style="-fx-background-color: #031231;" text="open chat" />
         <!-- Continue adding other nodes as needed -->
     </children>
 </AnchorPane>
@@ -87,13 +87,13 @@
           <Image url="@images/tourjoy.png" />
       </image>
   </ImageView>
-   <TableView fx:id="claimsTableView1" layoutX="772.0" layoutY="199.0" prefHeight="572.0" prefWidth="734.0">
+   <TableView fx:id="claimsTableView1" layoutX="772.0" layoutY="202.0" opacity="0.8" prefHeight="554.0" prefWidth="702.0" style="-fx-border-color: lightBlue;">
       <columns>
-         <TableColumn fx:id="titleR1" prefWidth="104.7999267578125" text="Title" />
-         <TableColumn fx:id="descriptionR1" prefWidth="129.5999755859375" text="Description" />
-         <TableColumn fx:id="createDateR1" minWidth="7.199951171875" prefWidth="119.99993896484375" text="Creation Date" />
-         <TableColumn fx:id="stateR1" prefWidth="113.5999755859375" text="State" />
-         <TableColumn fx:id="catView1" minWidth="0.0" prefWidth="111.199951171875" text="Category" />
+         <TableColumn fx:id="titleR1" prefWidth="102.39990234375" text="Title" />
+         <TableColumn fx:id="descriptionR1" prefWidth="126.4000244140625" text="Description" />
+         <TableColumn fx:id="createDateR1" minWidth="7.199951171875" prefWidth="115.199951171875" text="Creation Date" />
+         <TableColumn fx:id="stateR1" prefWidth="92.0001220703125" text="State" />
+         <TableColumn fx:id="catView1" minWidth="0.0" prefWidth="98.4000244140625" text="Category" />
          <TableColumn fx:id="replyR1" prefWidth="158.4000244140625" text="Reply" />
       </columns>
    </TableView>
