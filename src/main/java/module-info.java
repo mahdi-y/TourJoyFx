@@ -30,8 +30,8 @@ module com.example.tourjoy {
     opens com.example.tourjoy to javafx.fxml, javafx.base;
     opens models to javafx.base;
     exports com.example.tourjoy;
-    exports controllers;
-    opens controllers to javafx.fxml;
+    exports Controller;
+    opens Controller to javafx.fxml;
 
 
 }

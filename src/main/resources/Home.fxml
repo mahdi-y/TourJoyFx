@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1200.0" minHeight="776.0" minWidth="1200.0" prefHeight="776.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Home">
+<AnchorPane maxHeight="800.0" maxWidth="1200.0" minHeight="776.0" minWidth="1200.0" prefHeight="776.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Home">
     <children>
         <Label fx:id="idU" layoutX="288.0" layoutY="575.0" text="Label" textFill="WHITE" />
         <ImageView fitHeight="835.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">

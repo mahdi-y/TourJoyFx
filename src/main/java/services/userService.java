@@ -1,9 +1,8 @@
-package services;
+package Services;
 
 import com.google.gson.Gson;
 import utils.DBConnection;
 import models.User;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

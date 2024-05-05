@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="455.0" prefWidth="626.0" style="-fx-background-color: #739a8b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChatController">
+<AnchorPane prefHeight="455.0" prefWidth="626.0" style="-fx-background-color: #739a8b;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChatController">
 
     <!-- Sample FXML for chat panel -->
     <VBox fx:id="chatPanel" spacing="10">

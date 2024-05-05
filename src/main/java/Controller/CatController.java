@@ -1,4 +1,4 @@
-package controllers;
+package Controller;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.categories;
-import services.ServiceCategories;
+import Services.ServiceCategories;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,7 +41,7 @@ public class CatController {
     @FXML
     private TableColumn<categories, String> nameView;
 
-    private services.ServiceCategories ServiceCategories;
+    private Services.ServiceCategories ServiceCategories;
 
 
 

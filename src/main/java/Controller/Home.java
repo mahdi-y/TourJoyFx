@@ -1,8 +1,6 @@
-package controllers;
+package Controller;
 
 import com.example.tourjoy.HelloApplication;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,16 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import services.userService;
-import utils.SessionManager;
 import utils.UserSession;
-import models.User;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Home {
 

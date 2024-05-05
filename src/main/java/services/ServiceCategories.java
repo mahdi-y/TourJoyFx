@@ -1,4 +1,4 @@
-package services;
+package Services;
 
 import models.User;
 import models.categories;

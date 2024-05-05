@@ -1,11 +1,10 @@
-package controllers;
+package Controller;
 
 import com.example.tourjoy.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import utils.UserSession;
 
 public class UserDashboardController {
     @FXML

@@ -1,4 +1,4 @@
-package controllers;
+package Controller;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,7 +16,7 @@ import models.Message;
 import models.categories;
 import models.claims;
 import models.notification;
-import services.ServiceClaims;
+import Services.ServiceClaims;
 import utils.DBConnection;
 
 import java.io.IOException;

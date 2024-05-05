@@ -1,4 +1,4 @@
-package controllers;
+package Controller;
 
 import com.example.tourjoy.HelloApplication;
 import javafx.event.ActionEvent;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
-import services.userService;
+import Services.userService;
 import utils.GMailer;
 import java.io.IOException;
 import java.sql.SQLException;

@@ -1,16 +1,15 @@
-package controllers;
+package Controller;
 
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Message;
-import services.MessageService;
+import Services.MessageService;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;

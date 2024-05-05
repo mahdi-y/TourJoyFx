@@ -1,6 +1,6 @@
 package com.example.tourjoy;
 
-import controllers.RecController;
+import Controller.RecController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

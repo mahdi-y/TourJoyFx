@@ -1,4 +1,4 @@
-package controllers;
+package Controller;
 
 import com.example.tourjoy.HelloApplication;
 import javafx.event.ActionEvent;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
-import services.userService;
+import Services.userService;
 import utils.SessionManager;
 
 import java.io.IOException;
@@ -19,7 +19,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import utils.UserSession;
 
 
 public class registrationController {
