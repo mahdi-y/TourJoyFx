@@ -1,5 +1,6 @@
-package services;
+package Services;
 
+import Entities.Guide;
 import com.google.gson.Gson;
 import utils.DBConnection;
 import models.User;
@@ -358,6 +359,11 @@ public class userService implements IServices<User> {
         } else {
             System.out.println("La mise à jour de  " +  utilisateur.getFirstName() + " a échoué.");
         }
+    }
+
+    @Override
+    public void update(Guide guide, int oldCIN) throws SQLException {
+
     }
 
     @Override

@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Tooltip;
-import services.ServiceClaims;
+import Services.ServiceClaims;
 
 import java.sql.SQLException;
 import java.util.Map;

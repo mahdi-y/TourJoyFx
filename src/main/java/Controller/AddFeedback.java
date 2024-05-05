@@ -1,6 +1,7 @@
 package Controller;
 
 import Entities.feedback;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -9,6 +10,7 @@ import utils.MyDB;
 import org.controlsfx.control.Rating;
 
 import javafx.fxml.FXML;
+import utils.UserSession;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,15 +24,14 @@ import java.util.Map;
 public class AddFeedback {
     @FXML
     private ComboBox<String> guideCombo;
-
+    @FXML
+    private ScrollPane feedbackScrollPane;
+    @FXML
+    private VBox feedbackContainer;
     private String selectedGuideName;
 
     @FXML
     private TextArea CommentField;
-    @FXML
-    private VBox feedbackContainer;
-    @FXML
-    private ScrollPane feedbackScrollPane;
 
     @FXML
     private Button adddF;
@@ -59,11 +60,16 @@ public class AddFeedback {
 
     @FXML
     public void initialize() throws SQLException {
+        feedbackContainer.setPadding(new Insets(10, 10, 10, 10));
+
+        // Populate the ComboBox with guide names and ensure a default selection is made.
         populateGuideComboBox();
-        if (selectedGuideName != null && !selectedGuideName.isEmpty()) {
-            selectGuideByName(selectedGuideName);  // Use the new method for selecting the guide
+        // Set the default selection to the first guide if not specifically set.
+        if (guideCombo.getItems().size() > 0 && guideCombo.getSelectionModel().getSelectedItem() == null) {
+            guideCombo.getSelectionModel().selectFirst();
         }
-        adddF.setOnAction(event -> addFeedback());
+
+        // Load feedback for the initially selected guide
         loadFeedbackForSelectedGuide();
 
         // Listen to changes in the ComboBox and load feedback accordingly.
@@ -76,6 +82,10 @@ public class AddFeedback {
                 }
             }
         });
+
+        // Setup the action for the submit button
+        adddF.setOnAction(event -> addFeedback());
+
     }
 
     private void populateGuideComboBox() {
@@ -130,18 +140,18 @@ public class AddFeedback {
                 .orElse(null);
 
         String comment = CommentField.getText();
-        double rating = ratingControl.getRating(); // Get the current rating
-
-        // Round the rating to one decimal place
+        double rating = ratingControl.getRating();
         double roundedRating = Math.round(rating * 10) / 10.0;
 
+        int userId = UserSession.getInstance().getId(); // Assuming UserSession holds the current user
+
         if (selectedGuideId != null && isValidComment(comment)) {
-            feedback feedback = new feedback(selectedGuideId, comment, roundedRating); // Use the rounded rating
+            feedback feedback = new feedback(selectedGuideId, userId, comment, roundedRating);
             FeedbackServices feedbackServices = new FeedbackServices();
             if (feedbackServices.add(feedback)) {
                 showAlert("Thank You", "Thank you for your feedback.", Alert.AlertType.INFORMATION);
-                CommentField.clear();  // Clear the comment field after submission
-                ratingControl.setRating(0);  // Reset the rating control
+                CommentField.clear();
+                ratingControl.setRating(0);
             } else {
                 showAlert("Error", "Failed to submit feedback.", Alert.AlertType.ERROR);
             }
@@ -149,6 +159,7 @@ public class AddFeedback {
             System.out.println("No feedback submitted: Check that all fields are correct.");
         }
     }
+
 
 
 
@@ -160,7 +171,7 @@ public class AddFeedback {
         // We must modify this part to close the window after the alert is dismissed
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                // Close the current window, assuming `adddF` (the button) is part of the same window
+                // Close the current window, assuming adddF (the button) is part of the same window
                 ((Stage) adddF.getScene().getWindow()).close();
             }
         });
@@ -174,6 +185,8 @@ public class AddFeedback {
             }
         }
     }
+
+
 
     private void loadFeedbackForSelectedGuide() throws SQLException {
         feedbackContainer.getChildren().clear();
@@ -196,6 +209,7 @@ public class AddFeedback {
         }
 
         List<feedback> feedbacks = FeedbackServices.getFeedbackByGuideId(guideId);
+
         if (feedbacks.isEmpty()) {
             System.out.println("No feedback found for Guide ID: " + guideId);
             // Hide the ScrollPane when there are no feedback items
@@ -259,7 +273,5 @@ public class AddFeedback {
                 "-fx-text-fill: white; " +
                 "-fx-background-radius: 5; " +
                 "-fx-padding: 5 22; " +
-                "-fx-font-weight: bold;");// Revert background color when not hovered
-
-    }
-}
+                "-fx-font-weight: bold;");// Revert background color when
+    }}

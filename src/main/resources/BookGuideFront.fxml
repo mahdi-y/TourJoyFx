@@ -39,7 +39,7 @@
         </children>
     </AnchorPane>
     <stylesheets>
-        <URL value="@/style/styles.css" />
+        <URL value="@style/styles.css" />
     </stylesheets>
 
 </AnchorPane>

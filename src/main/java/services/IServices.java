@@ -1,5 +1,6 @@
-package services;
+package Services;
 
+import Entities.Guide;
 import models.User;
 
 import java.sql.SQLException;
@@ -16,6 +17,9 @@ public interface IServices<T>{
 
     boolean deleteUser(T t) throws SQLException;
     void update(T t) throws SQLException;
+
+    void update(Guide guide, int oldCIN) throws SQLException;
+
     void delete(T t) throws SQLException;
     List<T> Read(int fkUser) throws SQLException;
 

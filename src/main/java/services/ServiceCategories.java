@@ -1,5 +1,6 @@
-package services;
+package Services;
 
+import Entities.Guide;
 import models.User;
 import models.categories;
 import utils.DBConnection;
@@ -111,6 +112,12 @@ public class ServiceCategories implements IServices<categories> {
         pre.setInt(2, categories.getId()); // Ensure this is the last parameter according to the query
         pre.executeUpdate();
     }
+
+    @Override
+    public void update(Guide guide, int oldCIN) throws SQLException {
+
+    }
+
     public boolean isNameUnique(String name, Integer id) throws SQLException {
         String query = "SELECT COUNT(*) FROM categories WHERE name = ? AND id != ?";
         try (PreparedStatement pst = con.prepareStatement(query)) {

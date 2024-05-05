@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import models.Message;
-import services.MessageService;
+import Services.MessageService;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;

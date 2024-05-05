@@ -15,7 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import models.User;
-import services.userService;
+import Services.userService;
 import utils.SessionManager;
 
 
@@ -92,7 +92,7 @@ public class profileCompletionController {
             e.printStackTrace();
         } finally {
 //            ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
-            UserDashboardPage();
+            redirect_homePage();
         }
     }
 
@@ -173,8 +173,8 @@ public class profileCompletionController {
     }
 
     @FXML
-    void UserDashboardPage() throws IOException {
-        HelloApplication.loadFXML("/Home.fxml");
+    public void redirect_homePage() throws IOException{
+        HelloApplication.loadFXML("/com/test/tjv2/Home.fxml");
     }
 
     private Stage getPrimaryStage() {

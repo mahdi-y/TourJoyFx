@@ -15,12 +15,13 @@ public class FeedbackServices {
 
     // Add Feedback
     public boolean add(feedback feedback) {
-        String query = "INSERT INTO feedback (fk_guide_id, comment, rating) VALUES (?, ?, ?)";
+        String query = "INSERT INTO feedback (fk_guide_id, user_id_id, comment, rating) VALUES (?, ?, ?, ?)";
         try (Connection conn = MyDB.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, feedback.getGuide_id());
-            pstmt.setString(2, feedback.getComment());
-            pstmt.setDouble(3, feedback.getRating());  // This will handle the partial ratings
+            pstmt.setInt(2, feedback.getUser_id());
+            pstmt.setString(3, feedback.getComment());
+            pstmt.setDouble(4, feedback.getRating());
             int result = pstmt.executeUpdate();
             return result > 0;
         } catch (SQLException e) {
@@ -28,6 +29,7 @@ public class FeedbackServices {
             return false;
         }
     }
+
 
 
 
@@ -50,7 +52,7 @@ public class FeedbackServices {
     public List<feedback> Read() {
         List<feedback> feedbacks = new ArrayList<>();
         // Include the rating field in the SELECT query
-        String query = "SELECT id, guide_id, comment, rating FROM Feedback";
+        String query = "SELECT id, guide_id, user_id_id, comment, rating FROM Feedback";
         try (Connection conn = MyDB.getInstance().getConnection();
              PreparedStatement pst = conn.prepareStatement(query);
              ResultSet rs = pst.executeQuery()) {
@@ -60,6 +62,7 @@ public class FeedbackServices {
                 feedbacks.add(new feedback(
                         rs.getInt("id"),
                         rs.getInt("guide_id"),
+                        rs.getInt("user_id_id"),
                         rs.getString("comment"),
                         rs.getDouble("rating")  // Make sure to fetch the rating from the ResultSet
                 ));

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import Services.GuideServices;
+import utils.UserSession;
 
 
 public class BookingServices {
@@ -31,6 +32,8 @@ public class BookingServices {
         try {
             initializeConnection(); // Ensure connection is active
 
+            // Retrieve the logged-in user's ID
+            int userId = UserSession.getInstance().getId();  // Assuming UserSession holds the current user
             // Get selected guide ID from the map
             int selectedGuideId = guideMap.entrySet().stream()
                     .filter(entry -> entry.getValue().equals(selectedGuideName))
@@ -44,15 +47,16 @@ public class BookingServices {
                 return false;
             }
 
-            // Prepare SQL statement to insert booking
-            String query = "INSERT INTO Booking (guide_id, user_id, date) VALUES (?, NULL, ?)";
+            // Prepare SQL statement to insert booking with user_id
+            String query = "INSERT INTO Booking (guide_id, user_id, date) VALUES (?, ?, ?)";
 
             // Create prepared statement
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             // Set parameters
             preparedStatement.setInt(1, selectedGuideId);
-            preparedStatement.setDate(2, Date.valueOf(selectedDate));
+            preparedStatement.setInt(2, userId);  // Set user_id
+            preparedStatement.setDate(3, Date.valueOf(selectedDate));
 
             // Execute the insert statement
             int rowsAffected = preparedStatement.executeUpdate();
@@ -66,6 +70,7 @@ public class BookingServices {
             return false;
         }
     }
+
 
 
 
@@ -90,17 +95,19 @@ public class BookingServices {
 
     public static List<Booking> Read() throws SQLException {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT id, guide_id, date, status FROM Booking";
+        String query = "SELECT id, guide_id, user_id date, status FROM Booking";
         try (Connection connection = MyDB.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 int guideId = resultSet.getInt("guide_id");
+                int userId = resultSet.getInt("user_id");
+
                 LocalDate date = resultSet.getDate("date").toLocalDate(); // Assuming date is stored as a SQL DATE type
                 String status = resultSet.getString("status");
                 // Create a Booking object with the retrieved information
-                Booking booking = new Booking(id, guideId, date, status);
+                Booking booking = new Booking(id, guideId,userId, date, status);
                 bookings.add(booking);
             }
         } catch (SQLException e) {
@@ -139,10 +146,12 @@ public class BookingServices {
             if (rs.next()) {
                 int id = rs.getInt("id");
                 int guideId = rs.getInt("guide_id");
-                LocalDate date = rs.getDate("date").toLocalDate();
-                 String status = rs.getString("status");
+                int userId = rs.getInt("user_id");
 
-                lastBooking = new Booking(id, guideId, date, status);
+                LocalDate date = rs.getDate("date").toLocalDate();
+                String status = rs.getString("status");
+
+                lastBooking = new Booking(id, guideId, userId, date, status);
             }
         }
         return lastBooking;
@@ -150,7 +159,7 @@ public class BookingServices {
 
     public List<Booking> getBookingsByGuide(int guideId) {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT id, guide_id, date, status FROM Booking WHERE guide_id = ?"; // Corrected to 'Booking' if that's your table name
+        String query = "SELECT id, guide_id, user_id date, status FROM Booking WHERE guide_id = ?"; // Corrected to 'Booking' if that's your table name
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -170,6 +179,7 @@ public class BookingServices {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int guide = rs.getInt("guide_id");
+//                int userId = rs.getInt("user_id");
                 LocalDate date = rs.getDate("date").toLocalDate(); // Ensure 'date' is of type DATE in the database
                 String status = rs.getString("status");
 
@@ -254,7 +264,7 @@ public class BookingServices {
                         rs.getString("language"),
                         rs.getString("dob"),
                         rs.getDouble("price"),
-                        rs.getString("image_name"),
+                        rs.getString("image"),
                         rs.getInt("country_id")
                 );
             }
@@ -264,9 +274,3 @@ public class BookingServices {
 
 
 }
-
-
-
-
-
-

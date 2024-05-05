@@ -1,5 +1,6 @@
 package Controller;
 
+import com.example.tourjoy.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,5 +50,13 @@ public class Home {
                 ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
             }
         }
+    }
+
+    public void backoffice() throws IOException {
+        HelloApplication.loadFXML("/Dashboard.fxml");
+    }
+
+    public void backoffice(ActionEvent actionEvent) throws IOException {
+    backoffice();
     }
 }

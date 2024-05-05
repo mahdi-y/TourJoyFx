@@ -1,12 +1,11 @@
 package Services;
 
-import Entities.Booking;
 import Entities.Guide;
 import Entities.feedback;
+import models.User;
 import utils.MyDB;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -25,6 +24,21 @@ public class GuideServices implements IServices<Guide> {
             System.out.println("Error checking guide existence: " + e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public void registerUser(Guide guide) throws SQLException {
+
+    }
+
+    @Override
+    public void updateProfile(Guide guide, String currentEmail) throws SQLException {
+
+    }
+
+    @Override
+    public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
+
     }
 
     public void add(Guide guide) {
@@ -89,6 +103,21 @@ public class GuideServices implements IServices<Guide> {
                 System.out.println("Error closing resources: " + ex.getMessage());
             }
         }
+    }
+
+    @Override
+    public boolean emailExists(String email) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean deleteUser(Guide guide) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public void update(Guide guide) throws SQLException {
+
     }
 
 
@@ -237,6 +266,27 @@ public class GuideServices implements IServices<Guide> {
             }
         }
     }
+
+    @Override
+    public List<Guide> Read(int fkUser) throws SQLException {
+        return List.of();
+    }
+
+    @Override
+    public boolean phoneNumberExists(int phone) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public List<Guide> ReadUser() throws SQLException {
+        return List.of();
+    }
+
+    @Override
+    public List<User> fetchAllUsers() throws SQLException {
+        return List.of();
+    }
+
     public boolean isCINUnique(int cin) throws SQLException {
         // Query the database to check if the CIN already exists
         String query = "SELECT COUNT(*) FROM Guide WHERE CIN = ?";

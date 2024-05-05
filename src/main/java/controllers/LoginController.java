@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import services.userService;
+import Services.userService;
 
 import utils.SessionManager;
 import utils.UserSession;
@@ -105,7 +105,7 @@ public class LoginController {
     }
 
     public void redirect_homePage() throws IOException{
-        HelloApplication.loadFXML("/Home.fxml");
+        HelloApplication.loadFXML("/com/test/tjv2/Home.fxml");
     }
 
     public void redirect_profileCompletionPage() throws IOException {

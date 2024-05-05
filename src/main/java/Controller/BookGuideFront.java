@@ -38,7 +38,7 @@ public class BookGuideFront {
 
     @FXML
     void initialize() {
-      //  guideComboBox.setDisable(true); // Disables the ComboBox
+        //  guideComboBox.setDisable(true); // Disables the ComboBox
 
         populateGuideComboBox();
         if (selectedGuideName != null && !selectedGuideName.isEmpty()) {

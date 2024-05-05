@@ -2,14 +2,14 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import models.User;
-import services.userService;
+import Services.userService;
 import com.example.tourjoy.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
-import services.userService;
+import Services.userService;
 import utils.SessionManager;
 
 import java.io.IOException;

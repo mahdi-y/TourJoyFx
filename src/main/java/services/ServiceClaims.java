@@ -1,5 +1,6 @@
-package services;
+package Services;
 
+import Entities.Guide;
 import models.User;
 import models.claims;
 import models.notification;
@@ -146,6 +147,11 @@ public class ServiceClaims implements IServices<claims> {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    @Override
+    public void update(Guide guide, int oldCIN) throws SQLException {
+
     }
 
     @Override

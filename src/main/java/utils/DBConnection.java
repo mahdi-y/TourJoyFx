@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private final String URL = "jdbc:mysql://localhost:3306/tourjoy-user-reclam";
+    private final String URL = "jdbc:mysql://localhost:3306/tourjoydb";
     private final String USER = "root";
     private final String PWD = "";
 

@@ -5,18 +5,34 @@ import java.time.LocalDate;
 public class Booking {
     private int id;
     private int guide;
+    private int user_id; // Foreign key to User
+
     private LocalDate date;
     private String status; // Added status attribute
-
 
     public Booking(int id, int guide, LocalDate date, String status) {
         this.id = id;
         this.guide = guide;
         this.date = date;
-        this.status = status; // Initialize status in the constructor
+        this.status = status;
+    }
+
+    public Booking(int id, int guide, int user_id, LocalDate date, String status) {
+        this.id = id;
+        this.guide = guide;
+        this.user_id = user_id;
+        this.date = date;
+        this.status = status;
     }
 
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
 
     public int getId() {
         return id;
