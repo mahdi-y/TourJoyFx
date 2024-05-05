@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="847.0" maxWidth="1569.0" minHeight="800.0" minWidth="1200.0" prefHeight="836.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BackController">
+
+<!--  SideNav  -->
+<VBox fx:id="sidePanel" layoutX="0" prefHeight="800.0" prefWidth="287.0" style="-fx-padding: 10;" styleClass="side-panel" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0.0">
+   <Button prefWidth="218.0" style="-fx-text-fill: white;" styleClass="side-panel-button" text="User Management">
+      <graphic>
+         <SVGPath content="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+      </graphic>
+      <VBox.margin>
+         <Insets bottom="50.0" right="40.0" top="140.0" />
+      </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+   </Button>
+   <Button style="-fx-text-fill: white;" styleClass="side-panel-button" text="Guide Management">
+      <graphic>
+         <SVGPath content="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6m5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z" />
+      </graphic>
+      <VBox.margin>
+         <Insets bottom="50.0" right="50.0" />
+      </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+   </Button>
+   <Button style="-fx-text-fill: white;" styleClass="side-panel-button" text="Accommodation Management">
+      <graphic>
+         <SVGPath content="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+      </graphic>
+      <VBox.margin>
+         <Insets bottom="50.0" />
+      </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+   </Button>
+   <Button style="-fx-text-fill: white;" styleClass="side-panel-button" text="Transport Management">
+      <graphic>
+         <SVGPath content="M3.5 0A2.5 2.5 0 0 0 1 2.5v9c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2v-9A2.5 2.5 0 0 0 12.5 0zM3 3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3.9c0 .625-.562 1.092-1.17.994C10.925 7.747 9.208 7.5 8 7.5s-2.925.247-3.83.394A1.008 1.008 0 0 1 3 6.9zm1 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2m8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2m-5-2h2a1 1 0 1 1 0 2H7a1 1 0 1 1 0-2" />
+      </graphic>
+      <VBox.margin>
+         <Insets bottom="50.0" right="40.0" />
+      </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+   </Button>
+   <Button style="-fx-text-fill: white;" styleClass="side-panel-button" text="Monument Management">
+      <graphic>
+         <SVGPath content="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916zM12.375 6v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2M.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1z" />
+      </graphic>
+      <VBox.margin>
+         <Insets bottom="50.0" right="30.0" />
+      </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+   </Button>
+   <Button style="-fx-text-fill: white;" styleClass="side-panel-button" text="Claims Management">
+      <graphic>
+         <SVGPath content="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
+      </graphic>
+      <VBox.margin>
+         <Insets right="40.0" />
+      </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+   </Button>
+   <Button onAction="#handleCatV" style="-fx-text-fill: white;" styleClass="side-panel-button" text="Categories Management">
+      <graphic>
+         <SVGPath content="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
+      </graphic>
+      <VBox.margin>
+         <Insets right="30.0" top="40.0" />
+      </VBox.margin>
+         <font>
+            <Font size="24.0" />
+         </font>
+   </Button>
+</VBox>
+
+<!--  SideNav  -->
+
+
+<HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;" />
+<Text fill="WHITE" layoutX="475.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Claims Management">
+   <font>
+      <Font size="24.0" />
+   </font>
+</Text>
+
+<!--  Navbar  -->
+<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#34495e" height="101.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="navbar" width="1542.0" />
+
+<StackPane layoutX="1171.0" layoutY="10.0" prefHeight="490.0" prefWidth="29.0" styleClass="image-container">
+   <HBox.margin>
+      <Insets />
+   </HBox.margin>
+</StackPane>
+<ImageView fitHeight="84.0" fitWidth="89.0" layoutX="23.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+   <image>
+      <Image url="@images/tourjoy.png" />
+   </image>
+</ImageView>
+<Label layoutX="137.0" layoutY="19.0" prefHeight="65.0" prefWidth="403.0" text="Welcome admins!" textFill="WHITE">
+   <font>
+      <Font name="Vivaldi Italic" size="48.0" />
+   </font>
+</Label>
+<ImageView fx:id="notificationImageView" fitHeight="43.0" fitWidth="48.0" layoutX="1256.0" layoutY="25.0" onMouseClicked="#handleNotificationClick">
+   <Image url="@images/notification_icon.png" />
+</ImageView>
+
+<AnchorPane layoutX="251.2" layoutY="65.0" prefHeight="731.0" prefWidth="1282.0" AnchorPane.leftAnchor="230.4">
+   <children>
+      <TextField fx:id="titleM" layoutX="153.0" layoutY="145.0" prefHeight="38.0" prefWidth="280.0" />
+      <Label fx:id="titleMod" layoutX="77.0" layoutY="155.0" text="Title" />
+      <TextField fx:id="replyM" layoutX="155.0" layoutY="456.0" prefHeight="159.0" prefWidth="280.0" />
+      <TextField fx:id="descriptionM" layoutX="155.0" layoutY="222.0" prefHeight="38.0" prefWidth="280.0" />
+      <Label fx:id="descriptionMod" layoutX="76.0" layoutY="230.0" text="Description" />
+      <Label fx:id="stateMod" layoutX="76.0" layoutY="309.0" text="State" />
+      <Label fx:id="replyMod" layoutX="75.0" layoutY="483.0" text="Reply" />
+      <TableView fx:id="claimsTableView" layoutX="489.0" layoutY="200.0" prefHeight="518.0" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="idR" prefWidth="40.799957275390625" text="id" />
+            <TableColumn fx:id="titleR" prefWidth="84.79998779296875" text="Title" />
+            <TableColumn fx:id="descriptionR" prefWidth="135.20001220703125" text="Description" />
+            <TableColumn fx:id="createDateR" prefWidth="121.5999755859375" text="Creation Date" />
+            <TableColumn fx:id="stateR" prefWidth="85.5999755859375" text="State" />
+            <TableColumn fx:id="catView" prefWidth="101.5999755859375" text="Category" />
+            <TableColumn fx:id="replyR" prefWidth="124.0" text="Reply" />
+         </columns>
+      </TableView>
+      <Button fx:id="deleteButton" layoutX="326.0" layoutY="679.0" mnemonicParsing="false" onAction="#deleteClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Delete" />
+
+      <Button fx:id="updateButton" layoutX="133.0" layoutY="679.0" mnemonicParsing="false" onAction="#updateClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Reply" />
+      <ComboBox fx:id="stateBox" layoutX="155.0" layoutY="300.0" prefHeight="38.0" prefWidth="280.0" promptText="Select.." />
+      <Label fx:id="catL" layoutX="71.0" layoutY="384.0" text="Category" />
+      <ComboBox fx:id="catBo" layoutX="155.0" layoutY="375.0" prefHeight="38.0" prefWidth="280.0" promptText="Select.." />
+      <TextField fx:id="search" layoutX="489.0" layoutY="147.0" prefHeight="38.0" prefWidth="280.0" />
+      <ComboBox fx:id="order" layoutX="863.0" layoutY="149.0" prefHeight="35.0" prefWidth="122.0" promptText="Select order">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Id" />
+               <String fx:value="Title" />
+               <String fx:value="Description" />
+               <String fx:value="Creation date" />
+               <String fx:value="State" />
+               <String fx:value="Category" />
+               <String fx:value="Reply" />
+               <!-- Add more fields as necessary -->
+            </FXCollections>
+         </items>
+      </ComboBox>
+
+      <ComboBox fx:id="field" layoutX="995.0" layoutY="149.0" prefHeight="35.0" prefWidth="122.0" promptText="Select field">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Ascending" />
+               <String fx:value="Descending" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+      <!--  Navbar  -->
+      
+      
+         <Text layoutX="441.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-fill: #34495E;" text="Claims management">
+            <font>
+               <Font size="45.0" />
+            </font>
+            <effect>
+               <DropShadow color="rgba(0,0,0,0.5)" radius="5.0" />
+            </effect>
+         </Text>
+      <Button fx:id="sort" layoutX="1126.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleSortButtonAction" prefHeight="36.0" prefWidth="61.0" text="Sort" />
+
+      <VBox id="notificationPanel" fx:id="notificationPanel" visible="false">
+         <ListView fx:id="notificationListView" layoutY="477.0" prefHeight="367.0" prefWidth="318.0">
+               <VBox.margin>
+                  <Insets left="800.0" />
+               </VBox.margin></ListView>
+      </VBox>
+            <Button fx:id="statsB" layoutX="1160.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleStats" prefHeight="38.0" prefWidth="122.0 " style="-fx-background-color: #6C3483; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Stats" />
+
+   </children>
+</AnchorPane>
+<ImageView fx:id="chatImageView" fitHeight="35.0" fitWidth="48.0" layoutX="1308.0" layoutY="32.0" onMouseClicked="#handleChatClick" pickOnBounds="true" preserveRatio="true">
+
+   <Image url="@images/chat_icon.png" />
+</ImageView>
+<Button fx:id="ClaimB" layoutX="1389.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleAddV" prefHeight="30.0" prefWidth="122.0" text="Frontpage" />
+
+<stylesheets>
+   <URL value="@backoffice.css" />
+</stylesheets>
+</AnchorPane>

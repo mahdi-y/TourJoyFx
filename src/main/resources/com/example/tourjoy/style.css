@@ -1,0 +1,180 @@
+/* Title */
+.title-text {
+    -fx-font-family: "Arial Black", Gadget, sans-serif; /* Set font family */
+    -fx-font-size: 24px; /* Set font size */
+    -fx-text-fill: #333; /* Text color */
+}
+
+/* Text fields */
+.text-field {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* White background with reduced opacity */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-padding: 8px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
+
+/* Date picker */
+.date-picker {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* White background with reduced opacity */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
+
+
+/* Buttons */
+.button {
+    -fx-background-radius: 20px; /* Rounded edges */
+    -fx-padding: 8px 16px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: white; /* Text color */
+}
+
+/* Add button */
+#Add {
+    -fx-background-color: #4CAF50; /* Green color */
+}
+
+/* Update button */
+#updateButton {
+    -fx-background-color: #739a8b; /* Blue-gray color */
+}
+
+/* Delete button */
+#deleteButton {
+    -fx-background-color: #F44336; /* Red color */
+}
+
+/* Clear button */
+#clearButton {
+    -fx-background-color: #fd9f00; /* Orange color */
+}
+
+/* Table view */
+.table-view {
+    -fx-background-color: #f5f5f5; /* Background color */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+}
+
+/* Table cells */
+.table-cell {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-color: transparent; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-padding: 8px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
+
+/* Table header */
+.table-header {
+    -fx-background-color: #4CAF50; /* Header background color */
+    -fx-text-fill: white; /* Header text color */
+    -fx-font-size: 14px; /* Font size */
+}
+
+/* Alternating row colors */
+
+/* Title */
+.title-text {
+    -fx-font-family: "Arial Black", Gadget, sans-serif; /* Set font family */
+    -fx-font-size: 24px; /* Set font size */
+    -fx-text-fill: #4CAF50; /* Text color */
+    -fx-alignment: center; /* Center alignment */
+}
+
+
+/* Buttons */
+.button {
+    -fx-background-radius: 20px; /* Rounded edges */
+    -fx-padding: 8px 16px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: white; /* Text color */
+}
+
+/* Left section */
+.anchor-pane > .button {
+    -fx-background-color: #031231; /* Green color */
+}
+
+/* Right section */
+.anchor-pane > .combo-box,
+.anchor-pane > .date-picker,
+.anchor-pane > .button#bookButton {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* White background with reduced opacity */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
+
+/* style.css */
+/* Customize the ComboBox arrow button */
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+/* Customize the ComboBox popup button */
+.combo-box .arrow-button .arrow {
+    -fx-background-color: #031231; /* Green color for the arrow */
+}
+
+/* Customize the ComboBox text field */
+.combo-box .text-field {
+    -fx-background-color: #f2f2f2; /* Light gray background color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-pref-width: 250px; /* Preferred width */
+}
+/* style.css */
+.main-container {
+    -fx-background-color: #d8e2e7; /* Light blue background color */
+}
+
+
+/* styles.css located in src/main/resources/styles */
+.tile-pane {
+    -fx-background-color: #f0f0f2;
+}
+.table-row-cell:selected {
+    -fx-background-color: #dae7f3;;
+    -fx-text-fill: black;
+    -fx-table-cell-border-color: transparent;
+}
+.vbox {
+    -fx-padding: 10 10 10 10;  // Correct padding
+-fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+.label {
+    -fx-padding: 5;
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+}
+.orange-button {
+    -fx-background-color: orange;
+}
+.white-box {
+    -fx-background-color: white;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+}
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5;
+    -fx-padding: 4px;
+}

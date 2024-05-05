@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <?import java.net.URL?>
@@ -29,11 +30,12 @@
                 <Font name="System Bold" size="17.0" />
             </font>
         </Label>
-        <Label layoutX="1314.0" layoutY="45.0" text="CLAIMS" textFill="#230f6e">
+        <Button layoutX="1314.0" layoutY="45.0" text="CLAIMS" textFill="#230f6e">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
-        </Label>
+        </Button>
+
 
         <ImageView fx:id="heroImageView" fitHeight="556.0" fitWidth="552.0" layoutX="867.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -62,6 +64,19 @@
         </ImageView>
         <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
         <Label layoutX="751.0" layoutY="45.0" text="HOME" textFill="#fea116">
+        <Button fx:id="homeButton" layoutX="437.0" layoutY="86.0" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="HOME" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
+        <Button fx:id="guideButton" layoutX="641.0" layoutY="86.0" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparent; -fx-border: none;" text="GUIDES" textFill="#230f6e">
+            <font>
+                <Font name="System Bold" size="17.0" />
+            </font>
+        </Button>
+
+
+        <Label fx:id="SUBSCRIPTION" layoutX="737.0" layoutY="90.0" prefHeight="26.0" prefWidth="134.0" text="SUBSCRIPTIONS" textFill="#230f6e">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
@@ -75,6 +90,17 @@
         <!-- Subscription Button -->
         <Button fx:id="SubscriptionButton" layoutX="1043.0" layoutY="39.0" prefHeight="38.0" prefWidth="166.0" styleClass="custom-button" text="SUBSCRIPTION" textFill="#230f6e" />
 
+        <HBox alignment="TOP_RIGHT" layoutX="1432.0" layoutY="18.0" spacing="10.0" />
+      <Button layoutX="1078.0" layoutY="184.0" mnemonicParsing="false" onAction="#logoutUser" prefHeight="15.0" prefWidth="101.0" style="-fx-background-color: #cc284b;" text="Logout" textFill="WHITE" />
+        <Button fx:id="adminButton" layoutX="1078.0" layoutY="150.0" mnemonicParsing="false" onAction="#backoffice" prefHeight="15.0" prefWidth="101.0" style="-fx-background-color: #e7401a;" text="Admin Button" textFill="WHITE" />
+      <Label fx:id="firstNameLabel" layoutX="173.0" layoutY="237.0" textFill="WHITE">
+         <font>
+            <Font name="Britannic Bold" size="48.0" />
+         </font>
+      </Label>
+         <Button fx:id="minimizeButton" layoutX="1104.0" layoutY="33.0" onAction="#minimizeWindow" styleClass="minimize-button" />
+         <Button fx:id="expandButton" layoutX="1130.0" layoutY="33.0" onAction="#expandWindow" styleClass="expand-button" />
+         <Button fx:id="closeButton" layoutX="1156.0" layoutY="33.0" onAction="#closeWindow" styleClass="close-button" />
     </children>
     <stylesheets>
         <URL value="@/com/test/tjv2/Styles/Main.css"/>
