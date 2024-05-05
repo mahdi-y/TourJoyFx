@@ -1,5 +1,6 @@
 package services;
 
+import models.User;
 import models.categories;
 import utils.DBConnection;
 
@@ -15,7 +16,22 @@ public class ServiceCategories implements IServices<categories> {
 
 
     public ServiceCategories() {
-        con = DBConnection.getInstance().getCnx();
+        con = DBConnection.getInstance().getConnection();
+    }
+
+    @Override
+    public void registerUser(categories categories) throws SQLException {
+        
+    }
+
+    @Override
+    public void updateProfile(categories categories, String currentEmail) throws SQLException {
+
+    }
+
+    @Override
+    public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
+
     }
 
     @Override
@@ -41,7 +57,15 @@ public class ServiceCategories implements IServices<categories> {
         }
     }
 
+    @Override
+    public boolean emailExists(String email) throws SQLException {
+        return false;
+    }
 
+    @Override
+    public boolean deleteUser(categories categories) throws SQLException {
+        return false;
+    }
 
 
     public List<categories> Read() throws SQLException {
@@ -61,6 +85,22 @@ public class ServiceCategories implements IServices<categories> {
         }
         return categoriesList;
     }
+
+    @Override
+    public boolean phoneNumberExists(int phone) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public List<categories> ReadUser() throws SQLException {
+        return List.of();
+    }
+
+    @Override
+    public List<User> fetchAllUsers() throws SQLException {
+        return List.of();
+    }
+
     @Override
     public void update(categories categories)
             throws SQLException {
@@ -107,8 +147,10 @@ public class ServiceCategories implements IServices<categories> {
         }
     }
 
-
-
+    @Override
+    public List<categories> Read(int fkUser) throws SQLException {
+        return List.of();
+    }
 
 
 }

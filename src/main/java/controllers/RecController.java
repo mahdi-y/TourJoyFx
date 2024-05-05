@@ -15,6 +15,8 @@ import models.categories;
 import models.claims;
 import services.ServiceClaims;
 import utils.DBConnection;
+import utils.UserSession;
+
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -68,12 +70,14 @@ public class RecController {
     private TableView<claims> claimsTableView1;
     private ServiceClaims ServiceClaims;
     private int selectedClaimId;
+    UserSession session = UserSession.getInstance();
     @FXML
     void initialize() {
         ServiceClaims = new ServiceClaims();
         button.setOnAction(event -> addClaims());
         claimsTableView1.setItems(observableClaims);  // Bind the TableView to the observable list
 
+        System.out.println(session.getFirstname() + session.getId());
         loadClaimsData();
         setupTableColumns();
         try {
@@ -87,7 +91,7 @@ public class RecController {
 
     private List<categories> loadCategories() throws SQLException {
         List<categories> categories = new ArrayList<>();
-        Connection con = DBConnection.getInstance().getCnx();
+        Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT id, name FROM categories"; // Adjusted for a hypothetical table structure
         try (PreparedStatement pst = con.prepareStatement(query);
              ResultSet rs = pst.executeQuery()) {
@@ -101,6 +105,7 @@ public class RecController {
     @FXML
     void addClaims() {
         try {
+            Integer fkUser = session.getId();
             String title = titleT.getText();
             String description = descriptionT.getText();
             LocalDateTime createDate = LocalDateTime.now();
@@ -129,12 +134,12 @@ public class RecController {
             }
 
             // Create claim object
-            claims claims = new claims(title, description, createDate, state, fkC, reply);
+            claims claims = new claims(title, description, createDate, state, fkC, reply, fkUser);
 
             // Add claim to database
             ServiceClaims.add(claims);
             observableClaims.add(claims);
-            ServiceClaims.addNotification("A new claim has been submitted"); // Add notification
+            ServiceClaims.addNotification("A new claim has been submitted", fkUser); // Add notification
 
             clearForm();
             showAlert(Alert.AlertType.INFORMATION, "Success", "Claim added successfully!");
@@ -200,7 +205,7 @@ public class RecController {
         String categoryName = ""; // Default to an empty string if category is not found
         try {
             // Here you would have the actual code to query your database
-            Connection connection = DBConnection.getInstance().getCnx();
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT name FROM categories WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, id);
@@ -230,8 +235,9 @@ public class RecController {
         replyR1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReply()));
     }
     private void loadClaimsData() {
+
         try {
-            List<claims> claimsList = ServiceClaims.Read();
+            List<claims> claimsList = ServiceClaims.Read(session.getId());
             observableClaims.setAll(claimsList);  // Refresh the observable list
         } catch (SQLException e) {
             e.printStackTrace();

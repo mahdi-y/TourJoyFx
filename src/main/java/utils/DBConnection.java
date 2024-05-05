@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private final String URL = "jdbc:mysql://localhost:3306/tourjoy-user";
+    private final String URL = "jdbc:mysql://localhost:3306/tourjoy-user-reclam";
     private final String USER = "root";
     private final String PWD = "";
 
@@ -22,6 +22,14 @@ public class DBConnection {
     }
 
     public Connection getConnection() {
+        try {
+            if (cnx == null || cnx.isClosed()) {
+                cnx = DriverManager.getConnection(URL, USER, PWD);
+                System.out.println("Reconnecting: Connection established !");
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to re-establish connection: " + e.getMessage());
+        }
         return cnx;
     }
 

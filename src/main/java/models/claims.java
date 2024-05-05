@@ -9,7 +9,15 @@ public class claims {
     private LocalDateTime createDate;
     private String state;
     private Integer fkC;
+    private Integer fkUser;
 
+    public Integer getFkUser() {
+        return fkUser;
+    }
+
+    public void setFkUser(Integer fkUser) {
+        this.fkUser = fkUser;
+    }
     private String reply;
     // Default constructor
     public claims() {
@@ -24,6 +32,18 @@ public class claims {
         this.reply = reply;
     }
 
+//    claims claims = new claims(title, description, createDate, state, fkC, reply, fkUser);
+
+    public claims(String title, String description, LocalDateTime createDate, String state,Integer fkC, String reply, Integer fkUser) {
+        this.title = title;
+        this.description = description;
+        this.createDate = createDate;
+        this.state = state;
+        this.fkC = fkC;
+        this.reply = reply;
+        this.fkUser = fkUser;
+    }
+
     // Parameterized constructor
     public claims(Integer id, String title, String description, LocalDateTime createDate, String state,Integer fkC, String reply) {
         this.id = id;
@@ -33,6 +53,17 @@ public class claims {
         this.state = state;
         this.fkC = fkC;
         this.reply = reply;
+    }
+
+    public claims(Integer id, String title, String description, LocalDateTime createDate, String state,Integer fkC, String reply, Integer fkUser) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.createDate = createDate;
+        this.state = state;
+        this.fkC = fkC;
+        this.reply = reply;
+        this.fkUser = fkUser;
     }
 
     public Integer getId() {

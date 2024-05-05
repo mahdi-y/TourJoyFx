@@ -17,7 +17,7 @@ public interface IServices<T>{
     boolean deleteUser(T t) throws SQLException;
     void update(T t) throws SQLException;
     void delete(T t) throws SQLException;
-    List<T> Read() throws SQLException;
+    List<T> Read(int fkUser) throws SQLException;
 
     boolean phoneNumberExists(int phone) throws SQLException;
 

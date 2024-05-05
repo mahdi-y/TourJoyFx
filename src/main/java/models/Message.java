@@ -9,9 +9,17 @@ public class Message {
         private LocalDateTime timestamp;
         private String sender;
         private String role;
+        private int fkUser;
 
+    public int getFkUser() {
+        return fkUser;
+    }
 
-        public Message(int id, String text, LocalDateTime timestamp, String sender, String role) {
+    public void setFkUser(int fkUser) {
+        this.fkUser = fkUser;
+    }
+
+    public Message(int id, String text, LocalDateTime timestamp, String sender, String role) {
             this.id = id;
             this.text = text;
             this.timestamp = timestamp;
@@ -20,6 +28,23 @@ public class Message {
 
         }
 
+    public Message(int id, String text, LocalDateTime timestamp, String sender, String role, int fkUser) {
+        this.id = id;
+        this.text = text;
+        this.timestamp = timestamp;
+        this.sender = sender;
+        this.role = role;
+        this.fkUser = fkUser;
+    }
+
+    public Message(String text, LocalDateTime timestamp, String sender, String role, int fkUser) {
+//        this.id = id;
+        this.text = text;
+        this.timestamp = timestamp;
+        this.sender = sender;
+        this.role = role;
+        this.fkUser = fkUser;
+    }
     public Message() {
     }
 

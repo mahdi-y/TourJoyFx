@@ -32,11 +32,11 @@
                 <Font name="System Bold" size="17.0" />
             </font>
         </Label>
-        <Label layoutX="994.0" layoutY="90.0" text="CLAIMS" textFill="#230f6e">
+        <Button layoutX="994.0" layoutY="90.0" text="CLAIMS" textFill="#230f6e" onAction="#claims">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
-        </Label>
+        </Button>
 
         <ImageView fx:id="heroImageView" fitHeight="356.0" fitWidth="362.0" layoutX="772.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
             <image>

@@ -75,7 +75,7 @@ public class registrationController {
         int phoneNumber = Integer.parseInt(phoneNumberField.getText());
         String confirmPassword = confirmPasswordField.getText();
         LocalDateTime createdAt = LocalDateTime.now();
-        String[] roles = {"ROLE_USER","ROLE_ADMIN"};
+        String[] roles = {"ROLE_USER"};
 
         User user = new User(email, roles, password, phoneNumber, createdAt);
 
@@ -158,10 +158,10 @@ public class registrationController {
             return false;
         }
 
-        if (userService.phoneNumberExists(Integer.parseInt(phoneNumber))){
+        /*if (userService.phoneNumberExists(Integer.parseInt(phoneNumber))){
             showAlert(Alert.AlertType.ERROR,"Phone Number Exists", "This phone number is already registered.");
             return false;
-        }
+        }*/
 
         if (!phoneNumber.matches("\\d+")) {
             showAlert(Alert.AlertType.ERROR, "Invalid Phone Number", "Phone number should contain only digits.");

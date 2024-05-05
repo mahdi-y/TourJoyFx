@@ -1,5 +1,6 @@
 package services;
 
+import models.User;
 import models.claims;
 import models.notification;
 import utils.DBConnection;
@@ -20,14 +21,28 @@ public class ServiceClaims implements IServices<claims> {
 
 
     public ServiceClaims() {
-        con = DBConnection.getInstance().getCnx();
+        con = DBConnection.getInstance().getConnection();
     }
 
 
+    @Override
+    public void registerUser(claims claims) throws SQLException {
+
+    }
+
+    @Override
+    public void updateProfile(claims claims, String currentEmail) throws SQLException {
+
+    }
+
+    @Override
+    public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
+
+    }
 
     @Override
     public void add(claims claims) throws SQLException {
-        String query = "INSERT INTO claims (title, description, createDate, state, fkC, reply) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO claims (title, description, createDate, state, fkC, reply, fkUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pre = con.prepareStatement(query)) {
             pre.setString(1, claims.getTitle());
             pre.setString(2, claims.getDescription());
@@ -35,13 +50,24 @@ public class ServiceClaims implements IServices<claims> {
             pre.setString(4, claims.getState());
             pre.setInt(5, claims.getFkC());
             pre.setString(6, claims.getReply());
+            pre.setInt(7, claims.getFkUser());
             pre.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw e;
         }
     }
-    public List<claims> Read() throws SQLException {
+
+    @Override
+    public boolean emailExists(String email) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean deleteUser(claims claims) throws SQLException {
+        return false;
+    }
+
+    public List<claims> ReadBackList() throws  SQLException{
         List<claims> claimsList = new ArrayList<>();
         String query = "SELECT * FROM claims";
         try (PreparedStatement pre = con.prepareStatement(query);
@@ -63,9 +89,50 @@ public class ServiceClaims implements IServices<claims> {
         return claimsList;
     }
 
+    public List<claims> Read(int fkUser) throws SQLException {
+        List<claims> claimsList = new ArrayList<>();
+        Connection con = DBConnection.getInstance().getConnection();
+        String query = "SELECT * FROM claims WHERE fkUser = ?";
+        try (PreparedStatement pre = con.prepareStatement(query)) {
+            pre.setInt(1, fkUser);  // Set the fkUser parameter in the query
+            try (ResultSet res = pre.executeQuery()) {
+                while (res.next()) {
+                    Integer id = res.getObject("id", Integer.class);  // Using getObject to safely handle nulls
+                    String title = res.getString("title");
+                    String description = res.getString("description");
+                    LocalDateTime createDate = res.getTimestamp("createDate") != null ? res.getTimestamp("createDate").toLocalDateTime() : null;
+                    String state = res.getString("state");
+                    Integer fkC = res.getObject("fkC", Integer.class); // Safe null handling
+                    String reply = res.getString("reply");
+                    claims claim = new claims(id, title, description, createDate, state, fkC, reply, fkUser);
+                    claimsList.add(claim);
+                }
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error reading claims from database", e);
+        }
+        return claimsList;
+    }
+
+
+    @Override
+    public boolean phoneNumberExists(int phone) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public List<claims> ReadUser() throws SQLException {
+        return List.of();
+    }
+
+    @Override
+    public List<User> fetchAllUsers() throws SQLException {
+        return List.of();
+    }
+
     @Override
     public void update(claims claims) throws SQLException {
-        String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=? WHERE id=?";
+        String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=?, fkUser=? WHERE id=?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
             pre.setString(1, claims.getTitle());
             pre.setString(2, claims.getDescription());
@@ -73,6 +140,7 @@ public class ServiceClaims implements IServices<claims> {
             pre.setInt(4, claims.getFkC());
             pre.setString(5, claims.getReply());
             pre.setInt(6, claims.getId());
+            pre.setInt(7, claims.getFkUser());
             pre.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,7 +178,7 @@ public class ServiceClaims implements IServices<claims> {
         ResultSet rs = null;
 
         try {
-            con = DBConnection.getInstance().getCnx(); // Get the connection without auto-closing it
+            con = DBConnection.getInstance().getConnection(); // Get the connection without auto-closing it
             stmt = con.prepareStatement(query);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -132,13 +200,14 @@ public class ServiceClaims implements IServices<claims> {
 
 
 
-        public void addNotification(String message) throws SQLException {
-            String sql = "INSERT INTO notification (message, is_read, created_at) VALUES (?, ?, ?)";
-            try (Connection conn = DBConnection.getInstance().getCnx();
+        public void addNotification(String message, Integer fkUser) throws SQLException {
+            String sql = "INSERT INTO notification (message, is_read, created_at, fkUser) VALUES (?, ?, ?, ?)";
+            try (Connection conn = DBConnection.getInstance().getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, message);
                 pstmt.setInt(2, 0);
                 pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                pstmt.setInt(4, fkUser);
                 pstmt.executeUpdate();
             }
         }
@@ -153,7 +222,8 @@ public class ServiceClaims implements IServices<claims> {
                     rs.getInt("id"),
                     rs.getString("message"),
                     rs.getBoolean("is_read"),
-                    rs.getTimestamp("created_at").toLocalDateTime()
+                    rs.getTimestamp("created_at").toLocalDateTime(),
+                    rs.getInt("fkUser")
             ));
         }
         rs.close();  // Close ResultSet manually

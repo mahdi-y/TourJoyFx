@@ -21,11 +21,8 @@ module com.example.tourjoy {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires twilio;
-    requires java.sql;
     requires charm.glisten;
-    requires java.mail;
     requires java.net.http;
-    requires com.google.gson;
     requires org.testng;
     requires org.junit.jupiter.api;
     requires org.json;

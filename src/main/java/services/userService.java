@@ -110,6 +110,12 @@ public class userService implements IServices<User> {
             }
         }
     }
+
+    @Override
+    public void add(User user) throws SQLException {
+
+    }
+
     @Override
     public boolean emailExists(String email) throws SQLException {
         String query = "SELECT count(*) FROM user WHERE email = ?";
@@ -352,6 +358,21 @@ public class userService implements IServices<User> {
         } else {
             System.out.println("La mise à jour de  " +  utilisateur.getFirstName() + " a échoué.");
         }
+    }
+
+    @Override
+    public void delete(User user) throws SQLException {
+
+    }
+
+    @Override
+    public List<User> Read(int fkUser) throws SQLException {
+        return List.of();
+    }
+
+//    @Override
+    public List<User> Read() throws SQLException {
+        return List.of();
     }
 
     public static void updateforgottenpassword(String email, String password) {

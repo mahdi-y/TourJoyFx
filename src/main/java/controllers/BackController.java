@@ -286,7 +286,7 @@ public class BackController {
         Predicate<claims> createDatePredicate = claim -> claim.getCreateDate().toString().contains(searchTerm);
 
         try {
-            for (claims claim : ServiceClaims.Read()) {
+            for (claims claim : ServiceClaims.ReadBackList()) {
                 if (titlePredicate.or(descriptionPredicate).or(statePredicate).or(replyPredicate).or(fkCPredicate).or(createDatePredicate).test(claim)) {
                     filteredData.add(claim);
                 }
@@ -300,7 +300,7 @@ public class BackController {
     }
     private List<categories> loadCategories() throws SQLException {
         List<categories> categories = new ArrayList<>();
-        Connection con = DBConnection.getInstance().getCnx();
+        Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT id, name FROM categories"; // Adjusted for a hypothetical table structure
         try (PreparedStatement pst = con.prepareStatement(query);
              ResultSet rs = pst.executeQuery()) {
@@ -324,7 +324,7 @@ public class BackController {
         String categoryName = ""; // Default to an empty string if category is not found
         try {
             // Here you would have the actual code to query your database
-            Connection connection = DBConnection.getInstance().getCnx();
+            Connection connection = DBConnection.getInstance().getConnection();
             String query = "SELECT name FROM categories WHERE id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, id);
@@ -355,7 +355,7 @@ public class BackController {
 
     private void loadClaimsData() {
         try {
-            List<claims> claimsList = ServiceClaims.Read();
+            List<claims> claimsList = ServiceClaims.ReadBackList();
             ObservableList<claims> observableClaims = FXCollections.observableArrayList(claimsList);
             claimsTableView.setItems(observableClaims);
         } catch (SQLException e) {

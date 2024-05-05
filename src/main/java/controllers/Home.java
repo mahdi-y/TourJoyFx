@@ -91,4 +91,8 @@ public class Home {
     public void profileCompletion() throws IOException{
         HelloApplication.loadFXML("/profileCompletion.fxml");
     }
+
+    public void claims(ActionEvent actionEvent) throws IOException {
+        HelloApplication.loadFXML("/com/example/tourjoy/add-rec.fxml");
+    }
 }

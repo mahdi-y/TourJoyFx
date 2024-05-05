@@ -18,6 +18,7 @@ import services.MessageService;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import utils.UserSession;
 
 public class chatClientController {
         @FXML
@@ -28,9 +29,12 @@ public class chatClientController {
         @FXML
         private TextField messageField;
         private MessageService messageService;
+        UserSession session = UserSession.getInstance();
+
     private ScheduledService<Void> refreshService;
         @FXML
         public void initialize() {
+            System.out.println(session.getFirstname() + " - " + session.getId());
             try {
                 messageService = new MessageService();
                 updateMessages();
@@ -74,6 +78,7 @@ public class chatClientController {
     }
     public void sendMessage() {
         String text = messageField.getText().trim();
+        String mail = session.getEmail();
         if (!text.isEmpty()) {
             ProfanityFilter.containsProfanity(text).thenAccept(containsProfanity -> {
                 Platform.runLater(() -> {
@@ -82,8 +87,8 @@ public class chatClientController {
                     } else {
                         try {
                             // Proceed to send the message if no profanity is detected
-                            Message message = new Message(text, LocalDateTime.now(), "yasmine", "client");
-                            messageService.saveMessage(message);
+                            Message message = new Message(text, LocalDateTime.now(), "Client" + mail, "client");
+                            messageService.saveMessage(message, session.getId());
                             messageField.clear();
                             updateMessages();
                         } catch (Exception e) {

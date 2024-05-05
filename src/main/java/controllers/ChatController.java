@@ -15,6 +15,7 @@ import services.MessageService;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import utils.UserSession;
 
 public class ChatController {
     @FXML
@@ -27,7 +28,7 @@ public class ChatController {
     private MessageService messageService;
     private ScheduledService<Void> refreshService;
     private LocalDateTime lastUpdatedTime = LocalDateTime.now().minusDays(1); // Initialize to a time in the past
-
+    UserSession session = UserSession.getInstance();
     @FXML
     public void initialize() {
         try {
@@ -67,10 +68,11 @@ public class ChatController {
 
     public void sendMessage() {
         String text = messageField.getText().trim();
+        String admin = session.getFirstname();
         if (!text.isEmpty()) {
             try {
-                Message message = new Message(text, LocalDateTime.now(), "Tourjoy", "admin");
-                messageService.saveMessage(message);
+                Message message = new Message(text, LocalDateTime.now(), "Admin " + admin, "admin");
+                messageService.saveMessage(message, session.getId());
                 messageField.clear();
                 updateMessages();
             } catch (SQLException e) {

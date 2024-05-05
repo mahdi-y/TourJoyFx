@@ -12,21 +12,21 @@ public class MessageService {
 
     public MessageService() throws SQLException {
         // Initialize connection once
-        conn = DBConnection.getInstance().getCnx();
+        conn = DBConnection.getInstance().getConnection();
     }
 
-    public void saveMessage(Message message) throws SQLException {
-        String sql = "INSERT INTO Message (text, timestamp, sender, role) VALUES (?, ?, ?,?)";
+    public void saveMessage(Message message, int fkUser) throws SQLException {
+       /* if (!checkUserExists(fkUser)) {
+            throw new SQLException("No such user exists with ID: " + message.getFkUser());
+        }*/
+        String sql = "INSERT INTO Message (text, timestamp, sender, role, fkUser) VALUES (?, ?, ?,?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, message.getText());
         pstmt.setTimestamp(2, Timestamp.valueOf(message.getTimestamp()));
         pstmt.setString(3, message.getSender());
         pstmt.setString(4, message.getRole());
-        int affectedRows = pstmt.executeUpdate();
-
-        if (affectedRows == 0) {
-            throw new SQLException("Creating message failed, no rows affected.");
-        }
+        pstmt.setInt(5, fkUser);
+        pstmt.executeUpdate();
 
         try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
             if (generatedKeys.next()) {
@@ -61,6 +61,17 @@ public class MessageService {
     public void closeConnection() throws SQLException {
         if (conn != null && !conn.isClosed()) {
             conn.close(); // Close connection when it's no longer needed
+        }
+    }
+    public boolean checkUserExists(int userId) throws SQLException {
+        String checkUserSql = "SELECT COUNT(*) FROM user WHERE id = ?";
+        try (PreparedStatement checkUserStmt = conn.prepareStatement(checkUserSql)) {
+            checkUserStmt.setInt(1, userId);
+            ResultSet rs = checkUserStmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+            return false;
         }
     }
 }
