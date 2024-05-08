@@ -1,9 +1,11 @@
 package Controller;
 import Entities.Booking;
 import Entities.Guide;
+import com.example.javafx.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import models.User;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import Test.PaymentService;
 import Services.BookingServices;
@@ -14,6 +16,8 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import utils.UserSession;
+
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.io.File;
@@ -99,7 +103,8 @@ public class PaymentController {
                 lastBooking.setStatus("Paid");
                 bookingServices.updateBooking(lastBooking);
                 showAlert("Payment Successful", "Your payment was successful!", Alert.AlertType.INFORMATION);
-                generatePDF(lastBooking, guideServices, primaryStage);
+                UserSession session = UserSession.getInstance();
+                generatePDF(lastBooking, guideServices, primaryStage, session.getFirstname(), session.getLastname());
                 closeWindow();  // Close the payment window
             } else {
                 // Update booking status to unpaid
@@ -140,7 +145,7 @@ public class PaymentController {
         alert.showAndWait();
     }
 
-    public void generatePDF(Booking booking, GuideServices guideServices, Stage primaryStage) {
+    public void generatePDF(Booking booking, GuideServices guideServices, Stage primaryStage, String userFirstName, String userLastName) {
         Guide guide = guideServices.fetchGuideById(booking.getGuide());
 
         if (guide == null) {
@@ -155,35 +160,38 @@ public class PaymentController {
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            // Load and draw the image
-          //  PDImageXObject pdImage = PDImageXObject.createFromFile("@resources/image/tourjoy.png", document); // Correct path
-            //contentStream.drawImage(pdImage, 50, 700, 100, 100); // Adjust size and position as needed
+            // Load and draw the image if needed
+           //  PDImageXObject pdImage = PDImageXObject.createFromFile("@resources/image/tourjoy.png", document);
+          //   contentStream.drawImage(pdImage, 50, 700, 100, 100);
 
             contentStream.beginText();
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
-            contentStream.newLineAtOffset(180, 700); // Adjust text position to not overlap the image
-            contentStream.showText("Booking Information");
+            contentStream.newLineAtOffset(180, 700);
+            contentStream.showText("Payment Confirmation");
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.setLeading(14.5f);
 
+            // Adding user's name at the top or any preferred location
+            contentStream.newLine();
+            contentStream.showText("Client: " + userFirstName + " " + userLastName);
             contentStream.newLine();
             contentStream.newLine();
             contentStream.showText("Guide Name: " + guide.getFirstname_g() + " " + guide.getLastname_g());
             contentStream.newLine();
             contentStream.showText("Booking Date: " + booking.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             contentStream.newLine();
-            contentStream.showText("Price: $" + guide.getPrice());
+            contentStream.showText("Price: DT" + guide.getPrice());
             contentStream.endText();
             contentStream.close();
 
-            // Instead of saving directly, call savePDF to let user choose location
-            savePDF(document, primaryStage);  // Pass primaryStage to use it as the parent for FileChooser
+            savePDF(document, primaryStage); // Let user choose save location
 
         } catch (IOException e) {
             showAlert("PDF Generation Error", "Failed to generate the booking details PDF.", Alert.AlertType.ERROR);
             e.printStackTrace();
         }
     }
+
 
     private void savePDF(PDDocument document, Stage primaryStage) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -200,5 +208,22 @@ public class PaymentController {
             showAlert("PDF Generated", "Booking details PDF has been saved.", Alert.AlertType.INFORMATION);
         }
         document.close();
+    }
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
     }
 }

@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceCategories implements IServices<categories> {
+public class ServiceCategories {
 
     private Connection con;
     private PreparedStatement pre;
@@ -21,22 +21,7 @@ public class ServiceCategories implements IServices<categories> {
         con = DBConnection.getInstance().getConnection();
     }
 
-    @Override
-    public void registerUser(categories categories) throws SQLException {
-        
-    }
 
-    @Override
-    public void updateProfile(categories categories, String currentEmail) throws SQLException {
-
-    }
-
-    @Override
-    public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
-
-    }
-
-    @Override
     public void add(categories categories) throws SQLException {
         String query = "INSERT INTO categories (name) VALUES (?)";
         // Use the class-level connection 'con' which is already open
@@ -59,12 +44,10 @@ public class ServiceCategories implements IServices<categories> {
         }
     }
 
-    @Override
     public boolean emailExists(String email) throws SQLException {
         return false;
     }
 
-    @Override
     public boolean deleteUser(categories categories) throws SQLException {
         return false;
     }
@@ -88,22 +71,18 @@ public class ServiceCategories implements IServices<categories> {
         return categoriesList;
     }
 
-    @Override
     public boolean phoneNumberExists(int phone) throws SQLException {
         return false;
     }
 
-    @Override
     public List<categories> ReadUser() throws SQLException {
         return List.of();
     }
 
-    @Override
     public List<User> fetchAllUsers() throws SQLException {
         return List.of();
     }
 
-    @Override
     public void update(categories categories)
             throws SQLException {
         String query = "UPDATE categories SET name=? WHERE id=?";
@@ -114,12 +93,10 @@ public class ServiceCategories implements IServices<categories> {
         pre.executeUpdate();
     }
 
-    @Override
     public void update(claims claims, Integer fkUser) throws SQLException {
 
     }
 
-    @Override
     public void update(Guide guide, int oldCIN) throws SQLException {
 
     }
@@ -137,7 +114,6 @@ public class ServiceCategories implements IServices<categories> {
         return false;  // Default to false to handle unexpected cases safely
     }
 
-    @Override
     public void delete(categories categories) throws SQLException {
         String deleteCategoryQuery = "DELETE FROM categories WHERE id=?";
         PreparedStatement deleteCategoryPst = null;
@@ -160,7 +136,6 @@ public class ServiceCategories implements IServices<categories> {
         }
     }
 
-    @Override
     public List<categories> Read(int fkUser) throws SQLException {
         return List.of();
     }

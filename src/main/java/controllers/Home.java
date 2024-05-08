@@ -1,6 +1,6 @@
 package controllers;
 
-import com.example.tourjoy.HelloApplication;
+import com.example.javafx.HelloApplication;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonSyntaxException;
 import javafx.event.ActionEvent;

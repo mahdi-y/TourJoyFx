@@ -1,6 +1,6 @@
 package controllers;
 
-import com.example.tourjoy.HelloApplication;
+import com.example.javafx.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

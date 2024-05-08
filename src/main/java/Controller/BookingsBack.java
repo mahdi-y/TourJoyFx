@@ -1,6 +1,7 @@
 package Controller;
 
 import Entities.Booking;
+import com.example.javafx.HelloApplication;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -128,6 +129,23 @@ public class BookingsBack {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
     }
 
 

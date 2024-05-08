@@ -1,0 +1,124 @@
+Index: src/main/java/Controller/Home.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\nimport javafx.scene.control.Button;\r\n\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\n\r\npublic class Home {\r\n    @FXML\r\n    private Button guideButton;\r\n    @FXML\r\n    private Button homeButton;\r\n\r\n    @FXML\r\n    private Button MonumentButton;\r\n\r\n\r\n\r\n\r\n    public void goToMonuments(ActionEvent actionEvent) {\r\n        URL url = getClass().getResource(\"/com/test/tjv2/MonumentDetails.fxml\");\r\n        if (url == null) {\r\n            System.err.println(\"Cannot find MonumentDetails.fxml\");\r\n        } else {\r\n            try {\r\n                Parent root = FXMLLoader.load(url);\r\n                MonumentButton.getScene().setRoot(root);\r\n            } catch (IOException ex) {\r\n                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue\r\n            }\r\n        }\r\n    }\r\n\r\n    public void goToGuides(ActionEvent actionEvent) {\r\n        URL url = getClass().getResource(\"/guidesFront.fxml\");\r\n        if (url == null) {\r\n            System.err.println(\"Cannot find Guides.fxml\");\r\n        } else {\r\n            try {\r\n                Parent root = FXMLLoader.load(url);\r\n                guideButton.getScene().setRoot(root);\r\n            } catch (IOException ex) {\r\n                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Controller/Home.java b/src/main/java/Controller/Home.java
+--- a/src/main/java/Controller/Home.java	
++++ b/src/main/java/Controller/Home.java	
+@@ -24,7 +24,7 @@
+ 
+ 
+     public void goToMonuments(ActionEvent actionEvent) {
+-        URL url = getClass().getResource("/com/test/tjv2/MonumentDetails.fxml");
++        URL url = getClass().getResource("/com/test/tjv2/MonumentFront.fxml");
+         if (url == null) {
+             System.err.println("Cannot find MonumentDetails.fxml");
+         } else {
+@@ -40,7 +40,7 @@
+     public void goToGuides(ActionEvent actionEvent) {
+         URL url = getClass().getResource("/guidesFront.fxml");
+         if (url == null) {
+-            System.err.println("Cannot find Guides.fxml");
++            System.err.println("Cannot find guidesFront.fxml");
+         } else {
+             try {
+                 Parent root = FXMLLoader.load(url);
+@@ -50,4 +50,5 @@
+             }
+         }
+     }
++
+ }
+Index: src/main/java/Controller/PaymentController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\nimport Entities.Booking;\r\nimport Entities.Guide;\r\nimport javafx.fxml.FXML;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.control.Alert;\r\nimport org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;\r\nimport Test.PaymentService;\r\nimport Services.BookingServices;\r\nimport Services.GuideServices;\r\nimport org.apache.pdfbox.pdmodel.PDDocument;\r\nimport org.apache.pdfbox.pdmodel.PDPage;\r\nimport org.apache.pdfbox.pdmodel.PDPageContentStream;\r\nimport org.apache.pdfbox.pdmodel.font.PDType1Font;\r\nimport javafx.stage.FileChooser;\r\nimport javafx.stage.Stage;\r\nimport java.io.IOException;\r\nimport java.time.format.DateTimeFormatter;\r\nimport java.io.File;\r\nimport java.sql.Connection;\r\nimport java.sql.SQLException;\r\n\r\npublic class PaymentController {\r\n    @FXML private TextField cardNumberField;\r\n    @FXML private TextField expiryDateField;\r\n    @FXML private TextField cvcField;\r\n    private Stage primaryStage;\r\n    private PaymentService paymentService = new PaymentService(\"sk_test_51OqFkjEFVyu18y1ZCryKBaN30pD1JrG5u4ZVWIYlwF2NavSlVfa5QxLA69t5I2upCuT2a1UPhvsbzQR9TepmZh3z00c6QBIufa\");\r\n\r\n\r\n    private GuideServices guideServices;\r\n    private BookingServices bookingServices;  // Declare the bookingServices\r\n    public void setPrimaryStage(Stage primaryStage) {\r\n        this.primaryStage = primaryStage; // Method to set the primary stage from your main application class\r\n    }\r\n    public void initialize() {\r\n        guideServices = new GuideServices();\r\n        bookingServices = new BookingServices();  // Initialize it\r\n\r\n        // Other initialization code\r\n    }\r\n\r\n    private boolean validateCardNumber(String cardNumber) {\r\n        return cardNumber.matches(\"\\\\d{16}\");\r\n    }\r\n\r\n    private boolean validateCVC(String cvc) {\r\n        return cvc.matches(\"\\\\d{3}\");  // Exactly 3 digits\r\n    }\r\n\r\n    private boolean validateExpiryDate(String expiryDate) {\r\n        if (!expiryDate.matches(\"\\\\d{2}/\\\\d{2}\")) {\r\n            return false; // Ensure format is MM/YY\r\n        }\r\n        String[] parts = expiryDate.split(\"/\");\r\n        int month = Integer.parseInt(parts[0]);\r\n        int year = Integer.parseInt(parts[1]);\r\n        return month >= 1 && month <= 12 && year >= 24;\r\n    }\r\n\r\n    @FXML\r\n    private void handlePaymentProcess() {\r\n        Connection connection = null;\r\n        try {\r\n            // Get the card information from the input fields\r\n            String cardNumber = cardNumberField.getText();\r\n            String expiryDate = expiryDateField.getText();\r\n            String cvc = cvcField.getText();\r\n\r\n            // Validate card details\r\n            if (!validateCardNumber(cardNumber)) {\r\n                showAlert(\"Validation Error\", \"Invalid Card Number.\", Alert.AlertType.ERROR);\r\n                return;\r\n            }\r\n\r\n            if (!validateCVC(cvc)) {\r\n                showAlert(\"Validation Error\", \"Invalid CVC.\", Alert.AlertType.ERROR);\r\n                return;\r\n            }\r\n\r\n            if (!validateExpiryDate(expiryDate)) {\r\n                showAlert(\"Validation Error\", \"Invalid Expiry Date.\", Alert.AlertType.ERROR);\r\n                return;\r\n            }\r\n\r\n            // Retrieve the last booking\r\n            Booking lastBooking = bookingServices.getLastBooking();\r\n\r\n            // Get the guide price for the last booking\r\n            double guidePrice = guideServices.getGuidePrice(lastBooking.getGuide());\r\n\r\n            // Placeholder for token received from payment API\r\n            String token = \"tok_visa\";\r\n\r\n            boolean paymentSuccessful = paymentService.processPayment(token, guidePrice);\r\n\r\n            // Update booking status based on payment success\r\n            if (paymentSuccessful) {\r\n                lastBooking.setStatus(\"Paid\");\r\n                bookingServices.updateBooking(lastBooking);\r\n                showAlert(\"Payment Successful\", \"Your payment was successful!\", Alert.AlertType.INFORMATION);\r\n                generatePDF(lastBooking, guideServices, primaryStage);\r\n                closeWindow();  // Close the payment window\r\n            } else {\r\n                // Update booking status to unpaid\r\n                lastBooking.setStatus(\"Unpaid\");\r\n                bookingServices.updateBooking(lastBooking);\r\n                showAlert(\"Payment Failed\", \"Your payment could not be processed. Please try again.\", Alert.AlertType.ERROR);\r\n            }\r\n        } catch (NullPointerException e) {\r\n            showAlert(\"Data Error\", \"No recent bookings found.\", Alert.AlertType.ERROR);\r\n        } catch (SQLException e) {\r\n            showAlert(\"Database Error\", \"Error updating booking status in the database.\", Alert.AlertType.ERROR);\r\n        } finally {\r\n            if (connection != null) {\r\n                try {\r\n                    connection.close();\r\n                } catch (SQLException e) {\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    private void closeWindow() {\r\n        // Get the current stage from any control, here using cardNumberField\r\n        Stage currentStage = (Stage) cardNumberField.getScene().getWindow();\r\n        currentStage.close(); // Closes the window\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n    private void showAlert(String title, String message, Alert.AlertType alertType) {\r\n        Alert alert = new Alert(alertType);\r\n        alert.setTitle(title);\r\n        alert.setHeaderText(null);\r\n        alert.setContentText(message);\r\n        alert.showAndWait();\r\n    }\r\n\r\n    public void generatePDF(Booking booking, GuideServices guideServices, Stage primaryStage) {\r\n        Guide guide = guideServices.fetchGuideById(booking.getGuide());\r\n\r\n        if (guide == null) {\r\n            showAlert(\"Error\", \"No guide found with ID: \" + booking.getGuide(), Alert.AlertType.ERROR);\r\n            return;\r\n        }\r\n\r\n        PDDocument document = new PDDocument();\r\n        try {\r\n            PDPage page = new PDPage();\r\n            document.addPage(page);\r\n\r\n            PDPageContentStream contentStream = new PDPageContentStream(document, page);\r\n\r\n            // Load and draw the image\r\n          //  PDImageXObject pdImage = PDImageXObject.createFromFile(\"@resources/image/tourjoy.png\", document); // Correct path\r\n            //contentStream.drawImage(pdImage, 50, 700, 100, 100); // Adjust size and position as needed\r\n\r\n            contentStream.beginText();\r\n            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);\r\n            contentStream.newLineAtOffset(180, 700); // Adjust text position to not overlap the image\r\n            contentStream.showText(\"Booking Information\");\r\n            contentStream.setFont(PDType1Font.HELVETICA, 12);\r\n            contentStream.setLeading(14.5f);\r\n\r\n            contentStream.newLine();\r\n            contentStream.newLine();\r\n            contentStream.showText(\"Guide Name: \" + guide.getFirstname_g() + \" \" + guide.getLastname_g());\r\n            contentStream.newLine();\r\n            contentStream.showText(\"Booking Date: \" + booking.getDate().format(DateTimeFormatter.ofPattern(\"dd-MM-yyyy\")));\r\n            contentStream.newLine();\r\n            contentStream.showText(\"Price: $\" + guide.getPrice());\r\n            contentStream.endText();\r\n            contentStream.close();\r\n\r\n            // Instead of saving directly, call savePDF to let user choose location\r\n            savePDF(document, primaryStage);  // Pass primaryStage to use it as the parent for FileChooser\r\n\r\n        } catch (IOException e) {\r\n            showAlert(\"PDF Generation Error\", \"Failed to generate the booking details PDF.\", Alert.AlertType.ERROR);\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    private void savePDF(PDDocument document, Stage primaryStage) throws IOException {\r\n        FileChooser fileChooser = new FileChooser();\r\n        fileChooser.setTitle(\"Save PDF\");\r\n        // Set the initial file name to \"PaymentConfirmation.pdf\"\r\n        fileChooser.setInitialFileName(\"PaymentConfirmation.pdf\");\r\n        fileChooser.getExtensionFilters().addAll(\r\n                new FileChooser.ExtensionFilter(\"PDF Files\", \"*.pdf\")\r\n        );\r\n\r\n        File file = fileChooser.showSaveDialog(primaryStage);\r\n        if (file != null) {\r\n            document.save(file);\r\n            showAlert(\"PDF Generated\", \"Booking details PDF has been saved.\", Alert.AlertType.INFORMATION);\r\n        }\r\n        document.close();\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/Controller/PaymentController.java b/src/main/java/Controller/PaymentController.java
+--- a/src/main/java/Controller/PaymentController.java	
++++ b/src/main/java/Controller/PaymentController.java	
+@@ -4,6 +4,7 @@
+ import javafx.fxml.FXML;
+ import javafx.scene.control.TextField;
+ import javafx.scene.control.Alert;
++import org.apache.pdfbox.io.IOUtils;
+ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+ import Test.PaymentService;
+ import Services.BookingServices;
+@@ -15,6 +16,7 @@
+ import javafx.stage.FileChooser;
+ import javafx.stage.Stage;
+ import java.io.IOException;
++import java.io.InputStream;
+ import java.time.format.DateTimeFormatter;
+ import java.io.File;
+ import java.sql.Connection;
+@@ -155,9 +157,14 @@
+ 
+             PDPageContentStream contentStream = new PDPageContentStream(document, page);
+ 
+-            // Load and draw the image
+-          //  PDImageXObject pdImage = PDImageXObject.createFromFile("@resources/image/tourjoy.png", document); // Correct path
+-            //contentStream.drawImage(pdImage, 50, 700, 100, 100); // Adjust size and position as needed
++            // Load the image file from resources
++            InputStream imageStream = getClass().getResourceAsStream("/image/tourjoy.png");
++            if (imageStream != null) {
++                PDImageXObject pdImage = PDImageXObject.createFromByteArray(document, IOUtils.toByteArray(imageStream), "tourjoy.png");
++                contentStream.drawImage(pdImage, 50, 700, 100, 100); // Adjust size and position as needed
++            } else {
++                showAlert("Image Error", "Failed to load image from resources.", Alert.AlertType.ERROR);
++            }
+ 
+             contentStream.beginText();
+             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+Index: src/main/resources/BookGuideFront.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import java.net.URL?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.ComboBox?>\r\n<?import javafx.scene.control.DatePicker?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.text.Font?>\r\n<?import javafx.scene.text.Text?>\r\n\r\n<!-- ComboBox -->\r\n\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.image.Image?>\r\n<AnchorPane prefHeight=\"500.0\" prefWidth=\"500.0\" styleClass=\"main-container\" xmlns=\"http://javafx.com/javafx/21\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"Controller.BookGuideFront\">\r\n\r\n\r\n    <ImageView fitWidth=\"500\" fitHeight=\"500\">\r\n        <image>\r\n            <Image url=\"@image/bg1.jpg\" />\r\n        </image>\r\n    </ImageView>\r\n    <!-- Main Content Area -->\r\n    <AnchorPane prefHeight=\"500.0\" prefWidth=\"500.0\" styleClass=\"content-pane\">\r\n        <children>\r\n\r\n            <Text fill=\"#031231\" layoutX=\"150.0\" layoutY=\"123.0\" strokeType=\"OUTSIDE\" strokeWidth=\"0.0\" text=\"Book A Guide\">\r\n                <font>\r\n                    <Font size=\"40.0\" />\r\n                </font>\r\n            </Text>\r\n            <!-- DatePicker -->\r\n            <!-- Book Button -->\r\n            <!-- Add your buttons, ComboBox, and DatePicker here -->\r\n            <ComboBox fx:id=\"guideComboBox\" layoutX=\"146.0\" layoutY=\"182.0\" prefWidth=\"250.0\" promptText=\"Guide\" />\r\n            <DatePicker fx:id=\"datePicker\" layoutX=\"146.0\" layoutY=\"237.0\" prefWidth=\"250.0\" promptText=\"Date\" />\r\n            <Button fx:id=\"bookButton\" styleClass=\"guide-button\" layoutX=\"249.0\" layoutY=\"286.0\" onAction=\"#addBooking\" style=\"-fx-background-color: #031231; -fx-text-fill: white;\" text=\"Book\" />\r\n            <!-- Continue adding other nodes as needed -->\r\n        </children>\r\n    </AnchorPane>\r\n    <stylesheets>\r\n        <URL value=\"@/style/styles.css\" />\r\n    </stylesheets>\r\n\r\n</AnchorPane>\r\n
+===================================================================
+diff --git a/src/main/resources/BookGuideFront.fxml b/src/main/resources/BookGuideFront.fxml
+--- a/src/main/resources/BookGuideFront.fxml	
++++ b/src/main/resources/BookGuideFront.fxml	
+@@ -1,21 +1,20 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import java.net.URL?>
+ <?import javafx.scene.control.Button?>
+ <?import javafx.scene.control.ComboBox?>
+ <?import javafx.scene.control.DatePicker?>
++<?import javafx.scene.image.Image?>
++<?import javafx.scene.image.ImageView?>
+ <?import javafx.scene.layout.AnchorPane?>
+ <?import javafx.scene.text.Font?>
+ <?import javafx.scene.text.Text?>
+ 
+ <!-- ComboBox -->
+ 
+-<?import javafx.scene.image.ImageView?>
+-<?import javafx.scene.image.Image?>
+-<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="main-container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookGuideFront">
++<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="main-container" stylesheets="@style/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BookGuideFront">
+ 
+ 
+-    <ImageView fitWidth="500" fitHeight="500">
++    <ImageView fitHeight="500" fitWidth="500">
+         <image>
+             <Image url="@image/bg1.jpg" />
+         </image>
+@@ -34,12 +33,9 @@
+             <!-- Add your buttons, ComboBox, and DatePicker here -->
+             <ComboBox fx:id="guideComboBox" layoutX="146.0" layoutY="182.0" prefWidth="250.0" promptText="Guide" />
+             <DatePicker fx:id="datePicker" layoutX="146.0" layoutY="237.0" prefWidth="250.0" promptText="Date" />
+-            <Button fx:id="bookButton" styleClass="guide-button" layoutX="249.0" layoutY="286.0" onAction="#addBooking" style="-fx-background-color: #031231; -fx-text-fill: white;" text="Book" />
++            <Button fx:id="bookButton" layoutX="249.0" layoutY="286.0" onAction="#addBooking" style="-fx-background-color: #031231; -fx-text-fill: white;" styleClass="guide-button" text="Book" />
+             <!-- Continue adding other nodes as needed -->
+         </children>
+     </AnchorPane>
+-    <stylesheets>
+-        <URL value="@/style/styles.css" />
+-    </stylesheets>
+ 
+ </AnchorPane>

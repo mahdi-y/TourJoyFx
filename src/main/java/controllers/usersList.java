@@ -1,11 +1,13 @@
 package controllers;
 
-import com.example.tourjoy.HelloApplication;
+import com.example.javafx.HelloApplication;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -17,6 +19,7 @@ import models.User;
 import Services.userService;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -50,6 +53,22 @@ public class usersList {
     private TableColumn<User, Boolean> isVerifiedColumn;
     @FXML
     private TableColumn<User, Boolean> isBannedColumn;
+
+    @FXML
+    private Button gotoGuideManagement;
+
+    @FXML
+    private Button acc;
+
+    @FXML
+    private Button transport;
+    @FXML
+    private Button user;
+    @FXML
+    private Button claims;
+
+    @FXML
+    private Button gotoMonumentManagement;
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private Services.userService userService;
@@ -134,8 +153,9 @@ public class usersList {
     }
 
 
+
     public void front(ActionEvent actionEvent) throws IOException {
-        HelloApplication.loadFXML("/Home.fxml");
+        HelloApplication.loadFXML("/com/test/tjv2/Home.fxml");
     }
 
     public void exportUsersToExcel() {
@@ -232,6 +252,90 @@ public class usersList {
             }
         } else {
             showAlert(Alert.AlertType.WARNING, "No User Selected", "Please select a user to grant admin rights.");
+        }
+    }
+    public void gotoUserManagment(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/usersList.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                user.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+
+    public void goToTransport(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/Subscription.fxml");
+        if (url == null) {
+            System.err.println("Cannot find subscription.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                transport.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void goToAccManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/Accomodation.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Acc.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                acc.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void gotoMonumentManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/Monument.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gotoMonumentManagement.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void goToClaimsManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/back.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                claims.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void gotoGuideManagement(javafx.event.ActionEvent actionEvent) {
+        URL url = getClass().getResource("/AddGuide.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Guides.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gotoGuideManagement.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
         }
     }
 }

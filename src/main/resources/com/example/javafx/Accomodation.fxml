@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<!--  Navbar  -->
+
+<AnchorPane maxHeight="801.0" maxWidth="1569.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1569.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AccomodationController">
+
+    <!--  SideNav  -->
+    <VBox fx:id="sidePanel" layoutX="0" prefHeight="800.0" prefWidth="287.0" style="-fx-padding: 10;" styleClass="side-panel" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0.0">
+        <Button fx:id="user" onAction="#gotoUserManagment" prefWidth="218.0" styleClass="side-panel-button" text="User Management">
+            <graphic>
+                <SVGPath content="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="50.0" right="40.0" top="140.0" />
+            </VBox.margin>
+        </Button>
+        <Button fx:id="gotoGuideManagement" onAction="#gotoGuideManagement" styleClass="side-panel-button" text="Guide Management">
+            <graphic>
+                <SVGPath content="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6m5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z" />
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="50.0" right="50.0" />
+            </VBox.margin>
+        </Button>
+        <Button fx:id="acc" onAction="#goToAccManagement" styleClass="side-panel-button" text="Accommodation Management">
+            <graphic>
+                <SVGPath content="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="50.0" />
+            </VBox.margin>
+        </Button>
+        <Button fx:id="transport" onAction="#goToTransport" styleClass="side-panel-button" text="Transport Management">
+            <graphic>
+                <SVGPath content="M3.5 0A2.5 2.5 0 0 0 1 2.5v9c0 .818.393 1.544 1 2v2a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V14h6v1.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-2c.607-.456 1-1.182 1-2v-9A2.5 2.5 0 0 0 12.5 0zM3 3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3.9c0 .625-.562 1.092-1.17.994C10.925 7.747 9.208 7.5 8 7.5s-2.925.247-3.83.394A1.008 1.008 0 0 1 3 6.9zm1 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2m8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2m-5-2h2a1 1 0 1 1 0 2H7a1 1 0 1 1 0-2" />
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="50.0" right="40.0" />
+            </VBox.margin>
+        </Button>
+        <Button fx:id="goToMonumentManagement" onAction="#gotoMonumentManagement" styleClass="side-panel-button" text="Monument Management">
+            <graphic>
+                <SVGPath content="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916zM12.375 6v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zm-2.5 0v7h-1.25V6zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2M.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1z" />
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="50.0" right="30.0" />
+            </VBox.margin>
+        </Button>
+        <Button fx:id="claims" onAction="#goToClaimsManagement" styleClass="side-panel-button" text="Claims Management">
+            <graphic>
+                <SVGPath content="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
+            </graphic>
+            <VBox.margin>
+                <Insets right="40.0" />
+            </VBox.margin>
+        </Button>
+    </VBox>
+
+    <!--  SideNav  -->
+
+
+    <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;" />
+    <Text fill="WHITE" layoutX="475.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guides Management">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Text>
+
+    <!--  Navbar  -->
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#34495e" height="101.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="navbar" width="1569.0" />
+
+    <StackPane layoutX="1171.0" layoutY="10.0" prefHeight="490.0" prefWidth="29.0" styleClass="image-container">
+        <HBox.margin>
+            <Insets />
+        </HBox.margin>
+    </StackPane>
+    <ImageView fitHeight="84.0" fitWidth="89.0" layoutX="23.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../images/tourjoy.png" />
+        </image>
+    </ImageView>
+    <Label layoutX="137.0" layoutY="19.0" prefHeight="65.0" prefWidth="403.0" text="Welcome admins!" textFill="WHITE">
+        <font>
+            <Font name="Vivaldi Italic" size="48.0" />
+        </font>
+    </Label>
+
+
+    <AnchorPane layoutX="276.0" layoutY="134.0" minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="304.0" styleClass="pane_11">
+        <children>
+            <Label layoutX="49.0" layoutY="76.0" text="Name:" />
+
+            <Label layoutX="50.0" layoutY="139.0" text="Type:" />
+            <TextField fx:id="nameField" layoutX="49.0" layoutY="97.0" prefWidth="200.0" />
+
+
+            <Label layoutX="49.0" layoutY="271.0" text="Location:" />
+
+            <Label layoutX="49.0" layoutY="205.0" text="Room number:" />
+            <TextField fx:id="roomField" layoutX="49.0" layoutY="227.0" prefWidth="200.0" />
+            <Label layoutX="51.0" layoutY="339.0" text="Price per night:" />
+            <TextField fx:id="priceField" layoutX="49.0" layoutY="361.0" prefWidth="200.0" />
+            <TextField fx:id="locationField" layoutX="49.0" layoutY="292.0" prefWidth="200.0" />
+            <TextField fx:id="refAField" layoutX="41.0" layoutY="50.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-text-fill: transparent;" />
+            <ComboBox fx:id="typeComboBox" layoutX="49.0" layoutY="159.0" prefHeight="26.0" prefWidth="200.0" promptText="Select Type">
+
+            </ComboBox>
+            <Button fx:id="clearInputForm" layoutX="109.0" layoutY="423.0" mnemonicParsing="false" onAction="#clearInputForm" prefHeight="30.0" prefWidth="84.0" style="-fx-background-color: Blue; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" styleClass="button-clear" text="CLEAR" />
+            <Button fx:id="updateButton" layoutX="107.0" layoutY="471.0" mnemonicParsing="false" onAction="#updateAccomodation" prefHeight="30.0" prefWidth="84.0" style="-fx-background-color: #F4D03F; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" styleClass="button-update" text="UPDATE" />
+
+        </children>
+    </AnchorPane>
+    <AnchorPane layoutX="709.0" layoutY="197.0" minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="304.0" styleClass="pane_11">
+        <children>
+            <Button fx:id="SelectImageButton" layoutX="94.0" layoutY="167.0" mnemonicParsing="false" onAction="#selectImageAccommodation" styleClass="button-add" text="Select front image" />
+            <ImageView fx:id="imageViewAccommodation" fitHeight="146.0" fitWidth="186.0" layoutX="74.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../images/home.png" />
+            </image></ImageView>
+            <Button fx:id="multiple" layoutX="91.0" layoutY="436.0" mnemonicParsing="false" onAction="#selectMultipleImages" text="Select detailed images" />
+            <ListView fx:id="ListViewAcc" layoutX="34.0" layoutY="217.0" prefHeight="201.0" prefWidth="250.0" />
+
+            <Button fx:id="addButton" layoutX="83.0" layoutY="472.0" onAction="#addAccomodation" prefHeight="30.0" prefWidth="151.0" style="-fx-background-color: black; -fx-font-weight: bold; -fx-background-radius: 20px;" styleClass="button-add" text="Add Accommodation" textFill="#fcf7f7" />
+        </children>
+
+        <StackPane layoutX="512.0" layoutY="10.0" prefHeight="700.0" prefWidth="688.0" styleClass="image-container">
+            <HBox alignment="TOP_RIGHT" prefHeight="680.0" prefWidth="677.0" spacing="10.0" StackPane.alignment="TOP_RIGHT">
+                <!-- White circle behind the minimize button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0" />
+                    <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
+                </StackPane>
+
+                <!-- White circle behind the expand button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0">
+                        <StackPane.margin>
+                            <Insets />
+                        </StackPane.margin></Circle>
+                    <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
+                </StackPane>
+
+                <!-- White circle behind the close button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0" />
+                    <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
+                </StackPane>
+
+                <StackPane.margin>
+                    <Insets right="290.0" top="-930.0" />
+                </StackPane.margin>
+            </HBox>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </StackPane>
+
+    </AnchorPane>
+    <Button fx:id="frontoffice" layoutX="1262.0" layoutY="37.0" mnemonicParsing="false" onAction="#gotoFrontOffice" prefHeight="23.0" prefWidth="114.0" text="Frontpage" />
+    <AnchorPane layoutX="1020.0" layoutY="160.0" minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="514.0" styleClass="pane_11">
+        <children>
+
+            <TableView fx:id="DisplayAccommodations" layoutX="17.0" layoutY="25.0" prefHeight="410.0" prefWidth="483.0" stylesheets="@Styles/styling.css">
+                <columns>
+                    <TableColumn fx:id="nameColumn" prefWidth="109.0" text="Name" />
+                    <TableColumn fx:id="typeColumn" prefWidth="97.5999755859375" text="Type" />
+                    <TableColumn fx:id="priceColumn" prefWidth="95.0" text="Price" />
+                    <TableColumn fx:id="roomColumn" prefWidth="53.199951171875" text="rooms" />
+                    <TableColumn fx:id="locationColumn" prefWidth="130.4000244140625" text="Location" />
+
+                </columns>
+            </TableView>
+            <Button fx:id="deleteButton" layoutX="91.0" layoutY="468.0" mnemonicParsing="false" onAction="#deleteAccomodation" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" styleClass="button-delete" text="DELETE" />
+            <Button fx:id="SeeRes" layoutX="193.0" layoutY="468.0" mnemonicParsing="false" onAction="#SeeRes" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" styleClass="button-add" text="See all bookings" />
+            <Button fx:id="seePie" layoutX="332.0" layoutY="468.0" mnemonicParsing="false" onAction="#seePie" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" styleClass="button-add" text="Generate Pie Chart" />
+        </children>
+    </AnchorPane>
+    <stylesheets>
+        <URL value="@Styles/backoffice.css" />
+    </stylesheets>
+</AnchorPane>

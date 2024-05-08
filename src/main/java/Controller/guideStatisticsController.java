@@ -1,11 +1,17 @@
 package Controller;
 
 import Entities.Guide;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import Services.BookingServices;
 import Entities.Booking;
+import javafx.scene.control.Button;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +21,8 @@ public class guideStatisticsController {
     private PieChart bookingsPieChart;
 
     private BookingServices bookingServices = new BookingServices();
+    @FXML
+    private Button gobackG;
 
     @FXML
     public void initialize() {
@@ -57,5 +65,17 @@ public class guideStatisticsController {
     }
 
 
-
+    public void goBackG(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/AddGuide.fxml");
+        if (url == null) {
+            System.err.println("Cannot find stats.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gobackG.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
 }

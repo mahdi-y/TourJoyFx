@@ -2,6 +2,7 @@ package Controller;
 
 import Entities.Country;
 import Services.ServiceCountry;
+import com.example.javafx.HelloApplication;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +24,9 @@ import java.net.HttpURLConnection;
 public class CountryController {
 
     public Button clearButton1;
+    public Button frontoffice;
+    public Button gotoGuideManagement;
+    public Button gotoMonumentManagement;
     @FXML
     private TableView<Country> DisplayCountries;
 
@@ -287,4 +292,122 @@ public class CountryController {
         clearFields();;
     }
 
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
+    }
+
+    
+
+
+    public void gotoGuideManagement(javafx.event.ActionEvent actionEvent) {
+        URL url = getClass().getResource("/AddGuide.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Guides.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gotoGuideManagement.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void gotoMonumentManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/Monument.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gotoMonumentManagement.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void gotoFrontOffice(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/Home.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void gotoUserManagment(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/usersList.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void goToClaimsManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/back.fxml");
+        if (url == null) {
+            System.err.println("Cannot find back.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void goToTransport(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/Subscription.fxml");
+        if (url == null) {
+            System.err.println("Cannot find back.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void goToAccManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/Accomodation.fxml");
+        if (url == null) {
+            System.err.println("Cannot find back.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
 }

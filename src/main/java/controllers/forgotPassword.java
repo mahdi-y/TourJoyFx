@@ -1,6 +1,6 @@
 package controllers;
 
-import com.example.tourjoy.HelloApplication;
+import com.example.javafx.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,8 +18,8 @@ import javafx.scene.control.TextField;
 
 public class forgotPassword {
 
-    public TextField password;
-    public TextField confirm;
+    public PasswordField password;
+    public PasswordField confirm;
     @FXML
     public Button updatePassword;
     @FXML

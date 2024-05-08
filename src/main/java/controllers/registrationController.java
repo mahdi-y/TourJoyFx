@@ -1,6 +1,6 @@
 package controllers;
 
-import com.example.tourjoy.HelloApplication;
+import com.example.javafx.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -75,7 +75,7 @@ public class registrationController {
         int phoneNumber = Integer.parseInt(phoneNumberField.getText());
         String confirmPassword = confirmPasswordField.getText();
         LocalDateTime createdAt = LocalDateTime.now();
-        String[] roles = {"ROLE_USER"};
+        String[] roles = {"ROLE_USER","ROLE_ADMIN"};
 
         User user = new User(email, roles, password, phoneNumber, createdAt);
 

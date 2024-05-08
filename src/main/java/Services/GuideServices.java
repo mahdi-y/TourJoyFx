@@ -27,17 +27,15 @@ public class GuideServices implements IServices<Guide> {
         }
     }
 
-    @Override
+
     public void registerUser(Guide guide) throws SQLException {
 
     }
 
-    @Override
     public void updateProfile(Guide guide, String currentEmail) throws SQLException {
 
     }
 
-    @Override
     public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
 
     }
@@ -106,12 +104,10 @@ public class GuideServices implements IServices<Guide> {
         }
     }
 
-    @Override
     public boolean emailExists(String email) throws SQLException {
         return false;
     }
 
-    @Override
     public boolean deleteUser(Guide guide) throws SQLException {
         return false;
     }
@@ -121,10 +117,6 @@ public class GuideServices implements IServices<Guide> {
 
     }
 
-    @Override
-    public void update(claims claims, Integer fkUser) throws SQLException {
-
-    }
 
 
     public List<Guide> Read() throws SQLException {
@@ -273,25 +265,6 @@ public class GuideServices implements IServices<Guide> {
         }
     }
 
-    @Override
-    public List<Guide> Read(int fkUser) throws SQLException {
-        return List.of();
-    }
-
-    @Override
-    public boolean phoneNumberExists(int phone) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public List<Guide> ReadUser() throws SQLException {
-        return List.of();
-    }
-
-    @Override
-    public List<User> fetchAllUsers() throws SQLException {
-        return List.of();
-    }
 
     public boolean isCINUnique(int cin) throws SQLException {
         // Query the database to check if the CIN already exists

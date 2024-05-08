@@ -1,5 +1,6 @@
 package controllers;
 
+import com.example.javafx.HelloApplication;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -205,7 +206,7 @@ public class CatController {
         try {
             // Load the second FXML file
             // Ensure that the FXMLLoader uses the correct class to find the resource relative to its location in the classpath.
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/tourjoy/back.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/javafx/back.fxml"));
             // Change 'loader' to 'fxmlLoader' to match the initialized FXMLLoader object.
             Parent root = fxmlLoader.load();
 
@@ -223,4 +224,20 @@ public class CatController {
         }
     }
 
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
+    }
 }

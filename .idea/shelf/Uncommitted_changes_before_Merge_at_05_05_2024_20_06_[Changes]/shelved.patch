@@ -1,0 +1,53 @@
+Index: src/main/java/Services/IServices.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Services;\r\n\r\nimport java.sql.SQLException;\r\nimport java.util.List;\r\npublic interface IServices <T> {\r\n\r\n    void add(T t);\r\n    void delete(T t) throws SQLException;\r\n    void update(T t, int oldCIN) throws SQLException;\r\n    List<T> Read() throws SQLException;\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Services/IServices.java b/src/main/java/Services/IServices.java
+--- a/src/main/java/Services/IServices.java	(revision df2895fcff53c9f24dc1d89c83dd06cf4f45418d)
++++ b/src/main/java/Services/IServices.java	(date 1714935988993)
+@@ -1,12 +1,36 @@
+ package Services;
+ 
++import Entities.Guide;
++import models.User;
++import models.claims;
++
+ import java.sql.SQLException;
+ import java.util.List;
+-public interface IServices <T> {
++
++public interface IServices<T>{
++    void registerUser(T t) throws SQLException;
++    void updateProfile(T t, String currentEmail) throws SQLException;
++
++    void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException;
++    void add(T t) throws SQLException;
+ 
+-    void add(T t);
++    boolean emailExists(String email) throws SQLException;
++
++    boolean deleteUser(T t) throws SQLException;
++    void update(T t) throws SQLException;
++
++    void update(claims claims, Integer fkUser) throws SQLException;
++
++    void update(Guide guide, int oldCIN) throws SQLException;
++
+     void delete(T t) throws SQLException;
+-    void update(T t, int oldCIN) throws SQLException;
+-    List<T> Read() throws SQLException;
++    List<T> Read(int fkUser) throws SQLException;
++
++    boolean phoneNumberExists(int phone) throws SQLException;
++
++    List<T> ReadUser() throws SQLException;
++
+ 
+-}
++
++    List<User> fetchAllUsers() throws SQLException;
++}
+\ No newline at end of file

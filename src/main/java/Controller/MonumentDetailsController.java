@@ -1,6 +1,7 @@
 package Controller;
 
 import Entities.Monument;
+import com.example.javafx.HelloApplication;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javax.sound.sampled.AudioInputStream;
 import java.net.URL;
 import javafx.scene.text.TextFlow;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class MonumentDetailsController {
     public VBox detailsBox;
@@ -72,5 +74,22 @@ public class MonumentDetailsController {
         } else {
             System.err.println("Failed to find map.html resource.");
         }
+    }
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
     }
 }

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ServiceClaims implements IServices<claims> {
+public class ServiceClaims  {
 
     private Connection con;
     private PreparedStatement pre;
@@ -26,22 +26,18 @@ public class ServiceClaims implements IServices<claims> {
     }
 
 
-    @Override
     public void registerUser(claims claims) throws SQLException {
 
     }
 
-    @Override
     public void updateProfile(claims claims, String currentEmail) throws SQLException {
 
     }
 
-    @Override
     public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
 
     }
 
-    @Override
     public void add(claims claims) throws SQLException {
         String query = "INSERT INTO claims (title, description, createDate, state, fkC, reply, fkUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pre = con.prepareStatement(query)) {
@@ -58,17 +54,14 @@ public class ServiceClaims implements IServices<claims> {
         }
     }
 
-    @Override
     public boolean emailExists(String email) throws SQLException {
         return false;
     }
 
-    @Override
     public boolean deleteUser(claims claims) throws SQLException {
         return false;
     }
 
-    @Override
     public void update(claims claims) throws SQLException {
 
     }
@@ -121,22 +114,18 @@ public class ServiceClaims implements IServices<claims> {
     }
 
 
-    @Override
     public boolean phoneNumberExists(int phone) throws SQLException {
         return false;
     }
 
-    @Override
     public List<claims> ReadUser() throws SQLException {
         return List.of();
     }
 
-    @Override
     public List<User> fetchAllUsers() throws SQLException {
         return List.of();
     }
 
-    @Override
     public void update(claims claims, Integer fkUser) throws SQLException {
         String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=?, fkUser=? WHERE id=?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
@@ -154,13 +143,10 @@ public class ServiceClaims implements IServices<claims> {
         }
     }
 
-    @Override
     public void update(Guide guide, int oldCIN) throws SQLException {
 
     }
-
-    @Override
-    public void delete(claims claims) throws SQLException {
+ public void delete(claims claims) throws SQLException {
         String deleteClaimsQuery = "DELETE FROM claims WHERE id=?";
         PreparedStatement deleteClaimsPst = null;
         try {

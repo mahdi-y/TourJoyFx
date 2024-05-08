@@ -5,6 +5,7 @@ import Entities.Monument;
 import Services.ExchangeRateAPI;
 import Services.ServiceCountry;
 import Services.ServiceMonument;
+import com.example.javafx.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -60,6 +61,13 @@ public class MonumentFrontController {
 
     private final int rowsPerPage = 2; // 2 rows
     private final int columnsPerPage = 3; // 3 columns
+    public Button ClaimsButton;
+    public Button HomeButton;
+    public Button Acc;
+
+    @FXML
+    private Button homeButton;
+
 
 
     @FXML
@@ -513,6 +521,93 @@ public class MonumentFrontController {
                 ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
             }
         }
+    }
+
+    public void goToClaims(ActionEvent actionEvent){
+        // Correct the package path in the getResource method
+        URL url = getClass().getResource("/com/example/javafx/add-rec.fxml");
+        if (url == null) {
+            System.err.println("Cannot find add-rec.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                ClaimsButton.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+
+
+
+
+    public void goToHome(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/Home.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Home.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                guideButton.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+
+
+    public void goToAcc(ActionEvent actionEvent) {
+        // Get the URL of the FXML file
+        URL url = getClass().getResource("/com/example/javafx/accFront.fxml");
+
+        // Check if the URL is null, indicating that the resource was not found
+        if (url == null) {
+            System.err.println("Cannot find accFront.fxml");
+        } else {
+            try {
+                // Load the FXML file into a Parent node
+                Parent root = FXMLLoader.load(url);
+
+                // Set the loaded FXML file as the root scene
+                Acc.getScene().setRoot(root);
+            } catch (IOException ex) {
+                // Handle any IOException that occurs during loading
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void goToSubscriptions(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/test/tjv2/SubscriptionFront.fxml");
+        if (url == null) {
+            System.err.println("Cannot find SubscriptionFront.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                SubscriptionButton.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
     }
 
 }

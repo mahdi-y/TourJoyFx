@@ -13,6 +13,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 import Entities.Country;
+import com.example.javafx.HelloApplication;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.Scene;
@@ -78,6 +79,8 @@ public class AddGuide {
     @FXML
     private TableColumn<Guide, String> languageColumn;
 
+    @FXML
+    private Button user;
 
     @FXML
     private TableColumn<Guide, String> dobColumn;
@@ -119,12 +122,16 @@ public class AddGuide {
     @FXML
     private Button frontoffice;
     @FXML
+    private Button guidestats;
+    @FXML
     private Button selectImageButton;
 
     @FXML
     private Button gotoMonumentManagement;
     @FXML
     private Button gotoGuideManagement;
+    @FXML
+    private Button gotoTransportManagement;
     private Button exportExcelButton;
 
     List<Guide> listGuides = new ArrayList<>();
@@ -590,7 +597,55 @@ public class AddGuide {
         }
     }
 
-    public void gotoMonumentManagement(ActionEvent actionEvent) {
+
+
+    public void gotoUserManagment(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/usersList.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Monument.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                user.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
+    }
+
+    public void gotoTransportManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/Transport.fxml");
+        if (url == null) {
+            System.err.println("Cannot find Transport.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                gotoTransportManagement.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+    }
+
+    public void gotoMonumentManagements(ActionEvent actionEvent) {
         URL url = getClass().getResource("/com/test/tjv2/Monument.fxml");
         if (url == null) {
             System.err.println("Cannot find Monument.fxml");
@@ -604,15 +659,29 @@ public class AddGuide {
         }
     }
 
-
-    public void gotoUserManagment(ActionEvent actionEvent) {
-        URL url = getClass().getResource("/usersList.fxml");
+    public void goToAccManagement(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/com/example/javafx/Accomodation.fxml");
         if (url == null) {
-            System.err.println("Cannot find Userlist.fxml");
+            System.err.println("Cannot find back.fxml");
         } else {
             try {
                 Parent root = FXMLLoader.load(url);
                 frontoffice.getScene().setRoot(root);
+            } catch (IOException ex) {
+                ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
+            }
+        }
+
+    }
+
+    public void gotoGuideStats(ActionEvent actionEvent) {
+        URL url = getClass().getResource("/guideStats.fxml");
+        if (url == null) {
+            System.err.println("Cannot find stats.fxml");
+        } else {
+            try {
+                Parent root = FXMLLoader.load(url);
+                guidestats.getScene().setRoot(root);
             } catch (IOException ex) {
                 ex.printStackTrace(); // This prints the stack trace to help diagnose the issue
             }

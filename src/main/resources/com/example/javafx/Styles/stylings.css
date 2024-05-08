@@ -1,0 +1,227 @@
+.side_ankerpane{
+    -fx-background-color: #353A56;
+    -fx-border-width: 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+
+}
+.inner_pane{
+    -fx-background-color: #748CF1;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #784CF1;
+}
+.most_inner_pane {
+    -fx-background-color: #6780E2;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #784CF1;
+}
+.btn_workbench{
+    -fx-background-color: #141313;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #141313;
+}
+.pane_1{
+    -fx-background-color: #748CF1;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-border-style: solid;
+    -fx-border-color: #748CF1;
+}
+.pane_11{
+    -fx-background-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-border-style: solid;
+    -fx-border-color: #ffffff;
+}
+.pane_111{
+    -fx-background-color: #FD9999;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-border-style: solid;
+    -fx-border-color: #FD9999;
+}
+.table-view .column-header-background .filler{
+    -fx-cell-size: 20;
+    -fx-background-color: #FFFFFF;
+}
+.table-view .column-header-background .label{
+    -fx-text-fill: #52438F;
+}
+.table-view .cell{
+    -fx-cell-size: 30;
+    -fx-text-fill: #000000;
+}
+.table-row-cell:selected{
+    -fx-background-color: rgb(EBE9F6);
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #6c6296;
+    -fx-text-fill: white;
+    -fx-table-cell-border-color: transparent;
+}
+/*tab pane*/
+.tab-pane .tab-header-area .tab-header-background{
+    -fx-opacity: 0;
+}
+.tab-pane{
+    -fx-tab-min-width:90px;
+}
+.tab{
+    -fx-background-insets: 0 0 0 0,0,0;
+}
+.tab-pane .tab{
+    -fx-background-color: white;
+}
+.tab-pane .tab:selected
+{
+    -fx-background-color: white;
+    -fx-text-fill: #6F5CC2;
+    -fx-border-color: #6F5CC2;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+.tab .tab-label{
+    -fx-alignment: CENTER;
+    -fx-text-fill: #A5A9B4;
+
+}
+.tab:selected .tab-label{
+    -fx-alignment: CENTER;
+    -fx-text-fill: #6F5CC2;
+}
+
+/* Title */
+.title-text {
+    -fx-font-family: "Arial Black", Gadget, sans-serif; /* Set font family */
+    -fx-font-size: 24px; /* Set font size */
+    -fx-text-fill: #333; /* Text color */
+}
+
+/* Text fields */
+.text-field {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* White background with reduced opacity */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-padding: 8px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
+
+/* Date picker */
+.date-picker {
+    -fx-background-color: rgba(255, 255, 255, 0.9); /* White background with reduced opacity */
+    -fx-border-color: #ccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-font-size: 14px; /* Font size */
+    -fx-text-fill: #333; /* Text color */
+}
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5;
+    -fx-padding: 4px;
+}
+
+.orange-button {
+    -fx-background-color: orange;
+    -fx-text-fill: white;
+}
+/* Style for the guide card box */
+.guide-box {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+}
+
+/* Style for the guide image */
+.guide-image {
+    -fx-clip: true;
+    -fx-clip-radius: 5;
+}
+
+/* Style for the container of guide details */
+.guide-details {
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-spacing: 5; /* space between elements within the VBox */
+}
+
+/* Style for the guide's title label */
+.guide-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-alignment: center;
+}
+
+/* Style for the guide's price label */
+.guide-price {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #666;
+    -fx-alignment: center;
+}
+
+/* Style for buttons in the guide card */
+.guide-button {
+    -fx-background-color: #5a5;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-font-size: 12px;
+}
+
+/* Hover effect for buttons */
+.guide-button:hover {
+    -fx-background-color: #484;
+}
+
+/* CSS for Add button hover */
+.button-add:hover {
+    -fx-background-color: #66bb6a; /* Lighter shade of green */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for Clear button hover */
+.button-clear:hover {
+    -fx-background-color: #ffca28; /* Lighter shade of orange */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for Delete button hover */
+.button-delete:hover {
+    -fx-background-color: #ef5350; /* Lighter shade of red */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for Update button hover */
+.button-update:hover {
+    -fx-background-color: #81c784; /* Lighter shade of teal */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* CSS for See Bookings button hover */
+.button-seebookings:hover {
+    -fx-background-color: #26a69a; /* Lighter shade of blue-green */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}

@@ -26,7 +26,7 @@ public class userService implements IServices<User> {
         con = DBConnection.getInstance().getConnection();
     }
 
-    @Override
+
     public void registerUser(User user) {
         if (con == null) {
             System.err.println("Connection is null.");
@@ -59,7 +59,6 @@ public class userService implements IServices<User> {
         }
     }
 
-    @Override
     public boolean deleteUser(User user) throws SQLException {
         if (con == null) {
             throw new SQLException("Connection is null.");
@@ -72,7 +71,7 @@ public class userService implements IServices<User> {
         }
     }
 
-    @Override
+
     public void updateProfile(User user, String currentEmail) throws SQLException {
         if (con == null) {
             throw new SQLException("Connection is null.");
@@ -91,7 +90,7 @@ public class userService implements IServices<User> {
             throw new SQLException("Update failed, no rows affected.");
         }
     }
-    @Override
+
     public void updateProfileAfetrCompletion(User user, String currentEmail) throws SQLException {
         if (con == null) {
             throw new SQLException("Connection is null.");
@@ -118,7 +117,6 @@ public class userService implements IServices<User> {
 
     }
 
-    @Override
     public boolean emailExists(String email) throws SQLException {
         String query = "SELECT count(*) FROM user WHERE email = ?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
@@ -132,7 +130,7 @@ public class userService implements IServices<User> {
         return false;
     }
 
-    @Override
+
     public boolean phoneNumberExists(int phone) throws SQLException{
         String query = "SELECT count(*) FROM user WHERE phone_number = ?";
         try(PreparedStatement pre = con.prepareStatement(query)){
@@ -150,7 +148,7 @@ public class userService implements IServices<User> {
 
 
 
-    @Override
+
     public List<User> ReadUser() throws SQLException {
         return null;
     }
@@ -198,7 +196,6 @@ public class userService implements IServices<User> {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    @Override
     public List<User> fetchAllUsers() throws SQLException {
         List<User> usersList = new ArrayList<>();
         String query = "SELECT id, email, roles, first_name, last_name, phone_number, country, created_at, is_verified, is_banned FROM user";
@@ -362,15 +359,11 @@ public class userService implements IServices<User> {
         }
     }
 
-    @Override
     public void update(claims claims, Integer fkUser) throws SQLException {
 
     }
 
-    @Override
-    public void update(Guide guide, int oldCIN) throws SQLException {
 
-    }
 
     @Override
     public void delete(User user) throws SQLException {
@@ -378,6 +371,10 @@ public class userService implements IServices<User> {
     }
 
     @Override
+    public void update(User user, int oldCIN) throws SQLException {
+
+    }
+
     public List<User> Read(int fkUser) throws SQLException {
         return List.of();
     }
@@ -452,6 +449,32 @@ public class userService implements IServices<User> {
             System.err.println("SQL Error: " + e.getMessage());
             throw e;
         }
+    }
+
+    public static String fetchUserEmailById(int userId) throws SQLException {
+        String email = null;
+        String query = "SELECT email FROM user WHERE id = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userId);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                email = resultSet.getString("email");
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL Error: " + e.getMessage());
+            throw e; // Optionally rethrow to handle elsewhere
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (preparedStatement != null) preparedStatement.close();
+            if (connection != null) connection.close();
+        }
+        return email;
     }
 
 }

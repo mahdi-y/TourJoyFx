@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
-<?import org.controlsfx.control.Rating?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 
-<?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
-<?import java.net.URL?>
-<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="main-container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddFeedback">
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import org.controlsfx.control.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="main-container" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddFeedback">
    <ImageView fitHeight="680" fitWidth="500">
       <image>
          <Image url="@image/bg1.jpg" />
@@ -19,24 +17,20 @@
    <!-- Main Content Area -->
    <AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="content-pane">
       <children>
-         <ComboBox fx:id="guideCombo" styleClass="guideCombo" layoutX="125.0" layoutY="80.0" prefWidth="250.0" promptText="Select Guide" />
+         <ComboBox fx:id="guideCombo" layoutX="125.0" layoutY="80.0" prefWidth="250.0" promptText="Select Guide" styleClass="guideCombo" />
          <Rating fx:id="ratingControl" layoutX="175.0" layoutY="120.0" max="5" partialRating="true" />
-         <TextArea fx:id="CommentField"  layoutX="125.0" layoutY="160.0" prefHeight="110.0" prefWidth="260.0" wrapText="true"/>
-         <Button fx:id="adddF" layoutX="210.0" layoutY="285.0" mnemonicParsing="false" text="Submit"
-                 style="-fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 5 22; -fx-font-weight: bold;"
-                 onMouseEntered="#onButtonEntered"
-                 onMouseExited="#onButtonExited"/>
+         <TextArea fx:id="CommentField" layoutX="125.0" layoutY="160.0" prefHeight="110.0" prefWidth="260.0" wrapText="true" />
+         <Button fx:id="adddF" layoutX="210.0" layoutY="285.0" mnemonicParsing="false" onMouseEntered="#onButtonEntered" onMouseExited="#onButtonExited" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 5 22; -fx-font-weight: bold;" text="Submit" />
 
-         <ScrollPane fx:id="feedbackScrollPane" styleClass="scroll" layoutX="10" layoutY="340" prefHeight="300" prefWidth="480" style="-fx-background-color: transparent;">
+         <ScrollPane fx:id="feedbackScrollPane" layoutX="10" layoutY="340" prefHeight="300" prefWidth="480" style="-fx-background-color: transparent;" styleClass="scroll">
             <content>
-               <VBox fx:id="feedbackContainer" styleClass="container" spacing="10" style="-fx-background-color: transparent;">
+               <VBox fx:id="feedbackContainer" spacing="10" style="-fx-background-color: transparent;" styleClass="container">
                   <padding>
-                     <Insets top="10" right="10" bottom="10" left="10"/>
+                     <Insets bottom="10" left="10" right="10" top="10" />
                   </padding>
                </VBox>
             </content>
          </ScrollPane>
-
 
 
       </children>

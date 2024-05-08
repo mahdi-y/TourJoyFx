@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="806.0" prefWidth="1205.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ResBackController">
+    <children>
+        <ImageView fitHeight="805.0" fitWidth="1312.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/bgRes.jpg" />
+            </image>
+        </ImageView>
+        <!-- Details VBox -->
+        <VBox fx:id="detailsBox" alignment="TOP_LEFT" layoutX="225" layoutY="65" maxHeight="700" maxWidth="631.0" prefHeight="700.0" prefWidth="631.0" spacing="10" styleClass="details-box" stylesheets="@Styles/Main.css">
+            <VBox.margin>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </VBox.margin>
+         <children>
+            <TableView fx:id="DisplayReservations" prefHeight="681.0" prefWidth="460.0" style="-fx-background-color: transparent; -fx-control-inner-background: transparent; -fx-table-cell-border-color: transparent;">
+              <columns>
+                  <TableColumn fx:id="userColumn" prefWidth="129.79998397827148" text="User" />
+                  <TableColumn fx:id="nameRColumn" prefWidth="177.40000915527344" text="Accommodation name" />
+                <TableColumn fx:id="startColumn" prefWidth="153.0" text="Check-in" />
+                  <TableColumn fx:id="endColumn" prefWidth="156.79998779296875" text="Check-out" />
+
+              </columns>
+            </TableView>
+             <HBox spacing="10">
+                 <Button fx:id="deleteRButton" mnemonicParsing="false" onAction="#deleteRes" prefHeight="42.0" prefWidth="117.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="DELETE" />
+                 <Button fx:id="manageAccomButton" mnemonicParsing="false" onAction="#goToAccomManagement" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: blue; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Manage your accommodations" />
+               <Button fx:id="ExportRes" layoutX="138.0" layoutY="10.0" mnemonicParsing="false" onAction="#ExportRes" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="EXPORT EXCEL" />
+             </HBox>
+         </children>
+        </VBox>
+
+    </children>
+</StackPane>

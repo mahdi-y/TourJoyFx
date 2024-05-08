@@ -3,7 +3,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import models.User;
 import Services.userService;
-import com.example.tourjoy.HelloApplication;
+import com.example.javafx.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Pagination?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.text.Font?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
 
-<?import javafx.scene.control.ButtonBar?>
-<?import org.controlsfx.control.RangeSlider?>
-<?import javafx.scene.control.CheckBox?>
-<?import java.net.URL?>
-<?import javafx.scene.control.DatePicker?>
-<AnchorPane prefHeight="800.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GuidesFront">
+<!--<?import org.controlsfx.control.RangeSlider?>-->
+
+<AnchorPane prefHeight="810.0" prefWidth="1373.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GuidesFront">
     <children>
-        <ImageView fitHeight="1011.0" fitWidth="1538.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="994.0" fitWidth="1706.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@image/bg1.jpg" />
             </image>
@@ -29,18 +24,7 @@
             </image>
         </ImageView>
 
-        <Label layoutX="1212.0" layoutY="45.0" prefHeight="26.0" prefWidth="101.0" text="FEEDBACK" textFill="#230f6e">
-            <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-        </Label>
-        <Label layoutX="1314.0" layoutY="45.0" text="CLAIMS" textFill="#230f6e">
-            <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-        </Label>
-
-        <AnchorPane layoutX="10" layoutY="150" prefWidth="300" prefHeight="600" style="-fx-background-color: #87abbd; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;">
+        <AnchorPane layoutX="10" layoutY="150" prefHeight="600" prefWidth="300" style="-fx-background-color: #87abbd; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;">
             <children>
                 <!-- <DatePicker fx:id="datePickerAvailable" layoutX="24.5" layoutY="60.0" prefWidth="300" promptText="Select Date..." />-->
 
@@ -52,7 +36,7 @@
                     </font>
                 </Label>
                 <!-- Range Slider centered and moved down -->
-                <RangeSlider fx:id="priceRangeSlider" layoutX="24.5" layoutY="152" prefWidth="251.0" showTickLabels="true" showTickMarks="false" min="0" max="10000" />
+                <RangeSlider fx:id="priceRangeSlider" layoutX="24.5" layoutY="152" max="10000" min="0" prefWidth="251.0" showTickLabels="true" showTickMarks="false" />
                 <Label layoutX="30.0" layoutY="140.0" prefHeight="18.0" prefWidth="187.0" text="Filter By Price :">
                     <font>
                         <Font size="14.0" />
@@ -78,31 +62,67 @@
             </children>
         </AnchorPane>
 
-        <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1419.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+        <!-- ScrollPane for guides -->
+
+        <StackPane layoutX="512.0" layoutY="10.0" prefHeight="700.0" prefWidth="74.0" styleClass="image-container">
+            <HBox alignment="TOP_RIGHT" prefHeight="680.0" prefWidth="677.0" spacing="10.0" StackPane.alignment="TOP_RIGHT">
+                <!-- White circle behind the minimize button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0" />
+                    <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
+                </StackPane>
+
+                <!-- White circle behind the expand button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0">
+                        <StackPane.margin>
+                            <Insets />
+                        </StackPane.margin></Circle>
+                    <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
+                </StackPane>
+
+                <!-- White circle behind the close button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0" />
+                    <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
+                </StackPane>
+
+                <StackPane.margin>
+                    <Insets left="900.0" right="30.0" top="-620.0" />
+                </StackPane.margin>
+            </HBox>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </StackPane>
+        <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
+
+        <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1419.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="80.0">
             <image>
                 <Image url="@image/icons-utilisateur.png" />
             </image>
         </ImageView>
-        <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
-        <Label layoutX="751.0" layoutY="45.0" text="HOME" textFill="#fea116">
-            <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-        </Label>
-        <Button fx:id="guideButton" onAction="#goToGuides" layoutX="957.0" layoutY="39.0" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="GUIDES" textFill="#230f6e" />
 
-        <!-- Monument Button -->
-        <Button fx:id="MonumentButton" layoutX="821.0" layoutY="39.0" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="MONUMENTS" textFill="#230f6e" onAction="#goToMonuments" />
+        <!-- HOME Button -->
+        <Button fx:id="HomeButton" layoutX="634.0" layoutY="39.0" onAction="#goToHome" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="HOME" textFill="#230f6e" AnchorPane.topAnchor="80.0" />
 
-        <!-- Subscription Button -->
-        <Button fx:id="SubscriptionButton" layoutX="1043.0" layoutY="39.0" prefHeight="38.0" prefWidth="166.0" styleClass="custom-button" text="SUBSCRIPTION" textFill="#230f6e" />
+           <!-- Guide Button -->
+        <Button fx:id="guideButton" layoutX="1059.0" layoutY="38.0" onAction="#goToGuides" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="GUIDES" textFill="#230f6e" AnchorPane.topAnchor="80.0" />
 
-        <!-- ScrollPane for guides -->
+           <!-- Monument Button -->
+        <Button fx:id="MonumentButton" layoutX="916.0" layoutY="38.0" onAction="#goToMonuments" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="MONUMENTS" textFill="#230f6e" AnchorPane.topAnchor="80.0" />
 
+           <!-- Subscription Button -->
+        <Button fx:id="SubscriptionButton" layoutX="1140.0" layoutY="37.0" onAction="#goToSubscriptions" prefHeight="38.0" prefWidth="166.0" styleClass="custom-button" text="SUBSCRIPTIONS" textFill="#230f6e" AnchorPane.topAnchor="80.0" />
 
-        <Pagination fx:id="pagination" styleClass="pagination" layoutX="343.0" layoutY="86.0" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="343.0" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="86.0" />
+        <!-- Accommodation Button -->
+        <Button fx:id="Acc" layoutX="716.0" layoutY="37.0" onAction="#goToAcc" prefHeight="38.0" prefWidth="200.0" styleClass="custom-button" text="ACCOMMODATIONS" textFill="#230f6e" AnchorPane.topAnchor="80.0" />
 
+           <!-- Claims Button -->
+        <Button fx:id="ClaimsButton" layoutX="1275.0" layoutY="37.0" onAction="#goToClaims" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="CLAIMS" textFill="#230f6e" AnchorPane.topAnchor="80.0" />
 
+   
+           <Pagination fx:id="pagination" layoutX="343.0" layoutY="131.2" prefHeight="619.0" prefWidth="1194.0" styleClass="pagination" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="343.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="131.0" />
 
     </children>
     <stylesheets>

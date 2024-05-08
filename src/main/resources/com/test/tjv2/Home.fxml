@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Home">
     <children>
         <Label fx:id="idU" layoutX="288.0" layoutY="575.0" text="Label" textFill="WHITE" />
-        <ImageView fitHeight="1011.0" fitWidth="1538.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="GoToAcc" fitHeight="1011.0" fitWidth="1538.0" layoutY="-184.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/bg1.jpg" />
             </image>
@@ -22,7 +26,6 @@
                 <Image url="@../../../images/tourjoy.png" />
             </image>
         </ImageView>
-        <Button fx:id="ClaimsButton" layoutX="1275.0" layoutY="37.0" onAction="#goToClaims" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="CLAIMS" textFill="#230f6e" />
 
 
         <ImageView fx:id="heroImageView" fitHeight="556.0" fitWidth="552.0" layoutX="867.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
@@ -45,23 +48,67 @@
                 <Font size="22.0" />
             </font>
         </Button>
-        <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1419.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+        <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
+
+        <StackPane layoutX="512.0" layoutY="10.0" prefHeight="700.0" prefWidth="688.0" styleClass="image-container">
+            <HBox alignment="TOP_RIGHT" prefHeight="680.0" prefWidth="677.0" spacing="10.0" StackPane.alignment="TOP_RIGHT">
+                <!-- White circle behind the minimize button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0" />
+                    <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
+                </StackPane>
+
+                <!-- White circle behind the expand button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0">
+                        <StackPane.margin>
+                            <Insets />
+                        </StackPane.margin></Circle>
+                    <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
+                </StackPane>
+
+                <!-- White circle behind the close button -->
+                <StackPane>
+                    <Circle fill="WHITE" radius="14.0" />
+                    <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
+                </StackPane>
+
+                <StackPane.margin>
+                    <Insets left="890.0" top="-620.0" />
+                </StackPane.margin>
+            </HBox>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </StackPane>
+        <!-- HOME Button -->
+        <Button fx:id="HomeButton" layoutX="634.0" layoutY="39.0" onAction="#goToHome" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="HOME" textFill="#230f6e" AnchorPane.bottomAnchor="733.8" AnchorPane.topAnchor="90.0" />
+
+        <!-- Guide Button -->
+        <Button fx:id="guideButton" layoutX="1059.0" layoutY="38.0" onAction="#goToGuides" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="GUIDES" textFill="#230f6e" AnchorPane.topAnchor="90.0" />
+
+        <!-- Monument Button -->
+        <Button fx:id="MonumentButton" layoutX="916.0" layoutY="38.0" onAction="#goToMonuments" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="MONUMENTS" textFill="#230f6e" AnchorPane.topAnchor="90.0" />
+
+        <!-- Subscription Button -->
+        <Button fx:id="SubscriptionButton" layoutX="1140.0" layoutY="37.0" onAction="#goToSubscriptions" prefHeight="38.0" prefWidth="166.0" styleClass="custom-button" text="SUBSCRIPTIONS" textFill="#230f6e" AnchorPane.topAnchor="90.0" />
+
+        <!-- Accommodation Button -->
+        <Button fx:id="Acc" layoutX="716.0" layoutY="37.0" onAction="#goToAcc" prefHeight="38.0" prefWidth="200.0" styleClass="custom-button" text="ACCOMMODATIONS" textFill="#230f6e" AnchorPane.topAnchor="90.0" />
+
+        <!-- Claims Button -->
+        <Button fx:id="ClaimsButton" layoutX="1275.0" layoutY="37.0" onAction="#goToClaims" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="CLAIMS" textFill="#230f6e" AnchorPane.topAnchor="90.0" />
+
+        <Button fx:id="CategoryManagement" layoutX="1275.0" layoutY="37.0" onAction="#goToClaims" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="CLAIMS" textFill="#230f6e" AnchorPane.topAnchor="90.0" />
+
+                  <Button layoutX="1406.0" layoutY="243.0" mnemonicParsing="false" onAction="#logoutUser" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: #cc284b;" text="Logout" textFill="WHITE" />
+        <Button fx:id="adminButton" layoutX="1406.0" layoutY="200.8" mnemonicParsing="false" onAction="#backoffice" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: #fea116;" text="backoffice" textFill="WHITE" AnchorPane.topAnchor="200.8" />
+        <Button layoutX="1398.0" layoutY="152.0" mnemonicParsing="false" onAction="#goToFavs" prefHeight="38.0" prefWidth="98.0" style="-fx-background-color: #fea116;" text="Favorite Acc" textFill="WHITE" AnchorPane.topAnchor="150.0" />
+        <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1419.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="90.0">
             <image>
                 <Image url="@../../../images/icons-utilisateur.png" />
             </image>
         </ImageView>
-        <ButtonBar layoutX="382.0" layoutY="139.0" prefHeight="40.0" prefWidth="200.0" />
-        <Button fx:id="HomeButton" layoutX="780.0" layoutY="39.0" onAction="#goToHome" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="HOME" textFill="#230f6e" />
-
-        <!-- Guide Button -->
-        <Button fx:id="guideButton" layoutX="1040.0" layoutY="38.0" onAction="#goToGuides" prefHeight="26.0" prefWidth="86.0" styleClass="custom-button" text="GUIDES" textFill="#230f6e" />
-
-        <!-- Monument Button -->
-        <Button fx:id="MonumentButton" layoutX="885.0" layoutY="38.0" onAction="#goToMonuments" prefHeight="38.0" prefWidth="143.0" styleClass="custom-button" text="MONUMENTS" textFill="#230f6e" />
-
-        <!-- Subscription Button -->
-        <Button fx:id="SubscriptionButton" layoutX="1126.0" layoutY="37.0" prefHeight="38.0" prefWidth="166.0" styleClass="custom-button" text="SUBSCRIPTION" textFill="#230f6e" />
-      <Button layoutX="1410.0" layoutY="103.0" mnemonicParsing="false" onAction="#backoffice" prefHeight="38.0" prefWidth="74.0" style="-fx-background-color: #fea116;" text="backoffice" textFill="WHITE" />
 
     </children>
     <stylesheets>

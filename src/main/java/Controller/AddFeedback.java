@@ -1,6 +1,7 @@
 package Controller;
 
 import Entities.feedback;
+import com.example.javafx.HelloApplication;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -255,6 +256,23 @@ public class AddFeedback {
         // Add userLabel, displayRating, and commentLabel to the feedbackBox
         feedbackBox.getChildren().addAll(userLabel, displayRating, commentLabel);
         feedbackContainer.getChildren().add(feedbackBox);
+    }
+
+    private Stage getPrimaryStage() {
+        return HelloApplication.getPrimaryStage();
+    }
+
+    public void minimizeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().setIconified(true);
+    }
+
+    public void expandWindow(javafx.event.ActionEvent actionEvent) {
+        Stage stage = getPrimaryStage();
+        stage.setMaximized(!stage.isMaximized());
+    }
+
+    public void closeWindow(javafx.event.ActionEvent actionEvent) {
+        getPrimaryStage().close();
     }
 
     @FXML

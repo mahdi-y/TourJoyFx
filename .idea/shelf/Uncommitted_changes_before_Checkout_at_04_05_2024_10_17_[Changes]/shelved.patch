@@ -1,0 +1,17 @@
+Index: src/main/java/com/test/tjv2/HelloApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.test.tjv2;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class HelloApplication extends Application {\r\n    @Override\r\n    public void start(Stage stage) throws IOException {\r\n        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(\"Monument.fxml\"));\r\n        Scene scene = new Scene(fxmlLoader.load(), 1550, 780);\r\n        stage.setTitle(\"Tour Joy\");\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        System.setProperty(\"prism.order\", \"sw\"); // Disable hardware acceleration\r\n        launch();\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/com/test/tjv2/HelloApplication.java b/src/main/java/com/test/tjv2/HelloApplication.java
+--- a/src/main/java/com/test/tjv2/HelloApplication.java	
++++ b/src/main/java/com/test/tjv2/HelloApplication.java	
+@@ -10,7 +10,7 @@
+ public class HelloApplication extends Application {
+     @Override
+     public void start(Stage stage) throws IOException {
+-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Monument.fxml"));
++        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Home.fxml"));
+         Scene scene = new Scene(fxmlLoader.load(), 1550, 780);
+         stage.setTitle("Tour Joy");
+         stage.setScene(scene);

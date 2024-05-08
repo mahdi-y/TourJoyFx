@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 <AnchorPane prefHeight="589.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserDashboardController">
    <children>
       <VBox alignment="CENTER" layoutX="333.0" layoutY="197.0" spacing="20.0">
@@ -22,16 +24,41 @@
               <Label fx:id="roleLabel" text="Role:" />
           </children>
       </VBox>
-       <HBox alignment="TOP_RIGHT" layoutX="674.0" layoutY="26.0" spacing="10.0">
-           <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
-           <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
-           <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
-           <VBox.margin>
-               <Insets top="-60.0" />
-           </VBox.margin>
-       </HBox>
+       <StackPane layoutX="512.0" layoutY="10.0" prefHeight="700.0" prefWidth="688.0" styleClass="image-container">
+           <HBox alignment="TOP_RIGHT" prefHeight="680.0" prefWidth="677.0" spacing="10.0" StackPane.alignment="TOP_RIGHT">
+               <!-- White circle behind the minimize button -->
+               <StackPane>
+                   <Circle fill="WHITE" radius="14.0" />
+                   <Button fx:id="minimizeButton" onAction="#minimizeWindow" styleClass="minimize-button" />
+               </StackPane>
+
+               <!-- White circle behind the expand button -->
+               <StackPane>
+                   <Circle fill="WHITE" radius="14.0">
+                       <StackPane.margin>
+                           <Insets />
+                       </StackPane.margin></Circle>
+                   <Button fx:id="expandButton" onAction="#expandWindow" styleClass="expand-button" />
+               </StackPane>
+
+               <!-- White circle behind the close button -->
+               <StackPane>
+                   <Circle fill="WHITE" radius="14.0" />
+                   <Button fx:id="closeButton" onAction="#closeWindow" styleClass="close-button" />
+               </StackPane>
+
+               <StackPane.margin>
+                   <Insets right="30.0" top="-620.0" />
+               </StackPane.margin>
+           </HBox>
+           <HBox.margin>
+               <Insets />
+           </HBox.margin>
+       </StackPane>
    </children>
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
+
+
 </AnchorPane>
