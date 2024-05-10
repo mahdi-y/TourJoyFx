@@ -110,8 +110,8 @@
 
         <TableView fx:id="View" layoutX="627.0" layoutY="171.0" prefHeight="526.0" prefWidth="562.0">
             <columns>
-                <TableColumn fx:id="idView" prefWidth="102.39993286132812" text="Id" />
-                <TableColumn fx:id="nameView" prefWidth="452.800048828125" text="Name" />
+                <TableColumn fx:id="idView" minWidth="0.0" prefWidth="0.0" text="Id" />
+                <TableColumn fx:id="nameView" prefWidth="556.0000610351562" text="Name" />
 
             </columns>
         </TableView>

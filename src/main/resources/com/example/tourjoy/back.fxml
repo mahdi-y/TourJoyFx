@@ -95,15 +95,18 @@
    </Button>
    <Button onAction="#handleCatV" style="-fx-text-fill: white;" styleClass="side-panel-button" text="Categories Management">
       <graphic>
-         <SVGPath content="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
+         <SVGPath content="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5m6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5z" />
       </graphic>
       <VBox.margin>
          <Insets right="30.0" top="40.0" />
       </VBox.margin>
+
          <font>
             <Font size="24.0" />
          </font>
+
    </Button>
+
 </VBox>
 
 <!--  SideNav  -->
@@ -149,13 +152,13 @@
       <Label fx:id="replyMod" layoutX="75.0" layoutY="483.0" text="Reply" />
       <TableView fx:id="claimsTableView" layoutX="489.0" layoutY="200.0" prefHeight="518.0" prefWidth="700.0">
          <columns>
-            <TableColumn fx:id="idR" prefWidth="40.799957275390625" text="id" />
-            <TableColumn fx:id="titleR" prefWidth="84.79998779296875" text="Title" />
-            <TableColumn fx:id="descriptionR" prefWidth="135.20001220703125" text="Description" />
-            <TableColumn fx:id="createDateR" prefWidth="121.5999755859375" text="Creation Date" />
-            <TableColumn fx:id="stateR" prefWidth="85.5999755859375" text="State" />
-            <TableColumn fx:id="catView" prefWidth="101.5999755859375" text="Category" />
-            <TableColumn fx:id="replyR" prefWidth="124.0" text="Reply" />
+            <TableColumn fx:id="idR" minWidth="0.0" prefWidth="0.0" text="id" />
+            <TableColumn fx:id="titleR" prefWidth="101.60000610351562" text="Title" />
+            <TableColumn fx:id="descriptionR" prefWidth="144.79998779296875" text="Description" />
+            <TableColumn fx:id="createDateR" prefWidth="116.00006103515625" text="Creation Date" />
+            <TableColumn fx:id="stateR" prefWidth="90.39990234375" text="State" />
+            <TableColumn fx:id="catView" prefWidth="104.0" text="Category" />
+            <TableColumn fx:id="replyR" prefWidth="143.2000732421875" text="Reply" />
          </columns>
       </TableView>
       <Button fx:id="deleteButton" layoutX="326.0" layoutY="679.0" mnemonicParsing="false" onAction="#deleteClaims" prefHeight="40.0" prefWidth="122.0" style="-fx-background-color: #A93226; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20px;" text="Delete" />
@@ -165,6 +168,8 @@
       <Label fx:id="catL" layoutX="71.0" layoutY="384.0" text="Category" />
       <ComboBox fx:id="catBo" layoutX="155.0" layoutY="375.0" prefHeight="38.0" prefWidth="280.0" promptText="Select.." />
       <TextField fx:id="search" layoutX="489.0" layoutY="147.0" prefHeight="38.0" prefWidth="280.0" />
+
+
       <ComboBox fx:id="order" layoutX="863.0" layoutY="149.0" prefHeight="35.0" prefWidth="122.0" promptText="Select order">
          <items>
             <FXCollections fx:factory="observableArrayList">
@@ -199,7 +204,7 @@
                <DropShadow color="rgba(0,0,0,0.5)" radius="5.0" />
             </effect>
          </Text>
-      <Button fx:id="sort" layoutX="1126.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleSortButtonAction" prefHeight="36.0" prefWidth="61.0" text="Sort" />
+      <Button fx:id="sort" layoutX="1136.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleSortButtonAction" prefHeight="36.0" prefWidth="42.0" style="-fx-background-color: lightGray;" />
 
       <VBox id="notificationPanel" fx:id="notificationPanel" visible="false">
          <ListView fx:id="notificationListView" layoutY="477.0" prefHeight="367.0" prefWidth="318.0">
@@ -215,8 +220,10 @@
 
    <Image url="@images/chat_icon.png" />
 </ImageView>
-<Button fx:id="ClaimB" layoutX="1389.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleAddV" prefHeight="30.0" prefWidth="122.0" text="Frontpage" />
+<Button fx:id="ClaimB" layoutX="1389.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleAddV" prefHeight="30.0" prefWidth="122.0" style="-fx-background-color: lightBlue;" text="Frontpage" />
 
+      <SVGPath content="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" AnchorPane.leftAnchor="970.0" AnchorPane.topAnchor="223.0" />
+   <SVGPath content=" M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5z" layoutX="1380.300004529953" layoutY="224.6" AnchorPane.leftAnchor="1381.8" AnchorPane.topAnchor="225.6" />
 <stylesheets>
    <URL value="@backoffice.css" />
 </stylesheets>
