@@ -27,13 +27,13 @@ public class ServiceClaims implements IServices<claims> {
 
     @Override
     public void add(claims claims) throws SQLException {
-        String query = "INSERT INTO claims (title, description, createDate, state, fkC, reply) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO claims (fk_c_id, title, description, create_date, state, reply) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pre = con.prepareStatement(query)) {
-            pre.setString(1, claims.getTitle());
-            pre.setString(2, claims.getDescription());
-            pre.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-            pre.setString(4, claims.getState());
-            pre.setInt(5, claims.getFkC());
+            pre.setString(2, claims.getTitle());
+            pre.setString(3, claims.getDescription());
+            pre.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            pre.setString(5, claims.getState());
+            pre.setInt(1, claims.getFkC());
             pre.setString(6, claims.getReply());
             pre.executeUpdate();
         } catch (SQLException e) {
@@ -50,9 +50,9 @@ public class ServiceClaims implements IServices<claims> {
                 Integer id = res.getObject("id", Integer.class);  // Using getObject to safely handle nulls
                 String title = res.getString("title");
                 String description = res.getString("description");
-                LocalDateTime createDate = res.getTimestamp("createDate") != null ? res.getTimestamp("createDate").toLocalDateTime() : null;
+                LocalDateTime createDate = res.getTimestamp("create_date") != null ? res.getTimestamp("create_date").toLocalDateTime() : null;
                 String state = res.getString("state");
-                Integer fkC = res.getObject("fkC", Integer.class); // Safe null handling
+                Integer fkC = res.getObject("fk_c_id", Integer.class); // Safe null handling
                 String reply = res.getString("reply");
                 claims claim = new claims(id, title, description, createDate, state, fkC, reply);
                 claimsList.add(claim);
@@ -65,12 +65,12 @@ public class ServiceClaims implements IServices<claims> {
 
     @Override
     public void update(claims claims) throws SQLException {
-        String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=? WHERE id=?";
+        String query = "UPDATE claims SET fk_c_id=?, title=?, description=?, state=?,  reply=? WHERE id=?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
-            pre.setString(1, claims.getTitle());
-            pre.setString(2, claims.getDescription());
-            pre.setString(3, claims.getState());
-            pre.setInt(4, claims.getFkC());
+            pre.setString(2, claims.getTitle());
+            pre.setString(3, claims.getDescription());
+            pre.setString(4, claims.getState());
+            pre.setInt(1, claims.getFkC());
             pre.setString(5, claims.getReply());
             pre.setInt(6, claims.getId());
             pre.executeUpdate();
@@ -104,7 +104,7 @@ public class ServiceClaims implements IServices<claims> {
 
     public Map<String, Integer> getCategoryStatistics() throws SQLException {
         Map<String, Integer> stats = new HashMap<>();
-        String query = "SELECT c.name AS category, COUNT(*) AS count FROM claims cl JOIN categories c ON cl.fkC = c.id GROUP BY c.name";
+        String query = "SELECT c.name AS category, COUNT(*) AS count FROM claims cl JOIN categories c ON cl.fk_c_id = c.id GROUP BY c.name";
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
