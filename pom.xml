@@ -113,6 +113,21 @@
             <artifactId>freetts</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>at.favre.lib</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>0.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.12.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.3</version>
+        </dependency>
         <!--<dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.json</artifactId>

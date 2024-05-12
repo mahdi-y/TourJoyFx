@@ -43,11 +43,9 @@ public class Home {
         /*firstNameLabel.setText("Welcome " + session.getFirstname() + "!");
         System.out.println(session.getFirstname() + " " + session.getPhonenumber());*/
 
-        if (isAdmin()) {
+
             adminButton.setVisible(true); // Show admin features if user is admin
-        } else {
-            adminButton.setVisible(false); // Hide admin features if user is not admin
-        }
+
 
     }
 

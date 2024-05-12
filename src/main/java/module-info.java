@@ -51,6 +51,9 @@ module com.example.tourjoy {
 //    requires mail;
     requires stripe.java;
     requires java.json;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
+    requires bcrypt;
 
     opens com.example.tourjoy to javafx.fxml, javafx.base;
     opens models to javafx.base;
