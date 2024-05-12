@@ -22,6 +22,9 @@ module com.example.tourjoy {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
     requires twilio;
+    requires bcrypt;
+    requires com.fasterxml.jackson.core;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.tourjoy to javafx.fxml, javafx.base;
     opens models to javafx.base;

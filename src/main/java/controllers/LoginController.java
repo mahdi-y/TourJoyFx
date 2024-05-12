@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import services.userService;
+import Services.userService;
 
 import utils.SessionManager;
 import utils.UserSession;
@@ -44,7 +44,7 @@ public class LoginController {
                     showAlert(Alert.AlertType.ERROR, "Access Denied", "Your account has been banned.");
                     return;
                 }
-                UserSession.getInstance(user.getId(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCountry(), user.getProfilePicture(), String.valueOf(user.getPhoneNumber().intValue()), user.getRoles()).setUser(user);
+                UserSession.getInstance(user.getId(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCountry(), user.getProfilePicture(), String.valueOf(user.getPhoneNumber().intValue()), user.getRoles(), user.getRolesPHP()).setUser(user);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + user.getEmail() + "!");
 
                 SessionManager.setCurrentUser(user);

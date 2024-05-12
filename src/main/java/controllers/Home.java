@@ -1,8 +1,11 @@
 package controllers;
 
 import com.example.tourjoy.HelloApplication;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import services.userService;
+import Services.userService;
 import utils.SessionManager;
 import utils.UserSession;
 import models.User;
@@ -29,26 +32,53 @@ public class Home {
     public void initialize() throws IOException {
         UserSession session = UserSession.getInstance();
 
+        String[] userRolesArray = session.getRoles();
+        System.out.println("roles in homepage: " + Arrays.toString(userRolesArray));
+        boolean isAdmin = isAdmin(userRolesArray);
+        if (isAdmin) {
+            // User is an admin
+            System.out.println("User is an admin.");
+        } else {
+            // User is not an admin
+            System.out.println("User is not an admin.");
+        }
+
         firstNameLabel.setText("Welcome " + session.getFirstname() + "!");
         System.out.println(session.getFirstname() + " " + session.getPhonenumber());
 
-        if (isAdmin()) {
-            adminButton.setVisible(true); // Show admin features if user is admin
-        } else {
-            adminButton.setVisible(false); // Hide admin features if user is not admin
-        }
+            adminButton.setVisible(true);
+//            System.out.println("Admin button should now be visible.");:+
+
 
     }
 
-    private boolean isAdmin() {
-        String[] roles = UserSession.getInstance().getRoles();
-        for (String role : roles) {
-            if ("ROLE_ADMIN".equals(role)) {
-                return true;
+
+
+    public boolean isAdmin(String[] rolesArray) {
+        for (String rolesString : rolesArray) {
+            // Remove square brackets and quotation marks
+            String cleanedRolesString = rolesString.replace("[", "").replace("]", "").replace("\"", "");
+
+            // Split the cleanedRolesString into individual roles
+            String[] roles = cleanedRolesString.split(", ");
+
+
+            // Check each role for "ROLE_ADMIN"
+            for (String role : roles) {
+                if ("ROLE_ADMIN".equals(role)) {
+                    return true; // Found ROLE_ADMIN
+                }
             }
         }
-        return false;
+        return false; // ROLE_ADMIN not found
     }
+
+
+
+
+
+
+
 
     private Stage getPrimaryStage() {
         return HelloApplication.getPrimaryStage();

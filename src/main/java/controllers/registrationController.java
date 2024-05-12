@@ -6,13 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
-import services.userService;
+import Services.userService;
 import utils.SessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import utils.UserSession;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 
 public class registrationController {
@@ -75,14 +78,20 @@ public class registrationController {
         int phoneNumber = Integer.parseInt(phoneNumberField.getText());
         String confirmPassword = confirmPasswordField.getText();
         LocalDateTime createdAt = LocalDateTime.now();
+        String[] defaultRoles = {"ROLE_USER", "ROLE_ADMIN"};
         String[] roles = {"ROLE_USER","ROLE_ADMIN"};
+        ObjectMapper mapper = new ObjectMapper();
+        String rolesJson = mapper.writeValueAsString(new String[]{"ROLE_USER", "ROLE_ADMIN"});
+        System.out.println("Serialized roles: " + rolesJson);
 
-        User user = new User(email, roles, password, phoneNumber, createdAt);
+        User user = new User(email, rolesJson, password, phoneNumber, createdAt, defaultRoles);
 
         SessionManager.setCurrentUser(user);
 
+        System.out.println("Newly created user's roles: " + Arrays.toString(user.getRoles()));
+
+
         userService.registerUser(user);
-//        sendResetCodeBySMS();
         System.out.println("User registered successfully!");
         showAlert(Alert.AlertType.INFORMATION, "Success", "Account successfully created! Please verify your account.");
 
@@ -158,11 +167,11 @@ public class registrationController {
             return false;
         }
 
-        if (userService.phoneNumberExists(Integer.parseInt(phoneNumber))){
+       /* if (userService.phoneNumberExists(Integer.parseInt(phoneNumber))){
             showAlert(Alert.AlertType.ERROR,"Phone Number Exists", "This phone number is already registered.");
             return false;
         }
-
+*/
         if (!phoneNumber.matches("\\d+")) {
             showAlert(Alert.AlertType.ERROR, "Invalid Phone Number", "Phone number should contain only digits.");
             return false;

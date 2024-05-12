@@ -14,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.User;
-import services.userService;
+import Services.userService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -52,7 +52,7 @@ public class usersList {
     private TableColumn<User, Boolean> isBannedColumn;
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-    private services.userService userService;
+    private userService userService;
 
     @FXML
     public void initialize() {

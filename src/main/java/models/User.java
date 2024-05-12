@@ -1,14 +1,16 @@
 package models;
-//import javax.persistence;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class User {
-    private String[] roles;
+    private String roles;
+    private String rolesJson;
 
     private int id;
 
@@ -33,6 +35,26 @@ public class User {
     private LocalDateTime modifiedAt;
 
     private boolean isVerified;
+    private boolean isBanned;
+
+    private String googleId;
+
+    private String[] rolesPHP;
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    public User(String email, String rolesJson, String password, int phoneNumber, LocalDateTime createdAt, String[] defaultRoles) {
+        this.email = email;
+        this.roles = rolesJson;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.createdAt = createdAt;
+        this.rolesPHP = defaultRoles;
+    }
+
+
+
+
 
     public User(String email, String[] roles, String password, Integer phoneNumber, LocalDateTime createdAt) {
         this.email = email;
@@ -52,11 +74,17 @@ public class User {
         this.createdAt = createdAt;
     }
 
+//    User user = new User(email, roles, password, phoneNumber, createdAt, defaultRoles);
 
 
-    private boolean isBanned;
-
-    private String googleId;
+    public User(String email, String roles,  String password, Integer phoneNumber, LocalDateTime createdAt, String[] rolesPHP) {
+        this.roles = roles;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.createdAt = createdAt;
+        this.rolesPHP = rolesPHP;
+    }
 
     public User(String email, String[] roles, String password, LocalDateTime createdAt) {
         this.email = email;
@@ -131,19 +159,31 @@ public class User {
         this.email = email;
     }
 
-//    public Set<String> getRoles() {
-//        return roles;
-//    }
 
 
     public String[] getRoles() {
-        return roles;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String[] rolesArray = mapper.readValue(roles, String[].class);
+            System.out.println("Returning roles from User class: " + Arrays.toString(rolesArray));
+            return rolesArray;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new String[0]; // Return empty array on error
+        }
     }
 
+
+    // Serialize roles from an array to rolesJson
     public void setRoles(String[] roles) {
-        this.roles = roles;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            this.roles = mapper.writeValueAsString(roles);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            this.roles = "[]"; // Default to empty JSON array on error
+        }
     }
-
 
 
     public String getPassword() {
@@ -243,7 +283,7 @@ public class User {
     }
 
     public User() {
-
+        this.rolesPHP = new String[]{"ROLE_USER"};
     }
 
     public User(int id, String email, String[] roles, String password, String firstName, String lastName, Integer phoneNumber, String country, String profilePicture, LocalDateTime createdAt, String googleAuthenticatorSecret, LocalDateTime modifiedAt, boolean isVerified, boolean isBanned, String googleId) {
@@ -320,6 +360,28 @@ public class User {
     }
 
 
+    public String[] getRolesPHP() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // Serialize the roles array to a JSON string
+            return new String[]{mapper.writeValueAsString(rolesPHP)};
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return new String[]{"[]"};  // Return empty JSON array in case of error
+        }
+    }
+
+    // Setter for roles
+    public void setRolesPHP(String jsonRoles) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // Deserialize the JSON string back to a String array
+            this.rolesPHP = mapper.readValue(jsonRoles, String[].class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            this.rolesPHP = new String[]{};  // Set to empty array in case of error
+        }
+    }
 
 
     @Override
