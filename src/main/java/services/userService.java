@@ -1,8 +1,6 @@
 package Services;
 
-import Entities.Guide;
 //import com.google.gson.Gson;
-import models.claims;
 import utils.DBConnection;
 import models.User;
 
@@ -13,10 +11,12 @@ import java.util.List;
 
 import utils.userUtils;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+//import org.mindrot.jbcrypt.BCrypt;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.mindrot.jbcrypt.BCrypt;
-
-public class userService implements IServices<User> {
+public class userService{
 
     private final Connection con;
     private PreparedStatement pre;
@@ -32,18 +32,21 @@ public class userService implements IServices<User> {
             System.err.println("Connection is null.");
             return;
         }
-        String query = "INSERT INTO user (email, roles, password, phone_number, created_at) VALUES (?,?,?,?,?)";
+        /*if (user.getRolesPHP() == null || user.getRolesPHP().isEmpty()) {
+            user.setRoles(new String[]{"ROLE_USER"});
+        }*/
+        String query = "INSERT INTO user (email, roles, password, phone_number, created_at, is_verified, is_banned) VALUES (?,?,?,?,?, FALSE, FALSE)";
         try (PreparedStatement pre = con.prepareStatement(query)) {
+            ObjectMapper mapper = new ObjectMapper();
             pre.setString(1, user.getEmail());
-            String rolesString = String.join(",", user.getRoles());
-            pre.setString(2, rolesString);
+            String rolesJson = mapper.writeValueAsString(user.getRoles())   ;
+
+            pre.setString(2, rolesJson);
             String encryptedPassword = encrypt(user.getPassword());
             pre.setString(3, encryptedPassword);
 
             if (user.getPhoneNumber() != null) {
                 pre.setInt(4, user.getPhoneNumber());
-            } else {
-                pre.setNull(4, Types.INTEGER);
             }
 
             pre.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
@@ -56,8 +59,11 @@ public class userService implements IServices<User> {
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println("SQL Error: " + e.getMessage());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
+
 
     public boolean deleteUser(User user) throws SQLException {
         if (con == null) {
@@ -112,11 +118,6 @@ public class userService implements IServices<User> {
         }
     }
 
-    @Override
-    public void add(User user) throws SQLException {
-
-    }
-
     public boolean emailExists(String email) throws SQLException {
         String query = "SELECT count(*) FROM user WHERE email = ?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
@@ -163,7 +164,9 @@ public class userService implements IServices<User> {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     String storedPassword = resultSet.getString("password");
-                    if (BCrypt.checkpw(password, storedPassword)) {
+                    BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), storedPassword);
+
+                    if (result.verified) {
                         int id = resultSet.getInt("id");
                         String email1 = resultSet.getString("email");
                         String[] roles = userUtils.extractRoles(resultSet);
@@ -193,13 +196,16 @@ public class userService implements IServices<User> {
 
 
     public static String encrypt(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
+        int costFactor = 13;
+        char[] bcryptChars = BCrypt.with(BCrypt.Version.VERSION_2Y).hashToChar(costFactor, password.toCharArray());
+        return new String(bcryptChars);
     }
+
 
     public List<User> fetchAllUsers() throws SQLException {
         List<User> usersList = new ArrayList<>();
         String query = "SELECT id, email, roles, first_name, last_name, phone_number, country, created_at, is_verified, is_banned FROM user";
-     //   Gson gson = new Gson();
+//        Gson gson = new Gson();
 
         try (Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -357,31 +363,6 @@ public class userService implements IServices<User> {
         } else {
             System.out.println("La mise à jour de  " +  utilisateur.getFirstName() + " a échoué.");
         }
-    }
-
-    public void update(claims claims, Integer fkUser) throws SQLException {
-
-    }
-
-
-
-    @Override
-    public void delete(User user) throws SQLException {
-
-    }
-
-    @Override
-    public void update(User user, int oldCIN) throws SQLException {
-
-    }
-
-    public List<User> Read(int fkUser) throws SQLException {
-        return List.of();
-    }
-
-//    @Override
-    public List<User> Read() throws SQLException {
-        return List.of();
     }
 
     public static void updateforgottenpassword(String email, String password) {
