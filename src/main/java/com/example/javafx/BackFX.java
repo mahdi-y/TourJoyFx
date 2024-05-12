@@ -1,4 +1,4 @@
-package com.example.tourjoy;
+package com.example.javafx;
 
 import controllers.BackController;
 import javafx.application.Application;

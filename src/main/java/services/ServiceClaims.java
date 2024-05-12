@@ -39,13 +39,13 @@ public class ServiceClaims  {
     }
 
     public void add(claims claims) throws SQLException {
-        String query = "INSERT INTO claims (title, description, createDate, state, fkC, reply, fkUser) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO claims (fk_c_id,title, description, create_date, state,  reply, fk_u_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pre = con.prepareStatement(query)) {
-            pre.setString(1, claims.getTitle());
-            pre.setString(2, claims.getDescription());
-            pre.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-            pre.setString(4, claims.getState());
-            pre.setInt(5, claims.getFkC());
+            pre.setString(2, claims.getTitle());
+            pre.setString(3, claims.getDescription());
+            pre.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            pre.setString(5, claims.getState());
+            pre.setInt(1, claims.getFkC());
             pre.setString(6, claims.getReply());
             pre.setInt(7, claims.getFkUser());
             pre.executeUpdate();
@@ -75,9 +75,9 @@ public class ServiceClaims  {
                 Integer id = res.getObject("id", Integer.class);  // Using getObject to safely handle nulls
                 String title = res.getString("title");
                 String description = res.getString("description");
-                LocalDateTime createDate = res.getTimestamp("createDate") != null ? res.getTimestamp("createDate").toLocalDateTime() : null;
+                LocalDateTime createDate = res.getTimestamp("create_date") != null ? res.getTimestamp("create_date").toLocalDateTime() : null;
                 String state = res.getString("state");
-                Integer fkC = res.getObject("fkC", Integer.class); // Safe null handling
+                Integer fkC = res.getObject("fk_c_id", Integer.class); // Safe null handling
                 String reply = res.getString("reply");
                 claims claim = new claims(id, title, description, createDate, state, fkC, reply);
                 claimsList.add(claim);
@@ -91,7 +91,7 @@ public class ServiceClaims  {
     public List<claims> Read(int fkUser) throws SQLException {
         List<claims> claimsList = new ArrayList<>();
         Connection con = DBConnection.getInstance().getConnection();
-        String query = "SELECT * FROM claims WHERE fkUser = ?";
+        String query = "SELECT * FROM claims WHERE fk_u_id = ?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
             pre.setInt(1, fkUser);  // Set the fkUser parameter in the query
             try (ResultSet res = pre.executeQuery()) {
@@ -99,9 +99,9 @@ public class ServiceClaims  {
                     Integer id = res.getObject("id", Integer.class);  // Using getObject to safely handle nulls
                     String title = res.getString("title");
                     String description = res.getString("description");
-                    LocalDateTime createDate = res.getTimestamp("createDate") != null ? res.getTimestamp("createDate").toLocalDateTime() : null;
+                    LocalDateTime createDate = res.getTimestamp("create_date") != null ? res.getTimestamp("create_date").toLocalDateTime() : null;
                     String state = res.getString("state");
-                    Integer fkC = res.getObject("fkC", Integer.class); // Safe null handling
+                    Integer fkC = res.getObject("fk_c_id", Integer.class); // Safe null handling
                     String reply = res.getString("reply");
                     claims claim = new claims(id, title, description, createDate, state, fkC, reply, fkUser);
                     claimsList.add(claim);
@@ -127,12 +127,12 @@ public class ServiceClaims  {
     }
 
     public void update(claims claims, Integer fkUser) throws SQLException {
-        String query = "UPDATE claims SET title=?, description=?, state=?, fkC=?, reply=?, fkUser=? WHERE id=?";
+        String query = "UPDATE claims SET fk_c_id=?,title=?, description=?, state=?, reply=?, fk_u_id=? WHERE id=?";
         try (PreparedStatement pre = con.prepareStatement(query)) {
-            pre.setString(1, claims.getTitle());
-            pre.setString(2, claims.getDescription());
-            pre.setString(3, claims.getState());
-            pre.setInt(4, claims.getFkC());
+            pre.setString(2, claims.getTitle());
+            pre.setString(3, claims.getDescription());
+            pre.setString(4, claims.getState());
+            pre.setInt(1, claims.getFkC());
             pre.setString(5, claims.getReply());
             pre.setInt(6, claims.getId());
             pre.setInt(7, fkUser);
@@ -169,7 +169,7 @@ public class ServiceClaims  {
 
     public Map<String, Integer> getCategoryStatistics() throws SQLException {
         Map<String, Integer> stats = new HashMap<>();
-        String query = "SELECT c.name AS category, COUNT(*) AS count FROM claims cl JOIN categories c ON cl.fkC = c.id GROUP BY c.name";
+        String query = "SELECT c.name AS category, COUNT(*) AS count FROM claims cl JOIN categories c ON cl.fk = c.id GROUP BY c.name";
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -198,7 +198,7 @@ public class ServiceClaims  {
 
 
         public void addNotification(String message, Integer fkUser) throws SQLException {
-            String sql = "INSERT INTO notification (message, is_read, created_at, fkUser) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO notification (message, is_read, created_at, user) VALUES (?, ?, ?, ?)";
             try (Connection conn = DBConnection.getInstance().getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, message);
@@ -220,7 +220,7 @@ public class ServiceClaims  {
                     rs.getString("message"),
                     rs.getBoolean("is_read"),
                     rs.getTimestamp("created_at").toLocalDateTime(),
-                    rs.getInt("fkUser")
+                    rs.getInt("user")
             ));
         }
         rs.close();  // Close ResultSet manually

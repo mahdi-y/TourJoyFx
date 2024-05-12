@@ -1,4 +1,4 @@
-package com.example.tourjoy;
+package com.example.javafx;
 
 import controllers.RecController;
 import javafx.application.Application;
