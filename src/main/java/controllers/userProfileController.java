@@ -74,20 +74,20 @@ public class userProfileController {
             currentUser.setEmail(emailField.getText().trim());
             currentUser.setFirstName(firstNameField.getText().trim());
             currentUser.setLastName(lastNameField.getText().trim());
-            currentUser.setCountry(countryComboBox.getValue());
-            currentUser.setProfilePicture(imagePathField.getText().trim());
+           // currentUser.setCountry(countryComboBox.getValue());
+            //currentUser.setProfilePicture(imagePathField.getText().trim());
             currentUser.setModifiedAt(LocalDateTime.now());
-            Path path = Paths.get(imagePathField.getText());
+            /*Path path = Paths.get(imagePathField.getText());
             String fileName = path.getFileName().toString();
-            Path destinationPath = Paths.get("src/main/resources/images/profilePictures", fileName);
+            Path destinationPath = Paths.get("src/main/resources/images/profilePictures", fileName);*/
 
             userService.updateProfile(currentUser, currentUser.getEmail());
 
-            try {
+           /* try {
                 Files.copy(path, destinationPath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "Profile updated successfully!");
         } catch (SQLException e) {
@@ -108,9 +108,9 @@ public class userProfileController {
         firstNameField.setText(userSession.getFirstname());
         lastNameField.setText(userSession.getLastname());
         phoneNumberField.setText(userSession.getPhonenumber());
-        countryField.setText(userSession.getCountry());
+        //countryField.setText(userSession.getCountry());
         emailField.setText(userSession.getEmail());
-        profilePictureField.setText(userSession.getPicture());
+        //profilePictureField.setText(userSession.getPicture());
     }
 
     public void handleUploadImage(ActionEvent actionEvent) {

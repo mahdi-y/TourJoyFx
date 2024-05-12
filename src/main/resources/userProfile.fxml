@@ -84,7 +84,7 @@
         <TextField fx:id="firstNameField" promptText="First Name"/>
         <TextField fx:id="lastNameField" promptText="Last Name"/>
         <TextField fx:id="phoneNumberField" promptText="Phone Number"/>
-        <ComboBox fx:id="countryComboBox" promptText="Country"/>
+       <!-- <ComboBox fx:id="countryComboBox" promptText="Country"/> -->
         <TextField fx:id="emailField" promptText="Email"/>
         <Button text="Save Changes" onAction="#saveChanges"/>
         <Button text="Cancel" onAction="#cancelUpdate"/>

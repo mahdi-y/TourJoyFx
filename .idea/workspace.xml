@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d6fbacc-5e1f-4327-9d9b-9fd1426646dc" name="Changes" comment="updated claims &amp; notif tables">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2024_10_17_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2024_10_17__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_05_2024_00_10_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_05_2024_00_10__Changes_1.xml" beforeDir="false" />
+    <list default="true" id="4d6fbacc-5e1f-4327-9d9b-9fd1426646dc" name="Changes" comment="integration java web">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_05_2024_11_03_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_05_2024_11_03__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/notification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/ServiceClaims.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/ServiceClaims.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/userProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/userProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/test/tjv2/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/test/tjv2/Home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +186,7 @@
       <workItem from="1714898265885" duration="29701000" />
       <workItem from="1715160867417" duration="1614000" />
       <workItem from="1715482683470" duration="5828000" />
+      <workItem from="1715531790677" duration="359000" />
     </task>
     <task id="LOCAL-00001" summary="updated claims &amp; notif tables">
       <option name="closed" value="true" />

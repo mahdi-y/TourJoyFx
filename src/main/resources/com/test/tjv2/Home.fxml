@@ -104,7 +104,7 @@
                   <Button layoutX="1406.0" layoutY="243.0" mnemonicParsing="false" onAction="#logoutUser" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: #cc284b;" text="Logout" textFill="WHITE" />
         <Button fx:id="adminButton" layoutX="1406.0" layoutY="200.8" mnemonicParsing="false" onAction="#backoffice" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: #fea116;" text="backoffice" textFill="WHITE" AnchorPane.topAnchor="200.8" />
         <Button layoutX="1398.0" layoutY="152.0" mnemonicParsing="false" onAction="#goToFavs" prefHeight="38.0" prefWidth="98.0" style="-fx-background-color: #fea116;" text="Favorite Acc" textFill="WHITE" AnchorPane.topAnchor="150.0" />
-        <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1419.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="90.0">
+        <ImageView fx:id="profileImageView" fitHeight="56.0" fitWidth="60.0" layoutX="1419.0" layoutY="30.0" onMouseClicked="#goToProfile" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="90.0">
             <image>
                 <Image url="@../../../images/icons-utilisateur.png" />
             </image>
