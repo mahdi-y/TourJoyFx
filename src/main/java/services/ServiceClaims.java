@@ -169,7 +169,7 @@ public class ServiceClaims  {
 
     public Map<String, Integer> getCategoryStatistics() throws SQLException {
         Map<String, Integer> stats = new HashMap<>();
-        String query = "SELECT c.name AS category, COUNT(*) AS count FROM claims cl JOIN categories c ON cl.fk = c.id GROUP BY c.name";
+        String query = "SELECT c.name AS category, COUNT(*) AS count FROM claims cl JOIN categories c ON cl.fk_c_id = c.id GROUP BY c.name";
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -204,7 +204,7 @@ public class ServiceClaims  {
                 pstmt.setString(1, message);
                 pstmt.setInt(2, 0);
                 pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-                pstmt.setInt(4, fkUser);
+                pstmt.setString(4, String.valueOf(fkUser));
                 pstmt.executeUpdate();
             }
         }
@@ -220,7 +220,7 @@ public class ServiceClaims  {
                     rs.getString("message"),
                     rs.getBoolean("is_read"),
                     rs.getTimestamp("created_at").toLocalDateTime(),
-                    rs.getInt("user")
+                    rs.getString("user")
             ));
         }
         rs.close();  // Close ResultSet manually

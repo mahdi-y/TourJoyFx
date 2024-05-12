@@ -3,7 +3,7 @@ package models;
 import java.time.LocalDateTime;
 
 public class notification {
-    private Integer fkUser;
+    private String fkUser;
     private Integer id;
     private String message;
     private boolean is_read;
@@ -20,7 +20,7 @@ public class notification {
 
     }
 
-    public notification(int id, String message, boolean isRead, LocalDateTime createdAt, int fkUser) {
+    public notification(int id, String message, boolean isRead, LocalDateTime createdAt, String fkUser) {
         this.id = id;
         this.message = message;
         this.is_read = isRead;
@@ -40,11 +40,11 @@ public class notification {
         return message;
     }
 
-    public Integer getFkUser() {
+    public String getFkUser() {
         return fkUser;
     }
 
-    public void setFkUser(Integer fkUser) {
+    public void setFkUser(String fkUser) {
         this.fkUser = fkUser;
     }
 
